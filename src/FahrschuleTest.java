@@ -1,5 +1,5 @@
 import static org.assertj.core.api.Assertions.*;
-
+import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,9 +7,11 @@ import org.junit.Test;
 /*
  * Testcases:
  * 
+ * alle Fahrschüler -> Liste mit Fahrschülern
  * neuer Fahrschüler -> Fahrschüler in der Verwaltung aufgenommen
  * Fahrschüler entfernen -> Fahrschüler wird nicht mehr verwaltet
  * 
+ * alle Fahrlehrer -> Liste mit Fahrlehrern
  * neuer Fahrlehrer -> Fahrlehrer in der Verwaltung aufgenommen
  * Fahrlehrer entfernen -> Fahrlehrer wird nicht mehr verwaltet
  * 
@@ -25,6 +27,18 @@ public class FahrschuleTest {
     }
 	
 	
+	 @Test
+	public void alleFahrschueler(){
+		//Given
+		List<Fahrschueler> liste; 
+		
+		//When
+		liste = fs.getFahrschuelerListe();
+		
+		//Then
+		assertThat(liste).isNotNull();
+	} 
+	 
 	@Test
 	public void neuerFahrschueler(){
 		//Given
@@ -51,6 +65,19 @@ public class FahrschuleTest {
 		assertThat(fs.getFahrschuelerListe().contains(s)).isFalse();
 
 	}
+	
+	
+	 @Test
+	public void alleFahrlehrer(){
+		//Given
+		List<Fahrlehrer> liste; 
+		
+		//When
+		liste = fs.getFahrlehrerListe();
+		
+		//Then
+		assertThat(liste).isNotNull();
+	} 	
 	
 	@Test
 	public void neuerFahrlehrer(){
