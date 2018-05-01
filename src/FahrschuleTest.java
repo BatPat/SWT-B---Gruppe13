@@ -11,12 +11,13 @@ import org.junit.Test;
  * Fahrschüler entfernen -> Fahrschüler wird nicht mehr verwaltet
  * 
  * neuer Fahrlehrer -> Fahrlehrer in der Verwaltung aufgenommen
+ * Fahrlehrer entfernen -> Fahrlehrer wird nicht mehr verwaltet
  * 
  */
 
 public class FahrschuleTest {
 	
-	public Fahrschule fs;
+	private Fahrschule fs;
 	
 	 @Before
     public void setUp() {
