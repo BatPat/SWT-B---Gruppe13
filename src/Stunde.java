@@ -4,8 +4,10 @@ public abstract class Stunde implements Termin {
 
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		// TODO Auto-generated method stub
+		// TODO rückgabe von Schülern und Lehrern in einer Liste
 		return null;
 	}
+	
+	//TODO Attribute für beteilligte Schüler und Lehrer
 
 }

@@ -4,8 +4,11 @@ public class Fahrlehrer implements Person{
 
 	@Override
 	public List<Termin> getTermine() {
-		// TODO Auto-generated method stub
+		//TODO sämtliche Termine in einer Liste zurückgeben (Fahrstunden, Theoriestunden)
 		return null;
 	}
+	
+	//TODO Konstruktor mit Attributen für persönliche Daten
 
+	
 }

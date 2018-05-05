@@ -1,50 +1,47 @@
 import java.util.*;
 
 public class Fahrschule {
-
-	private Set<Fahrschueler> alleSchueler;
-	private Set<Fahrlehrer> alleLehrer;
-
-	public Fahrschule() {
+	
+	private FahrschuelerDao schuelerDao;
+	private FahrlehrerDao lehrerDao;
+	
+	public Fahrschule(FahrschuelerDao schuelerDao, FahrlehrerDao lehrerDao) {
 		super();
-		alleSchueler = new HashSet<Fahrschueler>();
-		alleLehrer = new HashSet<Fahrlehrer>();
+		this.schuelerDao = schuelerDao;
+		this.lehrerDao = lehrerDao;
+	}
+
+	public void updateFahrschueler(Fahrschueler s) {
+		schuelerDao.updateFahrschueler(s);
 	}
 	
 	public void addFahrschueler(Fahrschueler s) {
-		// TODO Auto-generated method stub
-		alleSchueler.add(s);
-		
+		schuelerDao.addFahrschueler(s);
 	}
 
 
 	public List<Fahrschueler> getFahrschuelerListe() {
-		// TODO Auto-generated method stub
-		List<Fahrschueler> liste = new ArrayList<Fahrschueler>(); 
-		liste.addAll(alleSchueler);
-		return liste;
+		return schuelerDao.getAlleFahrschueler();
 	}
 
 	public void removeFahrschueler(Fahrschueler s) {
-		// TODO Auto-generated method stub
-		alleSchueler.remove(s);
+		schuelerDao.deleteFahrschueler(s);
 	}
 
+	public void updateFahrlehrer(Fahrlehrer l) {
+		lehrerDao.updateFahrlehrer(l);
+	}
+	
 	public void addFahrlehrer(Fahrlehrer l) {
-		// TODO Auto-generated method stub
-		alleLehrer.add(l);
+		lehrerDao.addFahrlehrer(l);
 	}
 
 	public List<Fahrlehrer> getFahrlehrerListe() {
-		// TODO Auto-generated method stub
-		List<Fahrlehrer> liste = new ArrayList<Fahrlehrer>(); 
-		liste.addAll(alleLehrer);
-		return liste;
+		return lehrerDao.getAlleFahrlehrer();
 	}
 
 	public void removeFahrlehrer(Fahrlehrer l) {
-		// TODO Auto-generated method stub
-		alleLehrer.remove(l);
+		lehrerDao.deleteFahrlehrer(l);
 	}
 
 }

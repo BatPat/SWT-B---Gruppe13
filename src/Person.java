@@ -1,5 +1,9 @@
 import java.util.List;
 
 public interface Person {
-	List<Termin> getTermine();
+	
+	public List<Termin> getTermine();
+	
+
+	//TODO Methode um persönliche Daten zurückzugeben (Transferobjekt?)
 }

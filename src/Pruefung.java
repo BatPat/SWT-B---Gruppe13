@@ -1,11 +1,15 @@
 import java.util.List;
 
-public abstract class Pruefung implements Termin {
-
+public class Pruefung implements Termin {
+	
+	//TODO sinnvoller Konstruktor
+	
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		// TODO Auto-generated method stub
+		// TODO sinnvolle implementierung
 		return null;
 	}
+	
+	//TODO Attribute für Status und Art der Prüfung 
 
 }
