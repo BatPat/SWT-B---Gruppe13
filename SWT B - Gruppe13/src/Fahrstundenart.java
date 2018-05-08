@@ -1,24 +1,30 @@
 
 public enum Fahrstundenart {
 
-	NACHTFAHRT (40.0),
-	AUTOBAHNFAHRT (40.0),
-	STANDARDFAHRT (30.0),
-	UEBERLANDFAHRT (35.0);
+	B_NACHTFAHRT (40.0, "Nachtfahrt"),
+	B_AUTOBAHNFAHRT (40.0, "Autobahnfahrt"),
+	B_STANDARDFAHRT (30.0, "Standardfahrt"),
+	B_UEBERLANDFAHRT (35.0, "Überlandfahrt");
 	
 	private final double preis;
+	private final String beschreibung;
 	
-	Fahrstundenart(double preis){
+	Fahrstundenart(double preis, String beschreibung){
 		this.preis = preis;
+		this.beschreibung = beschreibung;
 	}
 	
 	public double getPreis(){
 		return this.preis;
 	}
 	
+	public String getBeschreibung(){
+		return this.beschreibung;
+	}
+	
 	@Override
 	public String toString(){
-		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase(); 
+		return this.beschreibung + ": " + this.preis + "€"; 
 	}
 	
 }
