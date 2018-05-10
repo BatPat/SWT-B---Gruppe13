@@ -1,4 +1,6 @@
+package Datenhaltung;
 import java.util.List;
+import Fachlogik.Fahrlehrer;;
 
 public interface FahrlehrerDao {
 	

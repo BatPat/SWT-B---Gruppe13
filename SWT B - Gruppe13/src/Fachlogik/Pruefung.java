@@ -1,3 +1,4 @@
+package Fachlogik;
 import java.util.List;
 
 public class Pruefung implements Termin {

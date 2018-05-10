@@ -1,4 +1,8 @@
+package Fachlogik;
 import java.util.*;
+
+import Datenhaltung.FahrlehrerDao;
+import Datenhaltung.FahrschuelerDao;
 
 public class Fahrschule {
 	
