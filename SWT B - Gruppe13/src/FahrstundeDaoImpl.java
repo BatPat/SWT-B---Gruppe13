@@ -13,9 +13,9 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private File generateFile(Fahrstunde fahrstunde) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrstunden");
-		dir.mkdir();
-		return new File(dir.getAbsolutePath() + "Fahrstunde"+fahrstunde.getGenid()+".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Fahrstunden"+"Fahrstunde"+fahrstunde.getGenid()+".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 	
 	@Override

@@ -8,9 +8,9 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	private File generateFile(Fahrschueler fahrschueler) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrschueler");
-		dir.mkdir();
-		return new File(dir.getAbsolutePath() + fahrschueler.getName() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Fahrschueler" + fahrschueler.getName() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 	
 	@Override

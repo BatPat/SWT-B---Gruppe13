@@ -13,9 +13,9 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	private File generateFile(Pruefung pruefung) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung");
-		dir.mkdir();
-		return new File(dir.getAbsolutePath() + "Pruefung" + pruefung.getGenid() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Pruefung"+"Pruefung" + pruefung.getGenid() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 
 	@Override

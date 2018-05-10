@@ -13,9 +13,9 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	
 	private File generateFile(Theoriestunde theoriestunde) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung");
-		dir.mkdir();
-		return new File(dir.getAbsolutePath() + "Pruefung" + theoriestunde.getGenid() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Theoriestunde"+"Theorie" + theoriestunde.getGenid() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 
 	@Override

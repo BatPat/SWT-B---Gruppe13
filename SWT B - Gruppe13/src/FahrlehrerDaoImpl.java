@@ -14,9 +14,9 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao, Serializable {
 
 	private File generateFile(Fahrlehrer fahrlehrer) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrlehrer");
-		dir.mkdir();
-		return new File(dir.getAbsolutePath() + fahrlehrer.getName() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Fahrlehrer"+ fahrlehrer.getName() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 
 	@Override
