@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
->>>>>>> featureBackEnd01
 import java.util.List;
 
 public class Fahrlehrer implements Person{
 
-<<<<<<< HEAD
-	@Override
-	public List<Termin> getTermine() {
-		//TODO sämtliche Termine in einer Liste zurückgeben (Fahrstunden, Theoriestunden)
-		return null;
-	}
-	
-	//TODO Konstruktor mit Attributen für persönliche Daten
 
-	
-=======
 	private String name;
 	private String plz;
 	private String wohnort;
@@ -84,5 +72,5 @@ public class Fahrlehrer implements Person{
 	public String getHausnummer() {
 		return hausnummer;
 	}
->>>>>>> featureBackEnd01
+
 }

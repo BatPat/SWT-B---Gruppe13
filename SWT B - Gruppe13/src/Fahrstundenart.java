@@ -1,11 +1,7 @@
 
 public enum Fahrstundenart {
 
-<<<<<<< HEAD
-	//TODO werte erstellen um für nachtfahrt, autobahn etc preise berechnen zu können.
-	
-	//TODO toString bereitstellen um die art in der GUI darzustellen
-=======
+
 	B_NACHTFAHRT (40.0, "Nachtfahrt"),
 	B_AUTOBAHNFAHRT (40.0, "Autobahnfahrt"),
 	B_STANDARDFAHRT (30.0, "Standardfahrt"),
@@ -31,6 +27,5 @@ public enum Fahrstundenart {
 	public String toString(){
 		return this.beschreibung + ": " + this.preis + "€"; 
 	}
-	
->>>>>>> featureBackEnd01
+
 }

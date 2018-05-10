@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 
-public class Fahrstunde extends Stunde {
-	
-	private Fahrstundenart art;
-	
-	//TODO getter, Konstruktor 
-	
-=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,5 +52,5 @@ public class Fahrstunde extends Stunde {
 	public long getGenid() {
 		return genid;
 	}
->>>>>>> featureBackEnd01
+
 }

@@ -1,13 +1,12 @@
-<<<<<<< HEAD
-=======
+
 import java.util.List;
->>>>>>> featureBackEnd01
 
 public class Theoriestunde extends Stunde {
 	
+//TODO Methode und Attribute für beteiligte Personen und Methode für Thema
+	
 	private TheorieThema thema;
-<<<<<<< HEAD
-=======
+
 	private long genid;
 	public long getGenid() {
 		return genid;
@@ -18,13 +17,11 @@ public class Theoriestunde extends Stunde {
 	
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public Theoriestunde() {
 		this.genid = counter++;
 	}
->>>>>>> featureBackEnd01
 	
 }

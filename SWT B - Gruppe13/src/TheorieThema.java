@@ -1,11 +1,6 @@
 
 public enum TheorieThema {
 
-<<<<<<< HEAD
-	//TODO werte erstellen 
-	
-	//TODO toString bereitstellen um das Thema in der GUI darzustellen
-=======
 	VORFAHRT("Vorfahrtregeln"),
 	ALKOHOL_UND_MENSCHLICHE_RISIKEN("Persönliche Voraussetzungen / Risikofaktor Mensch"),
 	RECHTLICHES("Rechtliche Rahmenbedingungen"),
@@ -32,5 +27,5 @@ public enum TheorieThema {
 	public String toString(){
 		return this.beschreibung;
 	}
->>>>>>> featureBackEnd01
+
 }
