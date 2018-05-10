@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories { 
+	mavenCentral()
+}
+
+eclipse {
+	classpath {
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}
+
+dependencies {		    
+	testCompile 'org.assertj:assertj-core:3.8.0'
+	testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.8.47"
+    compile group: 'com.google.inject', name: 'guice', version: '4.0'
+}
+
+compileJava.options.encoding = 'ISO-8859-1'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'ISO-8859-1'
+}

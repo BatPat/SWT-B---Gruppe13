@@ -21,6 +21,7 @@ public class Kalender {
 		return liste;
 	}
 	
+<<<<<<< HEAD
 	
 	public void addTermin(Termin t) {
 		//TODO sinnvolle Implementierung abhängig vom Termintypen
@@ -35,5 +36,28 @@ public class Kalender {
 	}
 	
 	
+=======
+	/**
+	 * @return the theoriestundeDao
+	 */
+	public TheoriestundeDao getTheoriestundeDao() {
+		return theoriestundeDao;
+	}
+
+	/**
+	 * @return the fahrstundeDao
+	 */
+	public FahrstundeDao getFahrstundeDao() {
+		return fahrstundeDao;
+	}
+
+	/**
+	 * @return the pruefungDao
+	 */
+	public PruefungDao getPruefungDao() {
+		return pruefungDao;
+	}
+
+>>>>>>> featureBackEnd01
 
 }
