@@ -6,6 +6,8 @@ public class Fahrstunde extends Stunde {
 	private Fahrstundenart art;
 	private Fahrlehrer lehrer;
 	private Fahrschueler schueler;
+	private long genid;
+
 
 
 
@@ -14,6 +16,7 @@ public class Fahrstunde extends Stunde {
 		this.art = art;
 		this.lehrer = lehrer;
 		this.schueler = schueler;
+		this.genid = genid++;
 	}
 
 	/**
@@ -43,5 +46,9 @@ public class Fahrstunde extends Stunde {
 		personen.add(lehrer);
 		personen.add(schueler);
 		return personen;
+	}
+	
+	public long getGenid() {
+		return genid;
 	}
 }
