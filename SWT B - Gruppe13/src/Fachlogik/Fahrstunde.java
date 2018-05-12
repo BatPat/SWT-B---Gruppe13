@@ -1,5 +1,8 @@
 package Fachlogik;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +16,8 @@ public class Fahrstunde extends Stunde {
 
 
 
-	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler) {
-		super();
+	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler, LocalTime uhrzeit, LocalDate datum, String ort) {
+		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.art = art;
 		this.lehrer = lehrer;
 		this.schueler = schueler;
