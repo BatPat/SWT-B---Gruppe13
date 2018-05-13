@@ -20,6 +20,10 @@ dependencies {
 	testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:2.8.47"
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
+    //https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+	compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.56'
+	//https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
 }
 
 compileJava.options.encoding = 'ISO-8859-1'
