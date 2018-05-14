@@ -4,24 +4,39 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Observable;
 import java.util.Observer;
 
+import Datenhaltung.FahrlehrerDao;
 import Datenhaltung.FahrlehrerDaoImpl;
+import Datenhaltung.FahrschuelerDao;
 import Datenhaltung.FahrschuelerDaoImpl;
+import Datenhaltung.FahrstundeDao;
+import Datenhaltung.FahrstundeDaoImpl;
 import Oberflaeche.MainView;
 
-public class Controller {
+public class Controller implements Observer{
 
 	private FahrschulModel model;
 	private MainView mainview;
 	private PdfDocumentBill pdf;
-	private FahrlehrerDaoImpl fahrlehrerdao;
-	private FahrschuelerDaoImpl fahrschuelerdao;
+	private FahrlehrerDao fahrlehrerdao;
+	private FahrschuelerDao fahrschuelerdao;
+	private FahrstundeDao fahrstundedao;
 
 	public Controller() {
 		initGUI();
 		initModel();
+		initDaos();
 		mainview.getShell().layout(true);
+	}
+
+	private void initDaos() {
+		fahrlehrerdao = new FahrlehrerDaoImpl();
+		fahrschuelerdao = new FahrschuelerDaoImpl();
+		fahrstundedao = new FahrstundeDaoImpl();
 	}
 
 	private void initGUI() {
@@ -96,6 +111,37 @@ public class Controller {
 			e.printStackTrace();
 		}
 		pdf.createPdf(fahrschueler);
+	}
+	
+	private void bucheFahrstunde() {
+		String fahrschuelername = mainview.getSchuelerCombo().getText();
+		String fahlehrername = mainview.getLehrerCombo().getText();
+		
+		//TODO ganz viel shit um parameter zu bekommen
+		
+		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
+		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
+		
+		//TODO mit parametern Objekte erstellen
+		LocalTime terminUhrzeit;
+		LocalDate terminDatum;
+		Fahrstundenart fStundenArt;
+		
+		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
+		fahrstundedao.addFahrstunde(fStunde);
+		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		switch (arg1.toString()) {
+		case "":
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
