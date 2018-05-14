@@ -234,7 +234,7 @@ public class PdfDocumentBill {
 				anzSonder++;
 			}
 		}
-		gpreis += (anzSonder * 40.00);
+		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theorieprüfung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
@@ -282,11 +282,11 @@ public class PdfDocumentBill {
 		// -Sonderstunden
 		int anzSonder = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
-			if (f.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
+			if (f.getArt() == Fahrstundenart.B_SONDERFAHRT) {
 				anzSonder++;
 			}
 		}
-		gpreis += (anzSonder * 40.00);
+		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theorieprüfung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
@@ -352,11 +352,11 @@ public class PdfDocumentBill {
 		// -Sonderstunden
 		int anzSonder = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
-			if (f.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
+			if (f.getArt() == Fahrstundenart.B_SONDERFAHRT) {
 				anzSonder++;
 			}
 		}
-		gpreis += (anzSonder * 40.00);
+		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theorieprüfung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
