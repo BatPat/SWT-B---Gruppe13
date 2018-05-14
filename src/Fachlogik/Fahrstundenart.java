@@ -24,7 +24,7 @@ public enum Fahrstundenart {
 	
 	@Override
 	public String toString(){
-		return this.beschreibung + ": " + this.preis + "€"; 
+		return this.beschreibung + ": " + this.preis + "ï¿½"; 
 	}
 
 }

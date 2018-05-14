@@ -42,7 +42,7 @@ public class PdfDocumentBill {
 	public void createPdf(Fahrschueler fahrschueler) throws IOException {
 		try {
 			String home = System.getProperty("user.home");
-			File file = new File(home + "/Downloads/Rechnungen/" + "Name des Schülers" + ".pdf");
+			File file = new File(home + "/Downloads/Rechnungen/" + "Name des Schï¿½lers" + ".pdf");
 			file.getParentFile().mkdirs();
 			Document document = new Document();
 			// PdfWriter pdfwriterwsadas = PdfWriter.getInstance(document, new
@@ -50,7 +50,7 @@ public class PdfDocumentBill {
 			PdfWriter pdfwriter = PdfWriter.getInstance(document, new FileOutputStream(file));
 			pdfwriter.setPdfVersion(PdfWriter.PDF_VERSION_1_7);
 			document.addAuthor("Fahrschule Terlau");
-			document.addTitle("Rechnung" + " Name des Schülers " + ".pdf");
+			document.addTitle("Rechnung" + " Name des Schï¿½lers " + ".pdf");
 			// pdfwriter.setTagged();
 			// pdfwriter.createXmpMetadata();
 			// ------------------
@@ -126,7 +126,7 @@ public class PdfDocumentBill {
 		PdfPTable tableGreetings = new PdfPTable(1);
 		tableGreetings.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		tableGreetings.setWidthPercentage(30);
-		PdfPCell cellGreetings = new PdfPCell(new Phrase("M i t  f r e u n d l i c h e n  G r ü ß e n\r\n" + "\r\n"
+		PdfPCell cellGreetings = new PdfPCell(new Phrase("M i t  f r e u n d l i c h e n  G r ï¿½ ï¿½ e n\r\n" + "\r\n"
 				+ "\r\n" + "\r\n" + "R o b e r t  T e r l a u\r\n" + "", fonthel12));
 		cellGreetings.setBorder(Rectangle.NO_BORDER);
 		tableGreetings.addCell(cellGreetings);
@@ -142,7 +142,7 @@ public class PdfDocumentBill {
 		tableTaxes.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		tableTaxes.setWidthPercentage(30);
 		PdfPCell celltaxes = new PdfPCell(new Phrase(
-				"*Die Mehrwertsteuer wird z.Zt. nicht ausgewiesen aufgrund eines \n anhängenden Verfahrens, wird jedoch an das Finanzamt abgeführt",
+				"*Die Mehrwertsteuer wird z.Zt. nicht ausgewiesen aufgrund eines \n anhï¿½ngenden Verfahrens, wird jedoch an das Finanzamt abgefï¿½hrt",
 				fonthell10));
 		celltaxes.setBorder(Rectangle.NO_BORDER);
 		tableTaxes.addCell(celltaxes);
@@ -185,7 +185,7 @@ public class PdfDocumentBill {
 
 		// -Grundbetrag
 		double gpreis = 110.00;
-		// -Übungsstunden
+		// -ï¿½bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -201,7 +201,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
+		// -Vorstellung Theorieprï¿½fung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
@@ -209,7 +209,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxisprï¿½fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
@@ -237,7 +237,7 @@ public class PdfDocumentBill {
 
 		// -Grundbetrag
 		double gpreis = 110.00;
-		// -Übungsstunden
+		// -ï¿½bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -253,7 +253,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
+		// -Vorstellung Theorieprï¿½fung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
@@ -261,7 +261,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxisprï¿½fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
@@ -280,7 +280,7 @@ public class PdfDocumentBill {
 
 	private void createSeventhRowInBillTable(PdfPTable tableBill) {
 		// -> Eigth Row
-		PdfPCell cell1R8 = new PdfPCell(new Phrase("zzgl. Auslage SVA Gebühr", fonthell10));
+		PdfPCell cell1R8 = new PdfPCell(new Phrase("zzgl. Auslage SVA Gebï¿½hr", fonthell10));
 		cell1R8.setBorder(Rectangle.BOTTOM);
 		cell1R8.setFixedHeight(20);
 		tableBill.addCell(cell1R8);
@@ -297,7 +297,7 @@ public class PdfDocumentBill {
 	}
 
 	private void createSixthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
-		PdfPCell cell1R7 = new PdfPCell(new Phrase("Gesamtbetrag Führerscheinausbildung", fonthell10ita));
+		PdfPCell cell1R7 = new PdfPCell(new Phrase("Gesamtbetrag Fï¿½hrerscheinausbildung", fonthell10ita));
 		cell1R7.setBorder(Rectangle.BOTTOM);
 		cell1R7.setFixedHeight(18);
 		tableBill.addCell(cell1R7);
@@ -307,7 +307,7 @@ public class PdfDocumentBill {
 		tableBill.addCell(cell2R7);
 		// -Grundbetrag
 		double gpreis = 110.00;
-		// -Übungsstunden
+		// -ï¿½bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -323,7 +323,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
+		// -Vorstellung Theorieprï¿½fung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
@@ -331,7 +331,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxisprï¿½fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
@@ -350,7 +350,7 @@ public class PdfDocumentBill {
 
 	private void createFifthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
 		// -> Sixth Row
-		PdfPCell cell1R6 = new PdfPCell(new Phrase("Vorstellung zur praktische Prüfung", fonthell10));
+		PdfPCell cell1R6 = new PdfPCell(new Phrase("Vorstellung zur praktische Prï¿½fung", fonthell10));
 		cell1R6.setBorder(Rectangle.BOTTOM);
 		cell1R6.setFixedHeight(18);
 		tableBill.addCell(cell1R6);
@@ -376,7 +376,7 @@ public class PdfDocumentBill {
 
 	private void createFourthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
 		// -> Fifth Row
-		PdfPCell cell1R5 = new PdfPCell(new Phrase("Vorstellung zur theoretischen Prüfung", fonthell10));
+		PdfPCell cell1R5 = new PdfPCell(new Phrase("Vorstellung zur theoretischen Prï¿½fung", fonthell10));
 		cell1R5.setBorder(Rectangle.BOTTOM);
 		cell1R5.setFixedHeight(18);
 		tableBill.addCell(cell1R5);
@@ -402,7 +402,7 @@ public class PdfDocumentBill {
 
 	private void createThirdRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
 		// -> Fourth Row
-		PdfPCell cell1R4 = new PdfPCell(new Phrase("Sonderfahrten à 44,00€", fonthell10));
+		PdfPCell cell1R4 = new PdfPCell(new Phrase("Sonderfahrten ï¿½ 44,00ï¿½", fonthell10));
 		cell1R4.setBorder(Rectangle.BOTTOM);
 		cell1R4.setFixedHeight(18);
 		tableBill.addCell(cell1R4);
@@ -417,7 +417,7 @@ public class PdfDocumentBill {
 		cell2R4.setBorder(Rectangle.BOTTOM);
 		cell2R4.setFixedHeight(18);
 		tableBill.addCell(cell2R4);
-		// TODO Preiskalkulierung abhängig von der Art der Sonderfahrt.
+		// TODO Preiskalkulierung abhï¿½ngig von der Art der Sonderfahrt.
 		String preis = (anzSonder * 40.00) + "";
 		PdfPCell cell3R4 = new PdfPCell(new Phrase(preis, fonthell10));
 		cell3R4.setBorder(Rectangle.BOTTOM);
@@ -429,7 +429,7 @@ public class PdfDocumentBill {
 
 	private void createSecondRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
 		// -> Third Row
-		PdfPCell cell1R3 = new PdfPCell(new Phrase("Übungsstunden à 34,00€", fonthell10));
+		PdfPCell cell1R3 = new PdfPCell(new Phrase("ï¿½bungsstunden ï¿½ 34,00ï¿½", fonthell10));
 		cell1R3.setBorder(Rectangle.BOTTOM);
 		cell1R3.setFixedHeight(18);
 		tableBill.addCell(cell1R3);
@@ -480,7 +480,7 @@ public class PdfDocumentBill {
 		cell2R1.setBorder(Rectangle.BOTTOM);
 		cell2R1.setFixedHeight(18);
 		tableBill.addCell(cell2R1);
-		PdfPCell cell3R1 = new PdfPCell(new Phrase("Brutto €", fonthel12));
+		PdfPCell cell3R1 = new PdfPCell(new Phrase("Brutto ï¿½", fonthel12));
 		cell3R1.setBorder(Rectangle.BOTTOM);
 		cell3R1.setFixedHeight(18);
 		tableBill.addCell(cell3R1);
@@ -497,7 +497,7 @@ public class PdfDocumentBill {
 		PdfPCell cellheader1 = new PdfPCell(new Phrase("Ausbildungsrechnung " + "(" + date2 + ")", fonthel14));
 		cellheader1.setBorder(Rectangle.NO_BORDER);
 		tableBillHeader.addCell(cellheader1);
-		PdfPCell cellheader2 = new PdfPCell(new Phrase("Für den Fahrerlaubnisbewerber der Klasse : B", fonthel12));
+		PdfPCell cellheader2 = new PdfPCell(new Phrase("Fï¿½r den Fahrerlaubnisbewerber der Klasse : B", fonthel12));
 		cellheader2.setBorder(Rectangle.NO_BORDER);
 		tableBillHeader.addCell(cellheader2);
 		PdfPCell cellheader3 = new PdfPCell(new Phrase(fahrschueler.getName(), fonthel12));
@@ -529,7 +529,7 @@ public class PdfDocumentBill {
 		PdfPTable tableAdressPartSchool = new PdfPTable(1);
 		tableAdressPartSchool.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		tableAdressPartSchool.setWidthPercentage(30);
-		PdfPCell cellone = new PdfPCell(new Phrase("Caspersgäßchen  2", address1));
+		PdfPCell cellone = new PdfPCell(new Phrase("Caspersgï¿½ï¿½chen  2", address1));
 		cellone.setBorder(Rectangle.NO_BORDER);
 		tableAdressPartSchool.addCell(cellone);
 		PdfPCell cellTwo = new PdfPCell(new Phrase("45657 Recklinghausen", address1));
@@ -554,7 +554,7 @@ public class PdfDocumentBill {
 		tableAdressPartStudent.setHorizontalAlignment(Element.ALIGN_LEFT);
 		tableAdressPartStudent.setWidthPercentage(30);
 		PdfPCell cellx1 = new PdfPCell(new Phrase(
-				"F a h r s c h u l e  T e r l a u, C a s p e r s g ä s s c h e n 2, \n4 5 6 5 7  R e c k l i n g h a u  s e n ",
+				"F a h r s c h u l e  T e r l a u, C a s p e r s g ï¿½ s s c h e n 2, \n4 5 6 5 7  R e c k l i n g h a u  s e n ",
 				address2));
 		cellx1.setBorder(Rectangle.BOTTOM);
 		tableAdressPartStudent.addCell(cellx1);
