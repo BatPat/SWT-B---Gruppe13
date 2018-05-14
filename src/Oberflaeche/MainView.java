@@ -317,14 +317,17 @@ public class MainView extends Observable {
 
 		private void erzeugeUntereLinkeWidgets() {
 			
+			createFillerLabel(kalenderComposite, 8);
+			
 			new Label(kalenderComposite, SWT.NONE);
 			
 		    DateTime zeitplan = new DateTime(kalenderComposite, SWT.CALENDAR);
 		    zeitplan.setFont(theme.getFont1());
 		    zeitplan.setLayoutData(createFillFillTrueFalseGridData(2));
 		    
-		    new Label(kalenderComposite, SWT.NONE);
+		    createFillerLabel(kalenderComposite, 8);
 		    
+		    new Label(kalenderComposite, SWT.NONE);
 		    
 		    Label zeitLabel = new Label(kalenderComposite, SWT.NONE);
 		    zeitLabel.setText("Uhrzeit");
@@ -410,6 +413,8 @@ public class MainView extends Observable {
 					btBuchen.setBackground(new Color(display, 125, 125, 255));
 				}
 			});
+			
+			 new Label(kalenderComposite, SWT.NONE);
 		}
 		
 		  private GridData createFillFillTrueFalseGridData(int span)
@@ -421,7 +426,9 @@ public class MainView extends Observable {
 		  
 		private void erzeugeUntereRechteWidgets() {
 			
-						Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
+			createFillerLabel(uebersichtComposite, 8);
+			
+			Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
 			ueberschrift.setText("�bersicht der Stunden vom Sch�ler");
 			ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
 			ueberschrift.setFont(theme.getFont1());
@@ -433,7 +440,7 @@ public class MainView extends Observable {
 			
 			
 			Label fahrstundeLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-			fahrstundeLabel.setText("Fahrstunde:");
+			fahrstundeLabel.setText("Fahrstunden:");
 			fahrstundeLabel.setBackground(theme.getWhiteColor());
 			fahrstundeLabel.setFont(theme.getFont2());
 
@@ -441,7 +448,7 @@ public class MainView extends Observable {
 			fahrstundeTxt.setEnabled(false);
 
 			Label sonderfahrtLabel = new Label(uebersichtComposite, SWT.NONE);
-			sonderfahrtLabel.setText("Sonderfahrt:");
+			sonderfahrtLabel.setText("Sonderfahrten:");
 			sonderfahrtLabel.setBackground(theme.getWhiteColor());
 			sonderfahrtLabel.setFont(theme.getFont2());
 			
@@ -449,7 +456,7 @@ public class MainView extends Observable {
 			sonderfahrtTxt.setEnabled(false);
 
 			Label theorieLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-			theorieLabel.setText("Theoriestunden");
+			theorieLabel.setText("Theoriestunden:");
 			theorieLabel.setBackground(theme.getWhiteColor());
 			theorieLabel.setFont(theme.getFont2());
 			
@@ -609,6 +616,14 @@ public class MainView extends Observable {
 
 		public Text getAutobahnTxt() {
 			return sonderfahrtTxt;
+		}
+
+		public Combo getArtCombo() {
+			return artCombo;
+		}
+
+		public Combo getTimeCombo() {
+			return timeCombo;
 		}
 
 		public Text getFahrstundeTxt() {
