@@ -43,7 +43,7 @@ public class MainView extends Observable {
 		private CLabel btBuchen, btRechnung;
 		private DateTime dateFahrstunde;
 		
-		private Combo lehrerCombo, schuelerCombo, zeitCombo, artCombo;
+		private Combo lehrerCombo, schuelerCombo, zeitCombo, artCombo, timeCombo;
 		private Text fahrstundeTxt, sonderfahrtTxt, theorieTxt;
 		
 		private Label fillerLabel;
@@ -63,6 +63,8 @@ public class MainView extends Observable {
 			initShell(); 
 			erzeugeMenu();
 			erzeugeHeader();
+			createFillerLabel(mainComposite, 8);
+			createFillerLabel(mainComposite, 8);
 			erzeugeHauptPanels();
 			erzeugeObereWidgets();
 			erzeugeUntereLinkeWidgets();
@@ -94,7 +96,7 @@ public class MainView extends Observable {
 			      }
 			    });
 			 
-			 mainComposite = new Composite(shell, SWT.NONE);
+			 mainComposite = new Composite(shell, SWT.BORDER);
 			 mainComposite.getVerticalBar();
 			 mainComposite.setRedraw(true);
 			 mainComposite.setBackground(theme.getWhiteColor());
@@ -143,6 +145,8 @@ public class MainView extends Observable {
 		}
 		
 		private void erzeugeHauptPanels() {
+			
+			
 			eingabe1Composite = new Composite(mainComposite, SWT.NONE);
 			eingabe1Composite.setBackground(theme.getWhiteColor());
 			eingabe1Composite.setLayout(new GridLayout(3, true));
@@ -150,6 +154,9 @@ public class MainView extends Observable {
 			eingabe2Composite = new Composite(mainComposite, SWT.NONE);
 			eingabe2Composite.setBackground(theme.getWhiteColor());
 			eingabe2Composite.setLayout(new GridLayout(3, true));
+			
+			createFillerLabel(mainComposite, 8);
+			createFillerLabel(mainComposite, 8);
 			
 			kalenderComposite = new Composite(mainComposite, SWT.NONE);
 			kalenderComposite.setBackground(theme.getWhiteColor());
@@ -303,7 +310,8 @@ public class MainView extends Observable {
 		  {
 		    for (int i = 0; i < anzahl; i++)
 		    {
-		      new Label(parent, SWT.NONE);
+		      Label l = new Label(parent, SWT.NONE);
+		      l.setBackground(theme.getWhiteColor());
 		    }
 		  }
 
@@ -313,9 +321,10 @@ public class MainView extends Observable {
 			
 		    DateTime zeitplan = new DateTime(kalenderComposite, SWT.CALENDAR);
 		    zeitplan.setFont(theme.getFont1());
+		    zeitplan.setLayoutData(createFillFillTrueFalseGridData(2));
 		    
 		    new Label(kalenderComposite, SWT.NONE);
-		    new Label(kalenderComposite, SWT.NONE);
+		    
 		    
 		    Label zeitLabel = new Label(kalenderComposite, SWT.NONE);
 		    zeitLabel.setText("Uhrzeit");
@@ -323,9 +332,10 @@ public class MainView extends Observable {
 		    zeitLabel.setFont(theme.getFont2());
 		    zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
 		    
-		    DateTime time = new DateTime(kalenderComposite, SWT.TIME);
-		    time.setFont(theme.getFont2());
-		    time.addSelectionListener(new SelectionAdapter()
+		    timeCombo = new Combo(kalenderComposite, SWT.NONE);
+			timeCombo.setLayoutData(createFillFillTrueFalseGridData());
+		    timeCombo.setFont(theme.getFont2());
+		    timeCombo.addSelectionListener(new SelectionAdapter()
 		    {
 		      @Override
 		      public void widgetSelected(SelectionEvent e)
@@ -339,7 +349,7 @@ public class MainView extends Observable {
 		    new Label(kalenderComposite, SWT.NONE);
 		    
 		    Label artLabel = new Label(kalenderComposite, SWT.NONE);
-		    artLabel.setText("Klasse:");
+		    artLabel.setText("Art der Fahrstunde:");
 		    artLabel.setBackground(theme.getWhiteColor());
 		    artLabel.setFont(theme.getFont2());
 		    artLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -358,9 +368,7 @@ public class MainView extends Observable {
 			artCombo.setFont(theme.getFont2());
 			
 			  new Label(kalenderComposite, SWT.NONE);
-			  new Label(kalenderComposite, SWT.NONE);
-			  new Label(kalenderComposite, SWT.NONE);
-		    
+			  
 		    btBuchen = new CLabel(kalenderComposite, SWT.BORDER);
 		    btBuchen.setText("Fahrstunde \n buchen");
 		    btBuchen.setTextDirection(SWT.CENTER);
@@ -402,8 +410,6 @@ public class MainView extends Observable {
 					btBuchen.setBackground(new Color(display, 125, 125, 255));
 				}
 			});
-		
-			erzeugeLinie(kalenderComposite);
 		}
 		
 		  private GridData createFillFillTrueFalseGridData(int span)
@@ -453,10 +459,6 @@ public class MainView extends Observable {
 			new Label(uebersichtComposite, SWT.NONE);
 			new Label(uebersichtComposite, SWT.None);
 			new Label(uebersichtComposite, SWT.None);
-			new Label(uebersichtComposite, SWT.None);
-			new Label(uebersichtComposite, SWT.None);
-			new Label(uebersichtComposite, SWT.None);
-			new Label(uebersichtComposite, SWT.None);
 			
 			btRechnung = new CLabel(uebersichtComposite, SWT.BORDER);
 			btRechnung.setText("Rechnungsübersicht \n erstellen");
@@ -499,8 +501,7 @@ public class MainView extends Observable {
 					btRechnung.setBackground(new Color(display, 125, 125, 255));
 				}
 			});
-			
-			erzeugeLinie(uebersichtComposite);
+			createFillerLabel(uebersichtComposite, 8);
 		}
 		
 		 public void erzeugeLinie(Composite composite)
