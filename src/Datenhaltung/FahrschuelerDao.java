@@ -12,4 +12,5 @@ public interface FahrschuelerDao {
 	
 	public void deleteFahrschueler(Fahrschueler fahrschueler);
 	
+	public Fahrschueler getFahrschueler(String fahrschuelerName);
 }
