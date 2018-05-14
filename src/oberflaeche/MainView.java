@@ -123,7 +123,6 @@ public class MainView extends Observable {
 
 	private void erzeugeHeader() {
 		headerComposite = new Composite(mainComposite, SWT.NONE);
-		headerComposite.setBackground(theme.getWhiteColor());
 		headerComposite.setLayout(new GridLayout(5, false));
 		setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
 
@@ -234,6 +233,7 @@ public class MainView extends Observable {
 			}
 		});
 
+		createFillerLabel(eingabe1Composite, 8);
 		erzeugeLinie(eingabe1Composite);
 
 		Label schuelerLabel = new Label(eingabe2Composite, SWT.NONE);
@@ -275,6 +275,7 @@ public class MainView extends Observable {
 		zeitCombo.addSelectionListener(selectionListenerZeitCombo);
 		zeitCombo.setLayoutData(createFillFillTrueFalseGridData());
 
+		createFillerLabel(eingabe2Composite, 8);
 		erzeugeLinie(eingabe2Composite);
 	}
 
