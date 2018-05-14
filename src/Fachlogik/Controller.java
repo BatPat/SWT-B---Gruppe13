@@ -41,7 +41,7 @@ public class Controller {
 			mainview.getSchuelerCombo().add(f.getName());
 		}
 		for (int i = 9; i < 22; i++) {
-			String zeit = ""+ i + ":00"; 
+			String zeit = i + ":00"; 
 			mainview.getZeitCombo().add(zeit);
 		}
 	}
