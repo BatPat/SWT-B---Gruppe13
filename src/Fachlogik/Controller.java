@@ -131,12 +131,11 @@ public class Controller implements Observer {
 		int datumJahr = mainview.getDateFahrstunde().getYear();
 		int datumMonat = mainview.getDateFahrstunde().getMonth();
 		int datumTag = mainview.getDateFahrstunde().getDay();
-		String artString = mainview.getArtCombo.getText();
+		String artString = mainview.getArtCombo().getText();
 
 		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
 		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
 
-		// TODO mit parametern Objekte erstellen
 		LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)), Integer.parseInt(uhrzeitString.substring(3)));
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		Fahrstundenart fStundenArt;
