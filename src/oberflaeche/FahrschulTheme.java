@@ -1,4 +1,4 @@
-package Oberflaeche;
+package oberflaeche;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

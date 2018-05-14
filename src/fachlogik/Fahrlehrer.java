@@ -1,4 +1,4 @@
-package Fachlogik;
+package fachlogik;
 
 import java.util.ArrayList;
 import java.util.List;

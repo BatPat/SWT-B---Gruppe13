@@ -1,4 +1,4 @@
-package Fachlogik;
+package fachlogik;
 import java.util.List;
 
 public interface Person {

@@ -1,4 +1,4 @@
-package Fachlogik;
+package fachlogik;
 
 public enum Fahrstundenart {
 

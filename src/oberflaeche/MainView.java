@@ -1,4 +1,4 @@
-package Oberflaeche;
+package oberflaeche;
 
 import java.util.Observable;
 
@@ -35,7 +35,6 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 public class MainView extends Observable {
 
-		private GridLayout layout;
 		private Display display;
 		private Shell shell;
 		private Menu menu, submenu;
@@ -71,12 +70,10 @@ public class MainView extends Observable {
 			erzeugeUntereRechteWidgets();
 			uebergebeSpaltenanzahl();
 
-			//shell.pack();
 			shell.open();
 		}
 		
 		private void initShell() {
-		//	shell.setBackground(theme.getWhiteColor());
 			shell.setFont(theme.getFont1());
 			shell.setLayout(createFluidGrid());
 			shell.setText("Fahrschul Verwaltung");
@@ -562,11 +559,9 @@ public class MainView extends Observable {
 			display.dispose();
 		}
 
-	public GridLayout getLayout() {
-			return layout;
-		}
+		
 
-		public Display getDisplay() {
+	public Display getDisplay() {
 			return display;
 		}
 
@@ -586,7 +581,7 @@ public class MainView extends Observable {
 			return menuitem;
 		}
 
-		public CLabel getBtKalender() {
+		public CLabel getBtBuchen() {
 			return btBuchen;
 		}
 
@@ -610,14 +605,6 @@ public class MainView extends Observable {
 			return zeitCombo;
 		}
 
-		public Text getNachtfahrtTxt() {
-			return fahrstundeTxt;
-		}
-
-		public Text getAutobahnTxt() {
-			return sonderfahrtTxt;
-		}
-
 		public Combo getArtCombo() {
 			return artCombo;
 		}
@@ -630,24 +617,16 @@ public class MainView extends Observable {
 			return fahrstundeTxt;
 		}
 
-		public CLabel getBtBuchen() {
-			return btBuchen;
-		}
-		
 		public Text getSonderfahrtTxt() {
 			return sonderfahrtTxt;
 		}
-		
-		public Label getFillerLabel() {
-			return fillerLabel;
-		}
-		
-		public FahrschulTheme getTheme() {
-			return theme;
-		}
-		
+
 		public Text getTheorieTxt() {
 			return theorieTxt;
+		}
+
+		public FahrschulTheme getTheme() {
+			return theme;
 		}
 
 	public static void main(String[] args) {

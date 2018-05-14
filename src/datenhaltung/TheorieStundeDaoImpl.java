@@ -1,11 +1,12 @@
-package Datenhaltung;
+package datenhaltung;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
-import Fachlogik.Theoriestunde;
+
+import fachlogik.Theoriestunde;
 
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 

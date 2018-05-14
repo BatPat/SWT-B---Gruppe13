@@ -1,4 +1,4 @@
-package Fachlogik;
+package fachlogik;
 
 import java.io.File;
 import java.io.FileNotFoundException;
