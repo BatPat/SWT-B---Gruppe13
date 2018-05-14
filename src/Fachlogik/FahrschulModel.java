@@ -32,7 +32,7 @@ public class FahrschulModel {
 	    return result;
 	  }
 	
-	public int berechneAlterMonatsgenau()
+	public int berechneVerbliebeneStunden()
 	  {
 	    //berechne verbliebene Stunden
 	  }

@@ -26,19 +26,6 @@ import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 
 public class PdfDocumentBill {
 
-	// Wird aufgerufen nachdem man einen Schüler in der Hauptanwendung ausgewählt
-	// hat (Selected Value aus einem
-	// Dropdown Menü) und dann auf einen Button Rechnung klickt.
-	// Das selected Value wird übergeben und hier werden sich sämtliche Stammdaten
-	// dazu geholt
-
-	// private Adresse adr;
-	// ...
-
-	// public PdfDocument(Fahrschüler fahrschüler) {
-	//
-	// }
-
 	private static Font red = new Font(FontFamily.HELVETICA, 24, Font.BOLDITALIC, BaseColor.RED);
 	private static Font black = new Font(FontFamily.HELVETICA, 24, Font.BOLDITALIC, BaseColor.BLACK);
 	private static Font righttop = new Font(FontFamily.SYMBOL, 20, Font.NORMAL, BaseColor.BLACK);
@@ -54,7 +41,6 @@ public class PdfDocumentBill {
 
 	public void createPdf(Fahrschueler fahrschueler) throws IOException {
 		try {
-
 			String home = System.getProperty("user.home");
 			File file = new File(home + "/Downloads/Rechnungen/" + "Name des Schülers" + ".pdf");
 			file.getParentFile().mkdirs();
@@ -73,23 +59,14 @@ public class PdfDocumentBill {
 			// ICC_Profile icc = ICC_Profile.getInstance(new FileInputStream(ICC));
 			// pdfwriter.setOutputIntents("Custom", "", "http://www.color.org", "sRGB
 			// IBC61966-2-1", icc);
-
 			createFirstTableAndAddHeader(document);
-
 			createSecondTableAndAddAdressParts(document, pdfwriter, fahrschueler);
-
 			createThirdTableAndAddTimestamp(document, pdfwriter);
-
 			createFourthTableAndAddBillHeader(document, pdfwriter, fahrschueler);
-
 			createBillTableAndAddRows(document, pdfwriter, fahrschueler);
-
 			createSixthTableAndAddTaxInformation(document, pdfwriter);
-
 			createSeventhTableAndAddGreetings(document, pdfwriter);
-
 			createTableAndAddBankInformation(document, pdfwriter);
-
 			// --------
 			document.close();
 			// --------
@@ -181,27 +158,16 @@ public class PdfDocumentBill {
 		PdfPTable tableBill = new PdfPTable(columnWidths);
 		tableBill.setHorizontalAlignment(Element.ALIGN_CENTER);
 		tableBill.setWidthPercentage(100);
-
 		createHeaderInBillTable(tableBill);
-
 		createFirstRowBillTable(tableBill);
-
 		createSecondRowInBillTable(tableBill, fahrschueler);
-
 		createThirdRowInBillTable(tableBill, fahrschueler);
-
 		createFourthRowInBillTable(tableBill, fahrschueler);
-
 		createFifthRowInBillTable(tableBill, fahrschueler);
-
 		createSixthRowInBillTable(tableBill, fahrschueler);
-
 		createSeventhRowInBillTable(tableBill);
-
 		createEightRowInBillTable(tableBill, fahrschueler);
-
 		createTenthRowInBillTable(tableBill, fahrschueler);
-
 		PdfContentByte canvas5 = pdfwriter.getDirectContent();
 		tableBill.writeSelectedRows(0, -1, document.left() + 10, document.top(260), canvas5);
 		// ---------------------------------------------------
