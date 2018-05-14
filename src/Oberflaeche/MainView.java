@@ -332,7 +332,7 @@ public class MainView extends Observable {
 		    zeitLabel.setFont(theme.getFont2());
 		    zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
 		    
-		    timeCombo = new Combo(kalenderComposite, SWT.NONE);
+		    timeCombo = new Combo(kalenderComposite, SWT.READ_ONLY);
 			timeCombo.setLayoutData(createFillFillTrueFalseGridData());
 		    timeCombo.setFont(theme.getFont2());
 		    timeCombo.addSelectionListener(new SelectionAdapter()

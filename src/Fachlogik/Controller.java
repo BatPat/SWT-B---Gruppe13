@@ -127,16 +127,24 @@ public class Controller implements Observer {
 	private void bucheFahrstunde() {
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
-
-		// TODO ganz viel shit um parameter zu bekommen
+		String uhrzeitString = mainview.getZeitCombo().getText();
+		int datumJahr = mainview.getDateFahrstunde().getYear();
+		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		int datumTag = mainview.getDateFahrstunde().getDay();
+		String artString = mainview.getArtCombo.getText();
 
 		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
 		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
 
 		// TODO mit parametern Objekte erstellen
-		LocalTime terminUhrzeit;
-		LocalDate terminDatum;
+		LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)), Integer.parseInt(uhrzeitString.substring(3)));
+		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		Fahrstundenart fStundenArt;
+		if (artString == Fahrstundenart.B_STANDARDFAHRT.toString()) {
+			fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
+		} else {
+			fStundenArt = Fahrstundenart.B_SONDERFAHRT;
+		}
 
 		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
 		fahrstundedao.addFahrstunde(fStunde);
