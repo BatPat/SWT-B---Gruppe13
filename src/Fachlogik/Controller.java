@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Observer;
 
+import Datenhaltung.FahrlehrerDaoImpl;
 import Oberflaeche.MainView;
 
 public class Controller {
@@ -14,6 +15,7 @@ public class Controller {
 	private FahrschulModel model;
 	private MainView mainview;
 	private PdfDocumentBill pdf;
+	private FahrlehrerDaoImpl fahrlehrerdao;
 	
 	public Controller() {
 		initGUI();
@@ -32,7 +34,18 @@ public class Controller {
 
 	private void fillListContent()
 	  {
-	  //Komboboxen füllen
+		String[] fahrlehrernamen = null;
+		for (Fahrlehrer f : fahrlehrerdao.getAlleFahrlehrer()) {
+			int count = 0;
+			fahrlehrernamen[count] = f.getName();
+		}
+		String[] fahrschuelernamen = null;
+		for (Fahrlehrer f : fahrlehrerdao.getAlleFahrlehrer()) {
+			int count = 0;
+			fahrschuelernamen[count] = f.getName();
+		}
+		mainview.getLehrerCombo().setItems(fahrlehrernamen);
+		mainview.getSchuelerCombo().setItems(fahrschuelernamen);
 	  }
 	
 	 private void updateModel()
