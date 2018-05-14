@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,7 +18,7 @@ import Datenhaltung.FahrstundeDao;
 import Datenhaltung.FahrstundeDaoImpl;
 import Oberflaeche.MainView;
 
-public class Controller implements Observer{
+public class Controller implements Observer {
 
 	private FahrschulModel model;
 	private MainView mainview;
@@ -56,8 +57,39 @@ public class Controller implements Observer{
 			mainview.getSchuelerCombo().add(f.getName());
 		}
 		for (int i = 9; i < 22; i++) {
-			String zeit = i + ":00"; 
+			String zeit = i + ":00";
 			mainview.getZeitCombo().add(zeit);
+		}
+	}
+
+	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
+		String fahrlehr = mainview.getLehrerCombo().getText();
+		String home = System.getProperty("user.home");
+		Fahrlehrer fahrlehrer = null;
+		try (FileInputStream fis = new FileInputStream(home + "/Downloads/Fahrschule/Fahrlehrer/" + fahrlehr + ".ser");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+			fahrlehrer = (Fahrlehrer) ois.readObject();
+			assert (fahrlehrer.getName().equals(fahrlehr));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		ArrayList<Fahrstunde> terminefahrlehr;
+		terminefahrlehr = fahrlehrer.getFahrstunden();
+		int tag = mainview.getDateFahrstunde().getDay();
+		int monat = mainview.getDateFahrstunde().getMonth();
+		int jahr = mainview.getDateFahrstunde().getYear();
+		for (int i = 0; i < terminefahrlehr.size(); i++) {
+			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
+					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
+					&& terminefahrlehr.get(i).getDatum().getYear() == jahr) {
+				for (int j = 9; j < 22; i++) {
+					if (terminefahrlehr.get(i).getUhrzeit().getHour() != j) {
+						String zeit = j + ":00";
+						mainview.getZeitCombo().add(zeit);
+					}
+				}
+
+			}
 		}
 	}
 
@@ -96,7 +128,7 @@ public class Controller implements Observer{
 	}
 
 	private void updateModel() {
-		
+
 	}
 
 	private void erstellePdf() throws FileNotFoundException, IOException {
@@ -112,31 +144,31 @@ public class Controller implements Observer{
 		}
 		pdf.createPdf(fahrschueler);
 	}
-	
+
 	private void bucheFahrstunde() {
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
-		
-		//TODO ganz viel shit um parameter zu bekommen
-		
+
+		// TODO ganz viel shit um parameter zu bekommen
+
 		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
 		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
-		
-		//TODO mit parametern Objekte erstellen
+
+		// TODO mit parametern Objekte erstellen
 		LocalTime terminUhrzeit;
 		LocalDate terminDatum;
 		Fahrstundenart fStundenArt;
-		
+
 		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
 		fahrstundedao.addFahrstunde(fStunde);
-		
+
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		switch (arg1.toString()) {
 		case "":
-			
+
 			break;
 
 		default:
