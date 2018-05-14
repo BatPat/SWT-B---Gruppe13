@@ -30,6 +30,10 @@ dependencies {
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
 }
 
+sourceSets {
+        main.java.srcDirs = ['src']
+    }
+
 compileJava.options.encoding = 'ISO-8859-1'
 
 tasks.withType(JavaCompile) {

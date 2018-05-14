@@ -3,10 +3,8 @@ package Fachlogik;
 public enum Fahrstundenart {
 
 
-	B_NACHTFAHRT (40.0, "Nachtfahrt"),
-	B_AUTOBAHNFAHRT (40.0, "Autobahnfahrt"),
-	B_STANDARDFAHRT (30.0, "Standardfahrt"),
-	B_UEBERLANDFAHRT (40.0, "Überlandfahrt");
+	B_STANDARDFAHRT (34.0, "Standardfahrt"),
+	B_SONDERFAHRT (44.0, "Sonderfahrt");
 	
 	private final double preis;
 	private final String beschreibung;
