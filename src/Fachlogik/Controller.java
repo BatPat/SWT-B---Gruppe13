@@ -18,6 +18,7 @@ public class Controller {
 	public Controller() {
 		initGUI();
 		initModel();
+		mainview.getShell().layout(true);
 	}
 
 	private void initGUI() {
@@ -43,7 +44,7 @@ public class Controller {
 		 String f = mainview.getSchuelerCombo().getText();
 		 String home = System.getProperty("user.home");
 		 Fahrschueler fahrschueler = null; 
-		 try (FileInputStream fis = new FileInputStream (home + "/Downloads/Fahrschule/Fahrschueler" + f + ".ser");
+		 try (FileInputStream fis = new FileInputStream (home + "/Downloads/Fahrschule/Fahrschueler/" + f + ".ser");
 				    ObjectInputStream ois = new ObjectInputStream (fis)) {
 				  fahrschueler = (Fahrschueler) ois.readObject ();
 				  assert (fahrschueler.getName().equals(f));

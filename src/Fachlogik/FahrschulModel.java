@@ -85,14 +85,4 @@ public class FahrschulModel {
 	public void setPruefung(Pruefung pruefung) {
 		this.pruefung = pruefung;
 	}
-
-
-	public Theoriestunde getTheoriestunde() {
-		return theoriestunde;
-	}
-
-
-	public void setTheoriestunde(Theoriestunde theoriestunde) {
-		this.theoriestunde = theoriestunde;
-	}
 }
