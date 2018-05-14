@@ -43,6 +43,7 @@ public class Controller implements Observer {
 	private void initGUI() {
 		MainView gui = new MainView();
 		gui.addObserver((Observer) this);
+		fillListContent();
 	}
 
 	private void initModel() {
@@ -117,7 +118,7 @@ public class Controller implements Observer {
 
 	}
 
-	private void erstellePdf() throws FileNotFoundException, IOException {
+	private void erstellePdf() throws IOException {
 		String f = mainview.getSchuelerCombo().getText();
 		String home = System.getProperty("user.home");
 		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
@@ -153,9 +154,58 @@ public class Controller implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		switch (arg1.toString()) {
-		case "":
-
+		case "Fahrlehrer":
+			try {
+				zeigePassendeTermine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
+
+		case "Datum":
+			try {
+				zeigePassendeTermine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+
+		case "Fahrschueler":
+			try {
+				zeigePassendeTermine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+
+		case "Uhrzeit":
+			//nix
+			break;
+
+		case "BuchungsZeit":
+			//nix
+			break;
+
+		case "F�hrerscheinklasse":
+			//nix
+			break;
+
+		case "Buchen":
+			bucheFahrstunde();
+			break;
+
+		case "Rechnung":
+			try {
+				erstellePdf();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
 
 		default:
 			break;
