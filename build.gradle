@@ -24,7 +24,6 @@ dependencies {
 	compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.56'
 	//https://mvnrepository.com/artifact/com.itextpdf/itextpdf
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
-	compile "org.eclipse:swt:3.3.0-v3346"
 }
 
 compileJava.options.encoding = 'ISO-8859-1'

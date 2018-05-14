@@ -40,7 +40,7 @@ public class MainView extends Observable {
 		private Text nachtfahrtTxt, autobahnTxt, ueberlandTxt, fahrstundeTxt, theorieTxt;
 		private Color whiteColor;
 		
-		public MainGUI() {
+		public MainView() {
 			initUI();
 		}
 
@@ -435,7 +435,7 @@ public class MainView extends Observable {
 		}
 
 	public static void main(String[] args) {
-		MainGUI gui = new MainGUI();
+		MainView gui = new MainView();
 		gui.startEventHandler();
 	}
 
