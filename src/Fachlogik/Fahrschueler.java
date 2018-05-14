@@ -16,6 +16,9 @@ public class Fahrschueler implements Person {
 	private ArrayList<Fahrstunde> fahrstunden;
 	private ArrayList<Theoriestunde> theoriestunden;
 
+	public Fahrschueler() {
+		super();
+	}
 
 	public Fahrschueler(String name, String plz, String wohnort, String strasse, String hausnummer) {
 		super();

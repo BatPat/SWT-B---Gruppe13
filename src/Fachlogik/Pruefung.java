@@ -17,6 +17,10 @@ public class Pruefung implements Termin {
 	private Duration dauer;
 	private String ort;
 
+	public Pruefung() {
+		super();
+	}
+
 	public Pruefung(Fahrlehrer fahrlehrer, Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		this.genid = counter++;
 		this.fahrlehrer = fahrlehrer;

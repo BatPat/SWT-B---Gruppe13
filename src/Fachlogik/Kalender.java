@@ -11,6 +11,10 @@ public class Kalender {
 	private FahrstundeDao fahrstundeDao;
 	private PruefungDao pruefungDao;
 	
+	public Kalender() {
+		super();
+	}
+
 	public Kalender(TheoriestundeDao theoriestundeDao, FahrstundeDao fahrstundeDao, PruefungDao pruefungDao) {
 		super();
 		this.theoriestundeDao = theoriestundeDao;

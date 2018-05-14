@@ -13,8 +13,9 @@ public class Fahrstunde extends Stunde {
 	private Fahrschueler schueler;
 	private long genid;
 
-
-
+	public Fahrstunde(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
+		super(datum, uhrzeit, dauer, ort);
+	}
 
 	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler, LocalTime uhrzeit, LocalDate datum, String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);

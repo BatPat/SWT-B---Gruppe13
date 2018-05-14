@@ -9,6 +9,10 @@ public class Fahrschule {
 	private FahrschuelerDao schuelerDao;
 	private FahrlehrerDao lehrerDao;
 	
+	public Fahrschule() {
+		super();
+	}
+
 	public Fahrschule(FahrschuelerDao schuelerDao, FahrlehrerDao lehrerDao) {
 		super();
 		this.schuelerDao = schuelerDao;
