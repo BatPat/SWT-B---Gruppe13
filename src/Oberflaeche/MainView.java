@@ -74,7 +74,7 @@ public class MainView extends Observable {
 		}
 		
 		private void initShell() {
-			shell.setBackground(theme.getWhiteColor());
+		//	shell.setBackground(theme.getWhiteColor());
 			shell.setFont(theme.getFont1());
 			shell.setLayout(createFluidGrid());
 			shell.setText("Fahrschul Verwaltung");
@@ -309,10 +309,11 @@ public class MainView extends Observable {
 
 		private void erzeugeUntereLinkeWidgets() {
 			
+			new Label(kalenderComposite, SWT.NONE);
+			
 		    DateTime zeitplan = new DateTime(kalenderComposite, SWT.CALENDAR);
 		    zeitplan.setFont(theme.getFont1());
 		    
-		    new Label(kalenderComposite, SWT.NONE);
 		    new Label(kalenderComposite, SWT.NONE);
 		    new Label(kalenderComposite, SWT.NONE);
 		    
