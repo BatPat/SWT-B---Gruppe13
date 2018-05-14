@@ -24,10 +24,10 @@ public class FahrschulModel {
 	  {
 	    boolean result = true;
 	    //TODO anpassen
-	    result = result & !getTarif().getTarifauswahl().isEmpty();
-	    result = result & !getTarif().getTarifstufe().isEmpty();
-	    result = result & getPerson().getGeschlecht() != null;
-	    result = result & getTarif().getAnwartschaft() != null;
+//	    result = result & !getTarif().getTarifauswahl().isEmpty();
+//	    result = result & !getTarif().getTarifstufe().isEmpty();
+//	    result = result & getPerson().getGeschlecht() != null;
+//	    result = result & getTarif().getAnwartschaft() != null;
 
 	    return result;
 	  }
@@ -35,6 +35,7 @@ public class FahrschulModel {
 	public int berechneAlterMonatsgenau()
 	  {
 	    //berechne verbliebene Stunden
+		return 0;
 	  }
 	
 	public Fahrlehrer getFahrlehrer() {
@@ -88,11 +89,11 @@ public class FahrschulModel {
 
 
 	public Theoriestunde getTheoriestunde() {
-		return theoriestunde;
+		return new Theoriestunde(null, null, null, null);
 	}
 
 
 	public void setTheoriestunde(Theoriestunde theoriestunde) {
-		this.theoriestunde = theoriestunde;
+		Theoriestunde tstunde = theoriestunde;
 	}
 }

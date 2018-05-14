@@ -1,4 +1,3 @@
-
 package Oberflaeche;
 
 import java.util.Observable;
@@ -12,19 +11,28 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-	
+import static com.eclipsesource.tabris.passepartout.PassePartout.columns;
+import static com.eclipsesource.tabris.passepartout.PassePartout.createFluidGrid;
+import static com.eclipsesource.tabris.passepartout.PassePartout.createFluidGridData;
+import static com.eclipsesource.tabris.passepartout.PassePartout.maxWidth;
+import static com.eclipsesource.tabris.passepartout.PassePartout.minWidth;
+import static com.eclipsesource.tabris.passepartout.PassePartout.px;
+import static com.eclipsesource.tabris.passepartout.PassePartout.when;
+
 public class MainView extends Observable {
 
 		private GridLayout layout;
@@ -32,13 +40,16 @@ public class MainView extends Observable {
 		private Shell shell;
 		private Menu menu, submenu;
 		private MenuItem menuitem;
-		private GridData dataGrunddaten, kalender, dataUebersicht;
 		private CLabel btBuchen, btRechnung;
 		private DateTime dateFahrstunde;
-		private Font font1, font2;
-		private Combo lehrerCombo, schuelerCombo, zeitCombo;
-		private Text nachtfahrtTxt, autobahnTxt, ueberlandTxt, fahrstundeTxt, theorieTxt;
-		private Color whiteColor;
+		
+		private Combo lehrerCombo, schuelerCombo, zeitCombo, artCombo;
+		private Text fahrstundeTxt, sonderfahrtTxt, theorieTxt;
+		
+		private Label fillerLabel;
+		private FahrschulTheme theme;
+		private Composite mainComposite, headerComposite, eingabe1Composite, eingabe2Composite, kalenderComposite, uebersichtComposite;
+		
 		
 		public MainView() {
 			initUI();
@@ -47,134 +58,321 @@ public class MainView extends Observable {
 		private void initUI() {
 			display = new Display();
 			shell = new Shell(display);
-			whiteColor = new Color(display, 255, 255, 255);
-			shell.setBackground(whiteColor);
-			font1 = new Font(display, "Sans-Serif", 13, SWT.NORMAL);
-			font2 = new Font(display, "Sans-Serif", 11, SWT.NORMAL);
-			shell.setFont(font1);
+			theme = new FahrschulTheme(); 
 			
-			layout = new GridLayout(5, false);
-			shell.setLayout(layout);
-
-			shell.setText("Fahrschul Verwaltung");
-			
-
+			initShell(); 
 			erzeugeMenu();
-			
-			// Widgets fuer die Shell erzeugen
+			erzeugeHeader();
+			erzeugeHauptPanels();
 			erzeugeObereWidgets();
-			new Label(shell, SWT.NONE);
 			erzeugeUntereLinkeWidgets();
-			new Label(shell, SWT.NONE);
 			erzeugeUntereRechteWidgets();
+			uebergebeSpaltenanzahl();
 
-			shell.pack();
+			//shell.pack();
 			shell.open();
 		}
+		
+		private void initShell() {
+			shell.setBackground(theme.getWhiteColor());
+			shell.setFont(theme.getFont1());
+			shell.setLayout(createFluidGrid());
+			shell.setText("Fahrschul Verwaltung");
+			aendereShellGroesse();
+			
+			 display.addListener(SWT.Resize, new Listener()
+			    {
+			      @Override
+			      public void handleEvent(Event e)
+			      {
+			        aendereShellGroesse();
+			        anpassenAnzahlFillerLabel();
+			        uebergebeSpaltenanzahl();
+			        anpassenLabelGroesse(fillerLabel);
+			        setChanged();
+			        notifyObservers("FenstergroesseAendern");
+			      }
+			    });
+			 
+			 mainComposite = new Composite(shell, SWT.NONE);
+			 mainComposite.getVerticalBar();
+			 mainComposite.setRedraw(true);
+			 mainComposite.setBackground(theme.getWhiteColor());
+			 mainComposite.setLayout(createFluidGrid());
+			 mainComposite.setLayoutData(
+			     createFluidGridData(when(minWidth(px(720))).then(columns(16)), when(maxWidth(px(719))).then(columns(8))));
+		}
+		
+		private void aendereShellGroesse()
+		  {
+		    // die Shell muss zum Anzeigen der Schrollbar l√§nger sein, als das Display,
+		    //von der Breite wird Platz f√ºr die Scrollbar abgezogen
+
+		    Rectangle help = display.getBounds();
+		    if (help.width < 720)
+		    {
+		      help.width -= 15;
+		      help.height = 1220; //Gesamth√∂he aller Widgets bei schmalem Display
+		    }
+		    else
+		    {
+		      int fill = 867 - help.height; //minimale H√∂he, bei der das Textfeld noch komplett zu sehen ist, bei Displaybreite ab 720
+
+		      if (fill > 0)
+		      {
+		        help.width -= 15;
+		        help.height += fill;
+		      }
+		    }
+		    shell.setBounds(help);
+		  }
+
+		private void erzeugeHeader() {
+			headerComposite = new Composite(mainComposite, SWT.NONE);
+		    headerComposite.setBackground(theme.getWhiteColor());
+		    headerComposite.setLayout(new GridLayout(5, false));
+		    setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
+
+		    Label nameLabel = new Label(headerComposite, SWT.NORMAL);
+		    nameLabel.setText("Fahrschul-Verwaltungssoftware" + "\n" + "Version: 1.0");
+		    nameLabel.setFont(theme.getFont1());
+		    nameLabel.setBackground(theme.getWhiteColor());
+		    nameLabel.setForeground(theme.getBlueColor());
+
+		    erzeugeLinie(headerComposite);
+		}
+		
+		private void erzeugeHauptPanels() {
+			eingabe1Composite = new Composite(mainComposite, SWT.NONE);
+			eingabe1Composite.setBackground(theme.getWhiteColor());
+			eingabe1Composite.setLayout(new GridLayout(3, true));
+			
+			eingabe2Composite = new Composite(mainComposite, SWT.NONE);
+			eingabe2Composite.setBackground(theme.getWhiteColor());
+			eingabe2Composite.setLayout(new GridLayout(3, true));
+			
+			kalenderComposite = new Composite(mainComposite, SWT.NONE);
+			kalenderComposite.setBackground(theme.getWhiteColor());
+			kalenderComposite.setLayout(new GridLayout(4, true));
+			
+			uebersichtComposite = new Composite(mainComposite, SWT.NONE);
+			uebersichtComposite.setBackground(theme.getWhiteColor());
+			uebersichtComposite.setLayout(new GridLayout(2, true));
+		}
+		
+		private void anpassenLabelGroesse(Label label)
+		  {
+		    if (display.getBounds().width < 1870)
+		    {
+		      label.setLayoutData(
+		        createFluidGridData(when(minWidth(px(720))).then(columns(2)), when(maxWidth(px(719))).then(columns(2))));
+		    }
+		    else
+		    {
+		      label.setLayoutData(
+		        createFluidGridData(when(minWidth(px(1871))).then(columns(8)), when(maxWidth(px(1970))).then(columns(4))));
+		    }
+		  }
+		
+		 private void anpassenAnzahlFillerLabel()
+		  {
+		    if (display.getBounds().width < 1870)
+		    {
+		      createFillerLabel(mainComposite, 2);
+		    }
+		    else
+		    {
+		      createFillerLabel(mainComposite, 4);
+		    }
+		  }
+		 
+		 public void uebergebeSpaltenanzahl()
+		  {
+		    setzeSpaltenVonFluidGrudData(eingabe1Composite, 4, 4, 8, 4);
+		    setzeSpaltenVonFluidGrudData(eingabe2Composite, 4, 4, 8, 4);
+		    setzeSpaltenVonFluidGrudData(kalenderComposite, 4, 4, 8, 4);
+		    setzeSpaltenVonFluidGrudData(uebersichtComposite, 4, 4, 8, 4);
+		    setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
+		  }
+		 
+		 private void setzeSpaltenVonFluidGrudData(Composite composite, int minWidthNormal, int maxWidthNormal,
+			      int minWidthGross, int maxWidthGross)
+			  {
+			    if (display.getBounds().width < 1871)
+			    {
+			      composite.setLayoutData(createFluidGridData(when(minWidth(px(720))).then(columns(minWidthNormal)),
+			        when(maxWidth(px(719))).then(columns(maxWidthNormal))));
+			    }
+			    else
+			    {
+			      composite.setLayoutData(createFluidGridData(when(minWidth(px(1872))).then(columns(minWidthGross)),
+			        when(maxWidth(px(1871))).then(columns(minWidthNormal))));
+			    }
+			    shell.layout();
+			  }
 
 		private void erzeugeObereWidgets() {
 
-			SelectionListener selectionListenerCombo = new SelectionAdapter() {
+			Label lehrerLabel = new Label(eingabe1Composite, SWT.NONE);
+			lehrerLabel.setText("Fahrlehrer");
+			lehrerLabel.setFont(theme.getFont1());
+			lehrerLabel.setBackground(theme.getWhiteColor());
+			lehrerLabel.setLayoutData(createFillFillTrueFalseGridData());
+			
+			SelectionListener selectionListenerFahrlehrerCombo = new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent event) {
 					setChanged();
-					notifyObservers(null); //null ersetzen
+					notifyObservers("Fahrlehrer"); 
 				};
 			};
 			
-			Label lehrerLabel = new Label(shell, SWT.NONE);
-			lehrerLabel.setText("Fahrlehrer");
-			lehrerLabel.setFont(font1);
-			lehrerLabel.setBackground(whiteColor);
-			
-			lehrerCombo = new Combo(shell, SWT.READ_ONLY);
-			lehrerCombo.addSelectionListener(selectionListenerCombo);
+			lehrerCombo = new Combo(eingabe1Composite, SWT.READ_ONLY);
+			lehrerCombo.addSelectionListener(selectionListenerFahrlehrerCombo);
 			lehrerCombo.setLayoutData(createFillFillTrueFalseGridData());
-			lehrerCombo.setFont(font2);
+			lehrerCombo.setFont(theme.getFont2());
 			
-			new Label(shell, SWT.NONE);
-
-			Label schuelerLabel = new Label(shell, SWT.NONE);
-			schuelerLabel.setText("Fahrsch¸ler");
-			schuelerLabel.setFont(font1);
-			schuelerLabel.setBackground(whiteColor);
+			new Label(eingabe1Composite, SWT.NONE);
 			
-			schuelerCombo = new Combo(shell, SWT.READ_ONLY);
-			schuelerCombo.addSelectionListener(selectionListenerCombo);
-			schuelerCombo.setLayoutData(createFillFillTrueFalseGridData());
-			schuelerCombo.setFont(font2);
-
-
-			Label datumLabel = new Label(shell, SWT.NONE);
+			Label datumLabel = new Label(eingabe1Composite, SWT.NONE);
 			datumLabel.setText("Datum:");
-			datumLabel.setFont(font1);
-			datumLabel.setBackground(whiteColor);
+			datumLabel.setFont(theme.getFont1());
+			datumLabel.setBackground(theme.getWhiteColor());
+			datumLabel.setLayoutData(createFillFillTrueFalseGridData());
 			
-			dateFahrstunde = new DateTime(shell, SWT.DATE);
+			dateFahrstunde = new DateTime(eingabe1Composite, SWT.DATE);
 			dateFahrstunde.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					setChanged();
-					notifyObservers(null); //null ersetzen
+					notifyObservers("Datum"); 
 				}
 			});
-
-			new Label(shell, SWT.NONE);
-	
-			Label zeitLabel  = new Label(shell, SWT.NONE);
-			zeitLabel.setText("Uhrzeit:");
-			zeitLabel.setFont(font1);
-			zeitLabel.setBackground(whiteColor);
 			
-			zeitCombo = new Combo(shell, SWT.READ_ONLY);
-			zeitCombo.addSelectionListener(selectionListenerCombo);
+			erzeugeLinie(eingabe1Composite);
+			
+			Label schuelerLabel = new Label(eingabe2Composite, SWT.NONE);
+			schuelerLabel.setText("Fahrsch¸ler");
+			schuelerLabel.setFont(theme.getFont1());
+			schuelerLabel.setBackground(theme.getWhiteColor());
+			schuelerLabel.setLayoutData(createFillFillTrueFalseGridData());
+			
+			SelectionListener selectionListenerSchuelerCombo = new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent event) {
+					setChanged();
+					notifyObservers("Fahrschueler"); 
+				};
+			};
+			
+			schuelerCombo = new Combo(eingabe2Composite, SWT.READ_ONLY);
+			schuelerCombo.addSelectionListener(selectionListenerSchuelerCombo);
+			schuelerCombo.setLayoutData(createFillFillTrueFalseGridData());
+			schuelerCombo.setFont(theme.getFont2());
+			
+			new Label(eingabe2Composite, SWT.NONE);
 
-			erzeugeLinie();
+			
+			Label zeitLabel  = new Label(eingabe2Composite, SWT.NONE);
+			zeitLabel.setText("Uhrzeit:");
+			zeitLabel.setFont(theme.getFont1());
+			zeitLabel.setBackground(theme.getWhiteColor());
+			zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
+			
+			SelectionListener selectionListenerZeitCombo = new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent event) {
+					setChanged();
+					notifyObservers("Uhrzeit"); 
+				};
+			};
+			
+			zeitCombo = new Combo(eingabe2Composite, SWT.READ_ONLY);
+			zeitCombo.addSelectionListener(selectionListenerZeitCombo);
+			zeitCombo.setLayoutData(createFillFillTrueFalseGridData());
 
+			
+			erzeugeLinie(eingabe2Composite);
 		}
 
 		private GridData createFillFillTrueFalseGridData() {
 			return new GridData(SWT.FILL, SWT.FILL, true, false);
 		}
+		
+		private void createFillerLabel(Composite parent, int anzahl)
+		  {
+		    for (int i = 0; i < anzahl; i++)
+		    {
+		      new Label(parent, SWT.NONE);
+		    }
+		  }
 
 		private void erzeugeUntereLinkeWidgets() {
 			
-			Composite calendar = new Composite(shell, SWT.NONE);
-			calendar.setBackground(whiteColor);
-			
-		    calendar.setLayout(new GridLayout(3, false));
+		    DateTime zeitplan = new DateTime(kalenderComposite, SWT.CALENDAR);
+		    zeitplan.setFont(theme.getFont1());
 		    
-		    new Label(calendar, SWT.None);
+		    new Label(kalenderComposite, SWT.NONE);
+		    new Label(kalenderComposite, SWT.NONE);
+		    new Label(kalenderComposite, SWT.NONE);
 		    
-		    DateTime zeitplan = new DateTime(calendar, SWT.CALENDAR);
-		    zeitplan.setFont(font1);
-		    
-		    new Label(calendar, SWT.None);
-		    new Label(calendar, SWT.None);
-		    
-		    Label zeitLabel = new Label(calendar, SWT.NONE);
+		    Label zeitLabel = new Label(kalenderComposite, SWT.NONE);
 		    zeitLabel.setText("Uhrzeit");
-		    zeitLabel.setBackground(whiteColor);
-		    zeitLabel.setFont(font2);
+		    zeitLabel.setBackground(theme.getWhiteColor());
+		    zeitLabel.setFont(theme.getFont2());
+		    zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
 		    
-		    DateTime time = new DateTime(calendar, SWT.TIME);
-		    time.setFont(font2);
+		    DateTime time = new DateTime(kalenderComposite, SWT.TIME);
+		    time.setFont(theme.getFont2());
+		    time.addSelectionListener(new SelectionAdapter()
+		    {
+		      @Override
+		      public void widgetSelected(SelectionEvent e)
+		      {
+		        setChanged();
+		        notifyObservers("BuchungsZeit");
+		      }
+		    });
 		    
-		    new Label(calendar, SWT.None);
-		    new Label(calendar, SWT.None);
+		    new Label(kalenderComposite, SWT.NONE);
+		    new Label(kalenderComposite, SWT.NONE);
 		    
-		    btBuchen = new CLabel(calendar, SWT.BORDER);
+		    Label artLabel = new Label(kalenderComposite, SWT.NONE);
+		    artLabel.setText("Klasse:");
+		    artLabel.setBackground(theme.getWhiteColor());
+		    artLabel.setFont(theme.getFont2());
+		    artLabel.setLayoutData(createFillFillTrueFalseGridData());
+		    
+		    SelectionListener selectionListenerArtCombo = new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent event) {
+					setChanged();
+					notifyObservers("F¸hrerscheinklasse"); 
+				};
+			};
+
+		    artCombo = new Combo(kalenderComposite, SWT.READ_ONLY);
+			artCombo.addSelectionListener(selectionListenerArtCombo);
+			artCombo.setLayoutData(createFillFillTrueFalseGridData());
+			artCombo.setFont(theme.getFont2());
+			
+			  new Label(kalenderComposite, SWT.NONE);
+			  new Label(kalenderComposite, SWT.NONE);
+			  new Label(kalenderComposite, SWT.NONE);
+		    
+		    btBuchen = new CLabel(kalenderComposite, SWT.BORDER);
 		    btBuchen.setText("Fahrstunde \n buchen");
 		    btBuchen.setTextDirection(SWT.CENTER);
-		    btBuchen.setFont(font2);
-		    btBuchen.setLayoutData(createFillFillTrueFalseGridData());
-		    btBuchen.setBackground(new Color(display, 25, 61, 138));
-			btBuchen.setForeground(whiteColor);
+		    btBuchen.setFont(theme.getFont2());
+		    btBuchen.setBackground(theme.getBlueColor());
+			btBuchen.setForeground(theme.getWhiteColor());
 			btBuchen.addMouseListener(new MouseListener() {
 
 				@Override
 				public void mouseUp(MouseEvent arg0) {
 					btBuchen.setBackground(new Color(display, 0, 0, 255));
+					 setChanged();
+				        notifyObservers("Buchen");
 				}
 
 				@Override
@@ -203,76 +401,75 @@ public class MainView extends Observable {
 					btBuchen.setBackground(new Color(display, 125, 125, 255));
 				}
 			});
-			
+		
+			erzeugeLinie(kalenderComposite);
 		}
-
+		
+		  private GridData createFillFillTrueFalseGridData(int span)
+		  {
+		    GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false);
+		    gridData.horizontalSpan = span;
+		    return gridData;
+		  }
+		  
 		private void erzeugeUntereRechteWidgets() {
-			dataUebersicht = new GridData(SWT.RIGHT, SWT.TOP, false, false, 2, 6);
 			
-			Composite compositeUebersicht = new Composite(shell, SWT.BORDER);
-			compositeUebersicht.setLayoutData(dataUebersicht);
-			compositeUebersicht.setLayout(new GridLayout(2, false));
-			compositeUebersicht.setBackground(whiteColor);
-
-			Label ueberschrift = new Label(compositeUebersicht, SWT.NONE | SWT.WRAP);
+						Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
 			ueberschrift.setText("‹bersicht der Stunden vom Sch¸ler");
 			ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
-			ueberschrift.setFont(font1);
-			ueberschrift.setBackground(whiteColor);
+			ueberschrift.setFont(theme.getFont1());
+			ueberschrift.setBackground(theme.getWhiteColor());
 			
-			new Label(compositeUebersicht, SWT.None);
-			new Label(compositeUebersicht, SWT.None);
-			new Label(compositeUebersicht, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
 			
 			
-			Label nachtLabel = new Label(compositeUebersicht, SWT.NONE | SWT.WRAP);
-			nachtLabel.setText("Nachtfahrt:");
-			nachtLabel.setBackground(whiteColor);
-			nachtLabel.setFont(font2);
+			Label fahrstundeLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
+			fahrstundeLabel.setText("Fahrstunde:");
+			fahrstundeLabel.setBackground(theme.getWhiteColor());
+			fahrstundeLabel.setFont(theme.getFont2());
 
-			nachtfahrtTxt = new Text(compositeUebersicht, SWT.BORDER);
-			nachtfahrtTxt.setEnabled(false);
+			fahrstundeTxt = new Text(uebersichtComposite, SWT.BORDER);
+			fahrstundeTxt.setEnabled(false);
 
-			Label autobahnLabel = new Label(compositeUebersicht, SWT.NONE);
-			autobahnLabel.setText("Autobahnfahrt:");
-			autobahnLabel.setBackground(whiteColor);
-			autobahnLabel.setFont(font2);
+			Label sonderfahrtLabel = new Label(uebersichtComposite, SWT.NONE);
+			sonderfahrtLabel.setText("Sonderfahrt:");
+			sonderfahrtLabel.setBackground(theme.getWhiteColor());
+			sonderfahrtLabel.setFont(theme.getFont2());
 			
-			autobahnTxt = new Text(compositeUebersicht, SWT.BORDER);
-			autobahnTxt.setEnabled(false);
+			sonderfahrtTxt = new Text(uebersichtComposite, SWT.BORDER);
+			sonderfahrtTxt.setEnabled(false);
 
-			Label ueberlandLabel = new Label(compositeUebersicht, SWT.NONE | SWT.WRAP);
-			ueberlandLabel.setText("‹berlandfahrt:");
-			ueberlandLabel.setBackground(whiteColor);
-			ueberlandLabel.setFont(font2);
-
-			ueberlandTxt = new Text(compositeUebersicht, SWT.BORDER);
-			ueberlandTxt.setEnabled(false);
-			
-			Label theorieLabel = new Label(compositeUebersicht, SWT.NONE | SWT.WRAP);
+			Label theorieLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
 			theorieLabel.setText("Theoriestunden");
-			theorieLabel.setBackground(whiteColor);
-			theorieLabel.setFont(font2);
+			theorieLabel.setBackground(theme.getWhiteColor());
+			theorieLabel.setFont(theme.getFont2());
 			
-			theorieTxt = new Text(compositeUebersicht, SWT.BORDER);
+			theorieTxt = new Text(uebersichtComposite, SWT.BORDER);
 			theorieTxt.setEnabled(false);
 			
-			new Label(compositeUebersicht, SWT.NONE);
-			new Label(compositeUebersicht, SWT.None);
-			new Label(compositeUebersicht, SWT.None);
+			new Label(uebersichtComposite, SWT.NONE);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
+			new Label(uebersichtComposite, SWT.None);
 			
-			btRechnung = new CLabel(compositeUebersicht, SWT.BORDER);
+			btRechnung = new CLabel(uebersichtComposite, SWT.BORDER);
 			btRechnung.setText("Rechnungs¸bersicht \n erstellen");
 			btRechnung.setTextDirection(SWT.CENTER);
-			btRechnung.setFont(font2);
-			btRechnung.setLayoutData(createFillFillTrueFalseGridData());
-			btRechnung.setBackground(new Color(display, 25, 61, 138));
-			btRechnung.setForeground(whiteColor);
+			btRechnung.setFont(theme.getFont2());
+			btRechnung.setBackground(theme.getBlueColor());
+			btRechnung.setForeground(theme.getWhiteColor());
 			btRechnung.addMouseListener(new MouseListener() {
 
 				@Override
 				public void mouseUp(MouseEvent arg0) {
 					btRechnung.setBackground(new Color(display, 0, 0, 255));
+					 setChanged();
+				     notifyObservers("Rechnung");
 				}
 
 				@Override
@@ -301,16 +498,18 @@ public class MainView extends Observable {
 					btRechnung.setBackground(new Color(display, 125, 125, 255));
 				}
 			});
+			
+			erzeugeLinie(uebersichtComposite);
 		}
 		
-		public void erzeugeLinie() {
-			Label hrLabel = new Label(shell, SWT.BORDER);
-			GridData gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
-			gridData.heightHint = 1;
-			gridData.horizontalSpan = 5;
-			hrLabel.setLayoutData(gridData);
-		}
-
+		 public void erzeugeLinie(Composite composite)
+		  {
+		    Label trennstrichLabel = new Label(composite, SWT.BORDER);
+		    GridData gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
+		    gridData.heightHint = 1;
+		    gridData.horizontalSpan = 5;
+		    trennstrichLabel.setLayoutData(gridData);
+		  }
 		
 		private void erzeugeMenu() {
 			// Erzeugung des Menus
@@ -378,18 +577,6 @@ public class MainView extends Observable {
 			return menuitem;
 		}
 
-		public GridData getDataGrunddaten() {
-			return dataGrunddaten;
-		}
-
-		public GridData getKalender() {
-			return kalender;
-		}
-
-		public GridData getDataUebersicht() {
-			return dataUebersicht;
-		}
-
 		public CLabel getBtKalender() {
 			return btBuchen;
 		}
@@ -415,21 +602,33 @@ public class MainView extends Observable {
 		}
 
 		public Text getNachtfahrtTxt() {
-			return nachtfahrtTxt;
+			return fahrstundeTxt;
 		}
 
 		public Text getAutobahnTxt() {
-			return autobahnTxt;
-		}
-
-		public Text getUeberlandTxt() {
-			return ueberlandTxt;
+			return sonderfahrtTxt;
 		}
 
 		public Text getFahrstundeTxt() {
 			return fahrstundeTxt;
 		}
 
+		public CLabel getBtBuchen() {
+			return btBuchen;
+		}
+		
+		public Text getSonderfahrtTxt() {
+			return sonderfahrtTxt;
+		}
+		
+		public Label getFillerLabel() {
+			return fillerLabel;
+		}
+		
+		public FahrschulTheme getTheme() {
+			return theme;
+		}
+		
 		public Text getTheorieTxt() {
 			return theorieTxt;
 		}
