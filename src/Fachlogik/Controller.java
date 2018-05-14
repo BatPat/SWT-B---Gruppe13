@@ -65,14 +65,7 @@ public class Controller implements Observer {
 	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
 		String fahrlehr = mainview.getLehrerCombo().getText();
 		String home = System.getProperty("user.home");
-		Fahrlehrer fahrlehrer = null;
-		try (FileInputStream fis = new FileInputStream(home + "/Downloads/Fahrschule/Fahrlehrer/" + fahrlehr + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrlehrer = (Fahrlehrer) ois.readObject();
-			assert (fahrlehrer.getName().equals(fahrlehr));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		Fahrlehrer fahrlehrer = fahrlehrerdao.getFahrlehrer(fahrlehr);
 		ArrayList<Fahrstunde> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
 		int tag = mainview.getDateFahrstunde().getDay();
@@ -96,14 +89,7 @@ public class Controller implements Observer {
 	private void uebersichtFahrstunden() throws FileNotFoundException, IOException {
 		String f = mainview.getSchuelerCombo().getText();
 		String home = System.getProperty("user.home");
-		Fahrschueler fahrschueler = null;
-		try (FileInputStream fis = new FileInputStream(home + "/Downloads/Fahrschule/Fahrschueler/" + f + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrschueler = (Fahrschueler) ois.readObject();
-			assert (fahrschueler.getName().equals(f));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		int anzNorm = 0;
 		int anzSond = 0;
 		int anzTheo = 0;
@@ -134,14 +120,7 @@ public class Controller implements Observer {
 	private void erstellePdf() throws FileNotFoundException, IOException {
 		String f = mainview.getSchuelerCombo().getText();
 		String home = System.getProperty("user.home");
-		Fahrschueler fahrschueler = null;
-		try (FileInputStream fis = new FileInputStream(home + "/Downloads/Fahrschule/Fahrschueler/" + f + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrschueler = (Fahrschueler) ois.readObject();
-			assert (fahrschueler.getName().equals(f));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		pdf.createPdf(fahrschueler);
 	}
 
