@@ -1,22 +1,20 @@
 package fachlogik;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import Datenhaltung.FahrlehrerDao;
-import Datenhaltung.FahrlehrerDaoImpl;
-import Datenhaltung.FahrschuelerDao;
-import Datenhaltung.FahrschuelerDaoImpl;
-import Datenhaltung.FahrstundeDao;
-import Datenhaltung.FahrstundeDaoImpl;
-import Oberflaeche.MainView;
+import datenhaltung.FahrlehrerDao;
+import datenhaltung.FahrlehrerDaoImpl;
+import datenhaltung.FahrschuelerDao;
+import datenhaltung.FahrschuelerDaoImpl;
+import datenhaltung.FahrstundeDao;
+import datenhaltung.FahrstundeDaoImpl;
+import oberflaeche.MainView;
 
 public class Controller implements Observer {
 
@@ -42,7 +40,7 @@ public class Controller implements Observer {
 
 	private void initGUI() {
 		MainView gui = new MainView();
-		gui.addObserver((Observer) this);
+		gui.addObserver(this);
 		fillListContent();
 	}
 
@@ -135,7 +133,8 @@ public class Controller implements Observer {
 		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
 		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
 
-		LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)), Integer.parseInt(uhrzeitString.substring(3)));
+		LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
+				Integer.parseInt(uhrzeitString.substring(3)));
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		Fahrstundenart fStundenArt;
 		if (artString == Fahrstundenart.B_STANDARDFAHRT.toString()) {
@@ -181,15 +180,15 @@ public class Controller implements Observer {
 			break;
 
 		case "Uhrzeit":
-			//nix
+			// nix
 			break;
 
 		case "BuchungsZeit":
-			//nix
+			// nix
 			break;
 
 		case "F�hrerscheinklasse":
-			//nix
+			// nix
 			break;
 
 		case "Buchen":
@@ -204,7 +203,6 @@ public class Controller implements Observer {
 				e.printStackTrace();
 			}
 			break;
-
 
 		default:
 			break;

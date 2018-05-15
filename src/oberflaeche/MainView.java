@@ -600,9 +600,9 @@ public class MainView extends Observable {
 		return theme;
 	}
 
-	public static void main(String[] args) {
-		MainView gui = new MainView();
-		gui.startEventHandler();
-	}
+	// public static void main(String[] args) {
+	// MainView gui = new MainView();
+	// gui.startEventHandler();
+	// }
 
 }
