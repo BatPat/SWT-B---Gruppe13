@@ -1,8 +1,7 @@
 package fachlogik;
 
-import Datenhaltung.FahrlehrerDaoImpl;
-import Datenhaltung.FahrschuelerDaoImpl;
-import Oberflaeche.MainView;
+import datenhaltung.FahrlehrerDaoImpl;
+import datenhaltung.FahrschuelerDaoImpl;
 
 public class Main {
 
@@ -11,7 +10,6 @@ public class Main {
 		FahrschuelerDaoImpl fahrschueler = new FahrschuelerDaoImpl();
 		fahrlehrer.addFahrlehrer(new Fahrlehrer("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3"));
 		fahrschueler.addFahrschueler(new Fahrschueler("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51"));
-		MainView gui = new MainView();
-		gui.startEventHandler();
+		Controller controller = new Controller();
 	}
 }

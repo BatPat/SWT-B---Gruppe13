@@ -39,9 +39,10 @@ public class Controller implements Observer {
 	}
 
 	private void initGUI() {
-		MainView gui = new MainView();
-		gui.addObserver(this);
-		fillListContent();
+		mainview = new MainView();
+		mainview.addObserver(this);
+		mainview.startEventHandler();
+		// fillListContent();
 	}
 
 	private void initModel() {

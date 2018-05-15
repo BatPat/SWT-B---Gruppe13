@@ -334,7 +334,7 @@ public class MainView extends Observable {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				setChanged();
-				notifyObservers("F�hrerscheinklasse");
+				notifyObservers("Führerscheinklasse");
 			};
 		};
 
@@ -401,7 +401,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 8);
 
 		Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		ueberschrift.setText("�bersicht der Stunden vom Sch�ler");
+		ueberschrift.setText("Übersicht der Stunden vom Schüler");
 		ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
 		ueberschrift.setFont(theme.getFont1());
 		ueberschrift.setBackground(theme.getWhiteColor());
@@ -439,7 +439,7 @@ public class MainView extends Observable {
 		new Label(uebersichtComposite, SWT.None);
 
 		btRechnung = new CLabel(uebersichtComposite, SWT.BORDER);
-		btRechnung.setText("Rechnungs�bersicht \n erstellen");
+		btRechnung.setText("Rechnungsübersicht \n erstellen");
 		btRechnung.setTextDirection(SWT.CENTER);
 		btRechnung.setFont(theme.getFont2());
 		btRechnung.setBackground(theme.getBlueColor());
@@ -493,7 +493,7 @@ public class MainView extends Observable {
 	private void erzeugeMenu() {
 		// Erzeugung des Menus
 		String[] menuBarEntries = { "Datei", "Hilfe" };
-		String[] menuEntries = { "�ffnen,Speichern,Schlie�en", "Hilfe,--,About" };
+		String[] menuEntries = { "Öffnen,Speichern,Schließen", "Hilfe,--,About" };
 
 		menu = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(menu);
