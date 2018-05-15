@@ -3,14 +3,14 @@ package fachlogik;
 public enum TheorieThema {
 
 	VORFAHRT("Vorfahrtregeln"),
-	ALKOHOL_UND_MENSCHLICHE_RISIKEN("Persönliche Voraussetzungen / Risikofaktor Mensch"),
+	ALKOHOL_UND_MENSCHLICHE_RISIKEN("Persï¿½nliche Voraussetzungen / Risikofaktor Mensch"),
 	RECHTLICHES("Rechtliche Rahmenbedingungen"),
 	VERKEHRSZEICHEN("Verkehrszeichen und Verkehrseinrichtungen"),
-	STRASSENSYSTEM("Straßenverkehrssystem und seine Nutzung"),
-	VERKEHRSREGELUNG("Verkehrsregelungen / Bahnübergänge"),
+	STRASSENSYSTEM("Straï¿½enverkehrssystem und seine Nutzung"),
+	VERKEHRSREGELUNG("Verkehrsregelungen / Bahnï¿½bergï¿½nge"),
 	GESCHWINDIGKEIT("Geschwindigkeit, Abstand und umweltschonende Fahrweise"),
-	ANDERE_TEILNEHMER("Andere Teilnehmer im Straßenverkehr: Besonderheiten und Verhalten"),
-	MANEUVER("Verkehrsverhalten bei Fahrmanövern, Verkehrsbeobachtung"),
+	ANDERE_TEILNEHMER("Andere Teilnehmer im Straï¿½enverkehr: Besonderheiten und Verhalten"),
+	MANEUVER("Verkehrsverhalten bei Fahrmanï¿½vern, Verkehrsbeobachtung"),
 	PARKEN("Ruhender Verkehr");
 	;
 	

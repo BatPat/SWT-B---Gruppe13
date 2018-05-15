@@ -1,4 +1,4 @@
-package Fachlogik;
+package fachlogik;
 
 import Datenhaltung.FahrlehrerDaoImpl;
 import Datenhaltung.FahrschuelerDaoImpl;
