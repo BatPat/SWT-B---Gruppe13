@@ -54,7 +54,7 @@ public class Controller implements Observer {
 		for (Fahrlehrer f : fahrlehrerdao.getAlleFahrlehrer()) {
 			mainview.getLehrerCombo().add(f.getName());
 		}
-		for (Fahrlehrer f : fahrlehrerdao.getAlleFahrlehrer()) {
+		for (Fahrschueler f : fahrschuelerdao.getAlleFahrschueler()) {
 			mainview.getSchuelerCombo().add(f.getName());
 		}
 		for (int i = 9; i < 22; i++) {
@@ -65,7 +65,6 @@ public class Controller implements Observer {
 
 	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
 		String fahrlehr = mainview.getLehrerCombo().getText();
-		String home = System.getProperty("user.home");
 		Fahrlehrer fahrlehrer = fahrlehrerdao.getFahrlehrer(fahrlehr);
 		ArrayList<Fahrstunde> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
@@ -89,7 +88,6 @@ public class Controller implements Observer {
 
 	private void uebersichtFahrstunden() throws FileNotFoundException, IOException {
 		String f = mainview.getSchuelerCombo().getText();
-		String home = System.getProperty("user.home");
 		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		int anzNorm = 0;
 		int anzSond = 0;
@@ -175,6 +173,7 @@ public class Controller implements Observer {
 		case "Fahrschueler":
 			try {
 				zeigePassendeTermine();
+				uebersichtFahrstunden();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

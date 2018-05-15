@@ -1,9 +1,10 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fahrlehrer implements Person{
+public class Fahrlehrer implements Person, Serializable{
 
 
 	private String name;

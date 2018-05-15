@@ -1,10 +1,10 @@
 package Fachlogik;
 
 import java.util.List;
-
+import java.io.Serializable;
 import java.util.*;
 
-public class Fahrschueler implements Person {
+public class Fahrschueler implements Person, Serializable{
 
 	private String name;
 	private String plz;
