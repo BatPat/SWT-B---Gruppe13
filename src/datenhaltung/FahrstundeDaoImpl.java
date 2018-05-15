@@ -1,4 +1,4 @@
-package Datenhaltung;
+package datenhaltung;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import Fachlogik.Fahrstunde;;
+
+import fachlogik.Fahrstunde;;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
 

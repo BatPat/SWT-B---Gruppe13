@@ -1,26 +1,26 @@
-package Fachlogik;
+package fachlogik;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
-public class Fahrlehrer implements Person, Serializable{
-
+public class Fahrschueler implements Person, Serializable{
 
 	private String name;
 	private String plz;
 	private String wohnort;
 	private String strasse;
 	private String hausnummer;
-
+	
+	private ArrayList<Pruefung> pruefungen;
 	private ArrayList<Fahrstunde> fahrstunden;
 	private ArrayList<Theoriestunde> theoriestunden;
-	
-	public Fahrlehrer() {
+
+	public Fahrschueler() {
 		super();
 	}
 
-	public Fahrlehrer(String name, String plz, String wohnort, String strasse, String hausnummer) {
+	public Fahrschueler(String name, String plz, String wohnort, String strasse, String hausnummer) {
 		super();
 		this.name = name;
 		this.plz = plz;
@@ -29,29 +29,38 @@ public class Fahrlehrer implements Person, Serializable{
 		this.hausnummer = hausnummer;
 	}
 	
+	@Override
+	public List<Termin> getTermine() {
+		ArrayList<Termin> termine = new ArrayList<Termin>();
+		termine.addAll(fahrstunden);
+		termine.addAll(pruefungen);
+		termine.addAll(theoriestunden);
+		return termine;
+	}
+	
+	
+
+	/**
+	 * @return the pruefungen
+	 */
+	public List<Pruefung> getPruefungen() {
+		return pruefungen;
+	}
 
 	/**
 	 * @return the fahrstunden
 	 */
-	public ArrayList<Fahrstunde> getFahrstunden() {
+	public List<Fahrstunde> getFahrstunden() {
 		return fahrstunden;
 	}
 
 	/**
 	 * @return the theoriestunden
 	 */
-	public ArrayList<Theoriestunde> getTheoriestunden() {
+	public List<Theoriestunde> getTheoriestunden() {
 		return theoriestunden;
 	}
-	
-	@Override
-	public List<Termin> getTermine() {
-		ArrayList<Termin> termine = new ArrayList<Termin>();
-		termine.addAll(fahrstunden);
-		termine.addAll(theoriestunden);
-		return termine;
-	}
-	
+
 	@Override
 	public String getName() {
 		return name;
@@ -76,5 +85,6 @@ public class Fahrlehrer implements Person, Serializable{
 	public String getHausnummer() {
 		return hausnummer;
 	}
-
+	
+	
 }

@@ -1,4 +1,5 @@
-package Datenhaltung;
+package datenhaltung;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,30 +10,31 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import Fachlogik.Pruefung;
 
-public class PruefungDaoImpl implements PruefungDao {
+import fachlogik.Theoriestunde;
+
+public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	@Override
-	public List<Pruefung> getAllePruefungen() {
+	public List<Theoriestunde> getAlleTheoriestunden() {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/");
-		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
+		File dir = new File(home + "/Downloads/Fahrschule/Theoriestunde/");
+		File[] theoriestundedateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
 			public boolean accept(File arg0, String arg1) {
 				// TODO Auto-generated method stub
-				return arg1.startsWith("Pruefung") && arg1.endsWith(".ser");
+				return arg1.startsWith("Theorie") && arg1.endsWith(".ser");
 			}
 			
 		});
-		List<Pruefung> liste = new ArrayList<Pruefung>();
-		Pruefung pruefung = null;
-		for (int i = 0; i < puefungdateien.length; i++) {
-			File file = puefungdateien[i]; 
+		List<Theoriestunde> liste = new ArrayList<Theoriestunde>();
+		Theoriestunde theoriestunde = null;
+		for (int i = 0; i < theoriestundedateien.length; i++) {
+			File file = theoriestundedateien[i]; 
 			 try (FileInputStream fis = new FileInputStream (file);
 					    ObjectInputStream ois = new ObjectInputStream (fis)) {
-				 pruefung = (Pruefung) ois.readObject ();
+				 theoriestunde = (Theoriestunde) ois.readObject ();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (FileNotFoundException e1) {
@@ -42,24 +44,24 @@ public class PruefungDaoImpl implements PruefungDao {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			liste.add(pruefung); 
+			liste.add(theoriestunde); 
 		}
 		return liste;
 	}
-
-	private File generateFile(Pruefung pruefung) {
+	
+	private File generateFile(Theoriestunde theoriestunde) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/"+"Pruefung" + pruefung.getGenid() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Theoriestunde/"+"Theorie" + theoriestunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
 
 	@Override
-	public void addPruefung(Pruefung pruefung) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
+	public void addTheoriestunde(Theoriestunde theoriestunde) {
+		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			try {
-				oos.writeObject(pruefung);
+				oos.writeObject(theoriestunde);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -69,13 +71,13 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 
 	@Override
-	public void updatePruefung(Pruefung pruefung) {
-		File td = generateFile(pruefung);
+	public void updateTheoriestunde(Theoriestunde theoriestunde) {
+		File td = generateFile(theoriestunde);
 		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
+		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			try {
-				oos.writeObject(pruefung);
+				oos.writeObject(theoriestunde);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -85,8 +87,8 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 
 	@Override
-	public void deletePruefung(Pruefung pruefung) {
-		File td = generateFile(pruefung);
+	public void deleteTheoriestunde(Theoriestunde theoriestunde) {
+		File td = generateFile(theoriestunde);
 		td.delete();
 	}
 

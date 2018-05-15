@@ -1,6 +1,7 @@
-package Datenhaltung;
+package datenhaltung;
 import java.util.List;
-import Fachlogik.Pruefung;
+
+import fachlogik.Pruefung;
 
 public interface PruefungDao {
 	

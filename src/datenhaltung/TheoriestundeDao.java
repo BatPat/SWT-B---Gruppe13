@@ -1,6 +1,7 @@
-package Datenhaltung;
+package datenhaltung;
 import java.util.List;
-import Fachlogik.Theoriestunde;
+
+import fachlogik.Theoriestunde;
 
 public interface TheoriestundeDao {
 	

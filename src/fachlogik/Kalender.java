@@ -1,9 +1,9 @@
-package Fachlogik;
+package fachlogik;
 import java.util.*;
 
-import Datenhaltung.FahrstundeDao;
-import Datenhaltung.PruefungDao;
-import Datenhaltung.TheoriestundeDao;
+import datenhaltung.FahrstundeDao;
+import datenhaltung.PruefungDao;
+import datenhaltung.TheoriestundeDao;
 
 public class Kalender {
 	
