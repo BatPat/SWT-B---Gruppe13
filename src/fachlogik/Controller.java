@@ -42,6 +42,8 @@ public class Controller implements Observer {
 		mainview = new MainView();
 		mainview.addObserver(this);
 		mainview.startEventHandler();
+
+		// ToDo fillListContent bearbeiten
 		// fillListContent();
 	}
 
@@ -70,6 +72,9 @@ public class Controller implements Observer {
 		int tag = mainview.getDateFahrstunde().getDay();
 		int monat = mainview.getDateFahrstunde().getMonth();
 		int jahr = mainview.getDateFahrstunde().getYear();
+
+		// FixMe nimm Termin aus dem Kalender und gleiche erst dann mit dem
+		// Fahrlehrertermin ab
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
 			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
 					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
@@ -98,11 +103,7 @@ public class Controller implements Observer {
 				anzSond++;
 			}
 		}
-		for (Pruefung p : fahrschueler.getPruefungen()) {
-			if (p.isTheoriepruefung()) {
-				anzTheo++;
-			}
-		}
+		anzTheo = fahrschueler.getTheoriestunden().size();
 		String anzSo = anzSond + "";
 		String anzNo = anzNorm + "";
 		String anzTh = anzTheo + "";
@@ -112,6 +113,9 @@ public class Controller implements Observer {
 	}
 
 	private void updateModel() {
+
+		// ToDo wird aufgerufen, wenn der Inhalt einer Combobox im Panel geändert wird,
+		// bekommt die Daten aus dem Panel (welcher Fahschüler wurde ausgewählt etc)
 
 	}
 
@@ -125,6 +129,9 @@ public class Controller implements Observer {
 	private void bucheFahrstunde() {
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
+
+		// FixMe Uhrzeit und Datum werden aus den Elementen aus dem kalenderComposite
+		// genommen
 		String uhrzeitString = mainview.getZeitCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
 		int datumMonat = mainview.getDateFahrstunde().getMonth();
@@ -156,7 +163,6 @@ public class Controller implements Observer {
 			try {
 				zeigePassendeTermine();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -165,7 +171,6 @@ public class Controller implements Observer {
 			try {
 				zeigePassendeTermine();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -175,7 +180,6 @@ public class Controller implements Observer {
 				zeigePassendeTermine();
 				uebersichtFahrstunden();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -188,7 +192,7 @@ public class Controller implements Observer {
 			// nix
 			break;
 
-		case "F�hrerscheinklasse":
+		case "Führerscheinklasse":
 			// nix
 			break;
 
@@ -200,8 +204,6 @@ public class Controller implements Observer {
 			try {
 				erstellePdf();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			break;
 
