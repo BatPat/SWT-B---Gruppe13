@@ -14,6 +14,6 @@ public class Main {
 		fahrschueler.addFahrschueler(new Fahrschueler("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51"));
 		fahrschueler.addFahrschueler(new Fahrschueler("Julius Blanke", "51123", "Hagen", "Runhweg", "32"));
 		fahrschueler.addFahrschueler(new Fahrschueler("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41"));
-		Controller controller = new Controller();
+		new Controller();
 	}
 }

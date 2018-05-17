@@ -1,4 +1,5 @@
 package datenhaltung;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,39 +23,36 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 			@Override
 			public boolean accept(File arg0, String arg1) {
-				// TODO Auto-generated method stub
 				return arg1.startsWith("Fahrstunde") && arg1.endsWith(".ser");
 			}
-			
+
 		});
 		List<Fahrstunde> liste = new ArrayList<Fahrstunde>();
 		Fahrstunde fahrstunde = null;
 		for (int i = 0; i < fahrstundendateien.length; i++) {
-			File file = fahrstundendateien[i]; 
-			 try (FileInputStream fis = new FileInputStream (file);
-					    ObjectInputStream ois = new ObjectInputStream (fis)) {
-				 fahrstunde = (Fahrstunde) ois.readObject ();
+			File file = fahrstundendateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				fahrstunde = (Fahrstunde) ois.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			liste.add(fahrstunde); 
+			liste.add(fahrstunde);
 		}
 		return liste;
 	}
 
 	private File generateFile(Fahrstunde fahrstunde) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrstunden/"+"Fahrstunde"+fahrstunde.getGenid()+".ser");
+		File dir = new File(
+				home + "/Downloads/Fahrschule/Fahrstunden/" + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
-	
+
 	@Override
 	public void addFahrstunde(Fahrstunde fahrstunde) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));

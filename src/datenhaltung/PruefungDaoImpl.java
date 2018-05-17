@@ -1,4 +1,5 @@
 package datenhaltung;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,35 +23,31 @@ public class PruefungDaoImpl implements PruefungDao {
 
 			@Override
 			public boolean accept(File arg0, String arg1) {
-				// TODO Auto-generated method stub
 				return arg1.startsWith("Pruefung") && arg1.endsWith(".ser");
 			}
-			
+
 		});
 		List<Pruefung> liste = new ArrayList<Pruefung>();
 		Pruefung pruefung = null;
 		for (int i = 0; i < puefungdateien.length; i++) {
-			File file = puefungdateien[i]; 
-			 try (FileInputStream fis = new FileInputStream (file);
-					    ObjectInputStream ois = new ObjectInputStream (fis)) {
-				 pruefung = (Pruefung) ois.readObject ();
+			File file = puefungdateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				pruefung = (Pruefung) ois.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			liste.add(pruefung); 
+			liste.add(pruefung);
 		}
 		return liste;
 	}
 
 	private File generateFile(Pruefung pruefung) {
 		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/"+"Pruefung" + pruefung.getGenid() + ".ser");
+		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}

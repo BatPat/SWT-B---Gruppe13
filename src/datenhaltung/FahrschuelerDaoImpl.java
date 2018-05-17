@@ -1,4 +1,5 @@
 package datenhaltung;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +21,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
-	
+
 	@Override
 	public List<Fahrschueler> getAlleFahrschueler() {
 		String home = System.getProperty("user.home");
@@ -29,28 +30,24 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 			@Override
 			public boolean accept(File arg0, String arg1) {
-				// TODO Auto-generated method stub
 				return arg1.endsWith(".ser");
 			}
-			
+
 		});
 		List<Fahrschueler> liste = new ArrayList<Fahrschueler>();
 		Fahrschueler fahrschueler = null;
 		for (int i = 0; i < fahrschuelerdateien.length; i++) {
-			File file = fahrschuelerdateien[i]; 
-			 try (FileInputStream fis = new FileInputStream (file);
-					    ObjectInputStream ois = new ObjectInputStream (fis)) {
-					  fahrschueler = (Fahrschueler) ois.readObject ();
+			File file = fahrschuelerdateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				fahrschueler = (Fahrschueler) ois.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			liste.add(fahrschueler); 
+			liste.add(fahrschueler);
 		}
 		return liste;
 	}
@@ -94,18 +91,17 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	@Override
 	public Fahrschueler getFahrschueler(String fahrschuelerName) {
 		String home = System.getProperty("user.home");
-		 Fahrschueler fahrschueler = null; 
-		 try (FileInputStream fis = new FileInputStream (home + "/Downloads/Fahrschule/Fahrschueler/" + fahrschuelerName + ".ser");
-				    ObjectInputStream ois = new ObjectInputStream (fis)) {
-				  fahrschueler = (Fahrschueler) ois.readObject ();
-				  assert (fahrschueler.getName().equals(fahrschuelerName));
+		Fahrschueler fahrschueler = null;
+		try (FileInputStream fis = new FileInputStream(
+				home + "/Downloads/Fahrschule/Fahrschueler/" + fahrschuelerName + ".ser");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+			fahrschueler = (Fahrschueler) ois.readObject();
+			assert (fahrschueler.getName().equals(fahrschuelerName));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return fahrschueler;

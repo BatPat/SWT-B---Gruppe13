@@ -1,4 +1,5 @@
 package fachlogik;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -6,8 +7,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pruefung implements Termin , Serializable{
-	
+public class Pruefung implements Termin, Serializable {
+
 	private long genid;
 	private Fahrlehrer fahrlehrer;
 	private static long counter = 0;
@@ -22,7 +23,8 @@ public class Pruefung implements Termin , Serializable{
 		super();
 	}
 
-	public Pruefung(Fahrlehrer fahrlehrer, Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
+	public Pruefung(Fahrlehrer fahrlehrer, Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit,
+			Duration dauer, String ort) {
 		this.genid = counter++;
 		this.fahrlehrer = fahrlehrer;
 		this.fahrschueler = fahrschueler;
@@ -31,11 +33,10 @@ public class Pruefung implements Termin , Serializable{
 		this.dauer = dauer;
 		this.ort = ort;
 	}
-	
+
 	public Pruefung(Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		this(null, fahrschueler, datum, uhrzeit, dauer, ort);
 	}
-
 
 	@Override
 	public List<Person> getBeteiligtePersonen() {
@@ -44,7 +45,7 @@ public class Pruefung implements Termin , Serializable{
 		personen.add(fahrschueler);
 		return personen;
 	}
-	
+
 	@Override
 	public LocalDate getDatum() {
 		return datum;
@@ -59,12 +60,12 @@ public class Pruefung implements Termin , Serializable{
 	public Duration getDauer() {
 		return dauer;
 	}
-	
+
 	@Override
 	public String getOrt() {
 		return ort;
 	}
-	
+
 	public long getGenid() {
 		return genid;
 	}
@@ -73,11 +74,9 @@ public class Pruefung implements Termin , Serializable{
 		return this.fahrlehrer == null;
 	}
 
-
 	public Fahrlehrer getFahrlehrer() {
 		return fahrlehrer;
 	}
-
 
 	public Fahrschueler getFahrschueler() {
 		return fahrschueler;
@@ -86,7 +85,6 @@ public class Pruefung implements Termin , Serializable{
 	public boolean isBestanden() {
 		return bestanden;
 	}
-
 
 	public void setBestanden(boolean bestanden) {
 		this.bestanden = bestanden;

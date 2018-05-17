@@ -44,8 +44,6 @@ public class Controller implements Observer {
 		mainview.addObserver(this);
 		fillListContent();
 		mainview.startEventHandler();
-
-		// ToDo fillListContent bearbeiten
 	}
 
 	private void initModel() {
@@ -161,7 +159,6 @@ public class Controller implements Observer {
 
 		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
 		fahrstundedao.addFahrstunde(fStunde);
-
 	}
 
 	@Override
@@ -211,10 +208,12 @@ public class Controller implements Observer {
 			try {
 				erstellePdf();
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 			break;
 
 		default:
+			// ToDo Exception einbauen
 			break;
 		}
 	}
