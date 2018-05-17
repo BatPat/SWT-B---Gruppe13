@@ -26,9 +26,9 @@ public class Controller implements Observer {
 	private FahrstundeDao fahrstundedao;
 
 	public Controller() {
+		initDaos();
 		initGUI();
 		initModel();
-		initDaos();
 		mainview.getShell().layout(true);
 	}
 
@@ -41,10 +41,10 @@ public class Controller implements Observer {
 	private void initGUI() {
 		mainview = new MainView();
 		mainview.addObserver(this);
+		fillListContent();
 		mainview.startEventHandler();
 
 		// ToDo fillListContent bearbeiten
-		// fillListContent();
 	}
 
 	private void initModel() {

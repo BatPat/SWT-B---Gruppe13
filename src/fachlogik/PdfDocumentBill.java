@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -154,7 +153,7 @@ public class PdfDocumentBill {
 
 	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, Fahrschueler fahrschueler) {
 		// Table with the prices for every piece
-		float[] columnWidths = { 7, (float) 2, (float) 2 };
+		float[] columnWidths = { 7, 2, 2 };
 		PdfPTable tableBill = new PdfPTable(columnWidths);
 		tableBill.setHorizontalAlignment(Element.ALIGN_CENTER);
 		tableBill.setWidthPercentage(100);
@@ -417,7 +416,7 @@ public class PdfDocumentBill {
 		cell2R4.setBorder(Rectangle.BOTTOM);
 		cell2R4.setFixedHeight(18);
 		tableBill.addCell(cell2R4);
-		// TODO Preiskalkulierung abh�ngig von der Art der Sonderfahrt.
+		// TODO Preiskalkulierung abhängig von der Art der Sonderfahrt.
 		String preis = (anzSonder * 40.00) + "";
 		PdfPCell cell3R4 = new PdfPCell(new Phrase(preis, fonthell10));
 		cell3R4.setBorder(Rectangle.BOTTOM);

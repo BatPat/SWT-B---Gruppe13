@@ -1,17 +1,17 @@
 package fachlogik;
 
-import java.util.List;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Fahrschueler implements Person, Serializable{
+public class Fahrschueler implements Person, Serializable {
 
 	private String name;
 	private String plz;
 	private String wohnort;
 	private String strasse;
 	private String hausnummer;
-	
+
 	private ArrayList<Pruefung> pruefungen;
 	private ArrayList<Fahrstunde> fahrstunden;
 	private ArrayList<Theoriestunde> theoriestunden;
@@ -27,8 +27,10 @@ public class Fahrschueler implements Person, Serializable{
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
+		this.fahrstunden = new ArrayList<Fahrstunde>();
+		this.theoriestunden = new ArrayList<Theoriestunde>();
 	}
-	
+
 	@Override
 	public List<Termin> getTermine() {
 		ArrayList<Termin> termine = new ArrayList<Termin>();
@@ -37,8 +39,6 @@ public class Fahrschueler implements Person, Serializable{
 		termine.addAll(theoriestunden);
 		return termine;
 	}
-	
-	
 
 	/**
 	 * @return the pruefungen
@@ -85,6 +85,5 @@ public class Fahrschueler implements Person, Serializable{
 	public String getHausnummer() {
 		return hausnummer;
 	}
-	
-	
+
 }

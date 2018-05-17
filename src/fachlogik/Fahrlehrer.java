@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fahrlehrer implements Person, Serializable{
-
+public class Fahrlehrer implements Person, Serializable {
 
 	private String name;
 	private String plz;
@@ -15,7 +14,7 @@ public class Fahrlehrer implements Person, Serializable{
 
 	private ArrayList<Fahrstunde> fahrstunden;
 	private ArrayList<Theoriestunde> theoriestunden;
-	
+
 	public Fahrlehrer() {
 		super();
 	}
@@ -27,8 +26,9 @@ public class Fahrlehrer implements Person, Serializable{
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
+		this.fahrstunden = new ArrayList<Fahrstunde>();
+		this.theoriestunden = new ArrayList<Theoriestunde>();
 	}
-	
 
 	/**
 	 * @return the fahrstunden
@@ -43,7 +43,7 @@ public class Fahrlehrer implements Person, Serializable{
 	public ArrayList<Theoriestunde> getTheoriestunden() {
 		return theoriestunden;
 	}
-	
+
 	@Override
 	public List<Termin> getTermine() {
 		ArrayList<Termin> termine = new ArrayList<Termin>();
@@ -51,7 +51,7 @@ public class Fahrlehrer implements Person, Serializable{
 		termine.addAll(theoriestunden);
 		return termine;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;
