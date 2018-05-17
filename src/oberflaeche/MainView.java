@@ -237,7 +237,7 @@ public class MainView extends Observable {
 		erzeugeLinie(eingabe1Composite);
 
 		Label schuelerLabel = new Label(eingabe2Composite, SWT.NONE);
-		schuelerLabel.setText("Fahrsch�ler");
+		schuelerLabel.setText("Fahrschüler");
 		schuelerLabel.setFont(theme.getFont1());
 		schuelerLabel.setBackground(theme.getWhiteColor());
 		schuelerLabel.setLayoutData(createFillFillTrueFalseGridData());
