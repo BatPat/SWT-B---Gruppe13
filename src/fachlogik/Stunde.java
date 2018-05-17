@@ -1,12 +1,13 @@
 package fachlogik;
 
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public abstract class Stunde implements Termin {
+public abstract class Stunde implements Termin, Serializable {
 	
 	private LocalDate datum;
 	private LocalTime uhrzeit;

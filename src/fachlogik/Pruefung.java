@@ -1,11 +1,12 @@
 package fachlogik;
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pruefung implements Termin {
+public class Pruefung implements Termin , Serializable{
 	
 	private long genid;
 	private Fahrlehrer fahrlehrer;
