@@ -29,6 +29,7 @@ public class Fahrschueler implements Person, Serializable {
 		this.hausnummer = hausnummer;
 		this.fahrstunden = new ArrayList<Fahrstunde>();
 		this.theoriestunden = new ArrayList<Theoriestunde>();
+		this.pruefungen = new ArrayList<Pruefung>();
 	}
 
 	@Override

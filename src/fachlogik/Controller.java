@@ -27,6 +27,7 @@ public class Controller implements Observer {
 
 	public Controller() {
 		initDaos();
+		pdf = new PdfDocumentBill();
 		initGUI();
 		initModel();
 		mainview.getShell().layout(true);
@@ -177,7 +178,6 @@ public class Controller implements Observer {
 
 		case "Fahrschueler":
 			try {
-				zeigePassendeTermine();
 				uebersichtFahrstunden();
 			} catch (IOException e1) {
 				e1.printStackTrace();
