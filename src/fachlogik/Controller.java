@@ -63,6 +63,14 @@ public class Controller implements Observer {
 			String zeit = i + ":00";
 			mainview.getZeitCombo().add(zeit);
 		}
+		for (int i = 9; i < 22; i++) {
+			String zeit = i + ":00";
+			mainview.getTimeCombo().add(zeit);
+		}
+
+		for (Fahrstundenart f : Fahrstundenart.values()) {
+			mainview.getArtCombo().add(f.getBeschreibung());
+		}
 	}
 
 	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
@@ -122,7 +130,6 @@ public class Controller implements Observer {
 
 	private void erstellePdf() throws IOException {
 		String f = mainview.getSchuelerCombo().getText();
-		String home = System.getProperty("user.home");
 		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		pdf.createPdf(fahrschueler);
 	}
