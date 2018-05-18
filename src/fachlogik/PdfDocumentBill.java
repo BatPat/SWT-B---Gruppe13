@@ -1,5 +1,6 @@
 package fachlogik;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,8 +43,6 @@ public class PdfDocumentBill {
 
 	public void createPdf(Fahrschueler fahrschueler) throws IOException {
 		try {
-
-			// ToDo aufräumen
 			String home = System.getProperty("user.home");
 			File file = new File(home + "/Downloads/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
 			file.getParentFile().mkdirs();
@@ -73,6 +72,7 @@ public class PdfDocumentBill {
 			// --------
 			document.close();
 			// --------
+			Desktop.getDesktop().open(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (DocumentException e) {
@@ -145,7 +145,7 @@ public class PdfDocumentBill {
 		tableTaxes.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		tableTaxes.setWidthPercentage(30);
 		PdfPCell celltaxes = new PdfPCell(new Phrase(
-				"*Die Mehrwertsteuer wird z.Zt. nicht ausgewiesen aufgrund eines \n anhängenden Verfahrens, wird jedoch an das Finanzamt abgeführt",
+				"*Die Mehrwertsteuer wird z.Zt. nicht ausgewiesen aufgrund eines \n anh�ngenden Verfahrens, wird jedoch an das Finanzamt abgeführt",
 				fonthell10));
 		celltaxes.setBorder(Rectangle.NO_BORDER);
 		tableTaxes.addCell(celltaxes);
@@ -188,7 +188,7 @@ public class PdfDocumentBill {
 
 		// -Grundbetrag
 		double gpreis = 110.00;
-		// -Übungsstunden
+		// -�bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -204,15 +204,15 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
-		int countertheorie = 0;
+		// -Vorstellung Theoriepr�fung
+		int countertheorie = fahrschueler.getTheoriestunden().size();
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
 				countertheorie++;
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
@@ -239,8 +239,8 @@ public class PdfDocumentBill {
 		tableBill.addCell(cell2R9);
 
 		// -Grundbetrag
-		double gpreis = 110.00; // Code ist doppelt. Z.190
-		// -Übungsstunden
+		double gpreis = 110.00;
+		// -�bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -256,7 +256,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
+		// -Vorstellung Theoriepr�fung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
@@ -264,7 +264,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
@@ -310,7 +310,7 @@ public class PdfDocumentBill {
 		tableBill.addCell(cell2R7);
 		// -Grundbetrag
 		double gpreis = 110.00;
-		// -Übungsstunden
+		// -�bungsstunden
 		int anzNorm = 0;
 		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
@@ -326,7 +326,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
-		// -Vorstellung Theorieprüfung
+		// -Vorstellung Theoriepr�fung
 		int countertheorie = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
@@ -334,7 +334,7 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (countertheorie * 77.00);
-		// -Vorstellung Praxisprüfung
+		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
 		for (Pruefung p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {

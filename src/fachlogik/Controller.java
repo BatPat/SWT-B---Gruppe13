@@ -61,10 +61,6 @@ public class Controller implements Observer {
 			String zeit = i + ":00";
 			mainview.getZeitCombo().add(zeit);
 		}
-		for (int i = 9; i < 22; i++) {
-			String zeit = i + ":00";
-			mainview.getTimeCombo().add(zeit);
-		}
 
 		for (Fahrstundenart f : Fahrstundenart.values()) {
 			mainview.getArtCombo().add(f.getBeschreibung());
@@ -72,6 +68,10 @@ public class Controller implements Observer {
 	}
 
 	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
+		for (int i = 9; i < 22; i++) {
+			String zeit = i + ":00";
+			mainview.getTimeCombo().add(zeit);
+		}
 		String fahrlehr = mainview.getLehrerCombo().getText();
 		Fahrlehrer fahrlehrer = fahrlehrerdao.getFahrlehrer(fahrlehr);
 		ArrayList<Fahrstunde> terminefahrlehr;
@@ -82,14 +82,15 @@ public class Controller implements Observer {
 
 		// FixMe nimm Termin aus dem Kalender und gleiche erst dann mit dem
 		// Fahrlehrertermin ab
+		// TODO einbinden wird noch nicht aufgerufen -- Doch beim update über den observer ... funktioniert soweit also denke ich
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
 			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
 					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
 					&& terminefahrlehr.get(i).getDatum().getYear() == jahr) {
 				for (int j = 9; j < 22; i++) {
-					if (terminefahrlehr.get(i).getUhrzeit().getHour() != j) {
+					if (terminefahrlehr.get(i).getUhrzeit().getHour() == j) {
 						String zeit = j + ":00";
-						mainview.getZeitCombo().add(zeit);
+						mainview.getZeitCombo().remove(zeit);
 					}
 				}
 
@@ -117,6 +118,13 @@ public class Controller implements Observer {
 		mainview.getTheorieTxt().setText(anzTh);
 		mainview.getSonderfahrtTxt().setText(anzSo);
 		mainview.getFahrstundeTxt().setText(anzNo);
+	}
+	
+	private boolean auswahlFeldersindleer() {
+		//TODO wird noch nicht aufgerufen
+		return (mainview.getLehrerCombo().getText().isEmpty() 
+				&& mainview.getSchuelerCombo().getText().isEmpty() 
+				&& mainview.getZeitCombo().getText().isEmpty());
 	}
 
 	private void updateModel() {
