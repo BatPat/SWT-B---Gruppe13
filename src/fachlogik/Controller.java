@@ -194,9 +194,11 @@ public class Controller implements Observer {
 	private void updatePanel() {
 		if (model.getFahrlehrer().getName() != null) {
 			zeigePassendeTermine();
+			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
 		}
 		if (model.getFahrschueler().getName() != null) {
 			uebersichtFahrstunden();
+			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
 		}
 	}
 
