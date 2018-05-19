@@ -74,24 +74,23 @@ public class Controller implements Observer {
 				mainview.getTimeCombo().add(zeit);
 			}
 		}
-		
+
 		Fahrlehrer fahrlehrer = model.getFahrlehrer();
-		
+
 		ArrayList<Fahrstunde> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
 		int tag = mainview.getDateFahrstunde().getDay();
 		int monat = mainview.getDateFahrstunde().getMonth();
 		int jahr = mainview.getDateFahrstunde().getYear();
 
-		
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
 			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
 					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
 					&& terminefahrlehr.get(i).getDatum().getYear() == jahr) {
-				for (int j = 9; j < 22; i++) {
+				for (int j = 9; j < 22; j++) {
 					if (terminefahrlehr.get(i).getUhrzeit().getHour() == j) {
 						String zeit = j + ":00";
-						mainview.getZeitCombo().remove(zeit);
+						mainview.getTimeCombo().remove(zeit);
 					}
 				}
 
@@ -100,7 +99,7 @@ public class Controller implements Observer {
 	}
 
 	private void uebersichtFahrstunden() throws FileNotFoundException, IOException {
-		
+
 		Fahrschueler fahrschueler = model.getFahrschueler();
 		int anzNorm = 0;
 		int anzSond = 0;
@@ -127,8 +126,7 @@ public class Controller implements Observer {
 	}
 
 	private void updateModel() {
-		
-		
+
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
 		String artString = mainview.getArtCombo().getText();
@@ -136,42 +134,42 @@ public class Controller implements Observer {
 		int datumJahr = mainview.getDateFahrstunde().getYear();
 		int datumMonat = mainview.getDateFahrstunde().getMonth();
 		int datumTag = mainview.getDateFahrstunde().getDay();
-		
-		
+
 		Fahrschueler fSchueler = null;
 		Fahrlehrer fLehrer = null;
 		LocalTime terminUhrzeit = null;
 		Fahrstundenart fStundenArt = null;
 		LocalDate terminDatum = null;
-		
-		if(!fahrschuelername.isEmpty()) {
+
+		if (!fahrschuelername.isEmpty()) {
 			fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
 		}
-		
-		if(!fahlehrername.isEmpty()) {
+
+		if (!fahlehrername.isEmpty()) {
 			fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
 		}
-		
-		if(!uhrzeitString.isEmpty()) {
-		terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),	Integer.parseInt(uhrzeitString.substring(3)));
+
+		if (!uhrzeitString.isEmpty()) {
+			terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
+					Integer.parseInt(uhrzeitString.substring(3)));
 		}
-		
-		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);		
-		
+
+		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+
 		if (!artString.isEmpty()) {
 			if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
 				fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
 			} else {
 				fStundenArt = Fahrstundenart.B_SONDERFAHRT;
-			} 
+			}
 		}
-		
+
 		model.setArt(fStundenArt);
 		model.setDatum(terminDatum);
 		model.setFahrlehrer(fLehrer);
 		model.setFahrschueler(fSchueler);
 		model.setUhrzeit(terminUhrzeit);
-		
+
 	}
 
 	private void erstellePdf() throws IOException {
@@ -182,7 +180,7 @@ public class Controller implements Observer {
 		Fahrstunde fStunde = model.getFahrstunde();
 		Fahrschueler fSchueler = model.getFahrschueler();
 		Fahrlehrer fLehrer = model.getFahrlehrer();
-		
+
 		fLehrer.getFahrstunden().add(fStunde);
 		fSchueler.getFahrstunden().add(fStunde);
 		fahrstundedao.addFahrstunde(fStunde);
