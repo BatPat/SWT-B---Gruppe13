@@ -133,7 +133,51 @@ public class Controller implements Observer {
 	private void updateModel() {
 
 		// TODO model aktualisieren
-
+		
+		
+		String fahrschuelername = mainview.getSchuelerCombo().getText();
+		String fahlehrername = mainview.getLehrerCombo().getText();
+		String artString = mainview.getArtCombo().getText();
+		String uhrzeitString = mainview.getTimeCombo().getText();
+		int datumJahr = mainview.getDateFahrstunde().getYear();
+		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		int datumTag = mainview.getDateFahrstunde().getDay();
+		
+		
+		Fahrschueler fSchueler = null;
+		Fahrlehrer fLehrer = null;
+		LocalTime terminUhrzeit = null;
+		Fahrstundenart fStundenArt = null;
+		LocalDate terminDatum = null;
+		
+		if(!fahrschuelername.isEmpty()) {
+			fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
+		}
+		
+		if(!fahlehrername.isEmpty()) {
+			fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
+		}
+		
+		if(!uhrzeitString.isEmpty()) {
+		terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),	Integer.parseInt(uhrzeitString.substring(3)));
+		}
+		
+		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);		
+		
+		if (!artString.isEmpty()) {
+			if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
+				fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
+			} else {
+				fStundenArt = Fahrstundenart.B_SONDERFAHRT;
+			} 
+		}
+		
+		model.setArt(fStundenArt);
+		model.setDatum(terminDatum);
+		model.setFahrlehrer(fLehrer);
+		model.setFahrschueler(fSchueler);
+		model.setUhrzeit(terminUhrzeit);
+		
 	}
 
 	private void erstellePdf() throws IOException {
