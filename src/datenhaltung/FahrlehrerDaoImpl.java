@@ -2,7 +2,6 @@ package datenhaltung;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -15,12 +14,14 @@ import fachlogik.Fahrlehrer;
 
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	
-	private static String javadir = System.getProperty("user.dir");
+	private static final String FAHRLEHRER_PATH = "/Fahrschule/Fahrlehrer/";
+
+	private static final String JAVADIR = System.getProperty("user.dir");
 
 
 	@Override
 	public List<Fahrlehrer> getAlleFahrlehrer() {
-		File dir = new File(javadir + "/Fahrschule/Fahrlehrer/");
+		File dir = new File(JAVADIR + FAHRLEHRER_PATH);
 		File[] fahrlehrerdateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -35,12 +36,8 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 			File file = fahrlehrerdateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
 				fahrlehrer = (Fahrlehrer) ois.readObject();
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
 			}
 			liste.add(fahrlehrer);
 		}
@@ -48,7 +45,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	}
 
 	private File generateFile(Fahrlehrer fahrlehrer) {
-		File dir = new File(javadir + "/Fahrschule/Fahrlehrer/" + fahrlehrer.getName() + ".ser");
+		File dir = new File(JAVADIR + FAHRLEHRER_PATH + fahrlehrer.getName() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
@@ -57,11 +54,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public void addFahrlehrer(Fahrlehrer fahrlehrer) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrlehrer));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
-				oos.writeObject(fahrlehrer);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				oos.writeObject(fahrlehrer);			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -71,16 +64,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public void updateFahrlehrer(Fahrlehrer fahrlehrer) {
 		File td = generateFile(fahrlehrer);
 		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrlehrer));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
-				oos.writeObject(fahrlehrer);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		addFahrlehrer(fahrlehrer);
 	}
 
 	@Override
@@ -93,16 +77,12 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public Fahrlehrer getFahrlehrer(String fahrlehrerName) {
 		Fahrlehrer fahrlehrer = null;
 		try (FileInputStream fis = new FileInputStream(
-				javadir + "/Fahrschule/Fahrlehrer/" + fahrlehrerName + ".ser");
+				JAVADIR + FAHRLEHRER_PATH + fahrlehrerName + ".ser");
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
 			fahrlehrer = (Fahrlehrer) ois.readObject();
 			assert (fahrlehrer.getName().equals(fahrlehrerName));
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 		return fahrlehrer;
 	}

@@ -33,14 +33,14 @@ public class Fahrlehrer implements Person, Serializable {
 	/**
 	 * @return the fahrstunden
 	 */
-	public ArrayList<Fahrstunde> getFahrstunden() {
+	public List<Fahrstunde> getFahrstunden() {
 		return fahrstunden;
 	}
 
 	/**
 	 * @return the theoriestunden
 	 */
-	public ArrayList<Theoriestunde> getTheoriestunden() {
+	public List<Theoriestunde> getTheoriestunden() {
 		return theoriestunden;
 	}
 

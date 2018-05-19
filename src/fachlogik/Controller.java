@@ -1,10 +1,9 @@
 package fachlogik;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -67,7 +66,9 @@ public class Controller implements Observer {
 		}
 	}
 
-	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
+	private void zeigePassendeTermine(){
+		mainview.getTimeCombo().removeAll();
+		
 		if (!auswahlFeldersindleer() && mainview.getTimeCombo().getText().isEmpty()) {
 			for (int i = 9; i < 22; i++) {
 				String zeit = i + ":00";
@@ -77,7 +78,7 @@ public class Controller implements Observer {
 
 		Fahrlehrer fahrlehrer = model.getFahrlehrer();
 
-		ArrayList<Fahrstunde> terminefahrlehr;
+		List<Fahrstunde> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
 		int tag = mainview.getDateFahrstunde().getDay();
 		int monat = mainview.getDateFahrstunde().getMonth();
@@ -98,7 +99,7 @@ public class Controller implements Observer {
 		}
 	}
 
-	private void uebersichtFahrstunden() throws FileNotFoundException, IOException {
+	private void uebersichtFahrstunden(){
 
 		Fahrschueler fahrschueler = model.getFahrschueler();
 		int anzNorm = 0;
@@ -143,18 +144,22 @@ public class Controller implements Observer {
 
 		if (!fahrschuelername.isEmpty()) {
 			fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
+			model.setFahrschueler(fSchueler);
 		}
 
 		if (!fahlehrername.isEmpty()) {
 			fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
+			model.setFahrlehrer(fLehrer);
 		}
 
 		if (!uhrzeitString.isEmpty()) {
 			terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
 					Integer.parseInt(uhrzeitString.substring(3)));
+			model.setUhrzeit(terminUhrzeit);
 		}
 
 		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+		model.setDatum(terminDatum);
 
 		if (!artString.isEmpty()) {
 			if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
@@ -162,18 +167,16 @@ public class Controller implements Observer {
 			} else {
 				fStundenArt = Fahrstundenart.B_SONDERFAHRT;
 			}
+			model.setArt(fStundenArt);
 		}
 
-		model.setArt(fStundenArt);
-		model.setDatum(terminDatum);
-		model.setFahrlehrer(fLehrer);
-		model.setFahrschueler(fSchueler);
-		model.setUhrzeit(terminUhrzeit);
-
+		
 	}
 
 	private void erstellePdf() throws IOException {
-		pdf.createPdf(model.getFahrschueler());
+		if (model.getFahrschueler().getName() != null) {
+			pdf.createPdf(model.getFahrschueler());
+		}
 	}
 
 	private void bucheFahrstunde() {
@@ -187,6 +190,15 @@ public class Controller implements Observer {
 		fahrlehrerdao.updateFahrlehrer(fLehrer);
 		fahrschuelerdao.updateFahrschueler(fSchueler);
 	}
+	
+	private void updatePanel() {
+		if (model.getFahrlehrer().getName() != null) {
+			zeigePassendeTermine();
+		}
+		if (model.getFahrschueler().getName() != null) {
+			uebersichtFahrstunden();
+		}
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -195,27 +207,15 @@ public class Controller implements Observer {
 
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
-			try {
-				zeigePassendeTermine();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			updatePanel();
 			break;
 
 		case "Datum":
-			try {
-				zeigePassendeTermine();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			updatePanel();
 			break;
 
 		case "Fahrschueler":
-			try {
-				uebersichtFahrstunden();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			updatePanel();
 			break;
 
 		case "Uhrzeit":
@@ -235,13 +235,9 @@ public class Controller implements Observer {
 			break;
 
 		case "Buchen":
-			bucheFahrstunde();
-			try {
-				uebersichtFahrstunden();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			if (model.isAlleFelderAusgefuellt()) {
+				bucheFahrstunde();
+				updatePanel();
 			}
 			break;
 

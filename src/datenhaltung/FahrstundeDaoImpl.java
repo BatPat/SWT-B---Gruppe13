@@ -2,7 +2,6 @@ package datenhaltung;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -15,11 +14,12 @@ import fachlogik.Fahrstunde;;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
 	
-	private static String javadir = System.getProperty("user.dir");
+	private static final String FAHRSTUNDEN_PATH = "/Fahrschule/Fahrstunden/";
+	private static final String JAVADIR = System.getProperty("user.dir");
 
 	@Override
 	public List<Fahrstunde> getAlleFahrstunden() {
-		File dir = new File(javadir + "/Fahrschule/Fahrstunden/");
+		File dir = new File(JAVADIR + FAHRSTUNDEN_PATH);
 		File[] fahrstundendateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -34,12 +34,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 			File file = fahrstundendateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
 				fahrstunde = (Fahrstunde) ois.readObject();
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
 			}
 			liste.add(fahrstunde);
 		}
@@ -48,7 +44,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private File generateFile(Fahrstunde fahrstunde) {
 		File dir = new File(
-				javadir + "/Fahrschule/Fahrstunden/" + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
+				JAVADIR + FAHRSTUNDEN_PATH + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
@@ -57,11 +53,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	public void addFahrstunde(Fahrstunde fahrstunde) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(fahrstunde);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -73,11 +65,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(fahrstunde);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

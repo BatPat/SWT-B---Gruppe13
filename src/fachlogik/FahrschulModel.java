@@ -27,11 +27,6 @@ public class FahrschulModel {
 		return result;
 	}
 
-	public int berechneAlterMonatsgenau() {
-		// TODO berechne verbliebene Stunden -- Was genau soll die Methode machen?
-		return 0;
-	}
-
 	public Fahrlehrer getFahrlehrer() {
 		return fahrstunde.getLehrer();
 	}
