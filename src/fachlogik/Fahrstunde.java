@@ -32,6 +32,10 @@ public class Fahrstunde extends Stunde {
 		return art;
 	}
 
+	public void setArt(Fahrstundenart art) {
+		this.art = art;
+	}
+
 	/**
 	 * @return the lehrer
 	 */
@@ -44,6 +48,14 @@ public class Fahrstunde extends Stunde {
 	 */
 	public Fahrschueler getSchueler() {
 		return schueler;
+	}
+
+	public void setLehrer(Fahrlehrer lehrer) {
+		this.lehrer = lehrer;
+	}
+
+	public void setSchueler(Fahrschueler schueler) {
+		this.schueler = schueler;
 	}
 
 	@Override

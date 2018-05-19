@@ -1,53 +1,51 @@
 package fachlogik;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class FahrschulModel {
 
-	private Fahrlehrer fahrlehrer;
-	private Fahrschueler fahrschueler;
 	private Fahrschule fahrschule;
 	private Kalender kalender;
-	private Pruefung pruefung;
-	private Stunde stunde; // wird nirgends verwendet. Löschen?
+	private Fahrstunde fahrstunde;
 
 	public FahrschulModel() {
-		fahrlehrer = new Fahrlehrer();
-		fahrschueler = new Fahrschueler();
 		fahrschule = new Fahrschule();
 		kalender = new Kalender();
-		pruefung = new Pruefung(); // FixMe Prüfung gehört hier nicht rein. ist nur ein Attribut von Fahrschüler
-		// TODO Stunde
+		fahrstunde = new Fahrstunde(null, new Fahrlehrer(), new Fahrschueler(), null, null, "Fahrschule Terlau");
 	}
 
 	public boolean isAlleFelderAusgefuellt() {
 		boolean result = true;
-		// TODO anpassen
-		// result = result & !getTarif().getTarifauswahl().isEmpty();
-		// result = result & !getTarif().getTarifstufe().isEmpty();
-		// result = result & getPerson().getGeschlecht() != null;
-		// result = result & getTarif().getAnwartschaft() != null;
+		
+		result = result && getFahrlehrer().getName() != null;
+		result = result && getFahrschueler().getName() != null;
+		result = result && getDatum() != null;
+		result = result && getUhrzeit() != null;
+		result = result && getArt() != null;
 
 		return result;
 	}
 
 	public int berechneAlterMonatsgenau() {
-		// berechne verbliebene Stunden
+		// TODO berechne verbliebene Stunden -- Was genau soll die Methode machen?
 		return 0;
 	}
 
 	public Fahrlehrer getFahrlehrer() {
-		return fahrlehrer;
+		return fahrstunde.getLehrer();
 	}
 
 	public void setFahrlehrer(Fahrlehrer fahrlehrer) {
-		this.fahrlehrer = fahrlehrer;
+		this.fahrstunde.setLehrer(fahrlehrer);
 	}
 
 	public Fahrschueler getFahrschueler() {
-		return fahrschueler;
+		return fahrstunde.getSchueler();
 	}
 
 	public void setFahrschueler(Fahrschueler fahrschueler) {
-		this.fahrschueler = fahrschueler;
+		this.fahrstunde.setSchueler(fahrschueler);
 	}
 
 	public Fahrschule getFahrschule() {
@@ -66,19 +64,35 @@ public class FahrschulModel {
 		this.kalender = kalender;
 	}
 
-	public Pruefung getPruefung() {
-		return pruefung;
+	public Fahrstunde getFahrstunde() {
+		return fahrstunde;
 	}
 
-	public void setPruefung(Pruefung pruefung) {
-		this.pruefung = pruefung;
+	public void setFahrstunde(Fahrstunde fahrstunde) {
+		this.fahrstunde = fahrstunde;
 	}
 
-	public Theoriestunde getTheoriestunde() {
-		return new Theoriestunde(null, null, null, null);
+	public LocalTime getUhrzeit() {
+		return fahrstunde.getUhrzeit();
 	}
 
-	public void setTheoriestunde(Theoriestunde theoriestunde) {
-		Theoriestunde tstunde = theoriestunde;
+	public void setUhrzeit(LocalTime uhrzeit) {
+		this.fahrstunde.setUhrzeit(uhrzeit);
+	}
+
+	public LocalDate getDatum() {
+		return fahrstunde.getDatum();
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.fahrstunde.setDatum(datum);
+	}
+
+	public Fahrstundenart getArt() {
+		return fahrstunde.getArt();
+	}
+
+	public void setArt(Fahrstundenart art) {
+		this.fahrstunde.setArt(art);
 	}
 }

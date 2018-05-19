@@ -45,4 +45,20 @@ public abstract class Stunde implements Termin, Serializable {
 		return ort;
 	}
 
+	public void setUhrzeit(LocalTime uhrzeit) {
+		this.uhrzeit = uhrzeit;
+	}
+
+	public void setDauer(Duration dauer) {
+		this.dauer = dauer;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
 }
