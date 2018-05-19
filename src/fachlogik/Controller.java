@@ -161,7 +161,7 @@ public class Controller implements Observer {
 				Integer.parseInt(uhrzeitString.substring(3)));
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		Fahrstundenart fStundenArt;
-		if (artString == Fahrstundenart.B_STANDARDFAHRT.toString()) {
+		if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
 			fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
 		} else {
 			fStundenArt = Fahrstundenart.B_SONDERFAHRT;
@@ -173,6 +173,16 @@ public class Controller implements Observer {
 		fahrstundedao.addFahrstunde(fStunde);
 		fahrlehrerdao.updateFahrlehrer(fLehrer);
 		fahrschuelerdao.updateFahrschueler(fSchueler);
+		
+		try {
+			uebersichtFahrstunden();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
