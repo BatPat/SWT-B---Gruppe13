@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public abstract class Stunde implements Termin, Serializable {
