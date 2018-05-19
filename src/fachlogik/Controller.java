@@ -153,6 +153,9 @@ public class Controller implements Observer {
 		}
 
 		if (!uhrzeitString.isEmpty()) {
+			if(uhrzeitString.length() == 4) {
+				uhrzeitString = "0" + uhrzeitString;
+			}
 			terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
 					Integer.parseInt(uhrzeitString.substring(3)));
 			model.setUhrzeit(terminUhrzeit);
