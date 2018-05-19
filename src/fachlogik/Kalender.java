@@ -23,7 +23,7 @@ public class Kalender {
 	}
 	
 	public List<Termin> getAlleTermine(){
-		List<Termin> liste = new ArrayList<Termin>();
+		List<Termin> liste = new ArrayList<>();
 		liste.addAll(theoriestundeDao.getAlleTheoriestunden());
 		liste.addAll(fahrstundeDao.getAlleFahrstunden());
 		liste.addAll(pruefungDao.getAllePruefungen());

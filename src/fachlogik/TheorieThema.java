@@ -12,7 +12,7 @@ public enum TheorieThema {
 	ANDERE_TEILNEHMER("Andere Teilnehmer im Stra�enverkehr: Besonderheiten und Verhalten"),
 	MANEUVER("Verkehrsverhalten bei Fahrman�vern, Verkehrsbeobachtung"),
 	PARKEN("Ruhender Verkehr");
-	;
+	
 	
 	private final String beschreibung;
 	

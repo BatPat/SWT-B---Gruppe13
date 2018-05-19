@@ -28,18 +28,14 @@ public class PruefungDaoImpl implements PruefungDao {
 			}
 
 		});
-		List<Pruefung> liste = new ArrayList<Pruefung>();
+		List<Pruefung> liste = new ArrayList<>();
 		Pruefung pruefung = null;
 		for (int i = 0; i < puefungdateien.length; i++) {
 			File file = puefungdateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
 				pruefung = (Pruefung) ois.readObject();
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
 			}
 			liste.add(pruefung);
 		}
@@ -56,11 +52,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	public void addPruefung(Pruefung pruefung) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(pruefung);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -72,11 +64,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(pruefung);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

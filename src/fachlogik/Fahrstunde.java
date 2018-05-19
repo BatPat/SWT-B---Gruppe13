@@ -62,7 +62,7 @@ public class Fahrstunde extends Stunde {
 
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		List<Person> personen = new ArrayList<Person>();
+		List<Person> personen = new ArrayList<>();
 		personen.add(lehrer);
 		personen.add(schueler);
 		return personen;

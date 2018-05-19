@@ -30,7 +30,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 			}
 
 		});
-		List<Fahrlehrer> liste = new ArrayList<Fahrlehrer>();
+		List<Fahrlehrer> liste = new ArrayList<>();
 		Fahrlehrer fahrlehrer = null;
 		for (int i = 0; i < fahrlehrerdateien.length; i++) {
 			File file = fahrlehrerdateien[i];

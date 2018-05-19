@@ -36,7 +36,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 			}
 
 		});
-		List<Fahrschueler> liste = new ArrayList<Fahrschueler>();
+		List<Fahrschueler> liste = new ArrayList<>();
 		Fahrschueler fahrschueler = null;
 		for (int i = 0; i < fahrschuelerdateien.length; i++) {
 			File file = fahrschuelerdateien[i];
@@ -54,11 +54,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	public void addFahrschueler(Fahrschueler fahrschueler) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrschueler));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(fahrschueler);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

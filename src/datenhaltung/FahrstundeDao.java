@@ -1,7 +1,7 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Fahrstunde;;
+import fachlogik.Fahrstunde;
 
 public interface FahrstundeDao {
 	

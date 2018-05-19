@@ -22,8 +22,6 @@ public abstract class Stunde implements Termin, Serializable {
 		this.ort = ort;
 	}
 
-	@Override
-	public abstract List<Person> getBeteiligtePersonen();
 
 	@Override
 	public LocalDate getDatum() {

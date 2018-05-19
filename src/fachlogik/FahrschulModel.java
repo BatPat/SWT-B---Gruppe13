@@ -18,7 +18,7 @@ public class FahrschulModel {
 	public boolean isAlleFelderAusgefuellt() {
 		boolean result = true;
 		
-		result = result && getFahrlehrer().getName() != null;
+		result = getFahrlehrer().getName() != null;
 		result = result && getFahrschueler().getName() != null;
 		result = result && getDatum() != null;
 		result = result && getUhrzeit() != null;

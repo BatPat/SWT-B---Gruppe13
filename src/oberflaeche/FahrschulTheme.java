@@ -7,16 +7,20 @@ import org.eclipse.swt.widgets.Display;
 
 public class FahrschulTheme {
 
-	private Color whiteColor, blueColor;
-	private Font font1, font2, namefont;
-
+	private static final String SANS_SERIF = "Sans-Serif";
+	private Color whiteColor;
+	private Color blueColor;
+	private Font font1;  
+	private Font font2;
+	private Font namefont;
+	
 	public FahrschulTheme() {
 
 		whiteColor = new Color(Display.getCurrent(), 255, 255, 255);
 		blueColor = new Color(Display.getCurrent(), 25, 61, 138);
-		font1 = new Font(Display.getCurrent(), "Sans-Serif", 13, SWT.NORMAL);
-		namefont = new Font(Display.getCurrent(), "Sans-Serif", 13, SWT.BOLD);
-		font2 = new Font(Display.getCurrent(), "Sans-Serif", 11, SWT.NORMAL);
+		font1 = new Font(Display.getCurrent(), SANS_SERIF, 13, SWT.NORMAL);
+		namefont = new Font(Display.getCurrent(), SANS_SERIF, 13, SWT.BOLD);
+		font2 = new Font(Display.getCurrent(), SANS_SERIF, 11, SWT.NORMAL);
 	}
 
 	public Color getWhiteColor() {

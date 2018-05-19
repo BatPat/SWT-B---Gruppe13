@@ -41,7 +41,7 @@ public class Pruefung implements Termin, Serializable {
 
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		List<Person> personen = new ArrayList<Person>();
+		List<Person> personen = new ArrayList<>();
 		personen.add(fahrlehrer);
 		personen.add(fahrschueler);
 		return personen;

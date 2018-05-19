@@ -28,18 +28,14 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 			}
 
 		});
-		List<Theoriestunde> liste = new ArrayList<Theoriestunde>();
+		List<Theoriestunde> liste = new ArrayList<>();
 		Theoriestunde theoriestunde = null;
 		for (int i = 0; i < theoriestundedateien.length; i++) {
 			File file = theoriestundedateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
 				theoriestunde = (Theoriestunde) ois.readObject();
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
 			}
 			liste.add(theoriestunde);
 		}

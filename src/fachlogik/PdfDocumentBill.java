@@ -73,9 +73,7 @@ public class PdfDocumentBill {
 			document.close();
 			// --------
 			Desktop.getDesktop().open(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (DocumentException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -420,7 +418,6 @@ public class PdfDocumentBill {
 		cell2R4.setBorder(Rectangle.BOTTOM);
 		cell2R4.setFixedHeight(18);
 		tableBill.addCell(cell2R4);
-		// TODO Preiskalkulierung abhängig von der Art der Sonderfahrt.
 		String preis = df.format(anzSonder * 40.00) + "";
 		PdfPCell cell3R4 = new PdfPCell(new Phrase(preis, fonthell10));
 		cell3R4.setBorder(Rectangle.BOTTOM);

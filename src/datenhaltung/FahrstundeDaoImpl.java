@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Fahrstunde;;
+import fachlogik.Fahrstunde;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
 	
@@ -28,7 +28,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 			}
 
 		});
-		List<Fahrstunde> liste = new ArrayList<Fahrstunde>();
+		List<Fahrstunde> liste = new ArrayList<>();
 		Fahrstunde fahrstunde = null;
 		for (int i = 0; i < fahrstundendateien.length; i++) {
 			File file = fahrstundendateien[i];
