@@ -24,7 +24,7 @@ public class Theoriestunde extends Stunde {
 		this.genid = counter++;
 		this.thema = thema;
 		this.fahrlehrer = fahrlehrer;
-		this.fahrschueler = new ArrayList<Fahrschueler>();
+		this.fahrschueler = new ArrayList<>();
 	}
 
 	public long getGenid() {
@@ -33,7 +33,7 @@ public class Theoriestunde extends Stunde {
 
 	@Override
 	public List<Person> getBeteiligtePersonen() {
-		List<Person> personen = new ArrayList<Person>();
+		List<Person> personen = new ArrayList<>();
 		personen.add(fahrlehrer);
 		personen.addAll(fahrschueler);
 		return personen;

@@ -52,11 +52,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	public void addTheoriestunde(Theoriestunde theoriestunde) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(theoriestunde);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -68,11 +64,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			try {
 				oos.writeObject(theoriestunde);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
