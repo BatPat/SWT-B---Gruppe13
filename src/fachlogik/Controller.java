@@ -28,8 +28,8 @@ public class Controller implements Observer {
 	public Controller() {
 		initDaos();
 		pdf = new PdfDocumentBill();
-		initGUI();
 		initModel();
+		initGUI();
 		mainview.getShell().layout(true);
 	}
 
@@ -74,8 +74,6 @@ public class Controller implements Observer {
 				mainview.getTimeCombo().add(zeit);
 			}
 		}
-//		String fahrlehr = mainview.getLehrerCombo().getText();
-//		Fahrlehrer fahrlehrer = fahrlehrerdao.getFahrlehrer(fahrlehr);
 		
 		Fahrlehrer fahrlehrer = model.getFahrlehrer();
 		
@@ -102,8 +100,6 @@ public class Controller implements Observer {
 	}
 
 	private void uebersichtFahrstunden() throws FileNotFoundException, IOException {
-//		String f = mainview.getSchuelerCombo().getText();
-//		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		
 		Fahrschueler fahrschueler = model.getFahrschueler();
 		int anzNorm = 0;
@@ -131,8 +127,6 @@ public class Controller implements Observer {
 	}
 
 	private void updateModel() {
-
-		// TODO model aktualisieren
 		
 		
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
@@ -181,38 +175,10 @@ public class Controller implements Observer {
 	}
 
 	private void erstellePdf() throws IOException {
-//		String f = mainview.getSchuelerCombo().getText();
-//		Fahrschueler fahrschueler = fahrschuelerdao.getFahrschueler(f);
 		pdf.createPdf(model.getFahrschueler());
 	}
 
 	private void bucheFahrstunde() {
-//		String fahrschuelername = mainview.getSchuelerCombo().getText();
-//		String fahlehrername = mainview.getLehrerCombo().getText();
-//
-//		// TODO FixMe Uhrzeit und Datum werden aus den Elementen aus dem
-//		// kalenderComposite
-//		// genommen
-//		String uhrzeitString = mainview.getZeitCombo().getText();
-//		int datumJahr = mainview.getDateFahrstunde().getYear();
-//		int datumMonat = mainview.getDateFahrstunde().getMonth();
-//		int datumTag = mainview.getDateFahrstunde().getDay();
-//		String artString = mainview.getArtCombo().getText();
-//
-//		Fahrschueler fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
-//		Fahrlehrer fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
-//
-//		LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
-//				Integer.parseInt(uhrzeitString.substring(3)));
-//		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-//		Fahrstundenart fStundenArt;
-//		if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
-//			fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
-//		} else {
-//			fStundenArt = Fahrstundenart.B_SONDERFAHRT;
-//		}
-//
-//		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
 		Fahrstunde fStunde = model.getFahrstunde();
 		Fahrschueler fSchueler = model.getFahrschueler();
 		Fahrlehrer fLehrer = model.getFahrlehrer();
