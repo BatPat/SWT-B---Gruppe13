@@ -26,12 +26,12 @@ public class Controller implements Observer {
 	public Controller() {
 		pdf = new PdfDocumentBill();
 		initModel();
-		initGUI();
-		mainview.getShell().layout(true);
 		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
 		klassen.add(Fuehrerscheinklasse.B);
 		fahrschule = new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen);
 		kalender = new Kalender(new TheorieStundeDaoImpl(), new FahrstundeDaoImpl(), new PruefungDaoImpl());
+		initGUI();
+		mainview.getShell().layout(true);
 	}
 
 	private void initGUI() {
@@ -159,8 +159,9 @@ public class Controller implements Observer {
 		}
 
 		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-		model.setDatum(terminDatum);
-
+		if (terminDatum.isAfter(LocalDate.now())) {
+			model.setDatum(terminDatum);
+		}
 		if (!artString.isEmpty()) {
 			if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
 				fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
