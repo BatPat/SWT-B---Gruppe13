@@ -492,6 +492,14 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 8);
 	}
 
+	public Label getSchuelernameLabel() {
+		return schuelernameLabel;
+	}
+
+	public Label getLehrernameLabel() {
+		return lehrernameLabel;
+	}
+
 	public void erzeugeLinie(Composite composite) {
 		Label trennstrichLabel = new Label(composite, SWT.BORDER);
 		GridData gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
