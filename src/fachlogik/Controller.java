@@ -68,9 +68,11 @@ public class Controller implements Observer {
 	}
 
 	private void zeigePassendeTermine() throws FileNotFoundException, IOException {
-		for (int i = 9; i < 22; i++) {
-			String zeit = i + ":00";
-			mainview.getTimeCombo().add(zeit);
+		if (!auswahlFeldersindleer() && mainview.getTimeCombo().getText().isEmpty()) {
+			for (int i = 9; i < 22; i++) {
+				String zeit = i + ":00";
+				mainview.getTimeCombo().add(zeit);
+			}
 		}
 		String fahrlehr = mainview.getLehrerCombo().getText();
 		Fahrlehrer fahrlehrer = fahrlehrerdao.getFahrlehrer(fahrlehr);
@@ -82,7 +84,8 @@ public class Controller implements Observer {
 
 		// FixMe nimm Termin aus dem Kalender und gleiche erst dann mit dem
 		// Fahrlehrertermin ab
-		// TODO einbinden wird noch nicht aufgerufen -- Doch beim update über den observer ... funktioniert soweit also denke ich
+		// TODO einbinden wird noch nicht aufgerufen -- Doch beim update über den
+		// observer ... funktioniert soweit also denke ich
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
 			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
 					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
@@ -119,11 +122,10 @@ public class Controller implements Observer {
 		mainview.getSonderfahrtTxt().setText(anzSo);
 		mainview.getFahrstundeTxt().setText(anzNo);
 	}
-	
+
 	private boolean auswahlFeldersindleer() {
-		//TODO wird noch nicht aufgerufen
-		return (mainview.getLehrerCombo().getText().isEmpty() 
-				&& mainview.getSchuelerCombo().getText().isEmpty() 
+		// TODO wird noch nicht aufgerufen
+		return (mainview.getLehrerCombo().getText().isEmpty() && mainview.getSchuelerCombo().getText().isEmpty()
 				&& mainview.getZeitCombo().getText().isEmpty());
 	}
 
@@ -143,7 +145,8 @@ public class Controller implements Observer {
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
 
-		// TODO FixMe Uhrzeit und Datum werden aus den Elementen aus dem kalenderComposite
+		// TODO FixMe Uhrzeit und Datum werden aus den Elementen aus dem
+		// kalenderComposite
 		// genommen
 		String uhrzeitString = mainview.getZeitCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
@@ -170,9 +173,9 @@ public class Controller implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
+
 		updateModel();
-		
+
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
 			try {
@@ -213,7 +216,7 @@ public class Controller implements Observer {
 		case "FenstergroesseAendern":
 			// nix
 			break;
-			
+
 		case "Buchen":
 			bucheFahrstunde();
 			break;
