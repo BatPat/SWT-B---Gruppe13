@@ -43,7 +43,7 @@ public class MainView extends Observable {
 	private CLabel btBuchen, btRechnung;
 	private DateTime dateFahrstunde;
 
-	private Combo lehrerCombo, schuelerCombo, zeitCombo, artCombo, timeCombo;
+	private Combo lehrerCombo, schuelerCombo, fsKlasseCombo, artCombo, timeCombo;
 	private Text fahrstundeTxt, sonderfahrtTxt, theorieTxt;
 
 	private Label schuelernameLabel, lehrernameLabel;
@@ -259,23 +259,23 @@ public class MainView extends Observable {
 
 		new Label(eingabe2Composite, SWT.NONE);
 
-		Label zeitLabel = new Label(eingabe2Composite, SWT.NONE);
-		zeitLabel.setText("Uhrzeit:");
-		zeitLabel.setFont(theme.getFont1());
-		zeitLabel.setBackground(theme.getWhiteColor());
-		zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
+		Label fsKlasseLabel = new Label(eingabe2Composite, SWT.NONE);
+		fsKlasseLabel.setText("Führerscheinklasse:");
+		fsKlasseLabel.setFont(theme.getFont1());
+		fsKlasseLabel.setBackground(theme.getWhiteColor());
+		fsKlasseLabel.setLayoutData(createFillFillTrueFalseGridData());
 
 		SelectionListener selectionListenerZeitCombo = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				setChanged();
-				notifyObservers("Uhrzeit");
+				notifyObservers("Führerscheinklasse");
 			};
 		};
 
-		zeitCombo = new Combo(eingabe2Composite, SWT.READ_ONLY);
-		zeitCombo.addSelectionListener(selectionListenerZeitCombo);
-		zeitCombo.setLayoutData(createFillFillTrueFalseGridData());
+		fsKlasseCombo = new Combo(eingabe2Composite, SWT.READ_ONLY);
+		fsKlasseCombo.addSelectionListener(selectionListenerZeitCombo);
+		fsKlasseCombo.setLayoutData(createFillFillTrueFalseGridData());
 
 		createFillerLabel(eingabe2Composite, 8);
 		erzeugeLinie(eingabe2Composite);
@@ -591,7 +591,7 @@ public class MainView extends Observable {
 	}
 
 	public Combo getZeitCombo() {
-		return zeitCombo;
+		return fsKlasseCombo;
 	}
 
 	public Combo getArtCombo() {
