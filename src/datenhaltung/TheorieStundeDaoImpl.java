@@ -14,11 +14,12 @@ import java.util.List;
 import fachlogik.Theoriestunde;
 
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
+	
+	private static String javadir = System.getProperty("user.dir");
 
 	@Override
 	public List<Theoriestunde> getAlleTheoriestunden() {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Theoriestunde/");
+		File dir = new File(javadir + "/Fahrschule/Theoriestunde/");
 		File[] theoriestundedateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -46,9 +47,8 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	}
 
 	private File generateFile(Theoriestunde theoriestunde) {
-		String home = System.getProperty("user.home");
 		File dir = new File(
-				home + "/Downloads/Fahrschule/Theoriestunde/" + "Theorie" + theoriestunde.getGenid() + ".ser");
+				javadir + "/Fahrschule/Theoriestunde/" + "Theorie" + theoriestunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}

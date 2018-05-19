@@ -14,11 +14,12 @@ import java.util.List;
 import fachlogik.Fahrstunde;;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
+	
+	private static String javadir = System.getProperty("user.dir");
 
 	@Override
 	public List<Fahrstunde> getAlleFahrstunden() {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrstunden/");
+		File dir = new File(javadir + "/Fahrschule/Fahrstunden/");
 		File[] fahrstundendateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -46,9 +47,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	}
 
 	private File generateFile(Fahrstunde fahrstunde) {
-		String home = System.getProperty("user.home");
 		File dir = new File(
-				home + "/Downloads/Fahrschule/Fahrstunden/" + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
+				javadir + "/Fahrschule/Fahrstunden/" + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}

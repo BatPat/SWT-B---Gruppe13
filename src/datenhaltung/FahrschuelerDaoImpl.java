@@ -14,18 +14,18 @@ import java.util.List;
 import fachlogik.Fahrschueler;
 
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
+	
+	private static String javadir = System.getProperty("user.dir");
 
 	private File generateFile(Fahrschueler fahrschueler) {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrschueler/" + fahrschueler.getName() + ".ser");
+		File dir = new File(javadir + "/Fahrschule/Fahrschueler/" + fahrschueler.getName() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
 
 	@Override
 	public List<Fahrschueler> getAlleFahrschueler() {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Fahrschueler/");
+		File dir = new File(javadir + "/Fahrschule/Fahrschueler/");
 		File[] fahrschuelerdateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -90,10 +90,9 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	@Override
 	public Fahrschueler getFahrschueler(String fahrschuelerName) {
-		String home = System.getProperty("user.home");
 		Fahrschueler fahrschueler = null;
 		try (FileInputStream fis = new FileInputStream(
-				home + "/Downloads/Fahrschule/Fahrschueler/" + fahrschuelerName + ".ser");
+				javadir + "/Fahrschule/Fahrschueler/" + fahrschuelerName + ".ser");
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
 			fahrschueler = (Fahrschueler) ois.readObject();
 			assert (fahrschueler.getName().equals(fahrschuelerName));

@@ -14,11 +14,12 @@ import java.util.List;
 import fachlogik.Pruefung;
 
 public class PruefungDaoImpl implements PruefungDao {
+	
+	private static String javadir = System.getProperty("user.dir");
 
 	@Override
 	public List<Pruefung> getAllePruefungen() {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/");
+		File dir = new File(javadir + "/Fahrschule/Pruefung/");
 		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
 
 			@Override
@@ -46,8 +47,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 
 	private File generateFile(Pruefung pruefung) {
-		String home = System.getProperty("user.home");
-		File dir = new File(home + "/Downloads/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
+		File dir = new File(javadir + "/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}

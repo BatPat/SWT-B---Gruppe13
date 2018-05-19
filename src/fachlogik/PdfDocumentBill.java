@@ -40,11 +40,11 @@ public class PdfDocumentBill {
 	private static Font fonthell10bol = new Font(FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.BLACK);
 	private static Font fonthell10undbolred = new Font(FontFamily.HELVETICA, 10, Font.UNDERLINE, BaseColor.RED);
 	private static DecimalFormat df = new DecimalFormat("#0.00");
+	private static String javadir = System.getProperty("user.dir");
 
 	public void createPdf(Fahrschueler fahrschueler) throws IOException {
 		try {
-			String home = System.getProperty("user.home");
-			File file = new File(home + "/Downloads/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
+			File file = new File(javadir + "/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
 			file.getParentFile().mkdirs();
 			Document document = new Document();
 			// PdfWriter pdfwriterwsadas = PdfWriter.getInstance(document, new
