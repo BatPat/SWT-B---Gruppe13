@@ -159,7 +159,7 @@ public class Controller implements Observer {
 		}
 
 		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-		if (terminDatum.isAfter(LocalDate.now())) {
+		if (!LocalDate.now().isAfter(terminDatum)) {
 			model.setDatum(terminDatum);
 		}
 		if (!artString.isEmpty()) {
@@ -201,6 +201,20 @@ public class Controller implements Observer {
 			uebersichtFahrstunden();
 			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
 		}
+
+		int datumJahr = mainview.getDateFahrstunde().getYear();
+		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		int datumTag = mainview.getDateFahrstunde().getDay();
+		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+		if (LocalDate.now().isAfter(terminDatum)) {
+			resetViewDatum();
+		}
+	}
+
+	private void resetViewDatum() {
+		mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
+		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
+		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
 	}
 
 	@Override
