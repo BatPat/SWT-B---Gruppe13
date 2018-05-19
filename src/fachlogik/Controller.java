@@ -3,16 +3,16 @@ package fachlogik;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import datenhaltung.FahrlehrerDao;
 import datenhaltung.FahrlehrerDaoImpl;
-import datenhaltung.FahrschuelerDao;
 import datenhaltung.FahrschuelerDaoImpl;
-import datenhaltung.FahrstundeDao;
 import datenhaltung.FahrstundeDaoImpl;
+import datenhaltung.PruefungDaoImpl;
+import datenhaltung.TheorieStundeDaoImpl;
 import oberflaeche.MainView;
 
 public class Controller implements Observer {
@@ -20,22 +20,18 @@ public class Controller implements Observer {
 	private FahrschulModel model;
 	private MainView mainview;
 	private PdfDocumentBill pdf;
-	private FahrlehrerDao fahrlehrerdao;
-	private FahrschuelerDao fahrschuelerdao;
-	private FahrstundeDao fahrstundedao;
+	private Fahrschule fahrschule;
+	private Kalender kalender;
 
 	public Controller() {
-		initDaos();
 		pdf = new PdfDocumentBill();
 		initModel();
 		initGUI();
 		mainview.getShell().layout(true);
-	}
-
-	private void initDaos() {
-		fahrlehrerdao = new FahrlehrerDaoImpl();
-		fahrschuelerdao = new FahrschuelerDaoImpl();
-		fahrstundedao = new FahrstundeDaoImpl();
+		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
+		klassen.add(Fuehrerscheinklasse.B);
+		fahrschule = new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen);
+		kalender = new Kalender(new TheorieStundeDaoImpl(), new FahrstundeDaoImpl(), new PruefungDaoImpl());
 	}
 
 	private void initGUI() {
@@ -50,17 +46,18 @@ public class Controller implements Observer {
 	}
 
 	private void fillListContent() {
-		for (Fahrlehrer f : fahrlehrerdao.getAlleFahrlehrer()) {
+		for (Fahrlehrer f : fahrschule.getFahrlehrerListe()) {
 			mainview.getLehrerCombo().add(f.getName());
 		}
-		for (Fahrschueler f : fahrschuelerdao.getAlleFahrschueler()) {
+		for (Fahrschueler f : fahrschule.getFahrschuelerListe()) {
 			mainview.getSchuelerCombo().add(f.getName());
 		}
-		for (int i = 9; i < 22; i++) {
-			String zeit = i + ":00";
-			mainview.getZeitCombo().add(zeit);
+		
+		
+		for (Fuehrerscheinklasse klasse : fahrschule.getAngeboteneKlassen()) {
+			mainview.getFsKlasseCombo().add(klasse.toString());
 		}
-
+		
 		for (Fahrstundenart f : Fahrstundenart.values()) {
 			mainview.getArtCombo().add(f.getBeschreibung());
 		}
@@ -123,7 +120,7 @@ public class Controller implements Observer {
 
 	private boolean auswahlFeldersindleer() {
 		return (mainview.getLehrerCombo().getText().isEmpty() && mainview.getSchuelerCombo().getText().isEmpty()
-				&& mainview.getZeitCombo().getText().isEmpty());
+				&& mainview.getFsKlasseCombo().getText().isEmpty());
 	}
 
 	private void updateModel() {
@@ -143,12 +140,12 @@ public class Controller implements Observer {
 		LocalDate terminDatum = null;
 
 		if (!fahrschuelername.isEmpty()) {
-			fSchueler = fahrschuelerdao.getFahrschueler(fahrschuelername);
+			fSchueler = fahrschule.getFahrschueler(fahrschuelername);
 			model.setFahrschueler(fSchueler);
 		}
 
 		if (!fahlehrername.isEmpty()) {
-			fLehrer = fahrlehrerdao.getFahrlehrer(fahlehrername);
+			fLehrer = fahrschule.getFahrlehrer(fahlehrername);
 			model.setFahrlehrer(fLehrer);
 		}
 
@@ -189,9 +186,9 @@ public class Controller implements Observer {
 
 		fLehrer.getFahrstunden().add(fStunde);
 		fSchueler.getFahrstunden().add(fStunde);
-		fahrstundedao.addFahrstunde(fStunde);
-		fahrlehrerdao.updateFahrlehrer(fLehrer);
-		fahrschuelerdao.updateFahrschueler(fSchueler);
+		kalender.addFahrstunde(fStunde);
+		fahrschule.updateFahrlehrer(fLehrer);
+		fahrschule.updateFahrschueler(fSchueler);
 	}
 	
 	private void updatePanel() {

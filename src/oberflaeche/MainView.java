@@ -590,7 +590,7 @@ public class MainView extends Observable {
 		return schuelerCombo;
 	}
 
-	public Combo getZeitCombo() {
+	public Combo getFsKlasseCombo() {
 		return fsKlasseCombo;
 	}
 
