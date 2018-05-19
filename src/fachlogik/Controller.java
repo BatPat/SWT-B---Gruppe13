@@ -168,7 +168,11 @@ public class Controller implements Observer {
 		}
 
 		Fahrstunde fStunde = new Fahrstunde(fStundenArt, fLehrer, fSchueler, terminUhrzeit, terminDatum, "dummy");
+		fLehrer.getFahrstunden().add(fStunde);
+		fSchueler.getFahrstunden().add(fStunde);
 		fahrstundedao.addFahrstunde(fStunde);
+		fahrlehrerdao.updateFahrlehrer(fLehrer);
+		fahrschuelerdao.updateFahrschueler(fSchueler);
 	}
 
 	@Override
