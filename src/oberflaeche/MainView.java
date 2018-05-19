@@ -46,6 +46,8 @@ public class MainView extends Observable {
 	private Combo lehrerCombo, schuelerCombo, zeitCombo, artCombo, timeCombo;
 	private Text fahrstundeTxt, sonderfahrtTxt, theorieTxt;
 
+	private Label schuelernameLabel, lehrernameLabel;
+
 	private Label fillerLabel;
 	private FahrschulTheme theme;
 	private Composite mainComposite, headerComposite, eingabe1Composite, eingabe2Composite, kalenderComposite,
@@ -150,11 +152,11 @@ public class MainView extends Observable {
 
 		kalenderComposite = new Composite(mainComposite, SWT.NONE);
 		kalenderComposite.setBackground(theme.getWhiteColor());
-		kalenderComposite.setLayout(new GridLayout(4, true));
+		kalenderComposite.setLayout(new GridLayout(3, true));
 
 		uebersichtComposite = new Composite(mainComposite, SWT.NONE);
 		uebersichtComposite.setBackground(theme.getWhiteColor());
-		uebersichtComposite.setLayout(new GridLayout(2, true));
+		uebersichtComposite.setLayout(new GridLayout(3, true));
 	}
 
 	private void anpassenLabelGroesse(Label label) {
@@ -292,17 +294,24 @@ public class MainView extends Observable {
 
 	private void erzeugeUntereLinkeWidgets() {
 
-		createFillerLabel(kalenderComposite, 8);
+		createFillerLabel(kalenderComposite, 4);
 
-		new Label(kalenderComposite, SWT.NONE);
+		Label ueberschrift = new Label(kalenderComposite, SWT.NONE | SWT.WRAP);
+		ueberschrift.setText("Offene Stunden von Fahrlehrer: ");
+		ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
+		ueberschrift.setFont(theme.getFont1());
+		ueberschrift.setBackground(theme.getWhiteColor());
 
-		DateTime zeitplan = new DateTime(kalenderComposite, SWT.CALENDAR);
-		zeitplan.setFont(theme.getFont1());
-		zeitplan.setLayoutData(createFillFillTrueFalseGridData(2));
+		createFillerLabel(kalenderComposite, 2);
 
-		createFillerLabel(kalenderComposite, 8);
+		lehrernameLabel = new Label(kalenderComposite, SWT.NONE | SWT.WRAP);
+		lehrernameLabel.setText("Fahrlehrername");
+		lehrernameLabel.setLayoutData(createFillFillTrueFalseGridData());
+		lehrernameLabel.setFont(theme.getNamefont());
+		lehrernameLabel.setBackground(theme.getWhiteColor());
+		lehrernameLabel.setForeground(theme.getBlueColor());
 
-		new Label(kalenderComposite, SWT.NONE);
+		createFillerLabel(kalenderComposite, 7);
 
 		Label zeitLabel = new Label(kalenderComposite, SWT.NONE);
 		zeitLabel.setText("Uhrzeit");
@@ -321,8 +330,7 @@ public class MainView extends Observable {
 			}
 		});
 
-		new Label(kalenderComposite, SWT.NONE);
-		new Label(kalenderComposite, SWT.NONE);
+		createFillerLabel(kalenderComposite, 1);
 
 		Label artLabel = new Label(kalenderComposite, SWT.NONE);
 		artLabel.setText("Art der Fahrstunde:");
@@ -343,7 +351,7 @@ public class MainView extends Observable {
 		artCombo.setLayoutData(createFillFillTrueFalseGridData());
 		artCombo.setFont(theme.getFont2());
 
-		new Label(kalenderComposite, SWT.NONE);
+		createFillerLabel(kalenderComposite, 8);
 
 		btBuchen = new CLabel(kalenderComposite, SWT.BORDER);
 		btBuchen.setText("Fahrstunde \n buchen");
@@ -387,28 +395,28 @@ public class MainView extends Observable {
 			}
 		});
 
-		new Label(kalenderComposite, SWT.NONE);
-	}
-
-	private GridData createFillFillTrueFalseGridData(int span) {
-		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false);
-		gridData.horizontalSpan = span;
-		return gridData;
 	}
 
 	private void erzeugeUntereRechteWidgets() {
 
-		createFillerLabel(uebersichtComposite, 8);
+		createFillerLabel(uebersichtComposite, 4);
 
 		Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		ueberschrift.setText("Übersicht der Stunden vom Schüler");
+		ueberschrift.setText("Übersicht der Stunden von Schüler:");
 		ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
 		ueberschrift.setFont(theme.getFont1());
 		ueberschrift.setBackground(theme.getWhiteColor());
 
-		new Label(uebersichtComposite, SWT.None);
-		new Label(uebersichtComposite, SWT.None);
-		new Label(uebersichtComposite, SWT.None);
+		createFillerLabel(uebersichtComposite, 2);
+
+		schuelernameLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
+		schuelernameLabel.setText("Fahrschuelername");
+		schuelernameLabel.setLayoutData(createFillFillTrueFalseGridData());
+		schuelernameLabel.setFont(theme.getNamefont());
+		schuelernameLabel.setBackground(theme.getWhiteColor());
+		schuelernameLabel.setForeground(theme.getBlueColor());
+
+		createFillerLabel(uebersichtComposite, 7);
 
 		Label fahrstundeLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
 		fahrstundeLabel.setText("Fahrstunden:");
@@ -418,6 +426,8 @@ public class MainView extends Observable {
 		fahrstundeTxt = new Text(uebersichtComposite, SWT.BORDER);
 		fahrstundeTxt.setEnabled(false);
 
+		createFillerLabel(uebersichtComposite, 1);
+
 		Label sonderfahrtLabel = new Label(uebersichtComposite, SWT.NONE);
 		sonderfahrtLabel.setText("Sonderfahrten:");
 		sonderfahrtLabel.setBackground(theme.getWhiteColor());
@@ -425,6 +435,8 @@ public class MainView extends Observable {
 
 		sonderfahrtTxt = new Text(uebersichtComposite, SWT.BORDER);
 		sonderfahrtTxt.setEnabled(false);
+
+		createFillerLabel(uebersichtComposite, 1);
 
 		Label theorieLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
 		theorieLabel.setText("Theoriestunden:");
@@ -434,9 +446,7 @@ public class MainView extends Observable {
 		theorieTxt = new Text(uebersichtComposite, SWT.BORDER);
 		theorieTxt.setEnabled(false);
 
-		new Label(uebersichtComposite, SWT.NONE);
-		new Label(uebersichtComposite, SWT.None);
-		new Label(uebersichtComposite, SWT.None);
+		createFillerLabel(uebersichtComposite, 8);
 
 		btRechnung = new CLabel(uebersichtComposite, SWT.BORDER);
 		btRechnung.setText("Rechnungsübersicht \n erstellen");
@@ -480,6 +490,14 @@ public class MainView extends Observable {
 			}
 		});
 		createFillerLabel(uebersichtComposite, 8);
+	}
+
+	public Label getSchuelernameLabel() {
+		return schuelernameLabel;
+	}
+
+	public Label getLehrernameLabel() {
+		return lehrernameLabel;
 	}
 
 	public void erzeugeLinie(Composite composite) {
@@ -599,10 +617,5 @@ public class MainView extends Observable {
 	public FahrschulTheme getTheme() {
 		return theme;
 	}
-
-	// public static void main(String[] args) {
-	// MainView gui = new MainView();
-	// gui.startEventHandler();
-	// }
 
 }
