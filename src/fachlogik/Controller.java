@@ -129,8 +129,7 @@ public class Controller implements Observer {
 
 	private void updateModel() {
 
-		// ToDo wird aufgerufen, wenn der Inhalt einer Combobox im Panel geändert wird,
-		// bekommt die Daten aus dem Panel (welcher Fahschüler wurde ausgewählt etc)
+		// TODO model aktualisieren
 
 	}
 
@@ -144,7 +143,7 @@ public class Controller implements Observer {
 		String fahrschuelername = mainview.getSchuelerCombo().getText();
 		String fahlehrername = mainview.getLehrerCombo().getText();
 
-		// FixMe Uhrzeit und Datum werden aus den Elementen aus dem kalenderComposite
+		// TODO FixMe Uhrzeit und Datum werden aus den Elementen aus dem kalenderComposite
 		// genommen
 		String uhrzeitString = mainview.getZeitCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
@@ -171,6 +170,9 @@ public class Controller implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		
+		updateModel();
+		
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
 			try {
@@ -208,6 +210,10 @@ public class Controller implements Observer {
 			// nix
 			break;
 
+		case "FenstergroesseAendern":
+			// nix
+			break;
+			
 		case "Buchen":
 			bucheFahrstunde();
 			break;
@@ -221,7 +227,12 @@ public class Controller implements Observer {
 			break;
 
 		default:
-			// ToDo Exception einbauen
+			try {
+				throw new Exception("unerwartetes Event in der mainView");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		}
 	}
