@@ -6,17 +6,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Theoriestunde extends Stunde {
 
-	
 	private TheorieThema thema;
 	private long genid;
 	private Fahrlehrer fahrlehrer;
 	private List<Fahrschueler> fahrschueler;
 	private static long counter = 0;
-	
-	
-	
+
 	public Theoriestunde(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		super(datum, uhrzeit, dauer, ort);
 	}
@@ -28,22 +26,18 @@ public class Theoriestunde extends Stunde {
 		this.fahrlehrer = fahrlehrer;
 		this.fahrschueler = new ArrayList<Fahrschueler>();
 	}
-	
+
 	public long getGenid() {
 		return genid;
 	}
 
-
-	
 	@Override
-	public List<Person> getBeteiligtePersonen() {		
+	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<Person>();
 		personen.add(fahrlehrer);
 		personen.addAll(fahrschueler);
 		return personen;
 	}
-	
-
 
 	public TheorieThema getThema() {
 		return thema;
@@ -60,5 +54,5 @@ public class Theoriestunde extends Stunde {
 	public List<Fahrschueler> getFahrschueler() {
 		return fahrschueler;
 	}
-	
+
 }

@@ -1,14 +1,14 @@
 package fachlogik;
 
-
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public abstract class Stunde implements Termin, Serializable {
-	
+
 	private LocalDate datum;
 	private LocalTime uhrzeit;
 	private Duration dauer;
@@ -39,7 +39,7 @@ public abstract class Stunde implements Termin, Serializable {
 	public Duration getDauer() {
 		return dauer;
 	}
-	
+
 	@Override
 	public String getOrt() {
 		return ort;

@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Fahrstunde extends Stunde {
 
 	private Fahrstundenart art;
@@ -17,7 +18,8 @@ public class Fahrstunde extends Stunde {
 		super(datum, uhrzeit, dauer, ort);
 	}
 
-	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler, LocalTime uhrzeit, LocalDate datum, String ort) {
+	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler, LocalTime uhrzeit, LocalDate datum,
+			String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.art = art;
 		this.lehrer = lehrer;
@@ -65,7 +67,7 @@ public class Fahrstunde extends Stunde {
 		personen.add(schueler);
 		return personen;
 	}
-	
+
 	public long getGenid() {
 		return genid;
 	}
