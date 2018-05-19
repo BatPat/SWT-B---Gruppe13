@@ -457,7 +457,7 @@ public class PdfDocumentBill {
 	}
 
 	private void createFirstRowBillTable(PdfPTable tableBill) {
-		PdfPCell cell1R2 = new PdfPCell(new Phrase("Grundbetrag abzgl. Geschwisterrabatt", fonthell10));
+		PdfPCell cell1R2 = new PdfPCell(new Phrase("Grundbetrag", fonthell10));
 		cell1R2.setBorder(Rectangle.BOTTOM);
 		cell1R2.setFixedHeight(18);
 		tableBill.addCell(cell1R2);

@@ -82,10 +82,7 @@ public class Controller implements Observer {
 		int monat = mainview.getDateFahrstunde().getMonth();
 		int jahr = mainview.getDateFahrstunde().getYear();
 
-		// FixMe nimm Termin aus dem Kalender und gleiche erst dann mit dem
-		// Fahrlehrertermin ab
-		// TODO einbinden wird noch nicht aufgerufen -- Doch beim update über den
-		// observer ... funktioniert soweit also denke ich
+		
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
 			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
 					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
@@ -124,7 +121,6 @@ public class Controller implements Observer {
 	}
 
 	private boolean auswahlFeldersindleer() {
-		// TODO wird noch nicht aufgerufen
 		return (mainview.getLehrerCombo().getText().isEmpty() && mainview.getSchuelerCombo().getText().isEmpty()
 				&& mainview.getZeitCombo().getText().isEmpty());
 	}
@@ -173,16 +169,6 @@ public class Controller implements Observer {
 		fahrstundedao.addFahrstunde(fStunde);
 		fahrlehrerdao.updateFahrlehrer(fLehrer);
 		fahrschuelerdao.updateFahrschueler(fSchueler);
-		
-		try {
-			uebersichtFahrstunden();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -233,6 +219,13 @@ public class Controller implements Observer {
 
 		case "Buchen":
 			bucheFahrstunde();
+			try {
+				uebersichtFahrstunden();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 
 		case "Rechnung":
