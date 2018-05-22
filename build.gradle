@@ -4,6 +4,10 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 version = '1.0'
 
+sourceSets {
+        main.java.srcDirs = ['src']
+}
+    
 repositories { 
 	mavenCentral()
 }
@@ -15,12 +19,25 @@ eclipse {
 	}
 }
 
+sourceSets {
+        main.java.srcDirs = ['src']
+    }
+
 dependencies {		    
 	testCompile 'org.assertj:assertj-core:3.8.0'
 	testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:2.8.47"
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
+    //https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.56'
+    //https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
+    compile group: 'com.eclipsesource.tabris', name: 'tabris-passepartout', version: '0.10.0'
 }
+
+sourceSets {
+        main.java.srcDirs = ['src']
+    }
 
 compileJava.options.encoding = 'ISO-8859-1'
 
