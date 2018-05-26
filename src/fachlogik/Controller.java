@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.eclipse.swt.widgets.Display;
+
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
 import datenhaltung.FahrstundeDaoImpl;
 import datenhaltung.PruefungDaoImpl;
 import datenhaltung.TheorieStundeDaoImpl;
 import oberflaeche.MainView;
+import oberflaeche.StammdatenView;
 
 public class Controller implements Observer {
 
@@ -22,6 +25,7 @@ public class Controller implements Observer {
 	private PdfDocumentBill pdf;
 	private Fahrschule fahrschule;
 	private Kalender kalender;
+	private StammdatenView stammdatenview;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
@@ -31,14 +35,18 @@ public class Controller implements Observer {
 		fahrschule = new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen);
 		kalender = new Kalender(new TheorieStundeDaoImpl(), new FahrstundeDaoImpl(), new PruefungDaoImpl());
 		initGUI();
-		mainview.getShell().layout(true);
 	}
 
 	private void initGUI() {
-		mainview = new MainView();
-		mainview.addObserver(this);
-		fillListContent();
-		mainview.startEventHandler();
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+		    	mainview = new MainView();
+				mainview.addObserver(Controller.this);
+				fillListContent();
+				mainview.startEventHandler();
+				mainview.getShell().layout(true);
+		    }
+		});
 	}
 
 	private void initModel() {
@@ -193,30 +201,51 @@ public class Controller implements Observer {
 	}
 	
 	private void updatePanel() {
-		if (model.getFahrlehrer().getName() != null) {
-			zeigePassendeTermine();
-			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
-		}
-		if (model.getFahrschueler().getName() != null) {
-			uebersichtFahrstunden();
-			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
-		}
+		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+		    	if (model.getFahrlehrer().getName() != null) {
+					zeigePassendeTermine();
+					mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
+				}
+				if (model.getFahrschueler().getName() != null) {
+					uebersichtFahrstunden();
+					mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
+				}
 
-		int datumJahr = mainview.getDateFahrstunde().getYear();
-		int datumMonat = mainview.getDateFahrstunde().getMonth();
-		int datumTag = mainview.getDateFahrstunde().getDay();
-		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-		if (LocalDate.now().isAfter(terminDatum)) {
-			resetViewDatum();
-		}
+				int datumJahr = mainview.getDateFahrstunde().getYear();
+				int datumMonat = mainview.getDateFahrstunde().getMonth();
+				int datumTag = mainview.getDateFahrstunde().getDay();
+				LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+				if (LocalDate.now().isAfter(terminDatum)) {
+					mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
+					mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
+					mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
+				}
+		    }
+		});
+		
+	}
+	
+	private void initStammdatenView() {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				stammdatenview = new StammdatenView();
+				stammdatenview.addObserver(Controller.this);
+			}
+		});
 	}
 
-	private void resetViewDatum() {
-		mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
-		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
-		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
+	private void switchToStammdatenView() {
+		// TODO StammdatenView soll in den Vordergrund
+		
 	}
 
+	private void switchToMainView() {
+		// TODO MainView soll in den Vordergrund
+		
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
@@ -266,6 +295,27 @@ public class Controller implements Observer {
 			}
 			break;
 
+		case "StammdatenanGui":
+			//TODO Abfrage auf null funktioniert so nicht, wenn die Stammdatenview geschlossen wird bleibt die Referenz.
+			if(stammdatenview == null) {
+				initStammdatenView();
+			}else {
+				switchToStammdatenView();
+			}
+			break;
+
+		case "FahrlehrerNeu":
+			//TODO fahrlehrer erstellen
+			break;
+
+		case "FahrschuelerNeu":
+			//TODO fahrschueler erstellen
+			break;
+
+		case "MainGui":
+			switchToMainView();
+			break;
+
 		default:
 			try {
 				throw new Exception("unerwartetes Event in der mainView");
@@ -275,5 +325,8 @@ public class Controller implements Observer {
 			break;
 		}
 	}
+
+
+
 
 }
