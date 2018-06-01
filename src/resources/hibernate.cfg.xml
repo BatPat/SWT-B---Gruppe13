@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   
+      <property name = "hibernate.dialect">
+         org.hibernate.dialect.MySQLDialectInnoDBDialect
+      </property>
+      
+      <property name = "hibernate.connection.driver_class">
+         com.mysql.jdbc.Driver
+      </property>
+      
+      <!-- Assume test is the database name -->
+      
+      <property name = "hibernate.connection.url">
+         jdbc:mysql://localhost:3306/fahrschule?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      </property>
+      
+      <property name = "hibernate.connection.username">
+         fahrschule
+      </property>
+      
+      <property name = "hibernate.connection.password">
+         fahrschule
+      </property>
+      
+      <property name="hibernate.hbm2ddl.auto">
+      update
+      </property>
+      
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
+      
+      provides the path the to the SQL script which Hibernate shall use to initialize the database.
+      persistence.sql-load-script-source 
+      
+      <!-- List of XML mapping files -->
+      <mapping resource = "Employee.hbm.xml"/>
+      
+   </session-factory>
+</hibernate-configuration>

@@ -6,14 +6,41 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class Theoriestunde extends Stunde {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "theoriestunde")
+public class Theoriestunde extends Stunde {
+	@Id
+	@GeneratedValue
+	@Column(nullable = false, name = "idtheoriestunde")
+	private long id;
+	@Column(nullable = false, name = "thematheoriestunde")
 	private TheorieThema thema;
+	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
+	@ManyToOne
+	@Column(nullable = false, name = "fahrlehrertheoriestunde")
 	private Fahrlehrer fahrlehrer;
+	@ManyToOne
+	@Column(nullable = false, name = "fahrschuelertheoriestunde")
 	private List<Fahrschueler> fahrschueler;
+	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
+	@Column(nullable = false, name = "datumtheoriestunde")
+	private LocalDate datum;
+	@Column(nullable = false, name = "uhrzeittheoriestunde")
+	private LocalTime uhrzeit;
+	@Column(nullable = false, name = "dauertheoriestunde")
+	private Duration dauer;
+	@Column(nullable = false, name = "orttheoriestunde")
+	private String ort;
 
 	public Theoriestunde(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		super(datum, uhrzeit, dauer, ort);
@@ -55,4 +82,63 @@ public class Theoriestunde extends Stunde {
 		return fahrschueler;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public static long getCounter() {
+		return counter;
+	}
+
+	public static void setCounter(long counter) {
+		Theoriestunde.counter = counter;
+	}
+
+	public LocalDate getDatum() {
+		return datum;
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
+	public LocalTime getUhrzeit() {
+		return uhrzeit;
+	}
+
+	public void setUhrzeit(LocalTime uhrzeit) {
+		this.uhrzeit = uhrzeit;
+	}
+
+	public Duration getDauer() {
+		return dauer;
+	}
+
+	public void setDauer(Duration dauer) {
+		this.dauer = dauer;
+	}
+
+	public String getOrt() {
+		return ort;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public void setThema(TheorieThema thema) {
+		this.thema = thema;
+	}
+
+	public void setGenid(long genid) {
+		this.genid = genid;
+	}
+
+	public void setFahrschueler(List<Fahrschueler> fahrschueler) {
+		this.fahrschueler = fahrschueler;
+	}
+
+	public long getId() {
+		return id;
+	}
 }
