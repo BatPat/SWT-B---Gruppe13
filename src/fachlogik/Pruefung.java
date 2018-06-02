@@ -14,9 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "pruefung")
+@SuppressWarnings("serial")
 public class Pruefung implements Termin, Serializable {
 	@Id
 	@GeneratedValue

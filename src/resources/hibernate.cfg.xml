@@ -32,8 +32,7 @@
       
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
       
-      provides the path the to the SQL script which Hibernate shall use to initialize the database.
-      persistence.sql-load-script-source 
+      <property name="persistence.sql-load-script-source" value="src/resources/sqlStatements.sql" />
       
       <!-- List of XML mapping files -->
       <mapping resource = "Employee.hbm.xml"/>

@@ -6,12 +6,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "fahrlehrer")
+@SuppressWarnings("serial")
 public class Fahrlehrer implements Person, Serializable {
 	@Id
-	@GeneratedValue
 	@Column(nullable = false, name = "idfahrlehrer")
 	private long id;
 	@Column(nullable = false, name = "namefahrlehrer")

@@ -12,12 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "fahrschueler")
+@SuppressWarnings("serial")
 public class Fahrschueler implements Person, Serializable {
 	@Id
-	@GeneratedValue
 	@Column(nullable = false, name = "idfahrschueler")
 	private long id;
 	@Column(nullable = false, name = "namefahrschueler")

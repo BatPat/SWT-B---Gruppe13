@@ -13,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "theoriestunde")
+@SuppressWarnings("serial")
 public class Theoriestunde extends Stunde {
 	@Id
 	@GeneratedValue

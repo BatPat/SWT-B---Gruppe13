@@ -14,12 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "fahrstunde")
+@SuppressWarnings("serial")
 public class Fahrstunde extends Stunde {
 	@Id
-	@GeneratedValue
 	@Column(nullable = false, name = "idfahrstunde")
 	private long id;
 	@Column(nullable = false, name = "artfahrstunde")
