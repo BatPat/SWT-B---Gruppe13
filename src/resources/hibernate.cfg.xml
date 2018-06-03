@@ -35,7 +35,11 @@
       <property name="persistence.sql-load-script-source" value="src/resources/sqlStatements.sql" />
       
       <!-- List of XML mapping files -->
-      <mapping resource = "Employee.hbm.xml"/>
+      <mapping class ="fachlogik.Fahrlehrer"/>
+      <mapping class ="fachlogik.Fahrschueler"/>
+      <mapping class ="fachlogik.Fahrstunde"/>
+      <mapping class ="fachlogik.Pruefung"/>
+      <mapping class ="fachlogik.Theoriestunde"/>
       
    </session-factory>
 </hibernate-configuration>
