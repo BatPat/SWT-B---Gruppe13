@@ -12,8 +12,6 @@
          com.mysql.cj.jdbc.Driver
       </property>
       
-      <!-- Assume test is the database name -->
-      
       <property name = "hibernate.connection.url">
          jdbc:mysql://localhost:3306/fahrschule?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
       </property>
@@ -26,10 +24,15 @@
          fahrschule
       </property>
       
-      <property name="hibernate.hbm2ddl.auto">
-      create
+      <property name = "show_sql">
+         true
       </property>
       
+      <property name="hibernate.hbm2ddl.auto">
+      update
+      </property>
+      
+ <!--     
       <property name="javax.persistence.schema-generation.database.action">
       drop-and-create 
       </property>
@@ -37,7 +40,7 @@
       <property name="persistence.sql-load-script-source">
       src/resources/sqlStatements.sql 
       </property>
-      
+ -->     
       <!-- List of XML mapping files -->
       <mapping class ="fachlogik.Fahrlehrer"/>
       <mapping class ="fachlogik.Fahrschueler"/>
