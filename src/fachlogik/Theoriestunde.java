@@ -6,12 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "theoriestunde")
@@ -25,10 +20,10 @@ public class Theoriestunde extends Stunde {
 	private TheorieThema thema;
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
-	@ManyToOne
 	@Column(nullable = false, name = "fahrlehrertheoriestunde")
 	private Fahrlehrer fahrlehrer;
-	@ManyToOne
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrschueler.class)
+	@JoinColumn(name="id")
 	@Column(nullable = false, name = "fahrschuelertheoriestunde")
 	private List<Fahrschueler> fahrschueler;
 	@Column(nullable = false, name = "countertheoriestunde")

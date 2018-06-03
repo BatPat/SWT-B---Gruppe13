@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "fahrschueler")
@@ -30,12 +24,18 @@ public class Fahrschueler implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Pruefung> pruefungen;
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Fahrstunde> fahrstunden;
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Theoriestunde> theoriestunden;
+//	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=Pruefung.class)
+	@JoinColumn(name="id")
+	private List<Pruefung> pruefungen;
+//	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrstunde.class)
+	@JoinColumn(name="id")
+	private List<Fahrstunde> fahrstunden;
+//	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Theoriestunde.class)
+	@JoinColumn(name="id")
+	private List<Theoriestunde> theoriestunden;
 
 	public Fahrschueler() {
 		super();

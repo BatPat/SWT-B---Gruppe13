@@ -23,10 +23,8 @@ public class Fahrstunde extends Stunde {
 	private long id;
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
-	@ManyToOne
 	@Column(nullable = false, name = "lehrerfahrstunde")
 	private Fahrlehrer lehrer;
-	@ManyToOne
 	@Column(nullable = false, name = "schuelerfahrstunde")
 	private Fahrschueler schueler;
 	@Column(nullable = false, name = "genidfahrstunde")

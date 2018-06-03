@@ -24,10 +24,14 @@ public class Fahrlehrer implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Fahrstunde> fahrstunden;
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Theoriestunde> theoriestunden;
+//	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrstunde.class)
+	@JoinColumn(name="id")
+	private List<Fahrstunde> fahrstunden;
+//	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=Theoriestunde.class)
+	@JoinColumn(name="id")
+	private List<Theoriestunde> theoriestunden;
 
 	public Fahrlehrer() {
 		super();

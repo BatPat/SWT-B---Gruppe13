@@ -5,17 +5,17 @@
    <session-factory>
    
       <property name = "hibernate.dialect">
-         org.hibernate.dialect.MySQLDialectInnoDBDialect
+         org.hibernate.dialect.MySQLInnoDBDialect
       </property>
       
       <property name = "hibernate.connection.driver_class">
-         com.mysql.jdbc.Driver
+         com.mysql.cj.jdbc.Driver
       </property>
       
       <!-- Assume test is the database name -->
       
       <property name = "hibernate.connection.url">
-         jdbc:mysql://localhost:3306/fahrschule?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+         jdbc:mysql://localhost:3306/fahrschule?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
       </property>
       
       <property name = "hibernate.connection.username">
@@ -27,12 +27,16 @@
       </property>
       
       <property name="hibernate.hbm2ddl.auto">
-      update
+      create
       </property>
       
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
+      <property name="javax.persistence.schema-generation.database.action">
+      drop-and-create 
+      </property>
       
-      <property name="persistence.sql-load-script-source" value="src/resources/sqlStatements.sql" />
+      <property name="persistence.sql-load-script-source">
+      src/resources/sqlStatements.sql 
+      </property>
       
       <!-- List of XML mapping files -->
       <mapping class ="fachlogik.Fahrlehrer"/>

@@ -24,14 +24,12 @@ public class Pruefung implements Termin, Serializable {
 	private long id;
 	@Column(nullable = false, name = "genidpruefung")
 	private long genid;
-	@ManyToOne
 	@Column(nullable = false, name = "fahrlehrerpruefung")
 	private Fahrlehrer fahrlehrer;
 	@Column(nullable = false, name = "counterpruefung")
 	private static long counter = 0;
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
-	@ManyToOne
 	@Column(nullable = false, name = "fahrschuelerpruefung")
 	private Fahrschueler fahrschueler;
 	@Column(nullable = false, name = "datumpruefung")
