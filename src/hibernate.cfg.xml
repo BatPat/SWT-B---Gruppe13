@@ -35,12 +35,12 @@
       <property name="javax.persistence.schema-generation.database.action">
       drop-and-create 
       </property>
-      
+       <!--      
       <property name="persistence.sql-load-script-source">
       src/resources/sqlStatements.sql 
       </property>
       
-      <!-- List of XML mapping files -->
+      List of XML mapping files -->
       <mapping class ="fachlogik.Fahrlehrer"/>
       <mapping class ="fachlogik.Fahrschueler"/>
       <mapping class ="fachlogik.Fahrstunde"/>
