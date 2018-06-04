@@ -1,5 +1,6 @@
 package fachlogik;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -22,7 +23,8 @@ public class HibernateUtil {
 	public void saveObject(Object o) {
 	Session session = createSessionFactory().openSession();
 	session.beginTransaction();
-	session.save(o);
+	// Hibernate.initialize();  entweder so oder statt lazy loading eager loading 
+ 	session.save(o);
 	session.getTransaction().commit();
 	}
 }

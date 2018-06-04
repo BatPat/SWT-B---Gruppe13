@@ -5,7 +5,7 @@
    <session-factory>
    
       <property name = "hibernate.dialect">
-         org.hibernate.dialect.MySQLInnoDBDialect
+         org.hibernate.dialect.MySQL5InnoDBDialect
       </property>
       
       <property name = "hibernate.connection.driver_class">
@@ -31,8 +31,7 @@
       <property name="hibernate.hbm2ddl.auto">
       update
       </property>
-      
- <!--     
+        
       <property name="javax.persistence.schema-generation.database.action">
       drop-and-create 
       </property>
@@ -40,7 +39,7 @@
       <property name="persistence.sql-load-script-source">
       src/resources/sqlStatements.sql 
       </property>
- -->     
+      
       <!-- List of XML mapping files -->
       <mapping class ="fachlogik.Fahrlehrer"/>
       <mapping class ="fachlogik.Fahrschueler"/>
