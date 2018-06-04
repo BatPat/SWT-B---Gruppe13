@@ -18,7 +18,19 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	private static final String JAVADIR = System.getProperty("user.dir");
 
+	private static FahrschuelerDaoImpl instance;
 
+	private FahrschuelerDaoImpl() {
+		
+	}
+	
+	public static FahrschuelerDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new FahrschuelerDaoImpl();
+		}
+		return instance;
+	}
+	
 	private File generateFile(Fahrschueler fahrschueler) {
 		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
 		dir.getParentFile().mkdirs();

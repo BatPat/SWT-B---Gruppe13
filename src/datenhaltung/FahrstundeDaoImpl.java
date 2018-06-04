@@ -17,6 +17,20 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	private static final String FAHRSTUNDEN_PATH = "/Fahrschule/Fahrstunden/";
 	private static final String JAVADIR = System.getProperty("user.dir");
 
+	private static FahrstundeDaoImpl instance;
+
+	private FahrstundeDaoImpl() {
+		
+	}
+	
+	public static FahrstundeDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new FahrstundeDaoImpl();
+		}
+		return instance;
+	}
+	
+
 	@Override
 	public List<Fahrstunde> getAlleFahrstunden() {
 		File dir = new File(JAVADIR + FAHRSTUNDEN_PATH);

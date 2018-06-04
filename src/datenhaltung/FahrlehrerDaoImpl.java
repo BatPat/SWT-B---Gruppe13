@@ -17,8 +17,20 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	private static final String FAHRLEHRER_PATH = "/Fahrschule/Fahrlehrer/";
 
 	private static final String JAVADIR = System.getProperty("user.dir");
+	
+	private static FahrlehrerDaoImpl instance;
 
-
+	private FahrlehrerDaoImpl() {
+		
+	}
+	
+	public static FahrlehrerDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new FahrlehrerDaoImpl();
+		}
+		return instance;
+	}
+	
 	@Override
 	public List<Fahrlehrer> getAlleFahrlehrer() {
 		File dir = new File(JAVADIR + FAHRLEHRER_PATH);

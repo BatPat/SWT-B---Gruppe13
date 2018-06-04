@@ -10,10 +10,7 @@ public class Fahrschule {
 	private FahrlehrerDao lehrerDao;
 	private List<Fuehrerscheinklasse> angeboteneKlassen;
 	
-	public Fahrschule() {
-		super();
-	}
-
+	
 	public Fahrschule(FahrschuelerDao schuelerDao, FahrlehrerDao lehrerDao, List<Fuehrerscheinklasse> angeboteneKlassen) {
 		super();
 		this.schuelerDao = schuelerDao;

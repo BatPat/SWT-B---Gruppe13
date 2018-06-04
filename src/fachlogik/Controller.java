@@ -25,15 +25,15 @@ public class Controller implements Observer {
 	private PdfDocumentBill pdf;
 	private Fahrschule fahrschule;
 	private Kalender kalender;
-	private StammdatenView stammdatenview;
+	private StammdatenController stammdatenController;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
 		initModel();
 		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
 		klassen.add(Fuehrerscheinklasse.B);
-		fahrschule = new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen);
-		kalender = new Kalender(new TheorieStundeDaoImpl(), new FahrstundeDaoImpl(), new PruefungDaoImpl());
+		fahrschule = new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen);
+		kalender = new Kalender(TheorieStundeDaoImpl.getInstance(), FahrstundeDaoImpl.getInstance(), PruefungDaoImpl.getInstance());
 		initGUI();
 	}
 
@@ -296,24 +296,13 @@ public class Controller implements Observer {
 			break;
 
 		case "StammdatenanGui":
-			//TODO Abfrage auf null funktioniert so nicht, wenn die Stammdatenview geschlossen wird bleibt die Referenz.
-			if(stammdatenview == null) {
-				initStammdatenView();
-			}else {
-				switchToStammdatenView();
-			}
+			//TODO MainView schließen
+			stammdatenController = new StammdatenController(this, fahrschule);
 			break;
 
-		case "FahrlehrerNeu":
-			//TODO fahrlehrer erstellen
-			break;
-
-		case "FahrschuelerNeu":
-			//TODO fahrschueler erstellen
-			break;
-
-		case "MainGui":
-			switchToMainView();
+		case "MainviewOeffnen":
+			initGUI();
+			mainview.getShell().layout(true);
 			break;
 
 		default:

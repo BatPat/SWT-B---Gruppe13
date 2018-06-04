@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -267,6 +268,10 @@ public class StammdatenView extends Observable {
 				btNeuerFahrschueler.setBackground(new Color(display, 0, 0, 255));
 				setChanged();
 				notifyObservers("FahrschuelerNeu");
+
+				MessageBox dialog = new MessageBox(shell, 0);
+				dialog.setMessage("Hier könnte man einen neuen Fahrschüler anlegen");
+				dialog.open();
 			}
 
 			@Override
@@ -348,6 +353,10 @@ public class StammdatenView extends Observable {
 				btNeuerFahrlehrer.setBackground(new Color(display, 0, 0, 255));
 				setChanged();
 				notifyObservers("FahrlehrerNeu");
+
+				MessageBox dialog = new MessageBox(shell, 0);
+				dialog.setMessage("Hier könnte man einen neuen Fahrlehrer anlegen");
+				dialog.open();
 			}
 
 			@Override

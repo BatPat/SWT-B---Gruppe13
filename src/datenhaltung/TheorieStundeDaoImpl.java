@@ -16,6 +16,20 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	
 	private static String javadir = System.getProperty("user.dir");
 
+	private static TheorieStundeDaoImpl instance;
+
+	private TheorieStundeDaoImpl() {
+		
+	}
+	
+	public static TheorieStundeDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new TheorieStundeDaoImpl();
+		}
+		return instance;
+	}
+	
+
 	@Override
 	public List<Theoriestunde> getAlleTheoriestunden() {
 		File dir = new File(javadir + "/Fahrschule/Theoriestunde/");
