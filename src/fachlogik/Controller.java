@@ -22,6 +22,7 @@ public class Controller implements Observer {
 	private PdfDocumentBill pdf;
 	private Fahrschule fahrschule;
 	private Kalender kalender;
+	private StammdatenController stammdatenController;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
@@ -264,6 +265,16 @@ public class Controller implements Observer {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			break;
+
+		case "StammdatenanGui":
+			//TODO MainView schließen
+			stammdatenController = new StammdatenController(this, fahrschule);
+			break;
+
+		case "MainviewOeffnen":
+			initGUI();
+			mainview.getShell().layout(true);
 			break;
 
 		default:
