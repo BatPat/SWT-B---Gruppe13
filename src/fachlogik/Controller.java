@@ -29,8 +29,8 @@ public class Controller implements Observer {
 		initModel();
 		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
 		klassen.add(Fuehrerscheinklasse.B);
-		fahrschule = new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen);
-		kalender = new Kalender(new TheorieStundeDaoImpl(), new FahrstundeDaoImpl(), new PruefungDaoImpl());
+		fahrschule = new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen);
+		kalender = new Kalender(TheorieStundeDaoImpl.getInstance(), FahrstundeDaoImpl.getInstance(), PruefungDaoImpl.getInstance());
 		initGUI();
 		mainview.getShell().layout(true);
 	}

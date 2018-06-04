@@ -16,6 +16,20 @@ public class PruefungDaoImpl implements PruefungDao {
 	
 	private static String javadir = System.getProperty("user.dir");
 
+	private static PruefungDaoImpl instance;
+
+	private PruefungDaoImpl() {
+		
+	}
+	
+	public static PruefungDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new PruefungDaoImpl();
+		}
+		return instance;
+	}
+	
+
 	@Override
 	public List<Pruefung> getAllePruefungen() {
 		File dir = new File(javadir + "/Fahrschule/Pruefung/");

@@ -118,7 +118,7 @@ public class StammdatenController implements Observer {
 	public static void main(String[] args) {
 		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
 		klassen.add(Fuehrerscheinklasse.B);
-		new StammdatenController(null, new Fahrschule(new FahrschuelerDaoImpl(), new FahrlehrerDaoImpl(), klassen));
+		new StammdatenController(null, new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen));
 	}
 
 }

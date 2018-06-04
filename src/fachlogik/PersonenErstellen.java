@@ -6,8 +6,8 @@ import datenhaltung.FahrschuelerDaoImpl;
 public class PersonenErstellen {
 
 	public static void main(String[] args) {
-		FahrlehrerDaoImpl fahrlehrer = new FahrlehrerDaoImpl();
-		FahrschuelerDaoImpl fahrschueler = new FahrschuelerDaoImpl();
+		FahrlehrerDaoImpl fahrlehrer = FahrlehrerDaoImpl.getInstance();
+		FahrschuelerDaoImpl fahrschueler = FahrschuelerDaoImpl.getInstance();
 		fahrlehrer.addFahrlehrer(new Fahrlehrer("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3"));
 		fahrlehrer.addFahrlehrer(new Fahrlehrer("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10"));
 		fahrlehrer.addFahrlehrer(new Fahrlehrer("Elke Oltor", "43623", "Unna", "Frogeldamm", "33"));
