@@ -1,12 +1,3 @@
-    FahrlehrerDaoImpl fahrlehrer = new FahrlehrerDaoImpl(); 
-    FahrschuelerDaoImpl fahrschueler = new FahrschuelerDaoImpl(); 
-    fahrlehrer.addFahrlehrer(new Fahrlehrer("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3")); 
-    fahrlehrer.addFahrlehrer(new Fahrlehrer("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10")); 
-    fahrlehrer.addFahrlehrer(new Fahrlehrer("Elke Oltor", "43623", "Unna", "Frogeldamm", "33")); 
-    fahrschueler.addFahrschueler(new Fahrschueler("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51")); 
-    fahrschueler.addFahrschueler(new Fahrschueler("Julius Blanke", "51123", "Hagen", "Runhweg", "32")); 
-    fahrschueler.addFahrschueler(new Fahrschueler("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41")); 
-
 -- Testdata for fahrlehrer 
 INSERT INTO `fahrschule`.`fahrlehrer`
 (`idfahrlehrer`,
@@ -16,12 +7,7 @@ INSERT INTO `fahrschule`.`fahrlehrer`
 `strassefahrlehrer`,
 `hausnummerfahrlehrer`)
 VALUES
-(<{idfahrlehrer: }>,
-<{namefahrlehrer: }>,
-<{plzfahrlehrer: }>,
-<{wohnortfahrlehrer: }>,
-<{strassefahrlehrer: }>,
-<{hausnummerfahrlehrer: }>);
+(1,"Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
 
 INSERT INTO `fahrschule`.`fahrlehrer`
 (`idfahrlehrer`,
@@ -31,12 +17,7 @@ INSERT INTO `fahrschule`.`fahrlehrer`
 `strassefahrlehrer`,
 `hausnummerfahrlehrer`)
 VALUES
-(<{idfahrlehrer: }>,
-<{namefahrlehrer: }>,
-<{plzfahrlehrer: }>,
-<{wohnortfahrlehrer: }>,
-<{strassefahrlehrer: }>,
-<{hausnummerfahrlehrer: }>)
+(,"Lukas Schmidt", "45231", "Bochum", "Marienweg", "10")
 
 INSERT INTO `fahrschule`.`fahrlehrer`
 (`idfahrlehrer`,
@@ -46,12 +27,7 @@ INSERT INTO `fahrschule`.`fahrlehrer`
 `strassefahrlehrer`,
 `hausnummerfahrlehrer`)
 VALUES
-(<{idfahrlehrer: }>,
-<{namefahrlehrer: }>,
-<{plzfahrlehrer: }>,
-<{wohnortfahrlehrer: }>,
-<{strassefahrlehrer: }>,
-<{hausnummerfahrlehrer: }>);
+(,"Elke Oltor", "43623", "Unna", "Frogeldamm", "33");
 
 -- Testdata for fahrschueler
 INSERT INTO `fahrschule`.`fahrschueler`
@@ -62,12 +38,7 @@ INSERT INTO `fahrschule`.`fahrschueler`
 `strassefahrschueler`,
 `hausnummerfahrschueler`)
 VALUES
-(<{idfahrschueler: }>,
-<{namefahrschueler: }>,
-<{plzfahrschueler: }>,
-<{wohnortfahrschueler: }>,
-<{strassefahrschueler: }>,
-<{hausnummerfahrschueler: }>);
+(1,"Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
 
 INSERT INTO `fahrschule`.`fahrschueler`
 (`idfahrschueler`,
@@ -77,12 +48,7 @@ INSERT INTO `fahrschule`.`fahrschueler`
 `strassefahrschueler`,
 `hausnummerfahrschueler`)
 VALUES
-(<{idfahrschueler: }>,
-<{namefahrschueler: }>,
-<{plzfahrschueler: }>,
-<{wohnortfahrschueler: }>,
-<{strassefahrschueler: }>,
-<{hausnummerfahrschueler: }>)
+(,"Julius Blanke", "51123", "Hagen", "Runhweg", "32")
 
 INSERT INTO `fahrschule`.`fahrschueler`
 (`idfahrschueler`,
@@ -92,12 +58,7 @@ INSERT INTO `fahrschule`.`fahrschueler`
 `strassefahrschueler`,
 `hausnummerfahrschueler`)
 VALUES
-(<{idfahrschueler: }>,
-<{namefahrschueler: }>,
-<{plzfahrschueler: }>,
-<{wohnortfahrschueler: }>,
-<{strassefahrschueler: }>,
-<{hausnummerfahrschueler: }>);
+(,"Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
 
 -- Testdata for fahrstunde
 INSERT INTO `fahrschule`.`fahrstunde`
@@ -111,15 +72,7 @@ INSERT INTO `fahrschule`.`fahrstunde`
 `dauerfahrstunde`,
 `ortfahrstunde`)
 VALUES
-(<{idfahrstunde: }>,
-<{artfahrstunde: }>,
-<{lehrerfahrstunde: }>,
-<{schuelerfahrstunde: }>,
-<{genidfahrstunde: }>,
-<{datumfahrstunde: }>,
-<{uhrzeitfahrstunde: }>,
-<{dauerfahrstunde: }>,
-<{ortfahrstunde: }>);
+(1,"Standardfahrt",1,1,1,"10-06-2018","10:00","1:00","Recklinghausen");
 
 INSERT INTO `fahrschule`.`fahrstunde`
 (`idfahrstunde`,
@@ -132,15 +85,7 @@ INSERT INTO `fahrschule`.`fahrstunde`
 `dauerfahrstunde`,
 `ortfahrstunde`)
 VALUES
-(<{idfahrstunde: }>,
-<{artfahrstunde: }>,
-<{lehrerfahrstunde: }>,
-<{schuelerfahrstunde: }>,
-<{genidfahrstunde: }>,
-<{datumfahrstunde: }>,
-<{uhrzeitfahrstunde: }>,
-<{dauerfahrstunde: }>,
-<{ortfahrstunde: }>);
+(,"Sonderfahrt",1,2,1,"10-06-2018","11:00","1:00","Recklinghausen");
 
 INSERT INTO `fahrschule`.`fahrstunde`
 (`idfahrstunde`,
@@ -153,15 +98,7 @@ INSERT INTO `fahrschule`.`fahrstunde`
 `dauerfahrstunde`,
 `ortfahrstunde`)
 VALUES
-(<{idfahrstunde: }>,
-<{artfahrstunde: }>,
-<{lehrerfahrstunde: }>,
-<{schuelerfahrstunde: }>,
-<{genidfahrstunde: }>,
-<{datumfahrstunde: }>,
-<{uhrzeitfahrstunde: }>,
-<{dauerfahrstunde: }>,
-<{ortfahrstunde: }>);
+(,"Sonderfahrt",2,3,1,"12-06-2018","09:00","1:00","Recklinghausen");
 
 INSERT INTO `fahrschule`.`fahrstunde`
 (`idfahrstunde`,
@@ -174,15 +111,7 @@ INSERT INTO `fahrschule`.`fahrstunde`
 `dauerfahrstunde`,
 `ortfahrstunde`)
 VALUES
-(<{idfahrstunde: }>,
-<{artfahrstunde: }>,
-<{lehrerfahrstunde: }>,
-<{schuelerfahrstunde: }>,
-<{genidfahrstunde: }>,
-<{datumfahrstunde: }>,
-<{uhrzeitfahrstunde: }>,
-<{dauerfahrstunde: }>,
-<{ortfahrstunde: }>);
+(,"Sonderfahrt",1,1,1,"17-06-2018","11:00","1:00","Recklinghausen");
 
 INSERT INTO `fahrschule`.`fahrstunde`
 (`idfahrstunde`,
@@ -195,15 +124,7 @@ INSERT INTO `fahrschule`.`fahrstunde`
 `dauerfahrstunde`,
 `ortfahrstunde`)
 VALUES
-(<{idfahrstunde: }>,
-<{artfahrstunde: }>,
-<{lehrerfahrstunde: }>,
-<{schuelerfahrstunde: }>,
-<{genidfahrstunde: }>,
-<{datumfahrstunde: }>,
-<{uhrzeitfahrstunde: }>,
-<{dauerfahrstunde: }>,
-<{ortfahrstunde: }>);
+(,"Sonderfahrt",3,2,1,"05-06-2018","18:00","1:00","Recklinghausen");
 
 -- Testdata for pruefung
 INSERT INTO `fahrschule`.`pruefung`
@@ -218,16 +139,7 @@ INSERT INTO `fahrschule`.`pruefung`
 `dauerpruefung`,
 `ortpruefung`)
 VALUES
-(<{idpruefung: }>,
-<{genidpruefung: }>,
-<{fahrlehrerpruefung: }>,
-<{counterpruefung: }>,
-<{bestandenpruefung: }>,
-<{fahrschuelerpruefung: }>,
-<{datumpruefung: }>,
-<{uhrzeitpruefung: }>,
-<{dauerpruefung: }>,
-<{ortpruefung: }>);
+(1,1,1,1,false,1,"01-06-2018","12:00","00:45","Recklinghausen");
 
 -- Testdata for theoriestunde
 INSERT INTO `fahrschule`.`theoriestunde`
@@ -235,23 +147,14 @@ INSERT INTO `fahrschule`.`theoriestunde`
 `thematheoriestunde`,
 `genidtheoriestunde`,
 `fahrlehrertheoriestunde`,
-`fahrschuelertheoriestunde`,
+`fahrschuelerlistetheoriestunde`,
 `countertheoriestunde`,
 `datumtheoriestunde`,
 `uhrzeittheoriestunde`,
 `dauertheoriestunde`,
 `orttheoriestunde`)
 VALUES
-(<{idtheoriestunde: }>,
-<{thematheoriestunde: }>,
-<{genidtheoriestunde: }>,
-<{fahrlehrertheoriestunde: }>,
-<{fahrschuelertheoriestunde: }>,
-<{countertheoriestunde: }>,
-<{datumtheoriestunde: }>,
-<{uhrzeittheoriestunde: }>,
-<{dauertheoriestunde: }>,
-<{orttheoriestunde: }>);
+(1,"Vorfahrtregeln",1,1,{1,2,3},1,"01-04-2018","19:00","02:00","Recklinghausen");
 
 INSERT INTO `fahrschule`.`theoriestunde`
 (`idtheoriestunde`,
@@ -265,13 +168,4 @@ INSERT INTO `fahrschule`.`theoriestunde`
 `dauertheoriestunde`,
 `orttheoriestunde`)
 VALUES
-(<{idtheoriestunde: }>,
-<{thematheoriestunde: }>,
-<{genidtheoriestunde: }>,
-<{fahrlehrertheoriestunde: }>,
-<{fahrschuelertheoriestunde: }>,
-<{countertheoriestunde: }>,
-<{datumtheoriestunde: }>,
-<{uhrzeittheoriestunde: }>,
-<{dauertheoriestunde: }>,
-<{orttheoriestunde: }>);
+(,"Rechtliche Rahmenbedingungen",3,1,{1,2},2,"08-04-2018","19:00","02:00","Recklinghausen");

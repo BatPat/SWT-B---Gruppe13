@@ -24,7 +24,7 @@ public class Theoriestunde extends Stunde {
 	private Fahrlehrer fahrlehrer;
 	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrschueler.class)
 	@JoinColumn(name="id")
-	@Column(nullable = false, name = "fahrschuelertheoriestunde")
+	@Column(nullable = false, name = "fahrschuelerlistetheoriestunde")
 	private List<Fahrschueler> fahrschueler;
 	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
