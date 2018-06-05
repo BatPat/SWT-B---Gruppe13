@@ -230,7 +230,7 @@ public class Controller implements Observer {
 	private void initStammdatenView() {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
-				stammdatenview = new StammdatenView();
+				StammdatenView stammdatenview = new StammdatenView();
 				stammdatenview.addObserver(Controller.this);
 			}
 		});
