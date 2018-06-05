@@ -10,9 +10,8 @@ import javax.persistence.*;
 @Table(name = "fahrlehrer")
 @SuppressWarnings("serial")
 public class FahrlehrerDTO implements Person, Serializable {
-	@Id
-	@Column(nullable = false, name = "idfahrlehrer")
-	private long id;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
 	@Column(nullable = false, name = "plzfahrlehrer")
@@ -24,13 +23,13 @@ public class FahrlehrerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
-	@JoinColumn(name="id")
+//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
+//	@JoinColumn(name="id")
+	@Transient
 	private List<FahrstundeDTO> fahrstunden;
-//	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
-	@JoinColumn(name="id")
+//	@OneToMany(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
+//	@JoinColumn(name="id")
+	@Transient
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrlehrerDTO() {
@@ -93,14 +92,6 @@ public class FahrlehrerDTO implements Person, Serializable {
 	@Override
 	public String getHausnummer() {
 		return hausnummer;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public void setName(String name) {

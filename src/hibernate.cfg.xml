@@ -29,23 +29,24 @@
       </property>
       
       <property name="hibernate.hbm2ddl.auto">
+<!--       create  -->
       update
       </property>
         
-      <property name="javax.persistence.schema-generation.database.action">
-      drop-and-create 
-      </property>
+<!--       <property name="javax.persistence.schema-generation.database.action"> -->
+<!--       drop-and-create  -->
+<!--       </property> -->
        <!--      
       <property name="persistence.sql-load-script-source">
       src/resources/sqlStatements.sql 
       </property>
       
       List of XML mapping files -->
-      <mapping class ="fachlogik.Fahrlehrer"/>
-      <mapping class ="fachlogik.Fahrschueler"/>
-      <mapping class ="fachlogik.Fahrstunde"/>
-      <mapping class ="fachlogik.Pruefung"/>
-      <mapping class ="fachlogik.Theoriestunde"/>
+      <mapping class ="fachlogik.FahrlehrerDTO"/>
+<!--       <mapping class ="fachlogik.FahrschuelerDTO"/> -->
+<!--       <mapping class ="fachlogik.FahrstundeDTO"/> -->
+<!--       <mapping class ="fachlogik.PruefungDTO"/> -->
+<!--       <mapping class ="fachlogik.TheoriestundeDTO"/> -->
       
    </session-factory>
 </hibernate-configuration>

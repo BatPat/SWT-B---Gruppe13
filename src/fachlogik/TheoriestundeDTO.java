@@ -28,10 +28,13 @@ public class TheoriestundeDTO extends Stunde {
 	private List<FahrschuelerDTO> fahrschueler;
 	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumtheoriestunde")
 	private LocalDate datum;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeittheoriestunde")
 	private LocalTime uhrzeit;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauertheoriestunde")
 	private Duration dauer;
 	@Column(nullable = false, name = "orttheoriestunde")

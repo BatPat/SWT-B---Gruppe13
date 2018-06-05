@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "pruefung")
@@ -32,10 +34,13 @@ public class PruefungDTO implements Termin, Serializable {
 	private boolean bestanden;
 	@Column(nullable = false, name = "fahrschuelerpruefung")
 	private FahrschuelerDTO fahrschueler;
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitpruefung")
 	private LocalTime uhrzeit;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauerpruefung")
 	private Duration dauer;
 	@Column(nullable = false, name = "ortpruefung")

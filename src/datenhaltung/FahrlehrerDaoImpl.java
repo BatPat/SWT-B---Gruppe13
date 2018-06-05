@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fachlogik.FahrlehrerDTO;
+import fachlogik.HibernateUtil;
 
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	
 	private static final String FAHRLEHRER_PATH = "/Fahrschule/Fahrlehrer/";
-
 	private static final String JAVADIR = System.getProperty("user.dir");
-	
 	private static FahrlehrerDaoImpl instance;
+	private static HibernateUtil h;
 
 	private FahrlehrerDaoImpl() {
 		
@@ -64,12 +64,8 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	@Override
 	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrlehrer));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(fahrlehrer);			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		h = new HibernateUtil();
+		h.saveObject(fahrlehrer);
 	}
 
 	@Override
@@ -85,18 +81,11 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		td.delete();
 	}
 
+	//TODO FahrlehrerDTO fahrlehrer als übergabe bei get Fahrlehrer
 	@Override
 	public FahrlehrerDTO getFahrlehrer(String fahrlehrerName) {
-		FahrlehrerDTO fahrlehrer = null;
-		try (FileInputStream fis = new FileInputStream(
-				JAVADIR + FAHRLEHRER_PATH + fahrlehrerName + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrlehrer = (FahrlehrerDTO) ois.readObject();
-			assert (fahrlehrer.getName().equals(fahrlehrerName));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return fahrlehrer;
+		h = new HibernateUtil();
+		return null; //TODO h.getObject(fahrlehrer.getID);
 	}
 
 }

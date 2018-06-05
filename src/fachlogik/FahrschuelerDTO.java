@@ -11,8 +11,6 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 public class FahrschuelerDTO implements Person, Serializable {
 	@Id
-	@Column(nullable = false, name = "idfahrschueler")
-	private long id;
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
 	@Column(nullable = false, name = "plzfahrschueler")
@@ -24,17 +22,17 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=PruefungDTO.class)
-	@JoinColumn(name="id")
+//	@OneToMany(cascade=CascadeType.ALL, targetEntity=PruefungDTO.class)
+//	@JoinColumn(name="id")
+	@Transient
 	private List<PruefungDTO> pruefungen;
-//	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
-	@JoinColumn(name="id")
+//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
+//	@JoinColumn(name="id")
+	@Transient
 	private List<FahrstundeDTO> fahrstunden;
-//	@OneToMany(cascade = CascadeType.ALL)
-	@ManyToOne(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
+//	@JoinColumn(name="id")
+	@Transient
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {
@@ -106,14 +104,6 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Override
 	public String getHausnummer() {
 		return hausnummer;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public void setName(String name) {

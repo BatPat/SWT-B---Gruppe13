@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "fahrstunde")
@@ -20,7 +24,7 @@ import javax.persistence.Table;
 public class FahrstundeDTO extends Stunde {
 	@Id
 	@Column(nullable = false, name = "idfahrstunde")
-	private long id;
+	private long id = 0;
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
 	@Column(nullable = false, name = "lehrerfahrstunde")
@@ -29,10 +33,13 @@ public class FahrstundeDTO extends Stunde {
 	private FahrschuelerDTO schueler;
 	@Column(nullable = false, name = "genidfahrstunde")
 	private long genid;
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumfahrstunde")
 	private LocalDate datum;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitfahrstunde")
 	private LocalTime uhrzeit;
+	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauerfahrstunde")
 	private Duration dauer;
 	@Column(nullable = false, name = "ortfahrstunde")
