@@ -462,4 +462,8 @@ public class StammdatenView extends Observable {
 		return lehrerStammdatenTabelle;
 	}
 
+	public Display getDisplay() {
+		return this.display;
+	}
+
 }

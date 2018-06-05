@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pruefung")
 @SuppressWarnings("serial")
-public class Pruefung implements Termin, Serializable {
+public class PruefungDTO implements Termin, Serializable {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false, name = "idpruefung")
@@ -25,13 +25,13 @@ public class Pruefung implements Termin, Serializable {
 	@Column(nullable = false, name = "genidpruefung")
 	private long genid;
 	@Column(nullable = false, name = "fahrlehrerpruefung")
-	private Fahrlehrer fahrlehrer;
+	private FahrlehrerDTO fahrlehrer;
 	@Column(nullable = false, name = "counterpruefung")
 	private static long counter = 0;
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
 	@Column(nullable = false, name = "fahrschuelerpruefung")
-	private Fahrschueler fahrschueler;
+	private FahrschuelerDTO fahrschueler;
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
 	@Column(nullable = false, name = "uhrzeitpruefung")
@@ -41,11 +41,11 @@ public class Pruefung implements Termin, Serializable {
 	@Column(nullable = false, name = "ortpruefung")
 	private String ort;
 
-	public Pruefung() {
+	public PruefungDTO() {
 		super();
 	}
 
-	public Pruefung(Fahrlehrer fahrlehrer, Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit,
+	public PruefungDTO(FahrlehrerDTO fahrlehrer, FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit,
 			Duration dauer, String ort) {
 		this.genid = counter++;
 		this.fahrlehrer = fahrlehrer;
@@ -56,7 +56,7 @@ public class Pruefung implements Termin, Serializable {
 		this.ort = ort;
 	}
 
-	public Pruefung(Fahrschueler fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
+	public PruefungDTO(FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		this(null, fahrschueler, datum, uhrzeit, dauer, ort);
 	}
 
@@ -96,11 +96,11 @@ public class Pruefung implements Termin, Serializable {
 		return this.fahrlehrer == null;
 	}
 
-	public Fahrlehrer getFahrlehrer() {
+	public FahrlehrerDTO getFahrlehrer() {
 		return fahrlehrer;
 	}
 
-	public Fahrschueler getFahrschueler() {
+	public FahrschuelerDTO getFahrschueler() {
 		return fahrschueler;
 	}
 

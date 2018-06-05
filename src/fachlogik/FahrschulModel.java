@@ -6,11 +6,11 @@ import java.time.LocalTime;
 public class FahrschulModel {
 
 	private Kalender kalender;
-	private Fahrstunde fahrstunde;
+	private FahrstundeDTO fahrstunde;
 
 	public FahrschulModel() {
 		kalender = new Kalender();
-		fahrstunde = new Fahrstunde(null, new Fahrlehrer(), new Fahrschueler(), null, null, "Fahrschule Terlau");
+		fahrstunde = new FahrstundeDTO(null, new FahrlehrerDTO(), new FahrschuelerDTO(), null, null, "Fahrschule Terlau");
 	}
 
 	public boolean isAlleFelderAusgefuellt() {
@@ -25,19 +25,19 @@ public class FahrschulModel {
 		return result;
 	}
 
-	public Fahrlehrer getFahrlehrer() {
+	public FahrlehrerDTO getFahrlehrer() {
 		return fahrstunde.getLehrer();
 	}
 
-	public void setFahrlehrer(Fahrlehrer fahrlehrer) {
+	public void setFahrlehrer(FahrlehrerDTO fahrlehrer) {
 		this.fahrstunde.setLehrer(fahrlehrer);
 	}
 
-	public Fahrschueler getFahrschueler() {
+	public FahrschuelerDTO getFahrschueler() {
 		return fahrstunde.getSchueler();
 	}
 
-	public void setFahrschueler(Fahrschueler fahrschueler) {
+	public void setFahrschueler(FahrschuelerDTO fahrschueler) {
 		this.fahrstunde.setSchueler(fahrschueler);
 	}
 
@@ -49,11 +49,11 @@ public class FahrschulModel {
 		this.kalender = kalender;
 	}
 
-	public Fahrstunde getFahrstunde() {
+	public FahrstundeDTO getFahrstunde() {
 		return fahrstunde;
 	}
 
-	public void setFahrstunde(Fahrstunde fahrstunde) {
+	public void setFahrstunde(FahrstundeDTO fahrstunde) {
 		this.fahrstunde = fahrstunde;
 	}
 

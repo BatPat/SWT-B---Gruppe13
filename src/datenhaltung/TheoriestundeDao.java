@@ -1,15 +1,15 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Theoriestunde;
+import fachlogik.TheoriestundeDTO;
 
 public interface TheoriestundeDao {
 	
-	public List<Theoriestunde> getAlleTheoriestunden();
+	public List<TheoriestundeDTO> getAlleTheoriestunden();
 	
-	public void addTheoriestunde(Theoriestunde theoriestunde);
+	public void addTheoriestunde(TheoriestundeDTO theoriestunde);
 	
-	public void updateTheoriestunde(Theoriestunde theoriestunde);
+	public void updateTheoriestunde(TheoriestundeDTO theoriestunde);
 	
-	public void deleteTheoriestunde(Theoriestunde theoriestunde);
+	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde);
 }

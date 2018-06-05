@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Theoriestunde;
+import fachlogik.TheoriestundeDTO;
 
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	
@@ -31,7 +31,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	
 
 	@Override
-	public List<Theoriestunde> getAlleTheoriestunden() {
+	public List<TheoriestundeDTO> getAlleTheoriestunden() {
 		File dir = new File(javadir + "/Fahrschule/Theoriestunde/");
 		File[] theoriestundedateien = dir.listFiles(new FilenameFilter() {
 
@@ -41,12 +41,12 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 			}
 
 		});
-		List<Theoriestunde> liste = new ArrayList<>();
-		Theoriestunde theoriestunde = null;
+		List<TheoriestundeDTO> liste = new ArrayList<>();
+		TheoriestundeDTO theoriestunde = null;
 		for (int i = 0; i < theoriestundedateien.length; i++) {
 			File file = theoriestundedateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				theoriestunde = (Theoriestunde) ois.readObject();
+				theoriestunde = (TheoriestundeDTO) ois.readObject();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -55,7 +55,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		return liste;
 	}
 
-	private File generateFile(Theoriestunde theoriestunde) {
+	private File generateFile(TheoriestundeDTO theoriestunde) {
 		File dir = new File(
 				javadir + "/Fahrschule/Theoriestunde/" + "Theorie" + theoriestunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
@@ -63,7 +63,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	}
 
 	@Override
-	public void addTheoriestunde(Theoriestunde theoriestunde) {
+	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.writeObject(theoriestunde);
@@ -73,7 +73,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	}
 
 	@Override
-	public void updateTheoriestunde(Theoriestunde theoriestunde) {
+	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
 		File td = generateFile(theoriestunde);
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
@@ -85,7 +85,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	}
 
 	@Override
-	public void deleteTheoriestunde(Theoriestunde theoriestunde) {
+	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
 		File td = generateFile(theoriestunde);
 		td.delete();
 	}

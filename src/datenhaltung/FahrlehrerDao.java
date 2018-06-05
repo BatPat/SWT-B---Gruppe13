@@ -1,17 +1,17 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Fahrlehrer;
+import fachlogik.FahrlehrerDTO;
 
 public interface FahrlehrerDao {
 	
-	public List<Fahrlehrer> getAlleFahrlehrer();
+	public List<FahrlehrerDTO> getAlleFahrlehrer();
 	
-	public void addFahrlehrer(Fahrlehrer fahrlehrer);
+	public void addFahrlehrer(FahrlehrerDTO fahrlehrer);
 	
-	public void updateFahrlehrer(Fahrlehrer fahrlehrer);
+	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer);
 	
-	public void deleteFahrlehrer(Fahrlehrer fahrlehrer);
+	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer);
 	
-	public Fahrlehrer getFahrlehrer(String fahrlehrerName);
+	public FahrlehrerDTO getFahrlehrer(String fahrlehrerName);
 }

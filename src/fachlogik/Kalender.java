@@ -31,51 +31,51 @@ public class Kalender {
 	}
 	
 
-	public List<Theoriestunde> getAlleTheoriestunden(){
+	public List<TheoriestundeDTO> getAlleTheoriestunden(){
 		return theoriestundeDao.getAlleTheoriestunden();
 	}
 	
-	public void addTheoriestunde(Theoriestunde theoriestunde) {
+	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
 		theoriestundeDao.addTheoriestunde(theoriestunde);
 	}
 	
-	public void updateTheoriestunde(Theoriestunde theoriestunde) {
+	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
 		theoriestundeDao.updateTheoriestunde(theoriestunde);
 	}
 	
-	public void deleteTheoriestunde(Theoriestunde theoriestunde) {
+	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
 		theoriestundeDao.deleteTheoriestunde(theoriestunde);
 	}
 	
-	public List<Fahrstunde> getAlleFahrstunden(){
+	public List<FahrstundeDTO> getAlleFahrstunden(){
 		return fahrstundeDao.getAlleFahrstunden();
 	}
 	
-	public void addFahrstunde(Fahrstunde fahrstunde) {
+	public void addFahrstunde(FahrstundeDTO fahrstunde) {
 		fahrstundeDao.addFahrstunde(fahrstunde);
 	}
 	
-	public void updateFahrstunde(Fahrstunde fahrstunde) {
+	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
 		fahrstundeDao.updateFahrstunde(fahrstunde);
 	}
 	
-	public void deleteFahrstunde(Fahrstunde fahrstunde) {
+	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
 		fahrstundeDao.deleteFahrstunde(fahrstunde);
 	}
 
-	public List<Pruefung> getAllePruefungen(){
+	public List<PruefungDTO> getAllePruefungen(){
 		return pruefungDao.getAllePruefungen();
 	}
 	
-	public void addPruefung(Pruefung pruefung) {
+	public void addPruefung(PruefungDTO pruefung) {
 		pruefungDao.addPruefung(pruefung);
 	}
 	
-	public void updatePruefung(Pruefung pruefung) {
+	public void updatePruefung(PruefungDTO pruefung) {
 		pruefungDao.updatePruefung(pruefung);
 	}
 	
-	public void deletePruefung(Pruefung pruefung) {
+	public void deletePruefung(PruefungDTO pruefung) {
 		pruefungDao.deletePruefung(pruefung);
 	}
 

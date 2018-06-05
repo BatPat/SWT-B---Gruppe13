@@ -17,16 +17,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "fahrstunde")
 @SuppressWarnings("serial")
-public class Fahrstunde extends Stunde {
+public class FahrstundeDTO extends Stunde {
 	@Id
 	@Column(nullable = false, name = "idfahrstunde")
 	private long id;
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
 	@Column(nullable = false, name = "lehrerfahrstunde")
-	private Fahrlehrer lehrer;
+	private FahrlehrerDTO lehrer;
 	@Column(nullable = false, name = "schuelerfahrstunde")
-	private Fahrschueler schueler;
+	private FahrschuelerDTO schueler;
 	@Column(nullable = false, name = "genidfahrstunde")
 	private long genid;
 	@Column(nullable = false, name = "datumfahrstunde")
@@ -38,11 +38,11 @@ public class Fahrstunde extends Stunde {
 	@Column(nullable = false, name = "ortfahrstunde")
 	private String ort;
 
-	public Fahrstunde(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
+	public FahrstundeDTO(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		super(datum, uhrzeit, dauer, ort);
 	}
 
-	public Fahrstunde(Fahrstundenart art, Fahrlehrer lehrer, Fahrschueler schueler, LocalTime uhrzeit, LocalDate datum,
+	public FahrstundeDTO(Fahrstundenart art, FahrlehrerDTO lehrer, FahrschuelerDTO schueler, LocalTime uhrzeit, LocalDate datum,
 			String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.art = art;
@@ -65,22 +65,22 @@ public class Fahrstunde extends Stunde {
 	/**
 	 * @return the lehrer
 	 */
-	public Fahrlehrer getLehrer() {
+	public FahrlehrerDTO getLehrer() {
 		return lehrer;
 	}
 
 	/**
 	 * @return the schueler
 	 */
-	public Fahrschueler getSchueler() {
+	public FahrschuelerDTO getSchueler() {
 		return schueler;
 	}
 
-	public void setLehrer(Fahrlehrer lehrer) {
+	public void setLehrer(FahrlehrerDTO lehrer) {
 		this.lehrer = lehrer;
 	}
 
-	public void setSchueler(Fahrschueler schueler) {
+	public void setSchueler(FahrschuelerDTO schueler) {
 		this.schueler = schueler;
 	}
 

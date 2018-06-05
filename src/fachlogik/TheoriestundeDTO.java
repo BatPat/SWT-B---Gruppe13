@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "theoriestunde")
 @SuppressWarnings("serial")
-public class Theoriestunde extends Stunde {
+public class TheoriestundeDTO extends Stunde {
 	@Id
 	@GeneratedValue
 	@Column(nullable = false, name = "idtheoriestunde")
@@ -21,11 +21,11 @@ public class Theoriestunde extends Stunde {
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
 	@Column(nullable = false, name = "fahrlehrertheoriestunde")
-	private Fahrlehrer fahrlehrer;
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrschueler.class)
+	private FahrlehrerDTO fahrlehrer;
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrschuelerDTO.class)
 	@JoinColumn(name="id")
 	@Column(nullable = false, name = "fahrschuelerlistetheoriestunde")
-	private List<Fahrschueler> fahrschueler;
+	private List<FahrschuelerDTO> fahrschueler;
 	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
 	@Column(nullable = false, name = "datumtheoriestunde")
@@ -37,11 +37,11 @@ public class Theoriestunde extends Stunde {
 	@Column(nullable = false, name = "orttheoriestunde")
 	private String ort;
 
-	public Theoriestunde(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
+	public TheoriestundeDTO(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
 		super(datum, uhrzeit, dauer, ort);
 	}
 
-	public Theoriestunde(TheorieThema thema, Fahrlehrer fahrlehrer, LocalDate datum, LocalTime uhrzeit, String ort) {
+	public TheoriestundeDTO(TheorieThema thema, FahrlehrerDTO fahrlehrer, LocalDate datum, LocalTime uhrzeit, String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.genid = counter++;
 		this.thema = thema;
@@ -65,15 +65,15 @@ public class Theoriestunde extends Stunde {
 		return thema;
 	}
 
-	public Fahrlehrer getFahrlehrer() {
+	public FahrlehrerDTO getFahrlehrer() {
 		return fahrlehrer;
 	}
 
-	public void setFahrlehrer(Fahrlehrer fahrlehrer) {
+	public void setFahrlehrer(FahrlehrerDTO fahrlehrer) {
 		this.fahrlehrer = fahrlehrer;
 	}
 
-	public List<Fahrschueler> getFahrschueler() {
+	public List<FahrschuelerDTO> getFahrschueler() {
 		return fahrschueler;
 	}
 
@@ -86,7 +86,7 @@ public class Theoriestunde extends Stunde {
 	}
 
 	public static void setCounter(long counter) {
-		Theoriestunde.counter = counter;
+		TheoriestundeDTO.counter = counter;
 	}
 
 	public LocalDate getDatum() {
@@ -129,7 +129,7 @@ public class Theoriestunde extends Stunde {
 		this.genid = genid;
 	}
 
-	public void setFahrschueler(List<Fahrschueler> fahrschueler) {
+	public void setFahrschueler(List<FahrschuelerDTO> fahrschueler) {
 		this.fahrschueler = fahrschueler;
 	}
 

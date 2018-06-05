@@ -8,15 +8,12 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.eclipse.swt.widgets.Display;
-
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
 import datenhaltung.FahrstundeDaoImpl;
 import datenhaltung.PruefungDaoImpl;
 import datenhaltung.TheorieStundeDaoImpl;
 import oberflaeche.MainView;
-import oberflaeche.StammdatenView;
 
 public class Controller implements Observer {
 
@@ -35,18 +32,14 @@ public class Controller implements Observer {
 		fahrschule = new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen);
 		kalender = new Kalender(TheorieStundeDaoImpl.getInstance(), FahrstundeDaoImpl.getInstance(), PruefungDaoImpl.getInstance());
 		initGUI();
+		mainview.getShell().layout(true);
 	}
 
 	private void initGUI() {
-		Display.getDefault().syncExec(new Runnable() {
-		    public void run() {
-		    	mainview = new MainView();
-				mainview.addObserver(Controller.this);
-				fillListContent();
-				mainview.startEventHandler();
-				mainview.getShell().layout(true);
-		    }
-		});
+		mainview = new MainView();
+		mainview.addObserver(this);
+		fillListContent();
+		mainview.startEventHandler();
 	}
 
 	private void initModel() {
@@ -54,10 +47,10 @@ public class Controller implements Observer {
 	}
 
 	private void fillListContent() {
-		for (Fahrlehrer f : fahrschule.getFahrlehrerListe()) {
+		for (FahrlehrerDTO f : fahrschule.getFahrlehrerListe()) {
 			mainview.getLehrerCombo().add(f.getName());
 		}
-		for (Fahrschueler f : fahrschule.getFahrschuelerListe()) {
+		for (FahrschuelerDTO f : fahrschule.getFahrschuelerListe()) {
 			mainview.getSchuelerCombo().add(f.getName());
 		}
 		
@@ -81,9 +74,9 @@ public class Controller implements Observer {
 			}
 		}
 
-		Fahrlehrer fahrlehrer = model.getFahrlehrer();
+		FahrlehrerDTO fahrlehrer = model.getFahrlehrer();
 
-		List<Fahrstunde> terminefahrlehr;
+		List<FahrstundeDTO> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
 		int tag = mainview.getDateFahrstunde().getDay();
 		int monat = mainview.getDateFahrstunde().getMonth();
@@ -106,11 +99,11 @@ public class Controller implements Observer {
 
 	private void uebersichtFahrstunden(){
 
-		Fahrschueler fahrschueler = model.getFahrschueler();
+		FahrschuelerDTO fahrschueler = model.getFahrschueler();
 		int anzNorm = 0;
 		int anzSond = 0;
 		int anzTheo = 0;
-		for (Fahrstunde fahrstunde : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO fahrstunde : fahrschueler.getFahrstunden()) {
 			if (fahrstunde.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
 				anzNorm++;
 			} else if (fahrstunde.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
@@ -141,8 +134,8 @@ public class Controller implements Observer {
 		int datumMonat = mainview.getDateFahrstunde().getMonth();
 		int datumTag = mainview.getDateFahrstunde().getDay();
 
-		Fahrschueler fSchueler = null;
-		Fahrlehrer fLehrer = null;
+		FahrschuelerDTO fSchueler = null;
+		FahrlehrerDTO fLehrer = null;
 		LocalTime terminUhrzeit = null;
 		Fahrstundenart fStundenArt = null;
 		LocalDate terminDatum = null;
@@ -189,9 +182,9 @@ public class Controller implements Observer {
 	}
 
 	private void bucheFahrstunde() {
-		Fahrstunde fStunde = model.getFahrstunde();
-		Fahrschueler fSchueler = model.getFahrschueler();
-		Fahrlehrer fLehrer = model.getFahrlehrer();
+		FahrstundeDTO fStunde = model.getFahrstunde();
+		FahrschuelerDTO fSchueler = model.getFahrschueler();
+		FahrlehrerDTO fLehrer = model.getFahrlehrer();
 
 		fLehrer.getFahrstunden().add(fStunde);
 		fSchueler.getFahrstunden().add(fStunde);
@@ -201,51 +194,36 @@ public class Controller implements Observer {
 	}
 	
 	private void updatePanel() {
-		
-		Display.getDefault().syncExec(new Runnable() {
-		    public void run() {
-		    	if (model.getFahrlehrer().getName() != null) {
-					zeigePassendeTermine();
-					mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
-				}
-				if (model.getFahrschueler().getName() != null) {
-					uebersichtFahrstunden();
-					mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
-				}
+		if (model.getFahrlehrer().getName() != null) {
+			zeigePassendeTermine();
+			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
+		}
+		if (model.getFahrschueler().getName() != null) {
+			uebersichtFahrstunden();
+			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
+		}
 
-				int datumJahr = mainview.getDateFahrstunde().getYear();
-				int datumMonat = mainview.getDateFahrstunde().getMonth();
-				int datumTag = mainview.getDateFahrstunde().getDay();
-				LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-				if (LocalDate.now().isAfter(terminDatum)) {
-					mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
-					mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
-					mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
-				}
-		    }
-		});
-		
+		int datumJahr = mainview.getDateFahrstunde().getYear();
+		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		int datumTag = mainview.getDateFahrstunde().getDay();
+		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+		if (LocalDate.now().isAfter(terminDatum)) {
+			resetViewDatum();
+		}
+	}
+
+	private void resetViewDatum() {
+		mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
+		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
+		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
 	}
 	
-	private void initStammdatenView() {
-		Display.getDefault().syncExec(new Runnable() {
-			public void run() {
-				StammdatenView stammdatenview = new StammdatenView();
-				stammdatenview.addObserver(Controller.this);
-			}
-		});
-	}
-
-	private void switchToStammdatenView() {
-		// TODO StammdatenView soll in den Vordergrund
+	public void restoreGUI() {
+		initGUI();
+		mainview.getShell().layout(true);
 		
 	}
 
-	private void switchToMainView() {
-		// TODO MainView soll in den Vordergrund
-		
-	}
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
@@ -296,13 +274,8 @@ public class Controller implements Observer {
 			break;
 
 		case "StammdatenanGui":
-			//TODO MainView schließen
+			mainview.getDisplay().close();
 			stammdatenController = new StammdatenController(this, fahrschule);
-			break;
-
-		case "MainviewOeffnen":
-			initGUI();
-			mainview.getShell().layout(true);
 			break;
 
 		default:
@@ -314,8 +287,5 @@ public class Controller implements Observer {
 			break;
 		}
 	}
-
-
-
 
 }

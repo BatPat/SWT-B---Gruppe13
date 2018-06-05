@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Pruefung;
+import fachlogik.PruefungDTO;
 
 public class PruefungDaoImpl implements PruefungDao {
 	
@@ -31,7 +31,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	
 
 	@Override
-	public List<Pruefung> getAllePruefungen() {
+	public List<PruefungDTO> getAllePruefungen() {
 		File dir = new File(javadir + "/Fahrschule/Pruefung/");
 		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
 
@@ -41,12 +41,12 @@ public class PruefungDaoImpl implements PruefungDao {
 			}
 
 		});
-		List<Pruefung> liste = new ArrayList<>();
-		Pruefung pruefung = null;
+		List<PruefungDTO> liste = new ArrayList<>();
+		PruefungDTO pruefung = null;
 		for (int i = 0; i < puefungdateien.length; i++) {
 			File file = puefungdateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				pruefung = (Pruefung) ois.readObject();
+				pruefung = (PruefungDTO) ois.readObject();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -55,14 +55,14 @@ public class PruefungDaoImpl implements PruefungDao {
 		return liste;
 	}
 
-	private File generateFile(Pruefung pruefung) {
+	private File generateFile(PruefungDTO pruefung) {
 		File dir = new File(javadir + "/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
 
 	@Override
-	public void addPruefung(Pruefung pruefung) {
+	public void addPruefung(PruefungDTO pruefung) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.writeObject(pruefung);
@@ -72,7 +72,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 
 	@Override
-	public void updatePruefung(Pruefung pruefung) {
+	public void updatePruefung(PruefungDTO pruefung) {
 		File td = generateFile(pruefung);
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
@@ -84,7 +84,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 
 	@Override
-	public void deletePruefung(Pruefung pruefung) {
+	public void deletePruefung(PruefungDTO pruefung) {
 		File td = generateFile(pruefung);
 		td.delete();
 	}

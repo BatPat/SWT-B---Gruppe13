@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Fahrstunde;
+import fachlogik.FahrstundeDTO;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
 	
@@ -32,7 +32,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	
 
 	@Override
-	public List<Fahrstunde> getAlleFahrstunden() {
+	public List<FahrstundeDTO> getAlleFahrstunden() {
 		File dir = new File(JAVADIR + FAHRSTUNDEN_PATH);
 		File[] fahrstundendateien = dir.listFiles(new FilenameFilter() {
 
@@ -42,12 +42,12 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 			}
 
 		});
-		List<Fahrstunde> liste = new ArrayList<>();
-		Fahrstunde fahrstunde = null;
+		List<FahrstundeDTO> liste = new ArrayList<>();
+		FahrstundeDTO fahrstunde = null;
 		for (int i = 0; i < fahrstundendateien.length; i++) {
 			File file = fahrstundendateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				fahrstunde = (Fahrstunde) ois.readObject();
+				fahrstunde = (FahrstundeDTO) ois.readObject();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -56,7 +56,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		return liste;
 	}
 
-	private File generateFile(Fahrstunde fahrstunde) {
+	private File generateFile(FahrstundeDTO fahrstunde) {
 		File dir = new File(
 				JAVADIR + FAHRSTUNDEN_PATH + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
 		dir.getParentFile().mkdirs();
@@ -64,7 +64,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	}
 
 	@Override
-	public void addFahrstunde(Fahrstunde fahrstunde) {
+	public void addFahrstunde(FahrstundeDTO fahrstunde) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.writeObject(fahrstunde);
@@ -74,7 +74,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	}
 
 	@Override
-	public void updateFahrstunde(Fahrstunde fahrstunde) {
+	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
 		File td = generateFile(fahrstunde);
 		td.delete();
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
@@ -86,7 +86,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	}
 
 	@Override
-	public void deleteFahrstunde(Fahrstunde fahrstunde) {
+	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
 		File td = generateFile(fahrstunde);
 		td.delete();
 	}

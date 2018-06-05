@@ -1,17 +1,17 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Fahrschueler;
+import fachlogik.FahrschuelerDTO;
 
 public interface FahrschuelerDao {
 	
-	public List<Fahrschueler> getAlleFahrschueler();
+	public List<FahrschuelerDTO> getAlleFahrschueler();
 	
-	public void addFahrschueler(Fahrschueler fahrschueler);
+	public void addFahrschueler(FahrschuelerDTO fahrschueler);
 	
-	public void updateFahrschueler(Fahrschueler fahrschueler);
+	public void updateFahrschueler(FahrschuelerDTO fahrschueler);
 	
-	public void deleteFahrschueler(Fahrschueler fahrschueler);
+	public void deleteFahrschueler(FahrschuelerDTO fahrschueler);
 	
-	public Fahrschueler getFahrschueler(String fahrschuelerName);
+	public FahrschuelerDTO getFahrschueler(String fahrschuelerName);
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
-public class Fahrschueler implements Person, Serializable {
+public class FahrschuelerDTO implements Person, Serializable {
 	@Id
 	@Column(nullable = false, name = "idfahrschueler")
 	private long id;
@@ -25,23 +25,23 @@ public class Fahrschueler implements Person, Serializable {
 	private String hausnummer;
 
 //	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=Pruefung.class)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=PruefungDTO.class)
 	@JoinColumn(name="id")
-	private List<Pruefung> pruefungen;
+	private List<PruefungDTO> pruefungen;
 //	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrstunde.class)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
 	@JoinColumn(name="id")
-	private List<Fahrstunde> fahrstunden;
+	private List<FahrstundeDTO> fahrstunden;
 //	@OneToMany(cascade = CascadeType.ALL)
-	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Theoriestunde.class)
+	@ManyToOne(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
 	@JoinColumn(name="id")
-	private List<Theoriestunde> theoriestunden;
+	private List<TheoriestundeDTO> theoriestunden;
 
-	public Fahrschueler() {
+	public FahrschuelerDTO() {
 		super();
 	}
 
-	public Fahrschueler(String name, String plz, String wohnort, String strasse, String hausnummer) {
+	public FahrschuelerDTO(String name, String plz, String wohnort, String strasse, String hausnummer) {
 		super();
 		this.name = name;
 		this.plz = plz;
@@ -65,21 +65,21 @@ public class Fahrschueler implements Person, Serializable {
 	/**
 	 * @return the pruefungen
 	 */
-	public List<Pruefung> getPruefungen() {
+	public List<PruefungDTO> getPruefungen() {
 		return pruefungen;
 	}
 
 	/**
 	 * @return the fahrstunden
 	 */
-	public List<Fahrstunde> getFahrstunden() {
+	public List<FahrstundeDTO> getFahrstunden() {
 		return fahrstunden;
 	}
 
 	/**
 	 * @return the theoriestunden
 	 */
-	public List<Theoriestunde> getTheoriestunden() {
+	public List<TheoriestundeDTO> getTheoriestunden() {
 		return theoriestunden;
 	}
 
@@ -136,15 +136,15 @@ public class Fahrschueler implements Person, Serializable {
 		this.hausnummer = hausnummer;
 	}
 
-	public void setPruefungen(ArrayList<Pruefung> pruefungen) {
+	public void setPruefungen(ArrayList<PruefungDTO> pruefungen) {
 		this.pruefungen = pruefungen;
 	}
 
-	public void setFahrstunden(ArrayList<Fahrstunde> fahrstunden) {
+	public void setFahrstunden(ArrayList<FahrstundeDTO> fahrstunden) {
 		this.fahrstunden = fahrstunden;
 	}
 
-	public void setTheoriestunden(ArrayList<Theoriestunde> theoriestunden) {
+	public void setTheoriestunden(ArrayList<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
 	}
 }

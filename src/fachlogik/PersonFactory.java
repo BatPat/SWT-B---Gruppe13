@@ -9,11 +9,11 @@ public class PersonFactory implements AbstractPersonFactory {
 		
 		switch (typ) {
 		case FAHRLEHRER:
-			person = new Fahrlehrer(name, plz, wohnort, strasse, hausnummer);			
+			person = new FahrlehrerDTO(name, plz, wohnort, strasse, hausnummer);			
 			break;
 	
 		case FAHRSCHUELER:
-			person = new Fahrschueler(name, plz, wohnort, strasse, hausnummer);
+			person = new FahrschuelerDTO(name, plz, wohnort, strasse, hausnummer);
 			break;
 		default:
 			

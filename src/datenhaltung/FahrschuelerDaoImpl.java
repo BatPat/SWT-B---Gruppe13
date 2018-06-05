@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Fahrschueler;
+import fachlogik.FahrschuelerDTO;
 
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	
@@ -31,14 +31,14 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return instance;
 	}
 	
-	private File generateFile(Fahrschueler fahrschueler) {
+	private File generateFile(FahrschuelerDTO fahrschueler) {
 		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
 
 	@Override
-	public List<Fahrschueler> getAlleFahrschueler() {
+	public List<FahrschuelerDTO> getAlleFahrschueler() {
 		File dir = new File(JAVADIR + FAHRSCHUELER_PATH);
 		File[] fahrschuelerdateien = dir.listFiles(new FilenameFilter() {
 
@@ -48,12 +48,12 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 			}
 
 		});
-		List<Fahrschueler> liste = new ArrayList<>();
-		Fahrschueler fahrschueler = null;
+		List<FahrschuelerDTO> liste = new ArrayList<>();
+		FahrschuelerDTO fahrschueler = null;
 		for (int i = 0; i < fahrschuelerdateien.length; i++) {
 			File file = fahrschuelerdateien[i];
 			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				fahrschueler = (Fahrschueler) ois.readObject();
+				fahrschueler = (FahrschuelerDTO) ois.readObject();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -63,7 +63,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	}
 
 	@Override
-	public void addFahrschueler(Fahrschueler fahrschueler) {
+	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
 		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrschueler));
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.writeObject(fahrschueler);
@@ -73,25 +73,25 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	}
 
 	@Override
-	public void updateFahrschueler(Fahrschueler fahrschueler) {
+	public void updateFahrschueler(FahrschuelerDTO fahrschueler) {
 		File td = generateFile(fahrschueler);
 		td.delete();
 		addFahrschueler(fahrschueler);
 	}
 
 	@Override
-	public void deleteFahrschueler(Fahrschueler fahrschueler) {
+	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
 		File td = generateFile(fahrschueler);
 		td.delete();
 	}
 
 	@Override
-	public Fahrschueler getFahrschueler(String fahrschuelerName) {
-		Fahrschueler fahrschueler = null;
+	public FahrschuelerDTO getFahrschueler(String fahrschuelerName) {
+		FahrschuelerDTO fahrschueler = null;
 		try (FileInputStream fis = new FileInputStream(
 				JAVADIR + FAHRSCHUELER_PATH + fahrschuelerName + ".ser");
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrschueler = (Fahrschueler) ois.readObject();
+			fahrschueler = (FahrschuelerDTO) ois.readObject();
 			assert (fahrschueler.getName().equals(fahrschuelerName));
 		} catch (Exception e) {
 			e.printStackTrace();

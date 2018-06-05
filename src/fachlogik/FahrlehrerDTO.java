@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fahrlehrer")
 @SuppressWarnings("serial")
-public class Fahrlehrer implements Person, Serializable {
+public class FahrlehrerDTO implements Person, Serializable {
 	@Id
 	@Column(nullable = false, name = "idfahrlehrer")
 	private long id;
@@ -25,19 +25,19 @@ public class Fahrlehrer implements Person, Serializable {
 	private String hausnummer;
 
 //	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=Fahrstunde.class)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
 	@JoinColumn(name="id")
-	private List<Fahrstunde> fahrstunden;
+	private List<FahrstundeDTO> fahrstunden;
 //	@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=Theoriestunde.class)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
 	@JoinColumn(name="id")
-	private List<Theoriestunde> theoriestunden;
+	private List<TheoriestundeDTO> theoriestunden;
 
-	public Fahrlehrer() {
+	public FahrlehrerDTO() {
 		super();
 	}
 
-	public Fahrlehrer(String name, String plz, String wohnort, String strasse, String hausnummer) {
+	public FahrlehrerDTO(String name, String plz, String wohnort, String strasse, String hausnummer) {
 		super();
 		this.name = name;
 		this.plz = plz;
@@ -51,14 +51,14 @@ public class Fahrlehrer implements Person, Serializable {
 	/**
 	 * @return the fahrstunden
 	 */
-	public List<Fahrstunde> getFahrstunden() {
+	public List<FahrstundeDTO> getFahrstunden() {
 		return fahrstunden;
 	}
 
 	/**
 	 * @return the theoriestunden
 	 */
-	public List<Theoriestunde> getTheoriestunden() {
+	public List<TheoriestundeDTO> getTheoriestunden() {
 		return theoriestunden;
 	}
 
@@ -123,11 +123,11 @@ public class Fahrlehrer implements Person, Serializable {
 		this.hausnummer = hausnummer;
 	}
 
-	public void setFahrstunden(ArrayList<Fahrstunde> fahrstunden) {
+	public void setFahrstunden(ArrayList<FahrstundeDTO> fahrstunden) {
 		this.fahrstunden = fahrstunden;
 	}
 
-	public void setTheoriestunden(ArrayList<Theoriestunde> theoriestunden) {
+	public void setTheoriestunden(ArrayList<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
 	}
 }
