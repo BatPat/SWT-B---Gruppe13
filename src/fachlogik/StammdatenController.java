@@ -95,8 +95,8 @@ public class StammdatenController implements Observer {
 			break;
 
 		case "MainGui":
-			//TODO stammdatenView schließen
-			controller.update(null, "MainviewOeffnen");
+			stammdatenView.getDisplay().close();
+			controller.restoreGUI();
 			break;
 
 		case "FenstergroesseAendern":
@@ -112,13 +112,6 @@ public class StammdatenController implements Observer {
 			}
 			break;
 		}
-	}
-
-	//TODO löschen wenn wechsel zwischen views möglich ist
-	public static void main(String[] args) {
-		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
-		klassen.add(Fuehrerscheinklasse.B);
-		new StammdatenController(null, new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen));
 	}
 
 }

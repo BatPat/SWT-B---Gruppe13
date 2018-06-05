@@ -217,6 +217,12 @@ public class Controller implements Observer {
 		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
 		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
 	}
+	
+	public void restoreGUI() {
+		initGUI();
+		mainview.getShell().layout(true);
+		
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -268,13 +274,8 @@ public class Controller implements Observer {
 			break;
 
 		case "StammdatenanGui":
-			//TODO MainView schließen
+			mainview.getDisplay().close();
 			stammdatenController = new StammdatenController(this, fahrschule);
-			break;
-
-		case "MainviewOeffnen":
-			initGUI();
-			mainview.getShell().layout(true);
 			break;
 
 		default:
