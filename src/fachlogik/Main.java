@@ -6,7 +6,7 @@ public class Main {
 //    	 new Controller();
 	    FahrlehrerDTO f = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
 		HibernateUtil h = new HibernateUtil();
-		h.saveObject(f);
+		h.saveFahrlehrer(f);
 //		h.getObject(f);
 	}
 }

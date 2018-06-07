@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -18,13 +20,14 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ForeignKey;
 
-@Entity
-@Table(name = "fahrstunde")
+//@Entity
+//@Table(name = "fahrstunde")
 @SuppressWarnings("serial")
+@Embeddable
 public class FahrstundeDTO extends Stunde {
-	@Id
-	@Column(nullable = false, name = "idfahrstunde")
-	private long id = 0;
+//	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+//	@Column(nullable = false, name = "idfahrstunde")
+//	private long id = 0;
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
 	@Column(nullable = false, name = "lehrerfahrstunde")
@@ -33,13 +36,12 @@ public class FahrstundeDTO extends Stunde {
 	private FahrschuelerDTO schueler;
 	@Column(nullable = false, name = "genidfahrstunde")
 	private long genid;
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumfahrstunde")
 	private LocalDate datum;
-	@Temporal(TemporalType.TIME)
+//	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitfahrstunde")
 	private LocalTime uhrzeit;
-	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauerfahrstunde")
 	private Duration dauer;
 	@Column(nullable = false, name = "ortfahrstunde")
@@ -91,6 +93,7 @@ public class FahrstundeDTO extends Stunde {
 		this.schueler = schueler;
 	}
 
+//	TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();
@@ -103,13 +106,13 @@ public class FahrstundeDTO extends Stunde {
 		return genid;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
 
 	public LocalDate getDatum() {
 		return datum;

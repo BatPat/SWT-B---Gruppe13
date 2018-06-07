@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
 public class FahrschuelerDTO implements Person, Serializable {
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
 	@Column(nullable = false, name = "plzfahrschueler")
@@ -136,5 +138,13 @@ public class FahrschuelerDTO implements Person, Serializable {
 
 	public void setTheoriestunden(ArrayList<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

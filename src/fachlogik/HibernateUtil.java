@@ -24,23 +24,46 @@ public class HibernateUtil {
 		return sessionFactory;
 	}
 
-	public void saveObject(Object o) {
+	public void saveFahrlehrer(FahrlehrerDTO f) {
 		session = createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.save(o);
+		session.save("fahrlehrer",f);
 		session.getTransaction().commit();
 		session.close();
 	}
-
-	public Object getObject(Object o) {
+	
+	public void updateFahrlehrer(FahrlehrerDTO f) {
 		session = createSessionFactory().openSession();
 		session.beginTransaction();
-		o = session.get(FahrlehrerDTO.class, 0);
-		return null;
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.update("fahrlehrer",f);
+		session.getTransaction().commit();
+		session.close();
 	}
 	
-	public FahrlehrerDTO getUserById(Long idfahrlehrer) {
+	public void deleteFahrlehrer(FahrlehrerDTO f) {
+		session = createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.delete("fahrlehrer", f);;
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FahrlehrerDTO> getAllFahrlehrer(FahrlehrerDTO f) {
+		List<FahrlehrerDTO> listeallefahrlehrer = new ArrayList<>();
+		session = createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		listeallefahrlehrer = session.createQuery("from fahrlehrer").list();
+		session.getTransaction().commit();
+		session.close();
+		return listeallefahrlehrer;
+	}
+	
+	public FahrlehrerDTO getFahrlehrerById(Long idfahrlehrer) {
         session = null;
         FahrlehrerDTO fahrlehrer = null;
         try {

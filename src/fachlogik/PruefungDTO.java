@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,8 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "pruefung")
 @SuppressWarnings("serial")
 public class PruefungDTO implements Termin, Serializable {
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(nullable = false, name = "idpruefung")
 	private long id;
 	@Column(nullable = false, name = "genidpruefung")
@@ -34,13 +34,12 @@ public class PruefungDTO implements Termin, Serializable {
 	private boolean bestanden;
 	@Column(nullable = false, name = "fahrschuelerpruefung")
 	private FahrschuelerDTO fahrschueler;
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
-	@Temporal(TemporalType.TIME)
+//	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitpruefung")
 	private LocalTime uhrzeit;
-	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauerpruefung")
 	private Duration dauer;
 	@Column(nullable = false, name = "ortpruefung")
@@ -65,6 +64,7 @@ public class PruefungDTO implements Termin, Serializable {
 		this(null, fahrschueler, datum, uhrzeit, dauer, ort);
 	}
 
+	//TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();

@@ -8,12 +8,16 @@
          org.hibernate.dialect.MySQL5InnoDBDialect
       </property>
       
+      <property name="connection.pool_size">
+      1
+      </property>
+      
       <property name = "hibernate.connection.driver_class">
          com.mysql.cj.jdbc.Driver
       </property>
       
       <property name = "hibernate.connection.url">
-         jdbc:mysql://localhost:3306/fahrschule?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
+         jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
       </property>
       
       <property name = "hibernate.connection.username">
@@ -36,6 +40,7 @@
 <!--       <property name="javax.persistence.schema-generation.database.action"> -->
 <!--       drop-and-create  -->
 <!--       </property> -->
+      
        <!--      
       <property name="persistence.sql-load-script-source">
       src/resources/sqlStatements.sql 

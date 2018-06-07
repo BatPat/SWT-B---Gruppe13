@@ -8,33 +8,35 @@ import java.util.List;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "theoriestunde")
+//@Entity
+//@Table(name = "theoriestunde")
 @SuppressWarnings("serial")
+@Embeddable
 public class TheoriestundeDTO extends Stunde {
-	@Id
-	@GeneratedValue
-	@Column(nullable = false, name = "idtheoriestunde")
-	private long id;
+//	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+//	@Column(nullable = false, name = "idtheoriestunde")
+//	private long id;
 	@Column(nullable = false, name = "thematheoriestunde")
 	private TheorieThema thema;
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
 	@Column(nullable = false, name = "fahrlehrertheoriestunde")
 	private FahrlehrerDTO fahrlehrer;
+	
+	//TODO
 	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrschuelerDTO.class)
 	@JoinColumn(name="id")
 	@Column(nullable = false, name = "fahrschuelerlistetheoriestunde")
 	private List<FahrschuelerDTO> fahrschueler;
+	
 	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumtheoriestunde")
 	private LocalDate datum;
-	@Temporal(TemporalType.TIME)
+//	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeittheoriestunde")
 	private LocalTime uhrzeit;
-	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "dauertheoriestunde")
 	private Duration dauer;
 	@Column(nullable = false, name = "orttheoriestunde")
@@ -56,6 +58,7 @@ public class TheoriestundeDTO extends Stunde {
 		return genid;
 	}
 
+	//TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();
@@ -80,9 +83,9 @@ public class TheoriestundeDTO extends Stunde {
 		return fahrschueler;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+//	public void setId(long id) {
+//		this.id = id;
+//	}
 
 	public static long getCounter() {
 		return counter;
@@ -136,7 +139,7 @@ public class TheoriestundeDTO extends Stunde {
 		this.fahrschueler = fahrschueler;
 	}
 
-	public long getId() {
-		return id;
-	}
+//	public long getId() {
+//		return id;
+//	}
 }

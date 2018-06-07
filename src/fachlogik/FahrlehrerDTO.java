@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "fahrlehrer")
 @SuppressWarnings("serial")
 public class FahrlehrerDTO implements Person, Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private int id = 0;
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
 	@Column(nullable = false, name = "plzfahrlehrer")
@@ -26,10 +30,14 @@ public class FahrlehrerDTO implements Person, Serializable {
 //	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
 //	@JoinColumn(name="id")
 	@Transient
+//	@GenericGenerator(name = "hilo-gen", strategy = "hilo") 
+//  @CollectionId(columns = { @Column(name="fahrstunden_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
 	private List<FahrstundeDTO> fahrstunden;
+	
 //	@OneToMany(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
 //	@JoinColumn(name="id")
 	@Transient
+//	@ElementCollection //Wouldn´t work i think
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrlehrerDTO() {
@@ -120,5 +128,13 @@ public class FahrlehrerDTO implements Person, Serializable {
 
 	public void setTheoriestunden(ArrayList<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
