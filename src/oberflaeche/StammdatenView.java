@@ -175,13 +175,11 @@ public class StammdatenView extends Observable {
 	}
 
 	private void erzeugeHauptPanel() {
-
 		datenComposite = new Composite(mainComposite, SWT.NONE);
 		datenComposite.setBackground(theme.getWhiteColor());
 		datenComposite.setLayout(new GridLayout(2, true));
 
 		erzeugeWidgets();
-
 	}
 
 	private void anpassenLabelGroesse(Label label) {
@@ -354,9 +352,7 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrlehrerNeu");
 
-				MessageBox dialog = new MessageBox(shell, 0);
-				dialog.setMessage("Hier könnte man einen neuen Fahrlehrer anlegen");
-				dialog.open();
+				starteFahrlehrerDialog();
 			}
 
 			@Override
@@ -387,10 +383,14 @@ public class StammdatenView extends Observable {
 		});
 
 		erzeugeLinie(datenComposite);
-
 	}
 
-	public void erzeugeLinie(Composite composite) {
+	private void starteFahrlehrerDialog() {
+		MessageBox dialog = new MessageBox(shell, 0);
+		dialog.setMessage("Hier könnte man einen neuen Fahrlehrer anlegen");
+	}
+
+	private void erzeugeLinie(Composite composite) {
 		Label trennstrichLabel = new Label(composite, SWT.BORDER);
 		GridData gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
 		gridData.heightHint = 1;
@@ -443,7 +443,6 @@ public class StammdatenView extends Observable {
 	public static void main(String[] args) {
 		StammdatenView stv = new StammdatenView();
 		stv.startEventHandler();
-
 	}
 
 	public CLabel getBtNeuerFahrschueler() {
