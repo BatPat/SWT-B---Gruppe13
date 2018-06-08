@@ -21,23 +21,30 @@ import javax.persistence.TemporalType;
 @Table(name = "pruefung")
 @SuppressWarnings("serial")
 public class PruefungDTO implements Termin, Serializable {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name = "idpruefung")
 	private long id;
 	@Column(nullable = false, name = "genidpruefung")
 	private long genid;
+
 	@Column(nullable = false, name = "fahrlehrerpruefung")
+	// @ManyToOne
 	private FahrlehrerDTO fahrlehrer;
+
 	@Column(nullable = false, name = "counterpruefung")
 	private static long counter = 0;
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
+
 	@Column(nullable = false, name = "fahrschuelerpruefung")
+	// @ManyToOne
 	private FahrschuelerDTO fahrschueler;
-//	@Temporal(TemporalType.DATE)
+
+	// @Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
-//	@Temporal(TemporalType.TIME)
+	// @Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitpruefung")
 	private LocalTime uhrzeit;
 	@Column(nullable = false, name = "dauerpruefung")
@@ -64,7 +71,7 @@ public class PruefungDTO implements Termin, Serializable {
 		this(null, fahrschueler, datum, uhrzeit, dauer, ort);
 	}
 
-	//TODO
+	// TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();
@@ -117,4 +124,11 @@ public class PruefungDTO implements Termin, Serializable {
 		this.bestanden = bestanden;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

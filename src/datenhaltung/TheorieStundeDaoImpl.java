@@ -1,22 +1,18 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+
+import fachlogik.FahrlehrerDTO;
+import fachlogik.HibernateUtil;
 import fachlogik.TheoriestundeDTO;
 
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
-	
-	private static String javadir = System.getProperty("user.dir");
 
 	private static TheorieStundeDaoImpl instance;
+	private Session session;
 
 	private TheorieStundeDaoImpl() {
 		
@@ -30,64 +26,47 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TheoriestundeDTO> getAlleTheoriestunden() {
-		File dir = new File(javadir + "/Fahrschule/Theoriestunde/");
-		File[] theoriestundedateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.startsWith("Theorie") && arg1.endsWith(".ser");
-			}
-
-		});
 		List<TheoriestundeDTO> liste = new ArrayList<>();
-		TheoriestundeDTO theoriestunde = null;
-		for (int i = 0; i < theoriestundedateien.length; i++) {
-			File file = theoriestundedateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				theoriestunde = (TheoriestundeDTO) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(theoriestunde);
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		liste = session.createQuery("from theoriestunde").list();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
-	}
-
-	private File generateFile(TheoriestundeDTO theoriestunde) {
-		File dir = new File(
-				javadir + "/Fahrschule/Theoriestunde/" + "Theorie" + theoriestunde.getGenid() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
 	}
 
 	@Override
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(theoriestunde);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.save("theoriestunde", theoriestunde.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
-		File td = generateFile(theoriestunde);
-		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(theoriestunde);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.update("theoriestunde", theoriestunde.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
-		File td = generateFile(theoriestunde);
-		td.delete();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.delete("theoriestunde", theoriestunde.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

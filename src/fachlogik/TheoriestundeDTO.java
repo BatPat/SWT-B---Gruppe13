@@ -8,24 +8,24 @@ import java.util.List;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "theoriestunde")
+@Entity
+@Table(name = "theoriestunde")
 @SuppressWarnings("serial")
-@Embeddable
 public class TheoriestundeDTO extends Stunde {
-//	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(nullable = false, name = "idtheoriestunde")
-//	private long id;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(nullable = false, name = "idtheoriestunde")
+	private long id;
 	@Column(nullable = false, name = "thematheoriestunde")
 	private TheorieThema thema;
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
+	//TODO
 	@Column(nullable = false, name = "fahrlehrertheoriestunde")
 	private FahrlehrerDTO fahrlehrer;
 	
 	//TODO
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrschuelerDTO.class)
-	@JoinColumn(name="id")
+//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrschuelerDTO.class)
+//	@JoinColumn(name="id")
 	@Column(nullable = false, name = "fahrschuelerlistetheoriestunde")
 	private List<FahrschuelerDTO> fahrschueler;
 	
@@ -83,9 +83,9 @@ public class TheoriestundeDTO extends Stunde {
 		return fahrschueler;
 	}
 
-//	public void setId(long id) {
-//		this.id = id;
-//	}
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public static long getCounter() {
 		return counter;
@@ -139,7 +139,7 @@ public class TheoriestundeDTO extends Stunde {
 		this.fahrschueler = fahrschueler;
 	}
 
-//	public long getId() {
-//		return id;
-//	}
+	public long getId() {
+		return id;
+	}
 }

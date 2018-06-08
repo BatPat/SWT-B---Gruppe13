@@ -1,24 +1,19 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
+import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
+import fachlogik.HibernateUtil;
 
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	
-	private static final String FAHRSCHUELER_PATH = "/Fahrschule/Fahrschueler/";
-
-	private static final String JAVADIR = System.getProperty("user.dir");
-
 	private static FahrschuelerDaoImpl instance;
+	private Session session;
 
 	private FahrschuelerDaoImpl() {
 		
@@ -31,70 +26,65 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return instance;
 	}
 	
-	private File generateFile(FahrschuelerDTO fahrschueler) {
-		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
-	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<FahrschuelerDTO> getAlleFahrschueler() {
-		File dir = new File(JAVADIR + FAHRSCHUELER_PATH);
-		File[] fahrschuelerdateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.endsWith(".ser");
-			}
-
-		});
 		List<FahrschuelerDTO> liste = new ArrayList<>();
-		FahrschuelerDTO fahrschueler = null;
-		for (int i = 0; i < fahrschuelerdateien.length; i++) {
-			File file = fahrschuelerdateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				fahrschueler = (FahrschuelerDTO) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(fahrschueler);
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		liste = session.createQuery("from fahrschueler").list();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
 	}
 
 	@Override
 	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrschueler));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(fahrschueler);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.save("fahrschueler", fahrschueler.getName());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void updateFahrschueler(FahrschuelerDTO fahrschueler) {
-		File td = generateFile(fahrschueler);
-		td.delete();
-		addFahrschueler(fahrschueler);
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.update("fahrschueler", fahrschueler.getName());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
-		File td = generateFile(fahrschueler);
-		td.delete();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.delete("fahrschueler", fahrschueler.getName());
+		;
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public FahrschuelerDTO getFahrschueler(String fahrschuelerName) {
 		FahrschuelerDTO fahrschueler = null;
-		try (FileInputStream fis = new FileInputStream(
-				JAVADIR + FAHRSCHUELER_PATH + fahrschuelerName + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrschueler = (FahrschuelerDTO) ois.readObject();
-			assert (fahrschueler.getName().equals(fahrschuelerName));
+		session = null;
+		try {
+			session = HibernateUtil.createSessionFactory().openSession();
+			fahrschueler = (FahrschuelerDTO) session.get(FahrschuelerDTO.class.getName().substring(0, FahrschuelerDTO.class.getName().length() - 3).toLowerCase(), fahrschuelerName);
+			Hibernate.initialize(fahrschueler);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return fahrschueler;
 	}

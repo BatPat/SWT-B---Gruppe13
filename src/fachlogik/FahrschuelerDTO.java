@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class FahrschuelerDTO implements Person, Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
 	@Column(nullable = false, name = "plzfahrschueler")
@@ -24,17 +23,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-//	@OneToMany(cascade=CascadeType.ALL, targetEntity=PruefungDTO.class)
-//	@JoinColumn(name="id")
-	@Transient
+	@OneToMany
 	private List<PruefungDTO> pruefungen;
-//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
-//	@JoinColumn(name="id")
-	@Transient
+	@OneToMany
 	private List<FahrstundeDTO> fahrstunden;
-//	@ManyToOne(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
-//	@JoinColumn(name="id")
-	@Transient
+	@OneToMany
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {

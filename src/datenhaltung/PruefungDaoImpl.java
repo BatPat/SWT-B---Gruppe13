@@ -1,22 +1,17 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+
+import fachlogik.HibernateUtil;
 import fachlogik.PruefungDTO;
 
 public class PruefungDaoImpl implements PruefungDao {
-	
-	private static String javadir = System.getProperty("user.dir");
 
 	private static PruefungDaoImpl instance;
+	private Session session;
 
 	private PruefungDaoImpl() {
 		
@@ -30,63 +25,47 @@ public class PruefungDaoImpl implements PruefungDao {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<PruefungDTO> getAllePruefungen() {
-		File dir = new File(javadir + "/Fahrschule/Pruefung/");
-		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.startsWith("Pruefung") && arg1.endsWith(".ser");
-			}
-
-		});
 		List<PruefungDTO> liste = new ArrayList<>();
-		PruefungDTO pruefung = null;
-		for (int i = 0; i < puefungdateien.length; i++) {
-			File file = puefungdateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				pruefung = (PruefungDTO) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(pruefung);
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		liste = session.createQuery("from pruefung").list();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
-	}
-
-	private File generateFile(PruefungDTO pruefung) {
-		File dir = new File(javadir + "/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
 	}
 
 	@Override
 	public void addPruefung(PruefungDTO pruefung) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(pruefung);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.save("pruefung", pruefung.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void updatePruefung(PruefungDTO pruefung) {
-		File td = generateFile(pruefung);
-		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(pruefung);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.update("pruefung", pruefung.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void deletePruefung(PruefungDTO pruefung) {
-		File td = generateFile(pruefung);
-		td.delete();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
+		session.delete("pruefung", pruefung.getId());
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

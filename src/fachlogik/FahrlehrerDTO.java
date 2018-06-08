@@ -1,21 +1,24 @@
 package fachlogik;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "fahrlehrer")
-@SuppressWarnings("serial")
-public class FahrlehrerDTO implements Person, Serializable {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id = 0;
+
+public class FahrlehrerDTO implements Person{
+	@Id 
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	private int id = 0;
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
 	@Column(nullable = false, name = "plzfahrlehrer")
@@ -27,17 +30,12 @@ public class FahrlehrerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrstundeDTO.class)
-//	@JoinColumn(name="id")
-	@Transient
-//	@GenericGenerator(name = "hilo-gen", strategy = "hilo") 
-//  @CollectionId(columns = { @Column(name="fahrstunden_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
+	@OneToMany @Fetch(FetchMode.JOIN)
+	@JoinTable(name="fahrlehrer_fahrstunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idfahrstunde"))
 	private List<FahrstundeDTO> fahrstunden;
 	
-//	@OneToMany(cascade=CascadeType.ALL, targetEntity=TheoriestundeDTO.class)
-//	@JoinColumn(name="id")
-	@Transient
-//	@ElementCollection //Wouldn´t work i think
+	@OneToMany @Fetch(FetchMode.JOIN)
+	@JoinTable(name="fahrlehrer_theoriestunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idtheoriestunde"))
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrlehrerDTO() {
@@ -51,8 +49,8 @@ public class FahrlehrerDTO implements Person, Serializable {
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
-		this.fahrstunden = new ArrayList<>();
-		this.theoriestunden = new ArrayList<>();
+		this.fahrstunden = new ArrayList<FahrstundeDTO>();
+		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
 	}
 
 	/**
@@ -130,11 +128,5 @@ public class FahrlehrerDTO implements Person, Serializable {
 		this.theoriestunden = theoriestunden;
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 }

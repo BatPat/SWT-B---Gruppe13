@@ -145,6 +145,7 @@ public class Controller implements Observer {
 			model.setFahrschueler(fSchueler);
 		}
 
+		
 		if (!fahlehrername.isEmpty()) {
 			fLehrer = fahrschule.getFahrlehrer(fahlehrername);
 			model.setFahrlehrer(fLehrer);

@@ -1,7 +1,10 @@
 package fachlogik;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -11,6 +14,15 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
+//	private static final Map<String, String> klassen_zu_tabellennamen;
+//	static {
+//		Map<String, String> aMap = new HashMap<String, String>();
+//		aMap.put("FahrlehrerDTO","fahrlehrer");
+//		aMap.put("FahrschuelerDTO","fahrschueler");
+//		aMap.put("FahrstundeDTO","fahrstunde");
+//		aMap.put("PruefungDTO","pruefung");		
+//		klassen_zu_tabellennamen = Collections.unmodifiableMap(aMap);
+//	}
 
 	private static SessionFactory sessionFactory;
 	private Session session;
@@ -23,7 +35,7 @@ public class HibernateUtil {
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		return sessionFactory;
 	}
-
+	
 	public void saveFahrlehrer(FahrlehrerDTO f) {
 		session = createSessionFactory().openSession();
 		session.beginTransaction();
@@ -52,7 +64,7 @@ public class HibernateUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<FahrlehrerDTO> getAllFahrlehrer(FahrlehrerDTO f) {
+	public List<FahrlehrerDTO> getAllFahrlehrer() {
 		List<FahrlehrerDTO> listeallefahrlehrer = new ArrayList<>();
 		session = createSessionFactory().openSession();
 		session.beginTransaction();
@@ -63,12 +75,12 @@ public class HibernateUtil {
 		return listeallefahrlehrer;
 	}
 	
-	public FahrlehrerDTO getFahrlehrerById(Long idfahrlehrer) {
+	public FahrlehrerDTO getFahrlehrerById(String fahrlehrerName) {
         session = null;
         FahrlehrerDTO fahrlehrer = null;
         try {
             session = HibernateUtil.createSessionFactory().openSession();
-            fahrlehrer =  (FahrlehrerDTO) session.get(FahrlehrerDTO.class, idfahrlehrer);
+            fahrlehrer =  (FahrlehrerDTO) session.get(FahrlehrerDTO.class.getName().substring(0, FahrlehrerDTO.class.getName().length() - 3).toLowerCase(), fahrlehrerName);
             Hibernate.initialize(fahrlehrer);
         } catch (Exception e) {
             e.printStackTrace();
