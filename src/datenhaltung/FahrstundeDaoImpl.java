@@ -44,7 +44,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.save("fahrstunde", fahrstunde.getId());
+		session.save(fahrstunde);
 		session.getTransaction().commit();
 		session.close();
 	}

@@ -51,12 +51,12 @@ public class Fahrschule {
 		lehrerDao.deleteFahrlehrer(l);
 	}
 
-	public FahrschuelerDTO getFahrschueler(String fahrschuelername) {
-		return schuelerDao.getFahrschueler(fahrschuelername);
+	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
+		return schuelerDao.getFahrschueler(fahrschuelerId);
 	}
 
-	public FahrlehrerDTO getFahrlehrer(String fahlehrername) {
-		return lehrerDao.getFahrlehrer(fahlehrername);
+	public FahrlehrerDTO getFahrlehrer(int fahlehrerId) {
+		return lehrerDao.getFahrlehrer(fahlehrerId);
 	}
 
 	public List<Fuehrerscheinklasse> getAngeboteneKlassen() {

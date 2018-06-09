@@ -57,6 +57,8 @@ public class FahrstundeDTO extends Stunde {
 		this.lehrer = lehrer;
 		this.schueler = schueler;
 		this.genid = genid++;
+		this.schueler.getFahrstunden().add(this);
+		this.lehrer.getFahrstunden().add(this);
 	}
 
 	/**

@@ -13,6 +13,7 @@ public class HibernateUtil {
 //		aMap.put("FahrschuelerDTO","fahrschueler");
 //		aMap.put("FahrstundeDTO","fahrstunde");
 //		aMap.put("PruefungDTO","pruefung");		
+//	    aMap.put("TheoriestundeDTO","theoriestunde");	
 //		klassen_zu_tabellennamen = Collections.unmodifiableMap(aMap);
 //	}
 	private static SessionFactory sessionFactory;

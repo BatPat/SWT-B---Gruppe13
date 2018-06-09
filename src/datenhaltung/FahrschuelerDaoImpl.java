@@ -14,6 +14,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	
 	private static FahrschuelerDaoImpl instance;
 	private Session session;
+	private static final String TABELLENNAME = "fahrschueler";
 
 	private FahrschuelerDaoImpl() {
 		
@@ -45,7 +46,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.persist("fahrschueler", fahrschueler.getName());
+		session.persist(fahrschueler);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -55,7 +56,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.update("fahrschueler", fahrschueler.getName());
+		session.update(fahrschueler);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -65,19 +66,19 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.delete("fahrschueler", fahrschueler.getName());
+		session.delete("fahrschueler", fahrschueler.getId());
 		;
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
-	public FahrschuelerDTO getFahrschueler(String fahrschuelerName) {
+	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
 		FahrschuelerDTO fahrschueler = null;
 		session = null;
 		try {
 			session = HibernateUtil.createSessionFactory().openSession();
-			fahrschueler = (FahrschuelerDTO) session.get(FahrschuelerDTO.class.getName().substring(0, FahrschuelerDTO.class.getName().length() - 3).toLowerCase(), fahrschuelerName);
+			fahrschueler = (FahrschuelerDTO) session.get(TABELLENNAME, fahrschuelerId);
 			Hibernate.initialize(fahrschueler);
 		} catch (Exception e) {
 			e.printStackTrace();

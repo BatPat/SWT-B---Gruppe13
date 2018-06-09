@@ -23,6 +23,8 @@ public class Controller implements Observer {
 	private Fahrschule fahrschule;
 	private Kalender kalender;
 	private StammdatenController stammdatenController;
+	private List<Integer> fahrlehrerids;
+	private List<Integer> fahrschuelerids;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
@@ -126,8 +128,8 @@ public class Controller implements Observer {
 
 	private void updateModel() {
 
-		String fahrschuelername = mainview.getSchuelerCombo().getText();
-		String fahlehrername = mainview.getLehrerCombo().getText();
+		int fahrschuelerindex = mainview.getSchuelerCombo().getSelectionIndex();
+		int fahrlehrerindex = mainview.getLehrerCombo().getSelectionIndex();
 		String artString = mainview.getArtCombo().getText();
 		String uhrzeitString = mainview.getTimeCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
@@ -140,14 +142,13 @@ public class Controller implements Observer {
 		Fahrstundenart fStundenArt = null;
 		LocalDate terminDatum = null;
 
-		if (!fahrschuelername.isEmpty()) {
-			fSchueler = fahrschule.getFahrschueler(fahrschuelername);
+		if (mainview.getSchuelerCombo().getSelectionIndex() != -1) {
+			fSchueler = fahrschule.getFahrschueler(fahrschuelerids.get(fahrschuelerindex));
 			model.setFahrschueler(fSchueler);
 		}
 
-		
-		if (!fahlehrername.isEmpty()) {
-			fLehrer = fahrschule.getFahrlehrer(fahlehrername);
+		if (mainview.getLehrerCombo().getSelectionIndex() != -1) {
+			fLehrer = fahrschule.getFahrlehrer(fahrlehrerids.get(fahrlehrerindex));
 			model.setFahrlehrer(fLehrer);
 		}
 

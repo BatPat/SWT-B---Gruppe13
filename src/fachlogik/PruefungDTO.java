@@ -72,6 +72,8 @@ public class PruefungDTO implements Termin, Serializable {
 		this.uhrzeit = uhrzeit;
 		this.dauer = dauer;
 		this.ort = ort;
+		this.fahrschueler.getPruefungen().add(this);
+		this.fahrlehrer.getPruefungen().add(this);
 	}
 
 	public PruefungDTO(FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {

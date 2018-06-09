@@ -13,6 +13,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
 	private Session session;
+	private static final String TABELLENNAME = "fahrlehrer";
 
 	private FahrlehrerDaoImpl() {
 
@@ -43,7 +44,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.persist("fahrlehrer", fahrlehrer.getName());
+		session.persist(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -53,7 +54,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.saveOrUpdate("fahrlehrer", fahrlehrer.getName());
+		session.saveOrUpdate(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -63,24 +64,18 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.delete("fahrlehrer", fahrlehrer.getName());
+		session.delete("fahrlehrer", fahrlehrer.getId());
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
-	public FahrlehrerDTO getFahrlehrer(String fahrlehrerName) {
-		// Session session = HibernateUtil.createSessionFactory().openSession();
-		// String hql = "FROM fahrlehrer WHERE fahrlehrer.id = :fahrlehrer_id";
-		// org.hibernate.Query query = session.createQuery(hql);
-		// query.setParameter("fahrlehrer_id",fahrlehrerName);
-		// FahrlehrerDTO fahrlehrer = (FahrlehrerDTO) ((Query) query).getSingleResult();
-
+	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
 		session = null;
 		try {
 			session = HibernateUtil.createSessionFactory().openSession();
-			fahrlehrer = (FahrlehrerDTO) session.get(FahrlehrerDTO.class.getName().substring(0, FahrlehrerDTO.class.getName().length() - 3).toLowerCase(), fahrlehrerName);
+			fahrlehrer = (FahrlehrerDTO) session.get(TABELLENNAME, fahrlehrerid);
 			Hibernate.initialize(fahrlehrer);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +85,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 			}
 		}
 		return fahrlehrer;
-		// return fahrlehrer;
 	}
 
 }

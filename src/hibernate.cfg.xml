@@ -41,9 +41,9 @@
 <!--       drop-and-create  -->
 <!--       </property> -->
             
-      <property name="persistence.sql-load-script-source">
-      sqlStatements.sql 
-       </property>
+<!--       <property name="persistence.sql-load-script-source"> -->
+<!--       sqlStatements.sql  -->
+<!--        </property> -->
       
 <!--       List of XML mapping files -->
       <mapping class ="fachlogik.FahrlehrerDTO"/>

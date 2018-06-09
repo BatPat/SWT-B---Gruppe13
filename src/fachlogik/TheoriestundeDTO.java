@@ -56,7 +56,8 @@ public class TheoriestundeDTO extends Stunde {
 		this.genid = counter++;
 		this.thema = thema;
 		this.fahrlehrer = fahrlehrer;
-		this.fahrschueler = new ArrayList<>();
+		this.fahrlehrer.getTheoriestunden().add(this);
+		this.fahrschueler = new ArrayList<FahrschuelerDTO>();
 	}
 
 	public long getGenid() {

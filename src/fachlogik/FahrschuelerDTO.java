@@ -11,8 +11,8 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 public class FahrschuelerDTO implements Person, Serializable {
 	@Id 
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
 	@Column(nullable = false, name = "plzfahrschueler")
@@ -24,6 +24,7 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
+//	cascade={CascadeType.REMOVE,CascadeType.PERSIST}
 	@OneToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
 	private List<PruefungDTO> pruefungen;
 	@OneToMany(mappedBy="schueler",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
@@ -42,9 +43,9 @@ public class FahrschuelerDTO implements Person, Serializable {
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
-		this.fahrstunden = new ArrayList<>();
-		this.theoriestunden = new ArrayList<>();
-		this.pruefungen = new ArrayList<>();
+		this.fahrstunden = new ArrayList<FahrstundeDTO>();
+		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
+		this.pruefungen = new ArrayList<PruefungDTO>();
 	}
 
 	@Override
@@ -134,11 +135,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 		this.theoriestunden = theoriestunden;
 	}
 
-//	public int getId() {
-//		return id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

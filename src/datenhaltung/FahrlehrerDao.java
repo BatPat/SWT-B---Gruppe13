@@ -13,5 +13,5 @@ public interface FahrlehrerDao {
 	
 	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer);
 	
-	public FahrlehrerDTO getFahrlehrer(String fahrlehrerName);
+	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid);
 }

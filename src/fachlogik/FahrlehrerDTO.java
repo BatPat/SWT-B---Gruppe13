@@ -6,20 +6,13 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.FetchProfile;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "fahrlehrer")
+@SuppressWarnings("serial")
 public class FahrlehrerDTO implements Person, Serializable{
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	private int id = 0;
 	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id = 0;
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
 	@Column(nullable = false, name = "plzfahrlehrer")
@@ -31,15 +24,13 @@ public class FahrlehrerDTO implements Person, Serializable{
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-//	@Fetch(FetchMode.JOIN)
-//	@JoinTable(name="fahrlehrer_fahrstunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idfahrstunde"))
-	@OneToMany(mappedBy="lehrer",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER)  
+//	cascade={CascadeType.REMOVE,CascadeType.PERSIST}
+	@OneToMany(mappedBy="lehrer",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
 	private List<FahrstundeDTO> fahrstunden;
-	
-//	@Fetch(FetchMode.JOIN)
-//	@JoinTable(name="fahrlehrer_theoriestunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idtheoriestunde"))
 	@OneToMany(mappedBy="fahrlehrer",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER)  
 	private List<TheoriestundeDTO> theoriestunden;
+	@OneToMany(mappedBy="fahrlehrer",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
+	private List<PruefungDTO> pruefungen;
 
 	public FahrlehrerDTO() {
 		super();
@@ -54,6 +45,7 @@ public class FahrlehrerDTO implements Person, Serializable{
 		this.hausnummer = hausnummer;
 		this.fahrstunden = new ArrayList<FahrstundeDTO>();
 		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
+		this.pruefungen = new ArrayList<PruefungDTO>();
 	}
 
 	/**
@@ -75,6 +67,7 @@ public class FahrlehrerDTO implements Person, Serializable{
 		ArrayList<Termin> termine = new ArrayList<>();
 		termine.addAll(fahrstunden);
 		termine.addAll(theoriestunden);
+		termine.addAll(pruefungen);
 		return termine;
 	}
 
@@ -131,13 +124,13 @@ public class FahrlehrerDTO implements Person, Serializable{
 		this.theoriestunden = theoriestunden;
 	}
 
-//	public int getId() {
-//		return id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public void setFahrstunden(List<FahrstundeDTO> fahrstunden) {
 		this.fahrstunden = fahrstunden;
@@ -145,6 +138,14 @@ public class FahrlehrerDTO implements Person, Serializable{
 
 	public void setTheoriestunden(List<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
+	}
+
+	public List<PruefungDTO> getPruefungen() {
+		return pruefungen;
+	}
+
+	public void setPruefungen(List<PruefungDTO> pruefungen) {
+		this.pruefungen = pruefungen;
 	}
 
 

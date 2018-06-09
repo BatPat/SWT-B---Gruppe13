@@ -43,7 +43,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.save("pruefung", pruefung.getId());
+		session.save(pruefung);
 		session.getTransaction().commit();
 		session.close();
 	}
