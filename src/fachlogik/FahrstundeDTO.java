@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name = "fahrstunde")
 @SuppressWarnings("serial")
@@ -19,11 +22,15 @@ public class FahrstundeDTO extends Stunde {
 	private Fahrstundenart art;
 	
 	@ManyToOne
-	@Column(nullable = false, name = "lehrerfahrstunde")
+	@Column(nullable = false)
+	@JoinColumn(name="namefahrlehrer")
+	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO lehrer;
 	
-//	@ManyToOne
-	@Column(nullable = false, name = "schuelerfahrstunde")
+	@ManyToOne
+	@Column(nullable = false)
+	@JoinColumn(name="namefahrschueler")
+	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO schueler;
 	
 	@Column(nullable = false, name = "genidfahrstunde")

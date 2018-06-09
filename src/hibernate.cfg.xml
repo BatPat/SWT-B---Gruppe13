@@ -40,18 +40,17 @@
 <!--       <property name="javax.persistence.schema-generation.database.action"> -->
 <!--       drop-and-create  -->
 <!--       </property> -->
-      
-       <!--      
+            
       <property name="persistence.sql-load-script-source">
-      src/resources/sqlStatements.sql 
-      </property>
+      sqlStatements.sql 
+       </property>
       
-      List of XML mapping files -->
+<!--       List of XML mapping files -->
       <mapping class="fachlogik.FahrlehrerDTO"/>
-<!--       <mapping class ="fachlogik.FahrschuelerDTO"/> -->
-<!--       <mapping class ="fachlogik.FahrstundeDTO"/> -->
-<!--       <mapping class ="fachlogik.PruefungDTO"/> -->
-<!--       <mapping class ="fachlogik.TheoriestundeDTO"/> -->
+      <mapping class ="fachlogik.FahrschuelerDTO"/>
+      <mapping class ="fachlogik.FahrstundeDTO"/>
+      <mapping class ="fachlogik.PruefungDTO"/>
+      <mapping class ="fachlogik.TheoriestundeDTO"/>
       
    </session-factory>
 </hibernate-configuration>

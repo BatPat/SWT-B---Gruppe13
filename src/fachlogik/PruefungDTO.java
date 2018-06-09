@@ -12,10 +12,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name = "pruefung")
@@ -27,18 +31,21 @@ public class PruefungDTO implements Termin, Serializable {
 	private long id;
 	@Column(nullable = false, name = "genidpruefung")
 	private long genid;
-
-	@Column(nullable = false, name = "fahrlehrerpruefung")
-	// @ManyToOne
-	private FahrlehrerDTO fahrlehrer;
-
 	@Column(nullable = false, name = "counterpruefung")
 	private static long counter = 0;
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
 
-	@Column(nullable = false, name = "fahrschuelerpruefung")
-	// @ManyToOne
+	@ManyToOne
+	@Column(nullable = false)
+	@JoinColumn(name="namefahrlehrer")
+	@NotFound(action=NotFoundAction.IGNORE)
+	private FahrlehrerDTO fahrlehrer;
+
+	@ManyToOne
+	@Column(nullable = false)
+	@JoinColumn(name="namefahrschueler")
+	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO fahrschueler;
 
 	// @Temporal(TemporalType.DATE)

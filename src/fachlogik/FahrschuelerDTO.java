@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
 public class FahrschuelerDTO implements Person, Serializable {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@Id 
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	private int id;
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
 	@Column(nullable = false, name = "plzfahrschueler")
@@ -23,11 +24,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-	@OneToMany
+	@OneToMany(mappedBy="fahrschueler") 
 	private List<PruefungDTO> pruefungen;
-	@OneToMany
+	@OneToMany(mappedBy="schueler") 
 	private List<FahrstundeDTO> fahrstunden;
-	@OneToMany
+	@ManyToMany
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {
@@ -133,11 +134,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 		this.theoriestunden = theoriestunden;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 }

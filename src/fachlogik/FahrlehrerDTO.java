@@ -30,12 +30,14 @@ public class FahrlehrerDTO implements Person{
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-	@OneToMany @Fetch(FetchMode.JOIN)
-	@JoinTable(name="fahrlehrer_fahrstunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idfahrstunde"))
+	@OneToMany(mappedBy="lehrer") 
+//	@Fetch(FetchMode.JOIN)
+//	@JoinTable(name="fahrlehrer_fahrstunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idfahrstunde"))
 	private List<FahrstundeDTO> fahrstunden;
 	
-	@OneToMany @Fetch(FetchMode.JOIN)
-	@JoinTable(name="fahrlehrer_theoriestunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idtheoriestunde"))
+	@OneToMany(mappedBy="fahrlehrer") 
+//	@Fetch(FetchMode.JOIN)
+//	@JoinTable(name="fahrlehrer_theoriestunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idtheoriestunde"))
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrlehrerDTO() {

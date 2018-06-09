@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name = "theoriestunde")
 @SuppressWarnings("serial")
@@ -19,14 +22,16 @@ public class TheoriestundeDTO extends Stunde {
 	private TheorieThema thema;
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
-	//TODO
-	@Column(nullable = false, name = "fahrlehrertheoriestunde")
+	
+	@ManyToOne
+	@Column(nullable = false)
+	@JoinColumn(name="namefahrlehrer")
+	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 	
-	//TODO
-//	@OneToMany(cascade=CascadeType.ALL, targetEntity=FahrschuelerDTO.class)
-//	@JoinColumn(name="id")
-	@Column(nullable = false, name = "fahrschuelerlistetheoriestunde")
+	@ManyToMany(mappedBy="theoriestunden") 
+	@Column(nullable = false)
+	@NotFound(action=NotFoundAction.IGNORE)
 	private List<FahrschuelerDTO> fahrschueler;
 	
 	@Column(nullable = false, name = "countertheoriestunde")
