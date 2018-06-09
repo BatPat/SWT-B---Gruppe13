@@ -1,5 +1,6 @@
 package fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,10 @@ import org.hibernate.annotations.FetchProfile;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "fahrlehrer")
-
-public class FahrlehrerDTO implements Person{
+public class FahrlehrerDTO implements Person, Serializable{
 //	@GeneratedValue(strategy=GenerationType.AUTO)
 //	private int id = 0;
 	@Id 
