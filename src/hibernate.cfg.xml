@@ -46,7 +46,7 @@
        </property>
       
 <!--       List of XML mapping files -->
-      <mapping class="fachlogik.FahrlehrerDTO"/>
+      <mapping class ="fachlogik.FahrlehrerDTO"/>
       <mapping class ="fachlogik.FahrschuelerDTO"/>
       <mapping class ="fachlogik.FahrstundeDTO"/>
       <mapping class ="fachlogik.PruefungDTO"/>
