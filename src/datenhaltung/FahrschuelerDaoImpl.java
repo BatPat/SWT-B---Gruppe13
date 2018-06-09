@@ -45,7 +45,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.save("fahrschueler", fahrschueler.getName());
+		session.persist("fahrschueler", fahrschueler.getName());
 		session.getTransaction().commit();
 		session.close();
 	}

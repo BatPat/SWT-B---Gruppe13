@@ -16,9 +16,9 @@ import org.hibernate.annotations.Type;
 @Table(name = "fahrlehrer")
 
 public class FahrlehrerDTO implements Person{
-	@Id 
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 //	private int id = 0;
+	@Id 
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
 	@Column(nullable = false, name = "plzfahrlehrer")
@@ -30,14 +30,14 @@ public class FahrlehrerDTO implements Person{
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-	@OneToMany(mappedBy="lehrer") 
 //	@Fetch(FetchMode.JOIN)
 //	@JoinTable(name="fahrlehrer_fahrstunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idfahrstunde"))
+	@OneToMany(mappedBy="lehrer",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER)  
 	private List<FahrstundeDTO> fahrstunden;
 	
-	@OneToMany(mappedBy="fahrlehrer") 
 //	@Fetch(FetchMode.JOIN)
 //	@JoinTable(name="fahrlehrer_theoriestunden",joinColumns=@JoinColumn(name="namefahrlehrer"),inverseJoinColumns=@JoinColumn(name="idtheoriestunde"))
+	@OneToMany(mappedBy="fahrlehrer",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER)  
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrlehrerDTO() {
@@ -127,6 +127,22 @@ public class FahrlehrerDTO implements Person{
 	}
 
 	public void setTheoriestunden(ArrayList<TheoriestundeDTO> theoriestunden) {
+		this.theoriestunden = theoriestunden;
+	}
+
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
+
+	public void setFahrstunden(List<FahrstundeDTO> fahrstunden) {
+		this.fahrstunden = fahrstunden;
+	}
+
+	public void setTheoriestunden(List<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
 	}
 

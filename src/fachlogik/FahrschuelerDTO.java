@@ -24,11 +24,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-	@OneToMany(mappedBy="fahrschueler") 
+	@OneToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
 	private List<PruefungDTO> pruefungen;
-	@OneToMany(mappedBy="schueler") 
+	@OneToMany(mappedBy="schueler",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
 	private List<FahrstundeDTO> fahrstunden;
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER) 
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {

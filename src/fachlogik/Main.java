@@ -1,14 +1,19 @@
 package fachlogik;
 
+import datenhaltung.FahrlehrerDaoImpl;
+import datenhaltung.FahrschuelerDaoImpl;
+
 public class Main {
 
 	public static void main(String[] args) {
 //    	 new Controller();
 		
 //		Funktion save Fahrlehrer
-	    FahrlehrerDTO f = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
-		HibernateUtil h = new HibernateUtil();
-		h.saveFahrlehrer(f);
+		FahrlehrerDaoImpl fahrlehrer = FahrlehrerDaoImpl.getInstance();
+		FahrschuelerDaoImpl fahrschueler = FahrschuelerDaoImpl.getInstance();
+		fahrlehrer.addFahrlehrer(new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3"));
+//		HibernateUtil h = new HibernateUtil();
+//		h.saveFahrlehrer(f);
 		
 		
 //		Funnktion mapping one to many zwischen Fahrlehrer und Stunden		
