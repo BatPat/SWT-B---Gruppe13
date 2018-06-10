@@ -54,7 +54,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.update("theoriestunde", theoriestunde.getId());
+		session.update(theoriestunde);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -64,7 +64,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.delete("theoriestunde", theoriestunde.getId());
+		session.delete(theoriestunde);
 		session.getTransaction().commit();
 		session.close();
 	}

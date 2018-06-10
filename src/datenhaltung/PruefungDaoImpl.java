@@ -53,7 +53,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.update("pruefung", pruefung.getId());
+		session.update(pruefung);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -63,7 +63,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.delete("pruefung", pruefung.getId());
+		session.delete(pruefung);
 		session.getTransaction().commit();
 		session.close();
 	}

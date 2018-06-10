@@ -64,7 +64,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		session.delete("fahrlehrer", fahrlehrer.getId());
+		session.delete(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
 	}

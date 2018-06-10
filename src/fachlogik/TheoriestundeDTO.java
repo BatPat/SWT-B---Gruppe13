@@ -29,7 +29,7 @@ public class TheoriestundeDTO extends Stunde {
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 	
-	@ManyToMany(mappedBy="theoriestunden") 
+	@ManyToMany(mappedBy="theoriestunden",cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
 	@Column(nullable = false)
 	@NotFound(action=NotFoundAction.IGNORE)
 	private List<FahrschuelerDTO> fahrschueler;
@@ -55,6 +55,10 @@ public class TheoriestundeDTO extends Stunde {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.genid = counter++;
 		this.thema = thema;
+		this.datum = datum;
+		this.uhrzeit = uhrzeit;
+		this.ort = ort;
+		this.dauer = Duration.ofHours(2);
 		this.fahrlehrer = fahrlehrer;
 		this.fahrlehrer.getTheoriestunden().add(this);
 		this.fahrschueler = new ArrayList<FahrschuelerDTO>();
