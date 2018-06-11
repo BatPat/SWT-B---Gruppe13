@@ -10,6 +10,7 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 import java.util.Observable;
 
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.MouseEvent;
@@ -26,7 +27,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -267,9 +267,13 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrschuelerNeu");
 
-				MessageBox dialog = new MessageBox(shell, 0);
-				dialog.setMessage("Hier könnte man einen neuen Fahrschüler anlegen");
-				dialog.open();
+				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
+				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
+				// Controller erzeugt neuen Fahrschueler, nach Klick auf ok müssen alle Daten
+				// des FS gespeichert werden
+				if (dialog.open() != Window.OK) {
+					System.out.println("Fehler");
+				}
 			}
 
 			@Override
@@ -352,7 +356,13 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrlehrerNeu");
 
-				starteFahrlehrerDialog();
+				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
+				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
+				// Controller erzeugt neuen Fahrlehrer, nach Klick auf ok müssen alle Daten des
+				// FL gespeichert werden
+				if (dialog.open() != Window.OK) {
+					System.out.println("Fehler");
+				}
 			}
 
 			@Override
@@ -383,11 +393,6 @@ public class StammdatenView extends Observable {
 		});
 
 		erzeugeLinie(datenComposite);
-	}
-
-	private void starteFahrlehrerDialog() {
-		MessageBox dialog = new MessageBox(shell, 0);
-		dialog.setMessage("Hier könnte man einen neuen Fahrlehrer anlegen");
 	}
 
 	private void erzeugeLinie(Composite composite) {
