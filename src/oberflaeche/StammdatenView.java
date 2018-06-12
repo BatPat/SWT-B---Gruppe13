@@ -25,8 +25,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -36,8 +34,6 @@ public class StammdatenView extends Observable {
 
 	private Display display;
 	private Shell shell;
-	private Menu menu, submenu;
-	private MenuItem menuitem;
 
 	private CLabel btNeuerFahrschueler, btNeuerFahrlehrer, btStundenBuchen;
 	private Table schuelerStammdatenTable, lehrerStammdatenTabelle;
@@ -56,7 +52,6 @@ public class StammdatenView extends Observable {
 		theme = new FahrschulTheme();
 
 		initShell();
-		erzeugeMenu();
 		erzeugeHeader();
 		createFillerLabel(mainComposite, 8);
 		createFillerLabel(mainComposite, 8);
@@ -401,39 +396,6 @@ public class StammdatenView extends Observable {
 		gridData.heightHint = 1;
 		gridData.horizontalSpan = 5;
 		trennstrichLabel.setLayoutData(gridData);
-	}
-
-	private void erzeugeMenu() {
-		// Erzeugung des Menus
-		String[] menuBarEntries = { "Datei", "Hilfe" };
-		String[] menuEntries = { "Öffnen,Speichern,Schließen", "Hilfe,--,About" };
-
-		menu = new Menu(shell, SWT.BAR);
-		shell.setMenuBar(menu);
-
-		for (int i = 0; i < menuBarEntries.length; i++) {
-			// Eintrag im Hauptmenu
-			menuitem = new MenuItem(menu, SWT.CASCADE);
-			menuitem.setText(menuBarEntries[i]);
-
-			// Menu, das an einen Eintrag gebunden ist
-			submenu = new Menu(shell, SWT.DROP_DOWN);
-			menuitem.setMenu(submenu);
-
-			createSubmenuEntries(submenu, menuEntries[i]);
-		}
-	}
-
-	private void createSubmenuEntries(Menu menuitem, String string) {
-		String[] entries = string.split(",");
-		for (int i = 0; i < entries.length; i++) {
-			if (entries[i].equalsIgnoreCase("--")) {
-				new MenuItem(menuitem, SWT.SEPARATOR);
-			} else {
-				MenuItem item = new MenuItem(menuitem, SWT.PUSH);
-				item.setText(entries[i]);
-			}
-		}
 	}
 
 	public void startEventHandler() {
