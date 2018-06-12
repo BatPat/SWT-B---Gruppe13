@@ -29,8 +29,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -568,18 +566,6 @@ public class MainView extends Observable {
 
 	public Shell getShell() {
 		return shell;
-	}
-
-	public Menu getMenu() {
-		return menu;
-	}
-
-	public Menu getSubmenu() {
-		return submenu;
-	}
-
-	public MenuItem getMenuitem() {
-		return menuitem;
 	}
 
 	public CLabel getBtBuchen() {
