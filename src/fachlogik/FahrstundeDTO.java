@@ -21,14 +21,12 @@ public class FahrstundeDTO extends Stunde {
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
 	
-//	@ManyToOne
-	@Column(nullable = false)
+	@ManyToOne
 	@JoinColumn(name="namefahrlehrer")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO lehrer;
 	
-//	@ManyToOne
-	@Column(nullable = false)
+	@ManyToOne
 	@JoinColumn(name="namefahrschueler")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO schueler;
@@ -109,10 +107,6 @@ public class FahrstundeDTO extends Stunde {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public LocalDate getDatum() {

@@ -29,7 +29,7 @@ public class FahrschuelerDTO implements Person, Serializable {
 	private List<PruefungDTO> pruefungen;
 	@OneToMany(mappedBy="schueler",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
 	private List<FahrstundeDTO> fahrstunden;
-	@ManyToMany(cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER) 
+	@ManyToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER) 
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {
@@ -139,7 +139,4 @@ public class FahrschuelerDTO implements Person, Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 }

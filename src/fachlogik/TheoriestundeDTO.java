@@ -23,14 +23,12 @@ public class TheoriestundeDTO extends Stunde {
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
 	
-//	@ManyToOne
-	@Column(nullable = false)
+	@ManyToOne
 	@JoinColumn(name="namefahrlehrer")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 	
-	@ManyToMany(mappedBy="theoriestunden",cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
-	@Column(nullable = false)
+	@ManyToMany(cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
 	@NotFound(action=NotFoundAction.IGNORE)
 	private List<FahrschuelerDTO> fahrschueler;
 	
@@ -91,10 +89,6 @@ public class TheoriestundeDTO extends Stunde {
 
 	public List<FahrschuelerDTO> getFahrschueler() {
 		return fahrschueler;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public static long getCounter() {

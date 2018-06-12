@@ -36,14 +36,12 @@ public class PruefungDTO implements Termin, Serializable {
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
 
-//	@ManyToOne
-	@Column(nullable = false)
+	@ManyToOne
 	@JoinColumn(name="namefahrlehrer")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 
-//	@ManyToOne
-	@Column(nullable = false)
+	@ManyToOne
 	@JoinColumn(name="namefahrschueler")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO fahrschueler;
@@ -137,7 +135,4 @@ public class PruefungDTO implements Termin, Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
 }
