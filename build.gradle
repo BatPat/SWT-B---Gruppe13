@@ -10,6 +10,9 @@ sourceSets {
     
 repositories { 
 	mavenCentral()
+	maven {
+        url "http://maven-eclipse.github.io/maven"
+    }
 }
 
 eclipse {
