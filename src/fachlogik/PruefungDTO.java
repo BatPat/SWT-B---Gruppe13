@@ -46,10 +46,8 @@ public class PruefungDTO implements Termin, Serializable {
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO fahrschueler;
 
-	// @Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
-	// @Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitpruefung")
 	private LocalTime uhrzeit;
 	@Column(nullable = false, name = "dauerpruefung")

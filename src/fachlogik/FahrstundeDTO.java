@@ -33,10 +33,8 @@ public class FahrstundeDTO extends Stunde {
 	
 	@Column(nullable = false, name = "genidfahrstunde")
 	private long genid;
-//	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "datumfahrstunde")
 	private LocalDate datum;
-//	@Temporal(TemporalType.TIME)
 	@Column(nullable = false, name = "uhrzeitfahrstunde")
 	private LocalTime uhrzeit;
 	@Column(nullable = false, name = "dauerfahrstunde")
