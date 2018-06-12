@@ -3,7 +3,6 @@ package fachlogik;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 //	private static final Map<String, String> klassen_zu_tabellennamen;
@@ -20,19 +19,19 @@ public class HibernateUtil {
 
 	public static SessionFactory createSessionFactory() {
 //		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
-//			    configure().loadProperties("src/hibernate.cfg.xml").build();
+//			    configure().loadProperties("/src/hibernate.cfg.xml").build();
 //		sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);  
 			
 		Configuration configuration = new Configuration();
 		configuration.configure();
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties()).build();
+		StandardServiceRegistryBuilder serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties());
 		configuration.addAnnotatedClass(FahrlehrerDTO.class);
 		configuration.addAnnotatedClass(FahrschuelerDTO.class);
 		configuration.addAnnotatedClass(FahrstundeDTO.class);
 		configuration.addAnnotatedClass(PruefungDTO.class);
 		configuration.addAnnotatedClass(TheoriestundeDTO.class);
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		sessionFactory = configuration.buildSessionFactory(serviceRegistry.build());
 		return sessionFactory;
 	}
 }
