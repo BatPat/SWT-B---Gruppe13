@@ -26,7 +26,7 @@ public class TheoriestundeDTO extends Stunde {
 	private long genid;
 	
 	@ManyToOne
-	@JoinColumn(name="namefahrlehrer")
+	@JoinColumn(name="idfahrlehrer")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 	
