@@ -9,7 +9,7 @@
       </property>
       
       <property name="connection.pool_size">
-      1
+      	 1
       </property>
       
       <property name = "hibernate.connection.driver_class">

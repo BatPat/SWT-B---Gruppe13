@@ -36,7 +36,7 @@ public class Main {
 		fahrlehrer.addFahrlehrer(fahrlehrer1);
 		fahrlehrer.addFahrlehrer(fahrlehrer2);
 		fahrschueler.addFahrschueler(fahrschueler1);	
-//		
+		
 //		TheoriestundeDTO fs1 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit, datum, ort);
 //		TheoriestundeDTO fs2 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit, datum, ort);
 //		TheoriestundeDTO fs3 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit, datum, ort);
@@ -46,18 +46,12 @@ public class Main {
 //		
 //		h.saveFahrlehrer(f);
 		
-		
-
-		
-		
 //		Funktion delete
 //		h.deleteFahrlehrer(f);
-		
-		
+				
 //		Funktion get alle Fahrlehrer
 //		h.getAllFahrlehrer();
-		
-		
+				
 //		Funktion get Fahrlehrer by Id
 //		FahrlehrerDTO f2 = h.getFahrlehrerById("Stefan Terlau");
 	}

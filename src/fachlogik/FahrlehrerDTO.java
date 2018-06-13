@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Table(name = "fahrlehrer")
 @SuppressWarnings("serial")
 public class FahrlehrerDTO implements Person, Serializable{
-	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id = 0;
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;

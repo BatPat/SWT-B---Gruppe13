@@ -25,8 +25,7 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name = "pruefung")
 @SuppressWarnings("serial")
 public class PruefungDTO implements Termin, Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name = "idpruefung")
 	private long id;
 	@Column(nullable = false, name = "genidpruefung")
