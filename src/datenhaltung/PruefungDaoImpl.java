@@ -11,7 +11,7 @@ import fachlogik.PruefungDTO;
 public class PruefungDaoImpl implements PruefungDao {
 
 	private static PruefungDaoImpl instance;
-	private final Session session = HibernateUtil.createSessionFactory().openSession();
+	private Session session;
 
 	private PruefungDaoImpl() {
 		
@@ -29,7 +29,7 @@ public class PruefungDaoImpl implements PruefungDao {
 	@Override
 	public List<PruefungDTO> getAllePruefungen() {
 		List<PruefungDTO> liste = new ArrayList<>();
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from pruefung").list();
@@ -40,7 +40,7 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	@Override
 	public void addPruefung(PruefungDTO pruefung) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(pruefung);
@@ -50,7 +50,7 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	@Override
 	public void updatePruefung(PruefungDTO pruefung) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(pruefung);
@@ -60,7 +60,7 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	@Override
 	public void deletePruefung(PruefungDTO pruefung) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(pruefung);

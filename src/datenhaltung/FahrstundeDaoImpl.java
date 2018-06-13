@@ -11,7 +11,7 @@ import fachlogik.HibernateUtil;
 public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private static FahrstundeDaoImpl instance;
-	private final Session session = HibernateUtil.createSessionFactory().openSession();
+	private Session session;
 
 	private FahrstundeDaoImpl() {
 		
@@ -29,7 +29,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	@Override
 	public List<FahrstundeDTO> getAlleFahrstunden() {
 		List<FahrstundeDTO> liste = new ArrayList<>();
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from fahrstunde").list();
@@ -40,7 +40,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	@Override
 	public void addFahrstunde(FahrstundeDTO fahrstunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(fahrstunde);
@@ -50,7 +50,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	@Override
 	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(fahrstunde);
@@ -60,7 +60,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	@Override
 	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(fahrstunde);

@@ -11,7 +11,7 @@ import fachlogik.TheoriestundeDTO;
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	private static TheorieStundeDaoImpl instance;
-	private final Session session = HibernateUtil.createSessionFactory().openSession();;
+	private Session session;
 
 	private TheorieStundeDaoImpl() {
 		
@@ -29,7 +29,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	@Override
 	public List<TheoriestundeDTO> getAlleTheoriestunden() {
 		List<TheoriestundeDTO> liste = new ArrayList<>();
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from theoriestunde").list();
@@ -40,7 +40,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	@Override
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(theoriestunde);
@@ -50,7 +50,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	@Override
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(theoriestunde);
@@ -60,7 +60,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	@Override
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
-//		session = HibernateUtil.createSessionFactory().openSession();
+		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(theoriestunde);
