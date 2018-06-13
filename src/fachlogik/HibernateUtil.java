@@ -15,23 +15,17 @@ public class HibernateUtil {
 //	    aMap.put("TheoriestundeDTO","theoriestunde");	
 //		klassen_zu_tabellennamen = Collections.unmodifiableMap(aMap);
 //	}
-	private static SessionFactory sessionFactory;
-
-	public static SessionFactory createSessionFactory() {
-//		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
-//			    configure().loadProperties("/src/hibernate.cfg.xml").build();
-//		sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);  
-			
+	public static SessionFactory createSessionFactory() {			
 		Configuration configuration = new Configuration();
 		configuration.configure();
-		StandardServiceRegistryBuilder serviceRegistry = new StandardServiceRegistryBuilder()
+		final StandardServiceRegistryBuilder serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
 		configuration.addAnnotatedClass(FahrlehrerDTO.class);
 		configuration.addAnnotatedClass(FahrschuelerDTO.class);
 		configuration.addAnnotatedClass(FahrstundeDTO.class);
 		configuration.addAnnotatedClass(PruefungDTO.class);
 		configuration.addAnnotatedClass(TheoriestundeDTO.class);
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry.build());
+		final SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry.build());
 		return sessionFactory;
 	}
 }

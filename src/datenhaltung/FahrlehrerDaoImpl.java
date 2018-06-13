@@ -12,7 +12,7 @@ import fachlogik.HibernateUtil;
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
-	private Session session;
+	private final Session session = HibernateUtil.createSessionFactory().openSession();
 	private static final String TABELLENNAME = "fahrlehrer";
 
 	private FahrlehrerDaoImpl() {
@@ -30,7 +30,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	@Override
 	public List<FahrlehrerDTO> getAlleFahrlehrer() {
 		List<FahrlehrerDTO> liste = new ArrayList<>();
-		session = HibernateUtil.createSessionFactory().openSession();
+//		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from fahrlehrer").list();
@@ -41,7 +41,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	@Override
 	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+//		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(fahrlehrer);
@@ -51,7 +51,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	@Override
 	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+//		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.saveOrUpdate(fahrlehrer);
@@ -61,7 +61,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	@Override
 	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+//		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(fahrlehrer);
@@ -72,9 +72,9 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	@Override
 	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
-		session = null;
+//		session = null;
 		try {
-			session = HibernateUtil.createSessionFactory().openSession();
+//			session = HibernateUtil.createSessionFactory().openSession();
 			fahrlehrer = (FahrlehrerDTO) session.get(TABELLENNAME, fahrlehrerid);
 			Hibernate.initialize(fahrlehrer);
 		} catch (Exception e) {
