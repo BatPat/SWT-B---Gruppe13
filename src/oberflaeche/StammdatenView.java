@@ -10,6 +10,7 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 import java.util.Observable;
 
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.MouseEvent;
@@ -24,9 +25,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -36,8 +34,6 @@ public class StammdatenView extends Observable {
 
 	private Display display;
 	private Shell shell;
-	private Menu menu, submenu;
-	private MenuItem menuitem;
 
 	private CLabel btNeuerFahrschueler, btNeuerFahrlehrer, btStundenBuchen;
 	private Table schuelerStammdatenTable, lehrerStammdatenTabelle;
@@ -56,7 +52,6 @@ public class StammdatenView extends Observable {
 		theme = new FahrschulTheme();
 
 		initShell();
-		erzeugeMenu();
 		erzeugeHeader();
 		createFillerLabel(mainComposite, 8);
 		createFillerLabel(mainComposite, 8);
@@ -175,13 +170,11 @@ public class StammdatenView extends Observable {
 	}
 
 	private void erzeugeHauptPanel() {
-
 		datenComposite = new Composite(mainComposite, SWT.NONE);
 		datenComposite.setBackground(theme.getWhiteColor());
 		datenComposite.setLayout(new GridLayout(2, true));
 
 		erzeugeWidgets();
-
 	}
 
 	private void anpassenLabelGroesse(Label label) {
@@ -269,9 +262,13 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrschuelerNeu");
 
-				MessageBox dialog = new MessageBox(shell, 0);
-				dialog.setMessage("Hier könnte man einen neuen Fahrschüler anlegen");
-				dialog.open();
+				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
+				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
+				// Controller erzeugt neuen Fahrschueler, nach Klick auf ok müssen alle Daten
+				// des FS gespeichert werden
+				if (dialog.open() != Window.OK) {
+					System.out.println("Fehler");
+				}
 			}
 
 			@Override
@@ -354,9 +351,13 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrlehrerNeu");
 
-				MessageBox dialog = new MessageBox(shell, 0);
-				dialog.setMessage("Hier könnte man einen neuen Fahrlehrer anlegen");
-				dialog.open();
+				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
+				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
+				// Controller erzeugt neuen Fahrlehrer, nach Klick auf ok müssen alle Daten des
+				// FL gespeichert werden
+				if (dialog.open() != Window.OK) {
+					System.out.println("Fehler");
+				}
 			}
 
 			@Override
@@ -387,48 +388,14 @@ public class StammdatenView extends Observable {
 		});
 
 		erzeugeLinie(datenComposite);
-
 	}
 
-	public void erzeugeLinie(Composite composite) {
+	private void erzeugeLinie(Composite composite) {
 		Label trennstrichLabel = new Label(composite, SWT.BORDER);
 		GridData gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
 		gridData.heightHint = 1;
 		gridData.horizontalSpan = 5;
 		trennstrichLabel.setLayoutData(gridData);
-	}
-
-	private void erzeugeMenu() {
-		// Erzeugung des Menus
-		String[] menuBarEntries = { "Datei", "Hilfe" };
-		String[] menuEntries = { "Öffnen,Speichern,Schließen", "Hilfe,--,About" };
-
-		menu = new Menu(shell, SWT.BAR);
-		shell.setMenuBar(menu);
-
-		for (int i = 0; i < menuBarEntries.length; i++) {
-			// Eintrag im Hauptmenu
-			menuitem = new MenuItem(menu, SWT.CASCADE);
-			menuitem.setText(menuBarEntries[i]);
-
-			// Menu, das an einen Eintrag gebunden ist
-			submenu = new Menu(shell, SWT.DROP_DOWN);
-			menuitem.setMenu(submenu);
-
-			createSubmenuEntries(submenu, menuEntries[i]);
-		}
-	}
-
-	private void createSubmenuEntries(Menu menuitem, String string) {
-		String[] entries = string.split(",");
-		for (int i = 0; i < entries.length; i++) {
-			if (entries[i].equalsIgnoreCase("--")) {
-				new MenuItem(menuitem, SWT.SEPARATOR);
-			} else {
-				MenuItem item = new MenuItem(menuitem, SWT.PUSH);
-				item.setText(entries[i]);
-			}
-		}
 	}
 
 	public void startEventHandler() {
@@ -443,7 +410,6 @@ public class StammdatenView extends Observable {
 	public static void main(String[] args) {
 		StammdatenView stv = new StammdatenView();
 		stv.startEventHandler();
-
 	}
 
 	public CLabel getBtNeuerFahrschueler() {

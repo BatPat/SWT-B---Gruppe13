@@ -13,18 +13,6 @@ public class FahrschulModel {
 		fahrstunde = new Fahrstunde(null, new Fahrlehrer(), new Fahrschueler(), null, null, "Fahrschule Terlau");
 	}
 
-	public boolean isAlleFelderAusgefuellt() {
-		boolean result = true;
-		
-		result = getFahrlehrer().getName() != null;
-		result = result && getFahrschueler().getName() != null;
-		result = result && getDatum() != null;
-		result = result && getUhrzeit() != null;
-		result = result && getArt() != null;
-
-		return result;
-	}
-
 	public Fahrlehrer getFahrlehrer() {
 		return fahrstunde.getLehrer();
 	}

@@ -53,20 +53,19 @@ public class Controller implements Observer {
 		for (Fahrschueler f : fahrschule.getFahrschuelerListe()) {
 			mainview.getSchuelerCombo().add(f.getName());
 		}
-		
-		
+
 		for (Fuehrerscheinklasse klasse : fahrschule.getAngeboteneKlassen()) {
 			mainview.getFsKlasseCombo().add(klasse.toString());
 		}
-		
+
 		for (Fahrstundenart f : Fahrstundenart.values()) {
 			mainview.getArtCombo().add(f.getBeschreibung());
 		}
 	}
 
-	private void zeigePassendeTermine(){
+	private void zeigePassendeTermine() {
 		mainview.getTimeCombo().removeAll();
-		
+
 		if (!auswahlFeldersindleer() && mainview.getTimeCombo().getText().isEmpty()) {
 			for (int i = 9; i < 22; i++) {
 				String zeit = i + ":00";
@@ -97,7 +96,7 @@ public class Controller implements Observer {
 		}
 	}
 
-	private void uebersichtFahrstunden(){
+	private void uebersichtFahrstunden() {
 
 		Fahrschueler fahrschueler = model.getFahrschueler();
 		int anzNorm = 0;
@@ -151,7 +150,7 @@ public class Controller implements Observer {
 		}
 
 		if (!uhrzeitString.isEmpty()) {
-			if(uhrzeitString.length() == 4) {
+			if (uhrzeitString.length() == 4) {
 				uhrzeitString = "0" + uhrzeitString;
 			}
 			terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
@@ -172,7 +171,6 @@ public class Controller implements Observer {
 			model.setArt(fStundenArt);
 		}
 
-		
 	}
 
 	private void erstellePdf() throws IOException {
@@ -192,7 +190,7 @@ public class Controller implements Observer {
 		fahrschule.updateFahrlehrer(fLehrer);
 		fahrschule.updateFahrschueler(fSchueler);
 	}
-	
+
 	private void updatePanel() {
 		if (model.getFahrlehrer().getName() != null) {
 			zeigePassendeTermine();
@@ -222,6 +220,18 @@ public class Controller implements Observer {
 		initGUI();
 		mainview.getShell().layout(true);
 		
+	}
+
+	public boolean isAlleFelderAusgefuellt() {
+		boolean result = true;
+
+		result = mainview.getLehrerCombo().getSelectionIndex() != -1;
+		result = result && mainview.getSchuelerCombo().getSelectionIndex() != -1;
+		result = result && mainview.getFsKlasseCombo().getSelectionIndex() != -1;
+		result = result && mainview.getArtCombo().getSelectionIndex() != -1;
+		result = result && mainview.getTimeCombo().getSelectionIndex() != -1;
+
+		return result;
 	}
 
 	@Override
@@ -259,7 +269,7 @@ public class Controller implements Observer {
 			break;
 
 		case "Buchen":
-			if (model.isAlleFelderAusgefuellt()) {
+			if (isAlleFelderAusgefuellt()) {
 				bucheFahrstunde();
 				updatePanel();
 			}
