@@ -130,7 +130,8 @@ public class Controller implements Observer {
 		String artString = mainview.getArtCombo().getText();
 		String uhrzeitString = mainview.getTimeCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
-		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
+		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
 		int datumTag = mainview.getDateFahrstunde().getDay();
 
 		Fahrschueler fSchueler = null;
@@ -202,7 +203,8 @@ public class Controller implements Observer {
 		}
 
 		int datumJahr = mainview.getDateFahrstunde().getYear();
-		int datumMonat = mainview.getDateFahrstunde().getMonth();
+		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
+		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
 		int datumTag = mainview.getDateFahrstunde().getDay();
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		if (LocalDate.now().isAfter(terminDatum)) {
@@ -212,7 +214,8 @@ public class Controller implements Observer {
 
 	private void resetViewDatum() {
 		mainview.getDateFahrstunde().setDay(LocalDate.now().getDayOfMonth());
-		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue());
+		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
+		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue() - 1);
 		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
 	}
 	
