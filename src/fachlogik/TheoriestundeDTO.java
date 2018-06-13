@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -29,6 +31,7 @@ public class TheoriestundeDTO extends Stunde {
 	private FahrlehrerDTO fahrlehrer;
 	
 	@ManyToMany(cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
+	@Fetch(value = FetchMode.SUBSELECT)
 	@NotFound(action=NotFoundAction.IGNORE)
 	private List<FahrschuelerDTO> fahrschueler;
 	

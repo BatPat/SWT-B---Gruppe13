@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
@@ -25,10 +28,13 @@ public class FahrschuelerDTO implements Person, Serializable {
 
 //	cascade={CascadeType.REMOVE,CascadeType.PERSIST}
 	@OneToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<PruefungDTO> pruefungen;
 	@OneToMany(mappedBy="schueler",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<FahrstundeDTO> fahrstunden;
 	@ManyToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER) 
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<TheoriestundeDTO> theoriestunden;
 
 	public FahrschuelerDTO() {
