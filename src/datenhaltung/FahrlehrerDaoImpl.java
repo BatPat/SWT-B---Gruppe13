@@ -33,7 +33,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		liste = session.createQuery("from fahrlehrer").list();
+		liste = session.createQuery("from FahrlehrerDTO").list();
 		session.getTransaction().commit();
 		session.close();
 		return liste;

@@ -32,7 +32,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		liste = session.createQuery("from theoriestunde").list();
+		liste = session.createQuery("from TheoriestundeDTO").list();
 		session.getTransaction().commit();
 		session.close();
 		return liste;

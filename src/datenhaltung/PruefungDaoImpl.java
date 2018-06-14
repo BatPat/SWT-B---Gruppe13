@@ -32,7 +32,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
 		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
-		liste = session.createQuery("from pruefung").list();
+		liste = session.createQuery("from PruefungDTO").list();
 		session.getTransaction().commit();
 		session.close();
 		return liste;

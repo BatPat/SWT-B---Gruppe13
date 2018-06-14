@@ -2,6 +2,8 @@ package fachlogik;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Iterator;
+import java.util.List;
 
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
@@ -14,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		// new Controller();
 
-		// Funktion save Fahrlehrer ---- Check
+//		 Test save DTO´s ---- Check
 		FahrlehrerDaoImpl fahrlehrer = FahrlehrerDaoImpl.getInstance();
 		FahrschuelerDaoImpl fahrschueler = FahrschuelerDaoImpl.getInstance();
 		FahrstundeDaoImpl fahrstunde = FahrstundeDaoImpl.getInstance();
@@ -29,15 +31,7 @@ public class Main {
 		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32");
 		FahrschuelerDTO fahrschueler3 = new FahrschuelerDTO("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
 
-		// fahrlehrer.addFahrlehrer(fahrlehrer1);
-		// fahrlehrer.addFahrlehrer(fahrlehrer2);
-		// fahrschueler.addFahrschueler(fahrschueler1);
-
-		// Funktion update ---- Check
-		// f.setHausnummer("4");
-		// fahrlehrer.updateFahrlehrer(f);
-
-		// Funnktion mapping one to many zwischen Fahrlehrer und Stunden
+//		 Funnktion mapping one to many zwischen DTO´s ---- Check
 		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
 		TheoriestundeDTO theostd2 = new TheoriestundeDTO(TheorieThema.MANEUVER, fahrlehrer2, LocalDate.now(),
@@ -81,26 +75,19 @@ public class Main {
 		pruefung.addPruefung(pruef2);
 		pruefung.addPruefung(pruef3);
 
+//		Test delete and Update ---- Check
+//		fahrlehrer1.setHausnummer("4");
+//		fahrlehrer.updateFahrlehrer(fahrlehrer1);
+//
+//		fahrschueler.deleteFahrschueler(fahrschueler1);
 
-		// TheoriestundeDTO fs1 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit,
-		// datum, ort);
-		// TheoriestundeDTO fs2 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit,
-		// datum, ort);
-		// TheoriestundeDTO fs3 = new TheoriestundeDTO(art, lehrer, schueler, uhrzeit,
-		// datum, ort);
-		// f.getTheoriestunden().add(fs1);
-		// f.getTheoriestunden().add(fs2);
-		// f.getTheoriestunden().add(fs3);
-		//
-		// h.saveFahrlehrer(f);
+//		 Test get alle Fahrlehrer
+		 List<FahrschuelerDTO> l = fahrschueler.getAlleFahrschueler();
+		 for (FahrschuelerDTO f : l) {
+			 		System.out.println(""+f.getName());
+		}
 
-		// Funktion delete
-		// h.deleteFahrlehrer(f);
-
-		// Funktion get alle Fahrlehrer
-		// h.getAllFahrlehrer();
-
-		// Funktion get Fahrlehrer by Id
-		// FahrlehrerDTO f2 = h.getFahrlehrerById("Stefan Terlau");
+//		 Funktion get Fahrlehrer by Id
+//		 FahrlehrerDTO f2 = h.getFahrlehrerById("Stefan Terlau");
 	}
 }
