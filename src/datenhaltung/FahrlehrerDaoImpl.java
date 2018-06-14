@@ -13,7 +13,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
 	private Session session;
-	private static final String TABELLENNAME = "fahrlehrer";
+	private static final String TABELLENNAME = "FahrlehrerDTO";
 
 	private FahrlehrerDaoImpl() {
 
@@ -72,18 +72,10 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	@Override
 	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
-		session = null;
-		try {
-			session = HibernateUtil.createSessionFactory().openSession();
-			fahrlehrer = (FahrlehrerDTO) session.get(TABELLENNAME, fahrlehrerid);
-			Hibernate.initialize(fahrlehrer);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
-		}
+		session = HibernateUtil.createSessionFactory().openSession();
+		fahrlehrer = (FahrlehrerDTO) session.get(TABELLENNAME, fahrlehrerid);
+		// Hibernate.initialize(fahrlehrer);
+		session.close();
 		return fahrlehrer;
 	}
 

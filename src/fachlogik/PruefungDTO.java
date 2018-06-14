@@ -70,10 +70,6 @@ public class PruefungDTO implements Termin, Serializable {
 		this.fahrlehrer.getPruefungen().add(this);
 	}
 
-	public PruefungDTO(FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
-		this(null, fahrschueler, datum, uhrzeit, ort);
-	}
-
 	// TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {

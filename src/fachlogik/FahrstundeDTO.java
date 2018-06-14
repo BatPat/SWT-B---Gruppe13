@@ -42,8 +42,8 @@ public class FahrstundeDTO extends Stunde {
 	@Column(nullable = false, name = "ortfahrstunde")
 	private String ort;
 
-	public FahrstundeDTO(LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
-		super(datum, uhrzeit, dauer, ort);
+	public FahrstundeDTO() {
+		super(LocalDate.now(), LocalTime.now(), Duration.ofHours(1), "Recklinghausen");
 	}
 
 	public FahrstundeDTO(Fahrstundenart art, FahrlehrerDTO lehrer, FahrschuelerDTO schueler, LocalTime uhrzeit, LocalDate datum,

@@ -56,9 +56,9 @@ public class Main {
 		fahrschueler3.getTheoriestunden().add(theostd2);
 		fahrschueler3.getTheoriestunden().add(theostd3);
 		
-		PruefungDTO pruef1 = new PruefungDTO(fahrlehrer1, fahrschueler1, LocalDate.now(), LocalTime.now(), "Recklinghausen");
-		PruefungDTO pruef2 = new PruefungDTO(fahrlehrer1, fahrschueler2, LocalDate.now(), LocalTime.now(), "Recklinghausen");
-		PruefungDTO pruef3 = new PruefungDTO(fahrlehrer3, fahrschueler3, LocalDate.now(), LocalTime.now(), "Recklinghausen");
+		PruefungDTO pruef1 = new PruefungDTO(fahrlehrer1, fahrschueler1, LocalDate.now(), LocalTime.now(), "Reckling");
+		PruefungDTO pruef2 = new PruefungDTO(fahrlehrer1, fahrschueler2, LocalDate.now(), LocalTime.now(), "Reckling");
+		PruefungDTO pruef3 = new PruefungDTO(fahrlehrer3, fahrschueler3, LocalDate.now(), LocalTime.now(), "Reckling");
 
 		FahrstundeDTO fahrstd1 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
 				LocalTime.now(), LocalDate.now(), "Recklinghausen");
@@ -81,13 +81,14 @@ public class Main {
 //
 //		fahrschueler.deleteFahrschueler(fahrschueler1);
 
-//		 Test get alle Fahrlehrer
-		 List<FahrschuelerDTO> l = fahrschueler.getAlleFahrschueler();
-		 for (FahrschuelerDTO f : l) {
-			 		System.out.println(""+f.getName());
-		}
+//		 Test get alle Fahrlehrer ---- Check
+//		 List<FahrschuelerDTO> l = fahrschueler.getAlleFahrschueler();
+//		 for (FahrschuelerDTO f : l) {
+//			 		System.out.println(""+f.getName());
+//		}
 
-//		 Funktion get Fahrlehrer by Id
-//		 FahrlehrerDTO f2 = h.getFahrlehrerById("Stefan Terlau");
+//		 Test get Fahrlehrer by Id
+		 FahrlehrerDTO fahrlehrerAusgabeTest = fahrlehrer.getFahrlehrer(1);
+		 System.out.println(fahrlehrerAusgabeTest.getName());
 	}
 }
