@@ -33,6 +33,7 @@ public class TheoriestundeDTO extends Stunde {
 	@ManyToMany(cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
 	@Fetch(value = FetchMode.SUBSELECT)
 	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinTable(name="theoriestunden_fahrschueler", joinColumns=@JoinColumn(name="idtheoriestunde"),inverseJoinColumns=@JoinColumn(name="idfahrschueler"))
 	private List<FahrschuelerDTO> fahrschueler;
 	
 	@Column(nullable = false, name = "countertheoriestunde")

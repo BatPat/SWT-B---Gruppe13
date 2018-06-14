@@ -43,7 +43,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		session.save(fahrschueler);
+		session.persist(fahrschueler);
 		session.getTransaction().commit();
 		session.close();
 	}
