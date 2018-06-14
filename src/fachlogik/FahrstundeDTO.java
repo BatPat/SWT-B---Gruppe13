@@ -52,7 +52,11 @@ public class FahrstundeDTO extends Stunde {
 		this.art = art;
 		this.lehrer = lehrer;
 		this.schueler = schueler;
+		this.uhrzeit = uhrzeit;
+		this.datum = datum;
+		this.ort = ort;
 		this.genid = genid++;
+		this.dauer = Duration.ofHours(1l);
 		this.schueler.getFahrstunden().add(this);
 		this.lehrer.getFahrstunden().add(this);
 	}

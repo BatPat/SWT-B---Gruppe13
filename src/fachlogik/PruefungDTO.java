@@ -58,21 +58,20 @@ public class PruefungDTO implements Termin, Serializable {
 		super();
 	}
 
-	public PruefungDTO(FahrlehrerDTO fahrlehrer, FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit,
-			Duration dauer, String ort) {
+	public PruefungDTO(FahrlehrerDTO fahrlehrer, FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, String ort) {
 		this.genid = counter++;
 		this.fahrlehrer = fahrlehrer;
 		this.fahrschueler = fahrschueler;
 		this.datum = datum;
 		this.uhrzeit = uhrzeit;
-		this.dauer = dauer;
+		this.dauer = Duration.ofHours(1l);
 		this.ort = ort;
 		this.fahrschueler.getPruefungen().add(this);
 		this.fahrlehrer.getPruefungen().add(this);
 	}
 
 	public PruefungDTO(FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, Duration dauer, String ort) {
-		this(null, fahrschueler, datum, uhrzeit, dauer, ort);
+		this(null, fahrschueler, datum, uhrzeit, ort);
 	}
 
 	// TODO

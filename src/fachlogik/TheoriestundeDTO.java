@@ -57,7 +57,7 @@ public class TheoriestundeDTO extends Stunde {
 		this.datum = datum;
 		this.uhrzeit = uhrzeit;
 		this.ort = ort;
-		this.dauer = Duration.ofHours(2);
+		this.dauer = Duration.ofHours(2l);
 		this.fahrlehrer = fahrlehrer;
 		this.fahrlehrer.getTheoriestunden().add(this);
 		this.fahrschueler = new ArrayList<FahrschuelerDTO>();
