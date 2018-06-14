@@ -77,7 +77,7 @@ public class Controller implements Observer {
 		List<Fahrstunde> terminefahrlehr;
 		terminefahrlehr = fahrlehrer.getFahrstunden();
 		int tag = mainview.getDateFahrstunde().getDay();
-		int monat = mainview.getDateFahrstunde().getMonth();
+		int monat = mainview.getDateFahrstunde().getMonth() + 1;
 		int jahr = mainview.getDateFahrstunde().getYear();
 
 		for (int i = 0; i < terminefahrlehr.size(); i++) {
