@@ -22,12 +22,12 @@ public class FahrstundeDTO extends Stunde {
 	private Fahrstundenart art;
 	
 	@ManyToOne
-	@JoinColumn(name="namefahrlehrer")
+	@JoinColumn(name="idfahrlehrer")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrlehrerDTO lehrer;
 	
 	@ManyToOne
-	@JoinColumn(name="namefahrschueler")
+	@JoinColumn(name="idfahrschueler")
 	@NotFound(action=NotFoundAction.IGNORE)
 	private FahrschuelerDTO schueler;
 	

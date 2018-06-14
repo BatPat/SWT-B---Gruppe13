@@ -31,17 +31,19 @@ public class Main {
 		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(), LocalTime.now(),"Recklinghausen");
 		TheoriestundeDTO theostd2 = new TheoriestundeDTO(TheorieThema.MANEUVER, fahrlehrer1, LocalDate.now(), LocalTime.now(),"Recklinghausen");
 		TheoriestundeDTO theostd3 = new TheoriestundeDTO(TheorieThema.VORFAHRT, fahrlehrer1, LocalDate.now(), LocalTime.now(),"Recklinghausen");
+		
 		fahrschueler1.getTheoriestunden().add(theostd1);
 		fahrschueler1.getTheoriestunden().add(theostd2);
 		fahrschueler1.getTheoriestunden().add(theostd3);
+		
+		fahrlehrer.addFahrlehrer(fahrlehrer1);
+		fahrlehrer.addFahrlehrer(fahrlehrer2);
+		fahrschueler.addFahrschueler(fahrschueler1);	
 		
 		FahrstundeDTO fahrstd1 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1, LocalTime.now(), LocalDate.now(),"Recklinghausen");
 		FahrstundeDTO fahrstd2 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1, LocalTime.now(), LocalDate.now(),"Recklinghausen");
 		FahrstundeDTO fahrstd3 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1, LocalTime.now(), LocalDate.now(),"Recklinghausen");
 
-		fahrlehrer.addFahrlehrer(fahrlehrer1);
-		fahrlehrer.addFahrlehrer(fahrlehrer2);
-		fahrschueler.addFahrschueler(fahrschueler1);	
 		
 		fahrstunde.addFahrstunde(fahrstd1);
 		fahrstunde.addFahrstunde(fahrstd2);
