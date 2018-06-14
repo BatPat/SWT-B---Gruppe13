@@ -13,7 +13,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
 	private Session session;
-	private static final String TABELLENNAME = "FahrlehrerDTO";
 
 	private FahrlehrerDaoImpl() {
 
@@ -32,7 +31,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		List<FahrlehrerDTO> liste = new ArrayList<>();
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from FahrlehrerDTO").list();
 		session.getTransaction().commit();
 		session.close();
@@ -43,7 +41,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
@@ -53,7 +50,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.saveOrUpdate(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
@@ -63,7 +59,6 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(fahrlehrer);
 		session.getTransaction().commit();
 		session.close();
@@ -73,8 +68,9 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
 		session = HibernateUtil.createSessionFactory().openSession();
-		fahrlehrer = (FahrlehrerDTO) session.get(TABELLENNAME, fahrlehrerid);
-		// Hibernate.initialize(fahrlehrer);
+		session.beginTransaction();
+		fahrlehrer = (FahrlehrerDTO) session.get(FahrlehrerDTO.class, fahrlehrerid);
+		session.getTransaction().commit();
 		session.close();
 		return fahrlehrer;
 	}

@@ -31,7 +31,6 @@ public class PruefungDaoImpl implements PruefungDao {
 		List<PruefungDTO> liste = new ArrayList<>();
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from PruefungDTO").list();
 		session.getTransaction().commit();
 		session.close();
@@ -42,7 +41,6 @@ public class PruefungDaoImpl implements PruefungDao {
 	public void addPruefung(PruefungDTO pruefung) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(pruefung);
 		session.getTransaction().commit();
 		session.close();
@@ -52,7 +50,6 @@ public class PruefungDaoImpl implements PruefungDao {
 	public void updatePruefung(PruefungDTO pruefung) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(pruefung);
 		session.getTransaction().commit();
 		session.close();
@@ -62,7 +59,6 @@ public class PruefungDaoImpl implements PruefungDao {
 	public void deletePruefung(PruefungDTO pruefung) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(pruefung);
 		session.getTransaction().commit();
 		session.close();

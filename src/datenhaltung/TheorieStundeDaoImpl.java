@@ -31,7 +31,6 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		List<TheoriestundeDTO> liste = new ArrayList<>();
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from TheoriestundeDTO").list();
 		session.getTransaction().commit();
 		session.close();
@@ -42,7 +41,6 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(theoriestunde);
 		session.getTransaction().commit();
 		session.close();
@@ -52,7 +50,6 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(theoriestunde);
 		session.getTransaction().commit();
 		session.close();
@@ -62,7 +59,6 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(theoriestunde);
 		session.getTransaction().commit();
 		session.close();

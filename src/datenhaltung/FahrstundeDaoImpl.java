@@ -31,7 +31,6 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		List<FahrstundeDTO> liste = new ArrayList<>();
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		liste = session.createQuery("from FahrstundeDTO").list();
 		session.getTransaction().commit();
 		session.close();
@@ -42,7 +41,6 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	public void addFahrstunde(FahrstundeDTO fahrstunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.save(fahrstunde);
 		session.getTransaction().commit();
 		session.close();
@@ -52,7 +50,6 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.update(fahrstunde);
 		session.getTransaction().commit();
 		session.close();
@@ -62,7 +59,6 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		// Hibernate.initialize(); entweder so oder statt lazy loading eager loading
 		session.delete(fahrstunde);
 		session.getTransaction().commit();
 		session.close();

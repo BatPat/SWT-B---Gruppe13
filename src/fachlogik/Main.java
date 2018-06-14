@@ -88,7 +88,7 @@ public class Main {
 //		}
 
 //		 Test get Fahrlehrer by Id
-		 FahrlehrerDTO fahrlehrerAusgabeTest = fahrlehrer.getFahrlehrer(1);
-		 System.out.println(fahrlehrerAusgabeTest.getName());
+//		 FahrlehrerDTO fahrlehrerAusgabeTest = fahrlehrer.getFahrlehrer(1);
+//		 System.out.println(fahrlehrerAusgabeTest.getName());
 	}
 }
