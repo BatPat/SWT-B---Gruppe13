@@ -44,7 +44,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		session.persist(fahrschueler);
+		session.save(fahrschueler);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -78,10 +78,10 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return fahrschueler;
 	}
 
-	public void addTheoriestunde(FahrschuelerDTO fahrschueler1, TheoriestundeDTO theostd1) {
+	public void addTheoriestunde(FahrschuelerDTO fahrschueler, TheoriestundeDTO theostd1) {
 		Session session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		FahrschuelerDTO fahrschuelerDTO = session.get(FahrschuelerDTO.class, fahrschueler1.getId());
+		FahrschuelerDTO fahrschuelerDTO = session.get(FahrschuelerDTO.class, fahrschueler.getId());
 		fahrschuelerDTO.addTheoriestunde(theostd1);
 		session.getTransaction().commit();
 		session.close();

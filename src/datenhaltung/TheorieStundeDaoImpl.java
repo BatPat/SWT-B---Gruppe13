@@ -41,7 +41,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		session.persist(theoriestunde);
+		session.save(theoriestunde);
 		session.getTransaction().commit();
 		session.close();
 	}

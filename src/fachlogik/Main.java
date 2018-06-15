@@ -17,9 +17,9 @@ public class Main {
 		// Test save DTO´s ---- Check
 		FahrlehrerDaoImpl fahrlehrerManager = FahrlehrerDaoImpl.getInstance();
 		FahrschuelerDaoImpl fahrschuelerManager = FahrschuelerDaoImpl.getInstance();
-		FahrstundeDaoImpl fahrstunde = FahrstundeDaoImpl.getInstance();
-		TheorieStundeDaoImpl theoriestunde = TheorieStundeDaoImpl.getInstance();
-		PruefungDaoImpl pruefung = PruefungDaoImpl.getInstance();
+		FahrstundeDaoImpl fahrstundemanager = FahrstundeDaoImpl.getInstance();
+		TheorieStundeDaoImpl theoriestundemanager = TheorieStundeDaoImpl.getInstance();
+		PruefungDaoImpl pruefungmanager = PruefungDaoImpl.getInstance();
 
 		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
 		FahrlehrerDTO fahrlehrer2 = new FahrlehrerDTO("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10");
@@ -41,17 +41,21 @@ public class Main {
 		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
 		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd1);
-//		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd1);
-//		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd1);
+		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd1);
+		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd1);
 
 		TheoriestundeDTO theostd2 = new TheoriestundeDTO(TheorieThema.MANEUVER, fahrlehrer2, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
-//		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd2);
+		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd2);
+		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd2);
 		
 		TheoriestundeDTO theostd3 = new TheoriestundeDTO(TheorieThema.VORFAHRT, fahrlehrer1, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
-//		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd2);
-//		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd3);
+		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd3);
+		
+		theoriestundemanager.addTheoriestunde(theostd1);
+		theoriestundemanager.addTheoriestunde(theostd2);
+		theoriestundemanager.addTheoriestunde(theostd3);
 
 		PruefungDTO pruef1 = new PruefungDTO(fahrlehrer1, fahrschueler1, LocalDate.now(), LocalTime.now(), "Reckling");
 		PruefungDTO pruef2 = new PruefungDTO(fahrlehrer1, fahrschueler2, LocalDate.now(), LocalTime.now(), "Reckling");
@@ -64,13 +68,13 @@ public class Main {
 		FahrstundeDTO fahrstd3 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer3, fahrschueler2,
 				LocalTime.now(), LocalDate.now(), "Recklinghausen");
 
-		fahrstunde.addFahrstunde(fahrstd1);
-		fahrstunde.addFahrstunde(fahrstd2);
-		fahrstunde.addFahrstunde(fahrstd3);
+		fahrstundemanager.addFahrstunde(fahrstd1);
+		fahrstundemanager.addFahrstunde(fahrstd2);
+		fahrstundemanager.addFahrstunde(fahrstd3);
 
-		pruefung.addPruefung(pruef1);
-		pruefung.addPruefung(pruef2);
-		pruefung.addPruefung(pruef3);
+		pruefungmanager.addPruefung(pruef1);
+		pruefungmanager.addPruefung(pruef2);
+		pruefungmanager.addPruefung(pruef3);
 
 		// Test delete and Update ---- Check
 		// fahrlehrer1.setHausnummer("4");
