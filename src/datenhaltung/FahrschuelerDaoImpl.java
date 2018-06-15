@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
 import fachlogik.HibernateUtil;
+import fachlogik.TheoriestundeDTO;
 
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	
@@ -75,6 +76,15 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		session.getTransaction().commit();
 		session.close();
 		return fahrschueler;
+	}
+
+	public void addTheoriestunde(FahrschuelerDTO fahrschueler1, TheoriestundeDTO theostd1) {
+		Session session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		FahrschuelerDTO fahrschuelerDTO = session.get(FahrschuelerDTO.class, fahrschueler1.getId());
+		fahrschuelerDTO.addTheoriestunde(theostd1);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

@@ -17,33 +17,40 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name = "theoriestunde")
 @SuppressWarnings("serial")
 public class TheoriestundeDTO extends Stunde {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name = "idtheoriestunde")
 	private long id;
+	
 	@Column(nullable = false, name = "thematheoriestunde")
 	private TheorieThema thema;
+	
 	@Column(nullable = false, name = "genidtheoriestunde")
 	private long genid;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idfahrlehrer")
-	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "idfahrlehrer")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
-	
-	@ManyToMany(cascade=CascadeType.ALL,targetEntity=FahrschuelerDTO.class,fetch=FetchType.EAGER) 
+
+	@ManyToMany(cascade = CascadeType.PERSIST, targetEntity = FahrschuelerDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@NotFound(action=NotFoundAction.IGNORE)
-	@JoinTable(name="theoriestunden_fahrschueler", joinColumns=@JoinColumn(name="idtheoriestunde"),inverseJoinColumns=@JoinColumn(name="idfahrschueler"))
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinTable(name = "theoriestunden_fahrschueler", joinColumns = @JoinColumn(name = "idtheoriestunde"), inverseJoinColumns = @JoinColumn(name = "idfahrschueler"))
 	private List<FahrschuelerDTO> fahrschueler;
-	
+
 	@Column(nullable = false, name = "countertheoriestunde")
 	private static long counter = 0;
+	
 	@Column(nullable = false, name = "datumtheoriestunde")
 	private LocalDate datum;
+	
 	@Column(nullable = false, name = "uhrzeittheoriestunde")
 	private LocalTime uhrzeit;
+	
 	@Column(nullable = false, name = "dauertheoriestunde")
 	private Duration dauer;
+	
 	@Column(nullable = false, name = "orttheoriestunde")
 	private String ort;
 
@@ -51,7 +58,8 @@ public class TheoriestundeDTO extends Stunde {
 		super(LocalDate.now(), LocalTime.now(), Duration.ofHours(1), "Recklinghausen");
 	}
 
-	public TheoriestundeDTO(TheorieThema thema, FahrlehrerDTO fahrlehrer, LocalDate datum, LocalTime uhrzeit, String ort) {
+	public TheoriestundeDTO(TheorieThema thema, FahrlehrerDTO fahrlehrer, LocalDate datum, LocalTime uhrzeit,
+			String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.genid = counter++;
 		this.thema = thema;
@@ -68,7 +76,7 @@ public class TheoriestundeDTO extends Stunde {
 		return genid;
 	}
 
-	//TODO
+	// TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();

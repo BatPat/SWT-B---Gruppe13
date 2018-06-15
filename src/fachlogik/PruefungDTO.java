@@ -25,32 +25,39 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name = "pruefung")
 @SuppressWarnings("serial")
 public class PruefungDTO implements Termin, Serializable {
-	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name = "idpruefung")
 	private long id;
+	
 	@Column(nullable = false, name = "genidpruefung")
 	private long genid;
+	
 	@Column(nullable = false, name = "counterpruefung")
 	private static long counter = 0;
+	
 	@Column(nullable = false, name = "bestandenpruefung")
 	private boolean bestanden;
 
 	@ManyToOne
-	@JoinColumn(name="namefahrlehrer")
-	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "namefahrlehrer")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 
 	@ManyToOne
-	@JoinColumn(name="namefahrschueler")
-	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "namefahrschueler")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrschuelerDTO fahrschueler;
 
 	@Column(nullable = false, name = "datumpruefung")
 	private LocalDate datum;
+	
 	@Column(nullable = false, name = "uhrzeitpruefung")
 	private LocalTime uhrzeit;
+	
 	@Column(nullable = false, name = "dauerpruefung")
 	private Duration dauer;
+	
 	@Column(nullable = false, name = "ortpruefung")
 	private String ort;
 
@@ -58,7 +65,8 @@ public class PruefungDTO implements Termin, Serializable {
 		super();
 	}
 
-	public PruefungDTO(FahrlehrerDTO fahrlehrer, FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit, String ort) {
+	public PruefungDTO(FahrlehrerDTO fahrlehrer, FahrschuelerDTO fahrschueler, LocalDate datum, LocalTime uhrzeit,
+			String ort) {
 		this.genid = counter++;
 		this.fahrlehrer = fahrlehrer;
 		this.fahrschueler = fahrschueler;

@@ -13,27 +13,34 @@ import org.hibernate.annotations.FetchMode;
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
 public class FahrschuelerDTO implements Person, Serializable {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	@Column(nullable = false, name = "namefahrschueler")
 	private String name;
+	
 	@Column(nullable = false, name = "plzfahrschueler")
 	private String plz;
+	
 	@Column(nullable = false, name = "wohnortfahrschueler")
 	private String wohnort;
+	
 	@Column(nullable = false, name = "strassefahrschueler")
 	private String strasse;
+	
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
 
-//	cascade={CascadeType.REMOVE,CascadeType.PERSIST}
-	@OneToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
+	@OneToMany(mappedBy = "fahrschueler", cascade = CascadeType.ALL, targetEntity = PruefungDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<PruefungDTO> pruefungen;
-	@OneToMany(mappedBy="schueler",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
+
+	@OneToMany(mappedBy = "schueler", cascade = CascadeType.ALL, targetEntity = FahrstundeDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<FahrstundeDTO> fahrstunden;
-	@ManyToMany(mappedBy="fahrschueler",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER) 
+
+	@ManyToMany(mappedBy = "fahrschueler", cascade = CascadeType.ALL, targetEntity = TheoriestundeDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<TheoriestundeDTO> theoriestunden;
 
@@ -142,6 +149,11 @@ public class FahrschuelerDTO implements Person, Serializable {
 
 	public int getId() {
 		return id;
+	}
+
+	public void addTheoriestunde(TheoriestundeDTO theostd) {
+		this.theoriestunden.add(theostd);
+		theostd.getFahrschueler().add(this);
 	}
 
 }

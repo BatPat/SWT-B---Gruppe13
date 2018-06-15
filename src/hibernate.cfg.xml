@@ -33,7 +33,8 @@
       </property>
       
       <property name="hibernate.hbm2ddl.auto">
-  		update
+      <!-- create -->
+ 		update
       </property>
       
       <property name="hibernate.c3p0.min_size">

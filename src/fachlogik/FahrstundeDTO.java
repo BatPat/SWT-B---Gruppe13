@@ -15,30 +15,36 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name = "fahrstunde")
 @SuppressWarnings("serial")
 public class FahrstundeDTO extends Stunde {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name = "idfahrstunde")
 	private long id = 0;
+	
 	@Column(nullable = false, name = "artfahrstunde")
 	private Fahrstundenart art;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idfahrlehrer")
-	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "idfahrlehrer")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrlehrerDTO lehrer;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idfahrschueler")
-	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "idfahrschueler")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrschuelerDTO schueler;
-	
+
 	@Column(nullable = false, name = "genidfahrstunde")
 	private long genid;
+	
 	@Column(nullable = false, name = "datumfahrstunde")
 	private LocalDate datum;
+	
 	@Column(nullable = false, name = "uhrzeitfahrstunde")
 	private LocalTime uhrzeit;
+	
 	@Column(nullable = false, name = "dauerfahrstunde")
 	private Duration dauer;
+	
 	@Column(nullable = false, name = "ortfahrstunde")
 	private String ort;
 
@@ -46,8 +52,8 @@ public class FahrstundeDTO extends Stunde {
 		super(LocalDate.now(), LocalTime.now(), Duration.ofHours(1), "Recklinghausen");
 	}
 
-	public FahrstundeDTO(Fahrstundenart art, FahrlehrerDTO lehrer, FahrschuelerDTO schueler, LocalTime uhrzeit, LocalDate datum,
-			String ort) {
+	public FahrstundeDTO(Fahrstundenart art, FahrlehrerDTO lehrer, FahrschuelerDTO schueler, LocalTime uhrzeit,
+			LocalDate datum, String ort) {
 		super(datum, uhrzeit, Duration.ofHours(1), ort);
 		this.art = art;
 		this.lehrer = lehrer;
@@ -94,7 +100,7 @@ public class FahrstundeDTO extends Stunde {
 		this.schueler = schueler;
 	}
 
-//	TODO
+	// TODO
 	@Override
 	public List<Person> getBeteiligtePersonen() {
 		List<Person> personen = new ArrayList<>();

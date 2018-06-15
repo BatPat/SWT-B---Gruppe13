@@ -12,28 +12,35 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "fahrlehrer")
 @SuppressWarnings("serial")
-public class FahrlehrerDTO implements Person, Serializable{
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+public class FahrlehrerDTO implements Person, Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id = 0;
+	
 	@Column(nullable = false, name = "namefahrlehrer")
 	private String name;
+	
 	@Column(nullable = false, name = "plzfahrlehrer")
 	private String plz;
+	
 	@Column(nullable = false, name = "wohnortfahrlehrer")
 	private String wohnort;
+	
 	@Column(nullable = false, name = "strassefahrlehrer")
 	private String strasse;
+	
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
 
-//	cascade={CascadeType.REMOVE,CascadeType.PERSIST}
-	@OneToMany(mappedBy="lehrer",cascade=CascadeType.ALL,targetEntity=FahrstundeDTO.class,fetch=FetchType.EAGER) 
+	@OneToMany(mappedBy = "lehrer", cascade = CascadeType.ALL, targetEntity = FahrstundeDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<FahrstundeDTO> fahrstunden;
-	@OneToMany(mappedBy="fahrlehrer",cascade=CascadeType.ALL,targetEntity=TheoriestundeDTO.class,fetch=FetchType.EAGER)  
+	
+	@OneToMany(mappedBy = "fahrlehrer", cascade = CascadeType.ALL, targetEntity = TheoriestundeDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<TheoriestundeDTO> theoriestunden;
-	@OneToMany(mappedBy="fahrlehrer",cascade=CascadeType.ALL,targetEntity=PruefungDTO.class,fetch=FetchType.EAGER)  
+	
+	@OneToMany(mappedBy = "fahrlehrer", cascade = CascadeType.ALL, targetEntity = PruefungDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<PruefungDTO> pruefungen;
 
@@ -133,7 +140,6 @@ public class FahrlehrerDTO implements Person, Serializable{
 		return id;
 	}
 
-
 	public void setFahrstunden(List<FahrstundeDTO> fahrstunden) {
 		this.fahrstunden = fahrstunden;
 	}
@@ -149,6 +155,5 @@ public class FahrlehrerDTO implements Person, Serializable{
 	public void setPruefungen(List<PruefungDTO> pruefungen) {
 		this.pruefungen = pruefungen;
 	}
-
 
 }
