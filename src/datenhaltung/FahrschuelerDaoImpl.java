@@ -3,10 +3,10 @@ package datenhaltung;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 
-import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
 import fachlogik.HibernateUtil;
 import fachlogik.TheoriestundeDTO;
@@ -62,6 +62,8 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
+		Query q = session.createNativeQuery("Delete from theoriestunden_fahrschueler where idfahrschueler=" + fahrschueler.getId());
+		q.executeUpdate();
 		session.delete(fahrschueler);
 		session.getTransaction().commit();
 		session.close();

@@ -29,7 +29,6 @@ public class Main {
 		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32");
 		FahrschuelerDTO fahrschueler3 = new FahrschuelerDTO("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
 
-
 		fahrlehrerManager.addFahrlehrer(fahrlehrer1);
 		fahrlehrerManager.addFahrlehrer(fahrlehrer2);
 		fahrlehrerManager.addFahrlehrer(fahrlehrer3);
@@ -80,8 +79,12 @@ public class Main {
 		// fahrlehrer1.setHausnummer("4");
 		// fahrlehrer.updateFahrlehrer(fahrlehrer1);
 		//
-		// fahrschueler.deleteFahrschueler(fahrschueler1);
-
+		fahrschuelerManager.deleteFahrschueler(fahrschueler1);
+//		fahrlehrerManager.deleteFahrlehrer(fahrlehrer1);
+//		fahrstundemanager.deleteFahrstunde(fahrstd1);
+//		pruefungmanager.deletePruefung(pruef1);
+//		theoriestundemanager.deleteTheoriestunde(theostd1);
+		
 		// Test get alle Fahrlehrer ---- Check
 		// List<FahrschuelerDTO> l = fahrschueler.getAlleFahrschueler();
 		// for (FahrschuelerDTO f : l) {
