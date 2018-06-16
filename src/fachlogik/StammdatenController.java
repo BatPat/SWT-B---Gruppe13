@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -13,6 +14,7 @@ import org.eclipse.swt.widgets.TableItem;
 
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
+import oberflaeche.PersonAnlegenDialog;
 import oberflaeche.StammdatenView;
 
 public class StammdatenController implements Observer {
@@ -85,12 +87,12 @@ public class StammdatenController implements Observer {
 
 		switch (arg1.toString()) {
 		case "FahrlehrerNeu":
-			//anpassen wenn view neue fahrlehrer erlaubt
+			createPerson(PersonType.FAHRLEHRER);
 			fillLehrerListContent();
 			break;
 
 		case "FahrschuelerNeu":
-			//anpassen wenn view neue fahrschueler erlaubt
+			createPerson(PersonType.FAHRSCHUELER);
 			fillSchuelerListContent();
 			break;
 
@@ -112,6 +114,11 @@ public class StammdatenController implements Observer {
 			}
 			break;
 		}
+	}
+
+	private void createPerson(PersonType personType) {
+		
+		new PersonAnlegenController(personType, stammdatenView.getDisplay().getActiveShell());
 	}
 
 }

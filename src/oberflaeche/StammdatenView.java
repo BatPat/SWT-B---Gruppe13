@@ -262,13 +262,7 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrschuelerNeu");
 
-				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
-				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
-				// Controller erzeugt neuen Fahrschueler, nach Klick auf ok müssen alle Daten
-				// des FS gespeichert werden
-				if (dialog.open() != Window.OK) {
-					System.out.println("Fehler");
-				}
+				
 			}
 
 			@Override
@@ -351,13 +345,6 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrlehrerNeu");
 
-				// ToDo Controller von PersonAnlegenDialog aufrufen und Zeilen dort rein
-				PersonAnlegenDialog dialog = new PersonAnlegenDialog(shell);
-				// Controller erzeugt neuen Fahrlehrer, nach Klick auf ok müssen alle Daten des
-				// FL gespeichert werden
-				if (dialog.open() != Window.OK) {
-					System.out.println("Fehler");
-				}
 			}
 
 			@Override
