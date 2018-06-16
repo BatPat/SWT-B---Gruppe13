@@ -2,6 +2,7 @@ package fachlogik;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
@@ -47,11 +48,11 @@ public class Main {
 				LocalTime.now(), "Recklinghausen");
 		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd2);
 		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd2);
-		
+
 		TheoriestundeDTO theostd3 = new TheoriestundeDTO(TheorieThema.VORFAHRT, fahrlehrer1, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
 		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd3);
-		
+
 		theoriestundemanager.addTheoriestunde(theostd1);
 		theoriestundemanager.addTheoriestunde(theostd2);
 		theoriestundemanager.addTheoriestunde(theostd3);
@@ -75,24 +76,31 @@ public class Main {
 		pruefungmanager.addPruefung(pruef2);
 		pruefungmanager.addPruefung(pruef3);
 
-		// Test delete and Update ---- Check
+		// Test delete and update ---- Check
 		// fahrlehrer1.setHausnummer("4");
 		// fahrlehrer.updateFahrlehrer(fahrlehrer1);
 		//
-		fahrschuelerManager.deleteFahrschueler(fahrschueler1);
-//		fahrlehrerManager.deleteFahrlehrer(fahrlehrer1);
-//		fahrstundemanager.deleteFahrstunde(fahrstd1);
-//		pruefungmanager.deletePruefung(pruef1);
-//		theoriestundemanager.deleteTheoriestunde(theostd1);
-		
-		// Test get alle Fahrlehrer ---- Check
-		// List<FahrschuelerDTO> l = fahrschueler.getAlleFahrschueler();
-		// for (FahrschuelerDTO f : l) {
+		// fahrschuelerManager.deleteFahrschueler(fahrschueler1);
+		// fahrlehrerManager.deleteFahrlehrer(fahrlehrer1);
+		// fahrstundemanager.deleteFahrstunde(fahrstd1);
+		// pruefungmanager.deletePruefung(pruef1);
+		// theoriestundemanager.deleteTheoriestunde(theostd1);
+
+		// Test get alle Fahrlehrer / Fahrschueler ---- Check
+		// List<FahrlehrerDTO> l = fahrlehrerManager.getAlleFahrlehrer();
+		// for (FahrlehrerDTO f : l) {
 		// System.out.println(""+f.getName());
 		// }
+		// List<FahrstundeDTO> l = fahrstundemanager.getAlleFahrstunden();
+		// for (FahrstundeDTO f : l) {
+		// System.out.println(""+f.getOrt());
+		// }
 
-		// Test get Fahrlehrer by Id
-		// FahrlehrerDTO fahrlehrerAusgabeTest = fahrlehrer.getFahrlehrer(1);
+		// Test get Fahrlehrer/Fahrschueler by Id
+		// FahrlehrerDTO fahrlehrerAusgabeTest = fahrlehrerManager.getFahrlehrer(1);
 		// System.out.println(fahrlehrerAusgabeTest.getName());
+		// FahrschuelerDTO fahrschuelerAusgabeTest =
+		// fahrschuelerManager.getFahrschueler(6);
+		// System.out.println(fahrschuelerAusgabeTest.getName());
 	}
 }

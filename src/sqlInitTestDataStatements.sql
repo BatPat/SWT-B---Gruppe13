@@ -1,64 +1,64 @@
 -- Testdata for fahrlehrer 
-INSERT INTO fahrschule.fahrlehrer
-(idfahrlehrer,
-namefahrlehrer,
-plzfahrlehrer,
-wohnortfahrlehrer,
-strassefahrlehrer,
-hausnummerfahrlehrer)
-VALUES
-(1,"Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
-
-INSERT INTO fahrschule.fahrlehrer
-(idfahrlehrer,
-namefahrlehrer,
-plzfahrlehrer,
-wohnortfahrlehrer,
-strassefahrlehrer,
-hausnummerfahrlehrer)
-VALUES
-(,"Lukas Schmidt", "45231", "Bochum", "Marienweg", "10")
-
-INSERT INTO fahrschule.fahrlehrer
-(idfahrlehrer,
-namefahrlehrer,
-plzfahrlehrer,
-wohnortfahrlehrer,
-strassefahrlehrer,
-hausnummerfahrlehrer)
-VALUES
-(,"Elke Oltor", "43623", "Unna", "Frogeldamm", "33");
-
--- Testdata for fahrschueler
-INSERT INTO fahrschule.fahrschueler
-(idfahrschueler,
-namefahrschueler,
-plzfahrschueler,
-wohnortfahrschueler,
-strassefahrschueler,
-hausnummerfahrschueler)
-VALUES
-(1,"Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
-
-INSERT INTO fahrschule.fahrschueler
-(idfahrschueler,
-namefahrschueler,
-plzfahrschueler,
-wohnortfahrschueler,
-strassefahrschueler,
-hausnummerfahrschueler)
-VALUES
-(,"Julius Blanke", "51123", "Hagen", "Runhweg", "32")
-
-INSERT INTO fahrschule.fahrschueler
-(idfahrschueler,
-namefahrschueler,
-plzfahrschueler,
-wohnortfahrschueler,
-strassefahrschueler,
-hausnummerfahrschueler)
-VALUES
-(,"Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
+--INSERT INTO fahrschule.fahrlehrer
+--(idfahrlehrer,
+--namefahrlehrer,
+--plzfahrlehrer,
+--wohnortfahrlehrer,
+--strassefahrlehrer,
+--hausnummerfahrlehrer)
+--VALUES
+--(1,"Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
+--
+--INSERT INTO fahrschule.fahrlehrer
+--(idfahrlehrer,
+--namefahrlehrer,
+--plzfahrlehrer,
+--wohnortfahrlehrer,
+--strassefahrlehrer,
+--hausnummerfahrlehrer)
+--VALUES
+--(,"Lukas Schmidt", "45231", "Bochum", "Marienweg", "10")
+--
+--INSERT INTO fahrschule.fahrlehrer
+--(idfahrlehrer,
+--namefahrlehrer,
+--plzfahrlehrer,
+--wohnortfahrlehrer,
+--strassefahrlehrer,
+--hausnummerfahrlehrer)
+--VALUES
+--(,"Elke Oltor", "43623", "Unna", "Frogeldamm", "33");
+--
+---- Testdata for fahrschueler
+--INSERT INTO fahrschule.fahrschueler
+--(idfahrschueler,
+--namefahrschueler,
+--plzfahrschueler,
+--wohnortfahrschueler,
+--strassefahrschueler,
+--hausnummerfahrschueler)
+--VALUES
+--(1,"Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
+--
+--INSERT INTO fahrschule.fahrschueler
+--(idfahrschueler,
+--namefahrschueler,
+--plzfahrschueler,
+--wohnortfahrschueler,
+--strassefahrschueler,
+--hausnummerfahrschueler)
+--VALUES
+--(,"Julius Blanke", "51123", "Hagen", "Runhweg", "32")
+--
+--INSERT INTO fahrschule.fahrschueler
+--(idfahrschueler,
+--namefahrschueler,
+--plzfahrschueler,
+--wohnortfahrschueler,
+--strassefahrschueler,
+--hausnummerfahrschueler)
+--VALUES
+--(,"Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
 
 ---- Testdata for fahrstunde
 --INSERT INTO fahrschule.fahrstunde

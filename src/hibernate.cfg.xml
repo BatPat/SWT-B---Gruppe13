@@ -8,10 +8,6 @@
         org.hibernate.dialect.MySQL5InnoDBDialect
       </property>
       
-<!--       <property name="connection.pool_size"> -->
-<!--       	 100 -->
-<!--       </property> -->
-      
       <property name = "hibernate.connection.driver_class">
         com.mysql.cj.jdbc.Driver
       </property>
@@ -36,10 +32,6 @@
 <!--        create-drop -->
  		update
       </property>
-
-<!-- 		<property name="javax.persistence.schema-generation.database.action">  -->
-<!-- 		drop-and-create -->
-<!-- 		</property> -->
       
       <property name="hibernate.c3p0.min_size">
       	5
@@ -61,9 +53,17 @@
   	  	300
   	  </property>
             
-<!--       <property name="persistence.sql-load-script-source"> -->
-<!--       sqlStatements.sql  -->
-<!--        </property> -->
+       <property name="javax.persistence.sql-load-script-source">
+      	"/sqlInitTestDataStatements.sql"
+       </property>
+       
+       <property name="javax.persistence.schema-generation.drop-source"> 
+       	"script" 
+       </property> 
+      
+      <property name="javax.persistence.schema-generation.drop-script-source">
+      	"/sqlDropStatements.sql"
+      </property>
       
 <!--       List of XML mapping files -->
       <mapping class ="fachlogik.FahrlehrerDTO"/>
