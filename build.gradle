@@ -10,6 +10,9 @@ sourceSets {
     
 repositories { 
 	mavenCentral()
+    maven {
+        url "http://maven-eclipse.github.io/maven"
+    }
 }
 
 eclipse {
@@ -33,6 +36,12 @@ dependencies {
     //https://mvnrepository.com/artifact/com.itextpdf/itextpdf
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
     compile group: 'com.eclipsesource.tabris', name: 'tabris-passepartout', version: '0.10.0'
+    // https://mvnrepository.com/artifact/org.eclipse/jface
+	compile group: 'org.eclipse', name: 'jface', version: '3.3.0-I20070606-0010'
+    compile group: 'org.eclipse.swt', name: 'org.eclipse.swt.win32.win32.x86_64', version: '4.6.1'
+    // https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.commands
+	compile group: 'org.eclipse.core', name: 'org.eclipse.core.commands', version: '3.6.0'
+    
 }
 
 sourceSets {
