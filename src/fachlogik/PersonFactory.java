@@ -1,5 +1,8 @@
 package fachlogik;
 
+import datenhaltung.FahrlehrerDaoImpl;
+import datenhaltung.FahrschuelerDaoImpl;
+
 public class PersonFactory implements AbstractPersonFactory {
 
 	@Override
@@ -9,11 +12,15 @@ public class PersonFactory implements AbstractPersonFactory {
 		
 		switch (typ) {
 		case FAHRLEHRER:
-			person = new FahrlehrerDTO(name, plz, wohnort, strasse, hausnummer, telefonnummer, geburtsdatum, fuehrerscheinklasse);			
+			FahrlehrerDTO fLehrer = new FahrlehrerDTO(name, plz, wohnort, strasse, hausnummer, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+			FahrlehrerDaoImpl.getInstance().addFahrlehrer(fLehrer);
+			person = fLehrer;		
 			break;
 	
 		case FAHRSCHUELER:
-			person = new FahrschuelerDTO(name, plz, wohnort, strasse, hausnummer, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+			FahrschuelerDTO fSchueler = new FahrschuelerDTO(name, plz, wohnort, strasse, hausnummer, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+			FahrschuelerDaoImpl.getInstance().addFahrschueler(fSchueler);
+			person = fSchueler;
 			break;
 		default:
 			

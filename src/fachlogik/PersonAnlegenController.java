@@ -41,13 +41,24 @@ public class PersonAnlegenController{
 
 
 	private void personAnlegen() {
-		
-		Person person = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
-		
-		//TODO Person abspeichern
-		System.out.println("neuer " + personType.name() + ": " + person.getName());
+		if(isAlleFelderAusgefüllt()) {
+			Person person = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+		}
 	}
-	
+
+	private boolean isAlleFelderAusgefüllt() {
+		boolean result = true;
+		result = result && vorname != null;
+		result = result && nachname != null;
+		result = result && telefonnummer != null;
+		result = result && plz != null;
+		result = result && ort != null;
+		result = result && strasse != null;
+		result = result && hausNr != null;
+		result = result && geburtsdatum != null;
+		result = result && fuehrerscheinklasse != null;
+		return result;
+	}
 
 	private void createDialogListener() {
 		dialog.getVornameInput().addFocusListener(new FocusListener() {
@@ -146,5 +157,11 @@ public class PersonAnlegenController{
 			public void focusGained(FocusEvent e) {
 			}
 		});
+		
+		//das eingabe feld für das geburtsdatum besitzt einen standardwert, dieser wird zu Beginn in das "model" übernommen
+		int tag = dialog.getGebdat().getDay();
+		int monat = dialog.getGebdat().getMonth() + 1;
+		int jahr = dialog.getGebdat().getYear();
+		geburtsdatum = tag + "." + monat + "." + jahr;
 	}
 }
