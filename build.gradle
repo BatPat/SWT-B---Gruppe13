@@ -5,7 +5,7 @@ sourceCompatibility = 1.8
 version = '1.0'
 
 sourceSets {
-        main.java.srcDirs = ['src']
+        main.java.srcDirs = ['test','src']
 }
     
 repositories { 
@@ -25,6 +25,12 @@ eclipse {
 dependencies {		    
 	testCompile 'org.assertj:assertj-core:3.8.0'
 	testCompile 'junit:junit:4.12'
+	 testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    )
     testCompile "org.mockito:mockito-core:2.8.47"
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
     //https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on

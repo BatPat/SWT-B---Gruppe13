@@ -29,7 +29,6 @@
       </property>
       
       <property name="hibernate.hbm2ddl.auto">
-<!--        create-drop -->
  		update
       </property>
       
@@ -51,19 +50,7 @@
   		
   	  <property name="hibernate.c3p0.idle_test_period">
   	  	300
-  	  </property>
-            
-       <property name="javax.persistence.sql-load-script-source">
-      	"/sqlInitTestDataStatements.sql"
-       </property>
-       
-       <property name="javax.persistence.schema-generation.drop-source"> 
-       	"script" 
-       </property> 
-      
-      <property name="javax.persistence.schema-generation.drop-script-source">
-      	"/sqlDropStatements.sql"
-      </property>
+  	  </property>       
       
 <!--       List of XML mapping files -->
       <mapping class ="fachlogik.FahrlehrerDTO"/>

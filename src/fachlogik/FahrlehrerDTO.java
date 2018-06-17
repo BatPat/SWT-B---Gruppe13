@@ -31,6 +31,15 @@ public class FahrlehrerDTO implements Person, Serializable {
 	
 	@Column(nullable = false, name = "hausnummerfahrlehrer")
 	private String hausnummer;
+	
+	@Column(nullable = false, name = "telefonnummerfahrlehrer")
+	private String telefonnummer;
+	
+	@Column(nullable = false, name = "geburtsdatumfahrlehrer")
+	private String geburtsdatum;
+	
+	@Column(nullable = false, name = "fuehrerscheinklassefahrlehrer")
+	private String fuehrerscheinklasse;
 
 	@OneToMany(mappedBy = "lehrer", cascade = CascadeType.ALL, targetEntity = FahrstundeDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -48,13 +57,16 @@ public class FahrlehrerDTO implements Person, Serializable {
 		super();
 	}
 
-	public FahrlehrerDTO(String name, String plz, String wohnort, String strasse, String hausnummer) {
+	public FahrlehrerDTO(String name, String plz, String wohnort, String strasse, String hausnummer, String telefonnummer, String geburtsdatum, String fuehrerscheinklasse) {
 		super();
 		this.name = name;
 		this.plz = plz;
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
+		this.fuehrerscheinklasse = fuehrerscheinklasse;
+		this.geburtsdatum = geburtsdatum;
+		this.telefonnummer = telefonnummer;
 		this.fahrstunden = new ArrayList<FahrstundeDTO>();
 		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
 		this.pruefungen = new ArrayList<PruefungDTO>();
@@ -156,4 +168,31 @@ public class FahrlehrerDTO implements Person, Serializable {
 		this.pruefungen = pruefungen;
 	}
 
+	public String getTelefonnummer() {
+		return telefonnummer;
+	}
+
+	public void setTelefonnummer(String telefonnummer) {
+		this.telefonnummer = telefonnummer;
+	}
+
+	public String getGeburtsdatum() {
+		return geburtsdatum;
+	}
+
+	public void setGeburtsdatum(String geburtsdatum) {
+		this.geburtsdatum = geburtsdatum;
+	}
+
+	public String getFuehrerscheinklasse() {
+		return fuehrerscheinklasse;
+	}
+
+	public void setFuehrerscheinklasse(String fuehrerscheinklasse) {
+		this.fuehrerscheinklasse = fuehrerscheinklasse;
+	}
+
+	public String Fuehrerscheinklasse() {
+		return null;
+	}
 }

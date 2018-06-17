@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+import datenhaltung.FahrschuelerDaoImpl;
 import fachlogik.FahrschuelerDTO;
 import fachlogik.HibernateUtil;
 
@@ -34,8 +35,8 @@ public class FahrschuelerDAOTest {
 	
 	@Test
 	public void test_GetAll_Fahrschueler_andGetOk() {
-		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
-		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Heinrich Wage", "41743", "Dortmund", "Perss-Alle", "51");
+		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
+		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 		List<FahrschuelerDTO> fahrschuelerliste = new ArrayList<FahrschuelerDTO>();
 		fahrschuelerliste.add(fahrschueler);
 		fahrschuelerliste.add(fahrschueler2);
@@ -46,7 +47,7 @@ public class FahrschuelerDAOTest {
 
 	@Test
 	public void test_Save_Fahrschueler_andGetOk() {
-		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
+		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler);
 		FahrschuelerDTO fahrschueler2 = FAHRSCHUELER_MANAGER.getFahrschueler(fahrschueler.getId());
 		assertThat("Peter Jung").isEqualTo(fahrschueler2.getName());
@@ -54,7 +55,7 @@ public class FahrschuelerDAOTest {
 	
 	@Test
 	public void test_Update_Fahrschueler_andGetOk() {
-		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10");
+		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler);
 		fahrschueler.setStrasse("Test-Straße");
 		fahrschueler.setHausnummer("7");
@@ -66,7 +67,7 @@ public class FahrschuelerDAOTest {
 	
 	@Test
 	public void test_Delete_Fahrschueler_andDontGetOk() {
-		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Heinrich Wage", "41743", "Dortmund", "Perss-Alle", "51");
+		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler);
 		FahrschuelerDTO fahrschueler2 = FAHRSCHUELER_MANAGER.getFahrschueler(fahrschueler.getId());
 		assertThat("Heinrich Wage").isEqualTo(fahrschueler2.getName());

@@ -1,7 +1,0 @@
---DROP TABLE fahrschule.hibernate_sequence;
---DROP TABLE fahrschule.theoriestunden_fahrschueler;
---DROP TABLE fahrschule.theoriestunde;
---DROP TABLE fahrschule.pruefung;
---DROP TABLE fahrschule.fahrstunde;
---DROP TABLE fahrschule.fahrlehrer;
---DROP TABLE fahrschule.fahrschueler;

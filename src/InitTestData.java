@@ -1,5 +1,3 @@
-package fachlogik;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -8,31 +6,34 @@ import datenhaltung.FahrschuelerDaoImpl;
 import datenhaltung.FahrstundeDaoImpl;
 import datenhaltung.PruefungDaoImpl;
 import datenhaltung.TheorieStundeDaoImpl;
+import fachlogik.FahrlehrerDTO;
+import fachlogik.FahrschuelerDTO;
+import fachlogik.FahrstundeDTO;
+import fachlogik.Fahrstundenart;
+import fachlogik.PruefungDTO;
+import fachlogik.TheorieThema;
+import fachlogik.TheoriestundeDTO;
 
 public class InitTestData {
+	private FahrlehrerDaoImpl fahrlehrerManager = FahrlehrerDaoImpl.getInstance();
+	private FahrschuelerDaoImpl fahrschuelerManager = FahrschuelerDaoImpl.getInstance();
+	private FahrstundeDaoImpl fahrstundemanager = FahrstundeDaoImpl.getInstance();
+	private TheorieStundeDaoImpl theoriestundemanager = TheorieStundeDaoImpl.getInstance();
+	private PruefungDaoImpl pruefungmanager = PruefungDaoImpl.getInstance();
 
 	public InitTestData() {
-		//TODO
-		if( Datenbank ist leer)
-		{
+		if(fahrlehrerManager.getAlleFahrlehrer().size()== 0)
 			createTestData();
-		}
 	}
 	
 	public void createTestData(){
-		FahrlehrerDaoImpl fahrlehrerManager = FahrlehrerDaoImpl.getInstance();
-		FahrschuelerDaoImpl fahrschuelerManager = FahrschuelerDaoImpl.getInstance();
-		FahrstundeDaoImpl fahrstundemanager = FahrstundeDaoImpl.getInstance();
-		TheorieStundeDaoImpl theoriestundemanager = TheorieStundeDaoImpl.getInstance();
-		PruefungDaoImpl pruefungmanager = PruefungDaoImpl.getInstance();
+		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
+		FahrlehrerDTO fahrlehrer2 = new FahrlehrerDTO("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10","0321-573447","03.06.1999","B");
+		FahrlehrerDTO fahrlehrer3 = new FahrlehrerDTO("Elke Oltor", "43623", "Unna", "Frogeldamm", "33","0321-2537347","15.02.1996","B");
 
-		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3");
-		FahrlehrerDTO fahrlehrer2 = new FahrlehrerDTO("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10");
-		FahrlehrerDTO fahrlehrer3 = new FahrlehrerDTO("Elke Oltor", "43623", "Unna", "Frogeldamm", "33");
-
-		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
-		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32");
-		FahrschuelerDTO fahrschueler3 = new FahrschuelerDTO("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41");
+		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
+		FahrschuelerDTO fahrschueler2 = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
+		FahrschuelerDTO fahrschueler3 = new FahrschuelerDTO("Maria Chimea", "41243", "Dortmund", "Temmstraße", "41","0221-4589347","15.02.1996","B");
 
 		fahrlehrerManager.addFahrlehrer(fahrlehrer1);
 		fahrlehrerManager.addFahrlehrer(fahrlehrer2);
@@ -41,7 +42,6 @@ public class InitTestData {
 		fahrschuelerManager.addFahrschueler(fahrschueler2);
 		fahrschuelerManager.addFahrschueler(fahrschueler3);
 
-		// Funnktion mapping one to many zwischen DTO´s ---- Check
 		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(),
 				LocalTime.now(), "Recklinghausen");
 		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd1);

@@ -9,8 +9,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import datenhaltung.TheorieStundeDaoImpl;
-
 @Entity
 @Table(name = "fahrschueler")
 @SuppressWarnings("serial")
@@ -33,6 +31,15 @@ public class FahrschuelerDTO implements Person, Serializable {
 	
 	@Column(nullable = false, name = "hausnummerfahrschueler")
 	private String hausnummer;
+	
+	@Column(nullable = false, name = "telefonnummerfahrschueler")
+	private String telefonnummer;
+	
+	@Column(nullable = false, name = "geburtsdatumfahrschueler")
+	private String geburtsdatum;
+	
+	@Column(nullable = false, name = "fuehrerscheinklassefahrschueler")
+	private String fuehrerscheinklasse;
 
 	@OneToMany(mappedBy = "fahrschueler", cascade = CascadeType.ALL, targetEntity = PruefungDTO.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -50,13 +57,16 @@ public class FahrschuelerDTO implements Person, Serializable {
 		super();
 	}
 
-	public FahrschuelerDTO(String name, String plz, String wohnort, String strasse, String hausnummer) {
+	public FahrschuelerDTO(String name, String plz, String wohnort, String strasse, String hausnummer, String telefonnummer, String geburtsdatum, String fuehrerscheinklasse) {
 		super();
 		this.name = name;
 		this.plz = plz;
 		this.wohnort = wohnort;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;
+		this.fuehrerscheinklasse = fuehrerscheinklasse;
+		this.geburtsdatum = geburtsdatum;
+		this.telefonnummer = telefonnummer;
 		this.fahrstunden = new ArrayList<FahrstundeDTO>();
 		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
 		this.pruefungen = new ArrayList<PruefungDTO>();
@@ -158,4 +168,43 @@ public class FahrschuelerDTO implements Person, Serializable {
 		theostd.getFahrschueler().add(this);
 	}
 
+	public String getTelefonnummer() {
+		return telefonnummer;
+	}
+
+	public void setTelefonnummer(String telefonnummer) {
+		this.telefonnummer = telefonnummer;
+	}
+
+	public String getGeburtsdatum() {
+		return geburtsdatum;
+	}
+
+	public void setGeburtsdatum(String geburtsdatum) {
+		this.geburtsdatum = geburtsdatum;
+	}
+
+	public String getFuehrerscheinklasse() {
+		return fuehrerscheinklasse;
+	}
+
+	public void setFuehrerscheinklasse(String fuehrerscheinklasse) {
+		this.fuehrerscheinklasse = fuehrerscheinklasse;
+	}
+
+	public void setPruefungen(List<PruefungDTO> pruefungen) {
+		this.pruefungen = pruefungen;
+	}
+
+	public void setFahrstunden(List<FahrstundeDTO> fahrstunden) {
+		this.fahrstunden = fahrstunden;
+	}
+
+	public void setTheoriestunden(List<TheoriestundeDTO> theoriestunden) {
+		this.theoriestunden = theoriestunden;
+	}
+
+	public String Fuehrerscheinklasse() {
+		return null;
+	}
 }
