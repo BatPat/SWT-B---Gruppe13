@@ -84,10 +84,9 @@ public class FahrschuelerDAOTest {
 //	}
 //	
 
-	
 //	@Test
 //	public void test_AddTheoriestunde_To_Fahrschueler_andGetOk() {
-//		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51");
+//		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 //		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler);
 //		FahrschuelerDTO fahrschueler2 = FAHRSCHUELER_MANAGER.getFahrschueler(fahrschueler.getId());
 //		assertThat("Peter Jung").isEqualTo(fahrschueler2.getName());
