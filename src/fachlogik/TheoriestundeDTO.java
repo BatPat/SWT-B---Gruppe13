@@ -57,6 +57,7 @@ public class TheoriestundeDTO extends Stunde {
 
 	public TheoriestundeDTO() {
 		super(LocalDate.now(), LocalTime.now(), Duration.ofHours(1), "Recklinghausen");
+		this.fahrschueler = new ArrayList<FahrschuelerDTO>();
 	}
 
 	public TheoriestundeDTO(TheorieThema thema, FahrlehrerDTO fahrlehrer, LocalDate datum, LocalTime uhrzeit,

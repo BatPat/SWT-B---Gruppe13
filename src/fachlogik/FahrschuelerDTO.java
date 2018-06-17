@@ -55,6 +55,9 @@ public class FahrschuelerDTO implements Person, Serializable {
 
 	public FahrschuelerDTO() {
 		super();
+		this.fahrstunden = new ArrayList<FahrstundeDTO>();
+		this.theoriestunden = new ArrayList<TheoriestundeDTO>();
+		this.pruefungen = new ArrayList<PruefungDTO>();
 	}
 
 	public FahrschuelerDTO(String name, String plz, String wohnort, String strasse, String hausnummer, String telefonnummer, String geburtsdatum, String fuehrerscheinklasse) {
