@@ -63,5 +63,15 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
+	@Override
+	public PruefungDTO getPruefung(int pruefungId) {
+		PruefungDTO pruefung = null;
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		pruefung = (PruefungDTO) session.get(PruefungDTO.class, pruefungId);
+		session.getTransaction().commit();
+		session.close();
+		return pruefung;
+	}
 }

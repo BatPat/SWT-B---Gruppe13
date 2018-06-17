@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
@@ -37,6 +37,21 @@ public class FahrstundeDAOTest {
 		session.close();
 	}
 	
+	@Test
+	public void test_GetAll_Fahrstunde_andGetOk() {
+		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
+		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
+		FahrstundeDTO fahrstunde = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
+				LocalTime.now(), LocalDate.now(), "Recklinghausen");
+		FahrstundeDTO fahrstunde2 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
+				LocalTime.now(), LocalDate.now(), "Recklinghausen");
+		List<FahrstundeDTO> fahrstundeliste = new ArrayList<FahrstundeDTO>();
+		fahrstundeliste.add(fahrstunde);
+		fahrstundeliste.add(fahrstunde2);
+		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde);
+		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde2);
+		assertThat(fahrstundeliste.size()).isEqualTo(FAHRSTUNDE_MANAGER.getAlleFahrstunden().size());
+	}
 	
 	@Test
 	public void test_Save_fahrstunde_andGetOk() {
@@ -68,8 +83,6 @@ public class FahrstundeDAOTest {
 				LocalTime.now(), LocalDate.now(), "Recklinghausen");
 		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde);
 		FAHRSTUNDE_MANAGER.deleteFahrstunde(fahrstunde);
-//		TODO need to be implemented
-		assertNull(FAHRSTUNDE_MANAGER.getFahrstunde(fahrstunde.getId()));
+		assertNull(FAHRSTUNDE_MANAGER.getFahrstunde((int) fahrstunde.getId()));
 	}
-	
 }

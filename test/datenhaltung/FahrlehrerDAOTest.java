@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import fachlogik.FahrlehrerDTO;
 import fachlogik.HibernateUtil;

@@ -12,4 +12,6 @@ public interface TheoriestundeDao {
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde);
 	
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde);
+	
+	public TheoriestundeDTO getTheoriestunde(int theoriestundeid);
 }

@@ -63,5 +63,15 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
+	@Override
+	public FahrstundeDTO getFahrstunde(int fahrstundeId) {
+		FahrstundeDTO fahrstunde = null;
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		fahrstunde = (FahrstundeDTO) session.get(FahrstundeDTO.class, fahrstundeId);
+		session.getTransaction().commit();
+		session.close();
+		return fahrstunde;
+	}
 }

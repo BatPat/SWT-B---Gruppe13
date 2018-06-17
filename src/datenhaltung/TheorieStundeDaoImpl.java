@@ -63,5 +63,15 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
+	@Override
+	public TheoriestundeDTO getTheoriestunde(int theoriestundeId) {
+		TheoriestundeDTO theoriestunde = null;
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		theoriestunde = (TheoriestundeDTO) session.get(TheoriestundeDTO.class, theoriestunde);
+		session.getTransaction().commit();
+		session.close();
+		return theoriestunde;
+	}
 }
