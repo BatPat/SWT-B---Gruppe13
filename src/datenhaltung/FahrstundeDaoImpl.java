@@ -1,23 +1,17 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Fahrstunde;
+import org.hibernate.Session;
+
+import fachlogik.FahrstundeDTO;
+import fachlogik.HibernateUtil;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
-	
-	private static final String FAHRSTUNDEN_PATH = "/Fahrschule/Fahrstunden/";
-	private static final String JAVADIR = System.getProperty("user.dir");
 
 	private static FahrstundeDaoImpl instance;
+	private Session session;
 
 	private FahrstundeDaoImpl() {
 		
@@ -31,64 +25,43 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Fahrstunde> getAlleFahrstunden() {
-		File dir = new File(JAVADIR + FAHRSTUNDEN_PATH);
-		File[] fahrstundendateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.startsWith("Fahrstunde") && arg1.endsWith(".ser");
-			}
-
-		});
-		List<Fahrstunde> liste = new ArrayList<>();
-		Fahrstunde fahrstunde = null;
-		for (int i = 0; i < fahrstundendateien.length; i++) {
-			File file = fahrstundendateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				fahrstunde = (Fahrstunde) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(fahrstunde);
-		}
+	public List<FahrstundeDTO> getAlleFahrstunden() {
+		List<FahrstundeDTO> liste = new ArrayList<>();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		liste = session.createQuery("from FahrstundeDTO").list();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
 	}
 
-	private File generateFile(Fahrstunde fahrstunde) {
-		File dir = new File(
-				JAVADIR + FAHRSTUNDEN_PATH + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
+	@Override
+	public void addFahrstunde(FahrstundeDTO fahrstunde) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(fahrstunde);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void addFahrstunde(Fahrstunde fahrstunde) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(fahrstunde);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(fahrstunde);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void updateFahrstunde(Fahrstunde fahrstunde) {
-		File td = generateFile(fahrstunde);
-		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(fahrstunde);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	@Override
-	public void deleteFahrstunde(Fahrstunde fahrstunde) {
-		File td = generateFile(fahrstunde);
-		td.delete();
+	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(fahrstunde);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

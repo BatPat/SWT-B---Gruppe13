@@ -14,5 +14,11 @@ public interface Person {
 	public String getStrasse();
 	
 	public String getHausnummer();
+	
+	public String getTelefonnummer();
+	
+	public String getGeburtsdatum();
+	
+	public String Fuehrerscheinklasse();
 
 }

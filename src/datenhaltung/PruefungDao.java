@@ -1,15 +1,15 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Pruefung;
+import fachlogik.PruefungDTO;
 
 public interface PruefungDao {
 	
-	public List<Pruefung> getAllePruefungen();
+	public List<PruefungDTO> getAllePruefungen();
 	
-	public void addPruefung(Pruefung pruefung);
+	public void addPruefung(PruefungDTO pruefung);
 	
-	public void updatePruefung(Pruefung pruefung);
+	public void updatePruefung(PruefungDTO pruefung);
 	
-	public void deletePruefung(Pruefung pruefung);
+	public void deletePruefung(PruefungDTO pruefung);
 }

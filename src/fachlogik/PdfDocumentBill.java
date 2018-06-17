@@ -41,7 +41,7 @@ public class PdfDocumentBill {
 	private static DecimalFormat df = new DecimalFormat("#0.00");
 	private static String javadir = System.getProperty("user.dir");
 
-	public void createPdf(Fahrschueler fahrschueler) throws IOException {
+	public void createPdf(FahrschuelerDTO fahrschueler) throws IOException {
 		try {
 			File file = new File(javadir + "/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
 			file.getParentFile().mkdirs();
@@ -152,7 +152,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, Fahrschueler fahrschueler) {
+	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// Table with the prices for every piece
 		float[] columnWidths = { 7, 2, 2 };
 		PdfPTable tableBill = new PdfPTable(columnWidths);
@@ -173,7 +173,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createTenthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createTenthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R11 = new PdfPCell(new Phrase("Rechnungsbetrag ", fonthell10undbolred));
 		cell1R11.setBorder(Rectangle.BOTTOM);
 		cell1R11.setFixedHeight(20);
@@ -187,7 +187,7 @@ public class PdfDocumentBill {
 		double gpreis = 110.00;
 		// -�bungsstunden
 		int anzNorm = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
 				anzNorm++;
 			}
@@ -195,7 +195,7 @@ public class PdfDocumentBill {
 		gpreis += (anzNorm * Fahrstundenart.B_STANDARDFAHRT.getPreis());
 		// -Sonderstunden
 		int anzSonder = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
 				anzSonder++;
 			}
@@ -203,7 +203,7 @@ public class PdfDocumentBill {
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theoriepr�fung
 		int countertheorie = fahrschueler.getTheoriestunden().size();
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
 				countertheorie++;
 			}
@@ -211,7 +211,7 @@ public class PdfDocumentBill {
 		gpreis += (countertheorie * 77.00);
 		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
 				counterpraxis++;
 			}
@@ -225,7 +225,7 @@ public class PdfDocumentBill {
 		tableBill.setTotalWidth(500);
 	}
 
-	private void createEightRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createEightRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R9 = new PdfPCell(new Phrase("Gesamtbetrag	", fonthell10bol));
 		cell1R9.setBorder(Rectangle.BOTTOM);
 		cell1R9.setFixedHeight(20);
@@ -239,7 +239,7 @@ public class PdfDocumentBill {
 		double gpreis = 110.00;
 		// -�bungsstunden
 		int anzNorm = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
 				anzNorm++;
 			}
@@ -247,7 +247,7 @@ public class PdfDocumentBill {
 		gpreis += (anzNorm * Fahrstundenart.B_STANDARDFAHRT.getPreis());
 		// -Sonderstunden
 		int anzSonder = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_SONDERFAHRT) {
 				anzSonder++;
 			}
@@ -255,7 +255,7 @@ public class PdfDocumentBill {
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theoriepr�fung
 		int countertheorie = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
 				countertheorie++;
 			}
@@ -263,7 +263,7 @@ public class PdfDocumentBill {
 		gpreis += (countertheorie * 77.00);
 		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
 				counterpraxis++;
 			}
@@ -296,7 +296,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createSixthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createSixthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R7 = new PdfPCell(new Phrase("Gesamtbetrag Führerscheinausbildung", fonthell10ita));
 		cell1R7.setBorder(Rectangle.BOTTOM);
 		cell1R7.setFixedHeight(18);
@@ -309,7 +309,7 @@ public class PdfDocumentBill {
 		double gpreis = 110.00;
 		// -�bungsstunden
 		int anzNorm = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
 				anzNorm++;
 			}
@@ -317,7 +317,7 @@ public class PdfDocumentBill {
 		gpreis += (anzNorm * Fahrstundenart.B_STANDARDFAHRT.getPreis());
 		// -Sonderstunden
 		int anzSonder = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_SONDERFAHRT) {
 				anzSonder++;
 			}
@@ -325,7 +325,7 @@ public class PdfDocumentBill {
 		gpreis += (anzSonder * Fahrstundenart.B_SONDERFAHRT.getPreis());
 		// -Vorstellung Theoriepr�fung
 		int countertheorie = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
 				countertheorie++;
 			}
@@ -333,7 +333,7 @@ public class PdfDocumentBill {
 		gpreis += (countertheorie * 77.00);
 		// -Vorstellung Praxispr�fung
 		int counterpraxis = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
 				counterpraxis++;
 			}
@@ -348,14 +348,14 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createFifthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createFifthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		// -> Sixth Row
 		PdfPCell cell1R6 = new PdfPCell(new Phrase("Vorstellung zur praktische Prüfung", fonthell10));
 		cell1R6.setBorder(Rectangle.BOTTOM);
 		cell1R6.setFixedHeight(18);
 		tableBill.addCell(cell1R6);
 		int counter = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (!p.isTheoriepruefung()) {
 				counter++;
 			}
@@ -374,14 +374,14 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createFourthRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createFourthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		// -> Fifth Row
 		PdfPCell cell1R5 = new PdfPCell(new Phrase("Vorstellung zur theoretischen Prüfung", fonthell10));
 		cell1R5.setBorder(Rectangle.BOTTOM);
 		cell1R5.setFixedHeight(18);
 		tableBill.addCell(cell1R5);
 		int counter = 0;
-		for (Pruefung p : fahrschueler.getPruefungen()) {
+		for (PruefungDTO p : fahrschueler.getPruefungen()) {
 			if (p.isTheoriepruefung()) {
 				counter++;
 			}
@@ -400,14 +400,14 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createThirdRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createThirdRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		// -> Fourth Row
 		PdfPCell cell1R4 = new PdfPCell(new Phrase("Sonderfahrten a 44,00€", fonthell10));
 		cell1R4.setBorder(Rectangle.BOTTOM);
 		cell1R4.setFixedHeight(18);
 		tableBill.addCell(cell1R4);
 		int anzSonder = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
 				anzSonder++;
 			}
@@ -426,14 +426,14 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createSecondRowInBillTable(PdfPTable tableBill, Fahrschueler fahrschueler) {
+	private void createSecondRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		// -> Third Row
 		PdfPCell cell1R3 = new PdfPCell(new Phrase("Übungsstunden a 34,00€", fonthell10));
 		cell1R3.setBorder(Rectangle.BOTTOM);
 		cell1R3.setFixedHeight(18);
 		tableBill.addCell(cell1R3);
 		int anzNorm = 0;
-		for (Fahrstunde f : fahrschueler.getFahrstunden()) {
+		for (FahrstundeDTO f : fahrschueler.getFahrstunden()) {
 			if (f.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
 				anzNorm++;
 			}
@@ -487,7 +487,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createFourthTableAndAddBillHeader(Document document, PdfWriter pdfwriter, Fahrschueler fahrschueler) {
+	private void createFourthTableAndAddBillHeader(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// fourth row -> Header for Bill
 		PdfPTable tableBillHeader = new PdfPTable(1);
 		tableBillHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -523,7 +523,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
-	private void createSecondTableAndAddAdressParts(Document document, PdfWriter pdfwriter, Fahrschueler fahrschueler) {
+	private void createSecondTableAndAddAdressParts(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// second row -> Address Part of the driving school
 		PdfPTable tableAdressPartSchool = new PdfPTable(1);
 		tableAdressPartSchool.setHorizontalAlignment(Element.ALIGN_RIGHT);

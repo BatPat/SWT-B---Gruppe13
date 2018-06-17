@@ -47,7 +47,7 @@ public class StammdatenView extends Observable {
 	}
 
 	private void initUI() {
-		display = new Display();
+		display = Display.getDefault();
 		shell = new Shell(display);
 		theme = new FahrschulTheme();
 

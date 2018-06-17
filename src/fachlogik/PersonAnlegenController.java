@@ -15,10 +15,13 @@ public class PersonAnlegenController{
 	
 	private String vorname;
 	private String nachname;
+	private String telefonnummer;
 	private String plz;
 	private String ort;
 	private String strasse;
 	private String hausNr;
+	private String geburtsdatum;
+	private String fuehrerscheinklasse;
 	
 	
 	public PersonAnlegenController(PersonType personType, Shell shell) {
@@ -39,7 +42,7 @@ public class PersonAnlegenController{
 
 	private void personAnlegen() {
 		
-		Person person = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr);
+		Person person = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
 		
 		//TODO Person abspeichern
 		System.out.println("neuer " + personType.name() + ": " + person.getName());
@@ -108,6 +111,40 @@ public class PersonAnlegenController{
 			
 			@Override
 			public void focusGained(FocusEvent e) {}
+		});
+		dialog.getTelInput().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				telefonnummer = dialog.getTelInput().getText();
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {}
+		});
+		dialog.getFsklasseInput().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				fuehrerscheinklasse = dialog.getFsklasseInput().getText();
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {}
+		});
+		dialog.getGebdat().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				int tag = dialog.getGebdat().getDay();
+				int monat = dialog.getGebdat().getMonth() + 1;
+				int jahr = dialog.getGebdat().getYear();
+				geburtsdatum = tag + "." + monat + "." + jahr;
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
 		});
 	}
 }

@@ -41,8 +41,8 @@ public class StammdatenController implements Observer {
 	private void fillLehrerListContent() {
 		Table table = stammdatenView.getLehrerStammdatenTabelle();
 		table.removeAll();
-		List<Fahrlehrer> fListe= fahrschule.getFahrlehrerListe();
-		for (Fahrlehrer fahrlehrer : fListe) {
+		List<FahrlehrerDTO> fListe= fahrschule.getFahrlehrerListe();
+		for (FahrlehrerDTO fahrlehrer : fListe) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			int whitespaceIndex= fahrlehrer.getName().indexOf(" ");
 			item.setText(0, fahrlehrer.getName().substring(0, whitespaceIndex));
@@ -63,8 +63,8 @@ public class StammdatenController implements Observer {
 	private void fillSchuelerListContent() {
 		Table table = stammdatenView.getSchuelerStammdatenTable();
 		table.removeAll();
-		List<Fahrschueler> fListe= fahrschule.getFahrschuelerListe();
-		for (Fahrschueler fahrschueler : fListe) {
+		List<FahrschuelerDTO> fListe= fahrschule.getFahrschuelerListe();
+		for (FahrschuelerDTO fahrschueler : fListe) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			int whitespaceIndex= fahrschueler.getName().indexOf(" ");
 			item.setText(0, fahrschueler.getName().substring(0, whitespaceIndex));

@@ -1,24 +1,20 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Fahrschueler;
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+
+import fachlogik.FahrschuelerDTO;
+import fachlogik.HibernateUtil;
+import fachlogik.TheoriestundeDTO;
 
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	
-	private static final String FAHRSCHUELER_PATH = "/Fahrschule/Fahrschueler/";
-
-	private static final String JAVADIR = System.getProperty("user.dir");
-
 	private static FahrschuelerDaoImpl instance;
+	private Session session;
 
 	private FahrschuelerDaoImpl() {
 		
@@ -31,72 +27,66 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return instance;
 	}
 	
-	private File generateFile(Fahrschueler fahrschueler) {
-		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
-	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Fahrschueler> getAlleFahrschueler() {
-		File dir = new File(JAVADIR + FAHRSCHUELER_PATH);
-		File[] fahrschuelerdateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.endsWith(".ser");
-			}
-
-		});
-		List<Fahrschueler> liste = new ArrayList<>();
-		Fahrschueler fahrschueler = null;
-		for (int i = 0; i < fahrschuelerdateien.length; i++) {
-			File file = fahrschuelerdateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				fahrschueler = (Fahrschueler) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(fahrschueler);
-		}
+	public List<FahrschuelerDTO> getAlleFahrschueler() {
+		List<FahrschuelerDTO> liste = new ArrayList<>();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		liste = session.createQuery("from FahrschuelerDTO").list();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
 	}
 
 	@Override
-	public void addFahrschueler(Fahrschueler fahrschueler) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrschueler));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(fahrschueler);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(fahrschueler);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void updateFahrschueler(Fahrschueler fahrschueler) {
-		File td = generateFile(fahrschueler);
-		td.delete();
-		addFahrschueler(fahrschueler);
+	public void updateFahrschueler(FahrschuelerDTO fahrschueler) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(fahrschueler);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void deleteFahrschueler(Fahrschueler fahrschueler) {
-		File td = generateFile(fahrschueler);
-		td.delete();
+	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createNativeQuery("Delete from theoriestunden_fahrschueler where idfahrschueler=" + fahrschueler.getId());
+		q.executeUpdate();
+		session.delete(fahrschueler);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public Fahrschueler getFahrschueler(String fahrschuelerName) {
-		Fahrschueler fahrschueler = null;
-		try (FileInputStream fis = new FileInputStream(
-				JAVADIR + FAHRSCHUELER_PATH + fahrschuelerName + ".ser");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-			fahrschueler = (Fahrschueler) ois.readObject();
-			assert (fahrschueler.getName().equals(fahrschuelerName));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
+		FahrschuelerDTO fahrschueler = null;
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		fahrschueler = (FahrschuelerDTO) session.get(FahrschuelerDTO.class, fahrschuelerId);
+		session.getTransaction().commit();
+		session.close();
 		return fahrschueler;
+	}
+
+	public void addTheoriestunde(FahrschuelerDTO fahrschueler, TheoriestundeDTO theostd1) {
+		Session session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		FahrschuelerDTO fahrschuelerDTO = session.get(FahrschuelerDTO.class, fahrschueler.getId());
+		fahrschuelerDTO.addTheoriestunde(theostd1);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

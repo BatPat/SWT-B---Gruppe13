@@ -18,45 +18,45 @@ public class Fahrschule {
 		this.setAngeboteneKlassen(angeboteneKlassen);
 	}
 
-	public void updateFahrschueler(Fahrschueler s) {
+	public void updateFahrschueler(FahrschuelerDTO s) {
 		schuelerDao.updateFahrschueler(s);
 	}
 	
-	public void addFahrschueler(Fahrschueler s) {
+	public void addFahrschueler(FahrschuelerDTO s) {
 		schuelerDao.addFahrschueler(s);
 	}
 
 
-	public List<Fahrschueler> getFahrschuelerListe() {
+	public List<FahrschuelerDTO> getFahrschuelerListe() {
 		return schuelerDao.getAlleFahrschueler();
 	}
 
-	public void removeFahrschueler(Fahrschueler s) {
+	public void removeFahrschueler(FahrschuelerDTO s) {
 		schuelerDao.deleteFahrschueler(s);
 	}
 
-	public void updateFahrlehrer(Fahrlehrer l) {
+	public void updateFahrlehrer(FahrlehrerDTO l) {
 		lehrerDao.updateFahrlehrer(l);
 	}
 	
-	public void addFahrlehrer(Fahrlehrer l) {
+	public void addFahrlehrer(FahrlehrerDTO l) {
 		lehrerDao.addFahrlehrer(l);
 	}
 
-	public List<Fahrlehrer> getFahrlehrerListe() {
+	public List<FahrlehrerDTO> getFahrlehrerListe() {
 		return lehrerDao.getAlleFahrlehrer();
 	}
 
-	public void removeFahrlehrer(Fahrlehrer l) {
+	public void removeFahrlehrer(FahrlehrerDTO l) {
 		lehrerDao.deleteFahrlehrer(l);
 	}
 
-	public Fahrschueler getFahrschueler(String fahrschuelername) {
-		return schuelerDao.getFahrschueler(fahrschuelername);
+	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
+		return schuelerDao.getFahrschueler(fahrschuelerId);
 	}
 
-	public Fahrlehrer getFahrlehrer(String fahlehrername) {
-		return lehrerDao.getFahrlehrer(fahlehrername);
+	public FahrlehrerDTO getFahrlehrer(int fahlehrerId) {
+		return lehrerDao.getFahrlehrer(fahlehrerId);
 	}
 
 	public List<Fuehrerscheinklasse> getAngeboteneKlassen() {
