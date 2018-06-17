@@ -47,12 +47,12 @@ public class StammdatenController implements Observer {
 			int whitespaceIndex= fahrlehrer.getName().indexOf(" ");
 			item.setText(0, fahrlehrer.getName().substring(0, whitespaceIndex));
 			item.setText(1, fahrlehrer.getName().substring(whitespaceIndex + 1));
-			item.setText(2, "Telefonnummer");
+			item.setText(2, fahrlehrer.getTelefonnummer());
 			item.setText(3, fahrlehrer.getStrasse());
 			item.setText(4, fahrlehrer.getHausnummer());
 			item.setText(5, fahrlehrer.getPlz());
-			item.setText(6, "Geburtsdatum");
-			item.setText(7, "Fuehrerscheinklasse");
+			item.setText(6, fahrlehrer.getGeburtsdatum());
+			item.setText(7, fahrlehrer.getFuehrerscheinklasse());
 		}
 		for (int i = 0; i < table.getColumns().length; i++) {
 			TableColumn column = table.getColumns()[i];
@@ -69,12 +69,12 @@ public class StammdatenController implements Observer {
 			int whitespaceIndex= fahrschueler.getName().indexOf(" ");
 			item.setText(0, fahrschueler.getName().substring(0, whitespaceIndex));
 			item.setText(1, fahrschueler.getName().substring(whitespaceIndex + 1));
-			item.setText(2, "Telefonnummer");
+			item.setText(2, fahrschueler.getTelefonnummer());
 			item.setText(3, fahrschueler.getStrasse());
 			item.setText(4, fahrschueler.getHausnummer());
 			item.setText(5, fahrschueler.getPlz());
-			item.setText(6, "Geburtsdatum");
-			item.setText(7, "Fuehrerscheinklasse");
+			item.setText(6, fahrschueler.getGeburtsdatum());
+			item.setText(7, fahrschueler.getFuehrerscheinklasse());
 		}
 		for (int i = 0; i < table.getColumns().length; i++) {
 			TableColumn column = table.getColumns()[i];

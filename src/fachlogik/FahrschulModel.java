@@ -13,7 +13,7 @@ public class FahrschulModel {
 		fahrstunde = new FahrstundeDTO(null, new FahrlehrerDTO(), new FahrschuelerDTO(), null, null, "Fahrschule Terlau");
 	}
 
-	public Fahrlehrer getFahrlehrer() {
+	public FahrlehrerDTO getFahrlehrer() {
 		return fahrstunde.getLehrer();
 	}
 
