@@ -172,6 +172,12 @@ public class Controller implements Observer {
 		fSchueler.getFahrstunden().add(fStunde);
 		fahrschule.updateFahrlehrer(fLehrer);
 		fahrschule.updateFahrschueler(fSchueler);
+		
+		LocalDate datum = model.getDatum();
+		LocalTime zeit = model.getUhrzeit();
+		Fahrstundenart art = model.getArt();
+		
+		model.setFahrstunde(new FahrstundeDTO(art, fLehrer, fSchueler, zeit, datum, "Fahrschule Terlau"));
 	}
 
 	private void updatePanel() {
