@@ -29,28 +29,39 @@ public class TheoriestundeDAOTest {
 	
 	@BeforeEach
 	public void init() {
-//		session = HibernateUtil.createSessionFactory().openSession();
-//		session.beginTransaction();
-//		Query q = session.createNativeQuery("DROP TABLE fahrschule.theoriestunde");
-//		q.executeUpdate();
-//		session.getTransaction().commit();
-//		session.close();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createNativeQuery("DROP TABLE fahrschule.theoriestunden_fahrschueler");
+		Query q2 = session.createNativeQuery("DROP TABLE fahrschule.theoriestunde");
+		Query q3 = session.createNativeQuery("DROP TABLE fahrschule.pruefung");
+		Query q4 = session.createNativeQuery("DROP TABLE fahrschule.fahrstunde");
+		Query q5 = session.createNativeQuery("DROP TABLE fahrschule.fahrschueler");
+		Query q6 = session.createNativeQuery("DROP TABLE fahrschule.fahrlehrer");
+		q.executeUpdate();
+		q2.executeUpdate();
+		q3.executeUpdate();
+		q4.executeUpdate();
+		q5.executeUpdate();
+		q6.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
 	}
 	
-//	@Test
-//	public void test_GetAll_Theoriestunden_andGetOk() {
-//		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
-//		TheoriestundeDTO theoriestunde = new TheoriestundeDTO(TheorieThema.PARKEN, fahrlehrer1,
-//				LocalDate.now(), LocalTime.now(), "Recklinghausen");
-//		TheoriestundeDTO theoriestunde2 = new TheoriestundeDTO(TheorieThema.RECHTLICHES, fahrlehrer1,
-//				LocalDate.now(), LocalTime.now(), "Recklinghausen");
-//		List<TheoriestundeDTO> pruefungliste = new ArrayList<TheoriestundeDTO>();
-//		pruefungliste.add(theoriestunde);
-//		pruefungliste.add(theoriestunde2);
-//		THEORIESTUNDE_MANAGER.addTheoriestunde(theoriestunde);
-//		THEORIESTUNDE_MANAGER.addTheoriestunde(theoriestunde2);
-//		assertThat(pruefungliste.size()).isEqualTo(THEORIESTUNDE_MANAGER.getAlleTheoriestunden().size());
-//	}
+	@Test
+	public void test_GetAll_Theoriestunden_andGetOk() {
+		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
+		FAHRLEHRER_MANAGER.addFahrlehrer(fahrlehrer1);
+		TheoriestundeDTO theoriestunde = new TheoriestundeDTO(TheorieThema.PARKEN, fahrlehrer1,
+				LocalDate.now(), LocalTime.now(), "Recklinghausen");
+		TheoriestundeDTO theoriestunde2 = new TheoriestundeDTO(TheorieThema.RECHTLICHES, fahrlehrer1,
+				LocalDate.now(), LocalTime.now(), "Recklinghausen");
+		List<TheoriestundeDTO> theoriestundenliste = new ArrayList<TheoriestundeDTO>();
+		theoriestundenliste.add(theoriestunde);
+		theoriestundenliste.add(theoriestunde2);
+		THEORIESTUNDE_MANAGER.addTheoriestunde(theoriestunde);
+		THEORIESTUNDE_MANAGER.addTheoriestunde(theoriestunde2);
+		assertThat(theoriestundenliste.size()).isEqualTo(THEORIESTUNDE_MANAGER.getAlleTheoriestunden().size());
+	}
 	
 	@Test
 	public void test_Save_pruefung_andGetOk() {

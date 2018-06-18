@@ -30,29 +30,41 @@ public class PruefungDAOTest {
 	
 	@BeforeEach
 	public void init() {
-//		session = HibernateUtil.createSessionFactory().openSession();
-//		session.beginTransaction();
-//		Query q = session.createNativeQuery("DROP TABLE fahrschule.pruefung");
-//		q.executeUpdate();
-//		session.getTransaction().commit();
-//		session.close();
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createNativeQuery("DROP TABLE fahrschule.theoriestunden_fahrschueler");
+		Query q2 = session.createNativeQuery("DROP TABLE fahrschule.theoriestunde");
+		Query q3 = session.createNativeQuery("DROP TABLE fahrschule.pruefung");
+		Query q4 = session.createNativeQuery("DROP TABLE fahrschule.fahrstunde");
+		Query q5 = session.createNativeQuery("DROP TABLE fahrschule.fahrschueler");
+		Query q6 = session.createNativeQuery("DROP TABLE fahrschule.fahrlehrer");
+		q.executeUpdate();
+		q2.executeUpdate();
+		q3.executeUpdate();
+		q4.executeUpdate();
+		q5.executeUpdate();
+		q6.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
 	}
 	
-//	@Test
-//	public void test_GetAll_Pruefung_andGetOk() {
-//		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
-//		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
-//		PruefungDTO pruefung = new PruefungDTO(fahrlehrer1, fahrschueler1,
-//				LocalDate.now(), LocalTime.now(), "Recklinghausen");
-//		PruefungDTO pruefung2 = new PruefungDTO(fahrlehrer1, fahrschueler1,
-//				LocalDate.now(), LocalTime.now(), "Recklinghausen");
-//		List<PruefungDTO> pruefungliste = new ArrayList<PruefungDTO>();
-//		pruefungliste.add(pruefung);
-//		pruefungliste.add(pruefung2);
-//		PRUEFUNG_MANAGER.addPruefung(pruefung);
-//		PRUEFUNG_MANAGER.addPruefung(pruefung2);
-//		assertThat(pruefungliste.size()).isEqualTo(PRUEFUNG_MANAGER.getAllePruefungen().size());
-//	}
+	@Test
+	public void test_GetAll_Pruefung_andGetOk() {
+		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
+		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
+		FAHRLEHRER_MANAGER.addFahrlehrer(fahrlehrer1);
+		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler1);
+		PruefungDTO pruefung = new PruefungDTO(fahrlehrer1, fahrschueler1,
+				LocalDate.now(), LocalTime.now(), "Recklinghausen");
+		PruefungDTO pruefung2 = new PruefungDTO(fahrlehrer1, fahrschueler1,
+				LocalDate.now(), LocalTime.now(), "Recklinghausen");
+		List<PruefungDTO> pruefungliste = new ArrayList<PruefungDTO>();
+		pruefungliste.add(pruefung);
+		pruefungliste.add(pruefung2);
+		PRUEFUNG_MANAGER.addPruefung(pruefung);
+		PRUEFUNG_MANAGER.addPruefung(pruefung2);
+		assertThat(pruefungliste.size()).isEqualTo(PRUEFUNG_MANAGER.getAllePruefungen().size());
+	}
 	
 	@Test
 	public void test_Save_pruefung_andGetOk() {
@@ -92,5 +104,4 @@ public class PruefungDAOTest {
 //		PRUEFUNG_MANAGER.deletePruefung(pruefung);
 //		assertNull(PRUEFUNG_MANAGER.getPruefung((int) pruefung.getId()));
 //	}
-
 }

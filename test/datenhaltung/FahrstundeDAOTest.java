@@ -29,31 +29,43 @@ public class FahrstundeDAOTest {
 	public FahrstundeDAOTest() {
 	}
 
-//	@BeforeEach
-//	public void init() {
-//		session = HibernateUtil.createSessionFactory().openSession();
-//		session.beginTransaction();
-//		Query q = session.createNativeQuery("DROP TABLE fahrschule.fahrstunde");
-//		q.executeUpdate();
-//		session.getTransaction().commit();
-//		session.close();
-//	}
+	@BeforeEach
+	public void init() {
+		session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createNativeQuery("DROP TABLE fahrschule.theoriestunden_fahrschueler");
+		Query q2 = session.createNativeQuery("DROP TABLE fahrschule.theoriestunde");
+		Query q3 = session.createNativeQuery("DROP TABLE fahrschule.pruefung");
+		Query q4 = session.createNativeQuery("DROP TABLE fahrschule.fahrstunde");
+		Query q5 = session.createNativeQuery("DROP TABLE fahrschule.fahrschueler");
+		Query q6 = session.createNativeQuery("DROP TABLE fahrschule.fahrlehrer");
+		q.executeUpdate();
+		q2.executeUpdate();
+		q3.executeUpdate();
+		q4.executeUpdate();
+		q5.executeUpdate();
+		q6.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
 	
-//	@Test
-//	public void test_GetAll_Fahrstunde_andGetOk() {
-//		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
-//		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
-//		FahrstundeDTO fahrstunde = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
-//				LocalTime.now(), LocalDate.now(), "Recklinghausen");
-//		FahrstundeDTO fahrstunde2 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
-//				LocalTime.now(), LocalDate.now(), "Recklinghausen");
-//		List<FahrstundeDTO> fahrstundeliste = new ArrayList<FahrstundeDTO>();
-//		fahrstundeliste.add(fahrstunde);
-//		fahrstundeliste.add(fahrstunde2);
-//		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde);
-//		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde2);
-//		assertThat(fahrstundeliste.size()).isEqualTo(FAHRSTUNDE_MANAGER.getAlleFahrstunden().size());
-//	}
+	@Test
+	public void test_GetAll_Fahrstunde_andGetOk() {
+		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
+		FahrschuelerDTO fahrschueler1 = new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51","0321-4589347","05.12.2000","B");
+		FAHRLEHRER_MANAGER.addFahrlehrer(fahrlehrer1);
+		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler1);
+		FahrstundeDTO fahrstunde = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
+				LocalTime.now(), LocalDate.now(), "Recklinghausen");
+		FahrstundeDTO fahrstunde2 = new FahrstundeDTO(Fahrstundenart.B_STANDARDFAHRT, fahrlehrer1, fahrschueler1,
+				LocalTime.now(), LocalDate.now(), "Recklinghausen");
+		List<FahrstundeDTO> fahrstundeliste = new ArrayList<FahrstundeDTO>();
+		fahrstundeliste.add(fahrstunde);
+		fahrstundeliste.add(fahrstunde2);
+		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde);
+		FAHRSTUNDE_MANAGER.addFahrstunde(fahrstunde2);
+		assertThat(fahrstundeliste.size()).isEqualTo(FAHRSTUNDE_MANAGER.getAlleFahrstunden().size());
+	}
 	
 	@Test
 	public void test_Save_fahrstunde_andGetOk() {
