@@ -1,4 +1,4 @@
-package fachlogik;
+package oberflaeche;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,7 +13,15 @@ import datenhaltung.FahrschuelerDaoImpl;
 import datenhaltung.FahrstundeDaoImpl;
 import datenhaltung.PruefungDaoImpl;
 import datenhaltung.TheorieStundeDaoImpl;
-import oberflaeche.MainView;
+import fachlogik.FahrlehrerDTO;
+import fachlogik.FahrschuelerDTO;
+import fachlogik.FahrschulModel;
+import fachlogik.Fahrschule;
+import fachlogik.FahrstundeDTO;
+import fachlogik.Fahrstundenart;
+import fachlogik.Fuehrerscheinklasse;
+import fachlogik.Kalender;
+import fachlogik.PdfDocumentBill;
 
 public class Controller implements Observer {
 

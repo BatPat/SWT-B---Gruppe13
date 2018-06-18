@@ -1,11 +1,14 @@
-package fachlogik;
+package oberflaeche;
 
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.widgets.Shell;
 
-import oberflaeche.PersonAnlegenDialog;
+import fachlogik.AbstractPersonFactory;
+import fachlogik.Person;
+import fachlogik.PersonFactory;
+import fachlogik.PersonType;
 
 public class PersonAnlegenController{
 	

@@ -1,4 +1,4 @@
-import fachlogik.Controller;
+import oberflaeche.Controller;
 
 public class Main {
 

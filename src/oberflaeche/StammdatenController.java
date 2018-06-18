@@ -1,4 +1,4 @@
-package fachlogik;
+package oberflaeche;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,8 +14,10 @@ import org.eclipse.swt.widgets.TableItem;
 
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDaoImpl;
-import oberflaeche.PersonAnlegenDialog;
-import oberflaeche.StammdatenView;
+import fachlogik.FahrlehrerDTO;
+import fachlogik.FahrschuelerDTO;
+import fachlogik.Fahrschule;
+import fachlogik.PersonType;
 
 public class StammdatenController implements Observer {
 	
