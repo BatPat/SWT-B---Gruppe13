@@ -59,6 +59,20 @@ public class Fahrschule {
 		}
 		return anzStandardfahrten;
 	}
+	
+	public int[] getAnzSonderAndStandardFahrten(int fahrschuelerId) {
+		List<FahrstundeDTO> fstunden = schuelerDao.getFahrschueler(fahrschuelerId).getFahrstunden();
+		int[] anzFahrten = new int[2];
+		for (FahrstundeDTO fahrstundeDTO : fstunden) {
+			if(fahrstundeDTO.getArt() == Fahrstundenart.B_SONDERFAHRT) {
+				anzFahrten[0]++;
+			}
+			if(fahrstundeDTO.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
+				anzFahrten[1]++;
+			}
+		}
+		return anzFahrten;
+	}
 
 	public void updateFahrschueler(FahrschuelerDTO s) {
 		schuelerDao.updateFahrschueler(s);

@@ -100,8 +100,9 @@ public class Controller implements Observer {
 
 	private void uebersichtFahrstunden() {
 		int fahrschuelerId = fahrschuelerids.get(mainview.getSchuelerCombo().getSelectionIndex());
-		String anzSo = fahrschule.getAnzSonderfahrten(fahrschuelerId) + "";
-		String anzNo = fahrschule.getAnzStandardfahrten(fahrschuelerId) + "";
+		int[] anzFahrstunden = fahrschule.getAnzSonderAndStandardFahrten(fahrschuelerId);
+		String anzSo = anzFahrstunden[0] + "";
+		String anzNo = anzFahrstunden[1] + "";
 		String anzTh = fahrschule.getAnzTheoriestunden(fahrschuelerId) + "";
 		mainview.getTheorieTxt().setText(anzTh);
 		mainview.getSonderfahrtTxt().setText(anzSo);
