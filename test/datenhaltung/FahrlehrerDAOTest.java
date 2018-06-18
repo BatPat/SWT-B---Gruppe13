@@ -1,7 +1,7 @@
 package datenhaltung;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import fachlogik.FahrlehrerDTO;
 import fachlogik.HibernateUtil;
@@ -22,7 +22,7 @@ public class FahrlehrerDAOTest {
 	public FahrlehrerDAOTest() {
 	}
 	
-	@Before
+	@BeforeEach
 	public void init() {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();

@@ -1,7 +1,7 @@
 package datenhaltung;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import datenhaltung.FahrschuelerDaoImpl;
 import fachlogik.FahrschuelerDTO;
@@ -23,7 +23,7 @@ public class FahrschuelerDAOTest {
 	public FahrschuelerDAOTest() {
 	}
 	
-	@Before
+	@BeforeEach
 	public void init() {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
@@ -50,7 +50,7 @@ public class FahrschuelerDAOTest {
 		FahrschuelerDTO fahrschueler = new FahrschuelerDTO("Julius Blanke", "51123", "Hagen", "Runhweg", "32","0321-4589347","04.12.1995","B");
 		FAHRSCHUELER_MANAGER.addFahrschueler(fahrschueler);
 		FahrschuelerDTO fahrschueler2 = FAHRSCHUELER_MANAGER.getFahrschueler(fahrschueler.getId());
-		assertThat("Peter Jung").isEqualTo(fahrschueler2.getName());
+		assertThat("Julius Blanke").isEqualTo(fahrschueler2.getName());
 	}
 	
 	@Test
