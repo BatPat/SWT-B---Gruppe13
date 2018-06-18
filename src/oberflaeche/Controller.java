@@ -92,7 +92,7 @@ public class Controller implements Observer {
 			if(l.getDayOfMonth() == tag
 					&& l.getMonthValue() == monat
 					&& l.getYear() == jahr) {
-				if(l.getHour() > 8 && l.getHour() <23) {
+				if(l.getHour() > 8 && l.getHour() < 22) {
 					String zeit = l.getHour() + ":00";
 					mainview.getTimeCombo().remove(zeit);
 				}
