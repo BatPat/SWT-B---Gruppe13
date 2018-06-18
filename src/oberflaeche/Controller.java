@@ -38,7 +38,9 @@ public class Controller implements Observer {
 		pdf = new PdfDocumentBill();
 		initModel();
 		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
-		klassen.add(Fuehrerscheinklasse.B);
+		for (Fuehrerscheinklasse fuehrerscheinklasse : Fuehrerscheinklasse.values()) {
+			klassen.add(fuehrerscheinklasse);
+		}
 		fahrschule = new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen);
 		kalender = new Kalender(TheorieStundeDaoImpl.getInstance(), FahrstundeDaoImpl.getInstance(), PruefungDaoImpl.getInstance());
 		initGUI();
@@ -57,11 +59,15 @@ public class Controller implements Observer {
 	}
 
 	private void fillListContent() {
+		fahrlehrerids = new ArrayList<>();
 		for (FahrlehrerDTO f : fahrschule.getFahrlehrerListe()) {
 			mainview.getLehrerCombo().add(f.getName());
+			fahrlehrerids.add(f.getId());
 		}
+		fahrschuelerids = new ArrayList<>();
 		for (FahrschuelerDTO f : fahrschule.getFahrschuelerListe()) {
 			mainview.getSchuelerCombo().add(f.getName());
+			fahrschuelerids.add(f.getId());
 		}
 
 		for (Fuehrerscheinklasse klasse : fahrschule.getAngeboteneKlassen()) {

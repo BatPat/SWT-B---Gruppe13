@@ -496,7 +496,7 @@ public class PdfDocumentBill {
 		PdfPCell cellheader1 = new PdfPCell(new Phrase("Ausbildungsrechnung " + "(" + date2 + ")", fonthel14));
 		cellheader1.setBorder(Rectangle.NO_BORDER);
 		tableBillHeader.addCell(cellheader1);
-		PdfPCell cellheader2 = new PdfPCell(new Phrase("Für den Fahrerlaubnisbewerber der Klasse : B", fonthel12));
+		PdfPCell cellheader2 = new PdfPCell(new Phrase("Für den Fahrerlaubnisbewerber der Klasse : "+ fahrschueler.getFuehrerscheinklasse(), fonthel12));
 		cellheader2.setBorder(Rectangle.NO_BORDER);
 		tableBillHeader.addCell(cellheader2);
 		PdfPCell cellheader3 = new PdfPCell(new Phrase(fahrschueler.getName(), fonthel12));
