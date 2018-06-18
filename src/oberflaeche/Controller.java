@@ -27,6 +27,8 @@ public class Controller implements Observer {
 	private Fahrschule fahrschule;
 	private List<Integer> fahrlehrerids;
 	private List<Integer> fahrschuelerids;
+	private int chachedFahrlehrerSelection = -1;
+	private int chachedFahrschuelerSelection = -1;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
@@ -126,11 +128,13 @@ public class Controller implements Observer {
 		int datumTag = mainview.getDateFahrstunde().getDay();
 
 		
-		if (mainview.getSchuelerCombo().getSelectionIndex() != -1) {
+		if (fahrschuelerindex != -1 && fahrschuelerindex != chachedFahrschuelerSelection) {
+			chachedFahrschuelerSelection = fahrschuelerindex;
 			model.setFahrschueler(fahrschule.getFahrschueler(fahrschuelerids.get(fahrschuelerindex)));
 		}
 
-		if (mainview.getLehrerCombo().getSelectionIndex() != -1) {
+		if (fahrlehrerindex != -1 && fahrlehrerindex != chachedFahrlehrerSelection) {
+			chachedFahrlehrerSelection = fahrlehrerindex;
 			model.setFahrlehrer(fahrschule.getFahrlehrer(fahrlehrerids.get(fahrlehrerindex)));
 		}
 
@@ -232,17 +236,17 @@ public class Controller implements Observer {
 
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
-			//TODO optimieren, kein update der fahrstundenübersicht nötig
-			updatePanel();
+			zeigePassendeTermine();
+			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
 			break;
 
 		case "Datum":
-			updatePanel();
+			zeigePassendeTermine();
 			break;
 
 		case "Fahrschueler":
-			//TODO optimieren, kein update der verfügbaren uhrzeiten nötig
-			updatePanel();
+			uebersichtFahrstunden();
+			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
 			break;
 
 		case "Uhrzeit":
