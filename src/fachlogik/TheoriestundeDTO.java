@@ -34,7 +34,7 @@ public class TheoriestundeDTO extends Stunde {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private FahrlehrerDTO fahrlehrer;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}, targetEntity = FahrschuelerDTO.class, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}, targetEntity = FahrschuelerDTO.class, fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinTable(name = "theoriestunden_fahrschueler", joinColumns = @JoinColumn(name = "idtheoriestunde"), inverseJoinColumns = @JoinColumn(name = "idfahrschueler"))
