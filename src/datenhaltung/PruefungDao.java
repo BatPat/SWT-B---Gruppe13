@@ -12,4 +12,6 @@ public interface PruefungDao {
 	public void updatePruefung(PruefungDTO pruefung);
 	
 	public void deletePruefung(PruefungDTO pruefung);
+	
+	public PruefungDTO getPruefung(int pruefungid);
 }

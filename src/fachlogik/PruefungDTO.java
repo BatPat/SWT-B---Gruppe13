@@ -135,4 +135,39 @@ public class PruefungDTO implements Termin, Serializable {
 		return id;
 	}
 
+	public static long getCounter() {
+		return counter;
+	}
+
+	public static void setCounter(long counter) {
+		PruefungDTO.counter = counter;
+	}
+
+	public void setGenid(long genid) {
+		this.genid = genid;
+	}
+
+	public void setFahrlehrer(FahrlehrerDTO fahrlehrer) {
+		this.fahrlehrer = fahrlehrer;
+	}
+
+	public void setFahrschueler(FahrschuelerDTO fahrschueler) {
+		this.fahrschueler = fahrschueler;
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
+	public void setUhrzeit(LocalTime uhrzeit) {
+		this.uhrzeit = uhrzeit;
+	}
+
+	public void setDauer(Duration dauer) {
+		this.dauer = dauer;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
 }

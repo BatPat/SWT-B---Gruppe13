@@ -12,4 +12,6 @@ public interface FahrstundeDao {
 	public void updateFahrstunde(FahrstundeDTO fahrstunde);
 	
 	public void deleteFahrstunde(FahrstundeDTO fahrstunde);
+	
+	public FahrstundeDTO getFahrstunde(int fahrstundeid);
 }
