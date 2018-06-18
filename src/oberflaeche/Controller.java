@@ -232,6 +232,7 @@ public class Controller implements Observer {
 
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
+			//TODO optimieren, kein update der fahrstundenübersicht nötig
 			updatePanel();
 			break;
 
@@ -240,6 +241,7 @@ public class Controller implements Observer {
 			break;
 
 		case "Fahrschueler":
+			//TODO optimieren, kein update der verfügbaren uhrzeiten nötig
 			updatePanel();
 			break;
 
