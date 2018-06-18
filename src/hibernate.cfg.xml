@@ -13,7 +13,7 @@
       </property>
       
       <property name = "hibernate.connection.url">
-        jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
+        jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;
       </property>
       
       <property name = "hibernate.connection.username">
