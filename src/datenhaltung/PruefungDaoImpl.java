@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import fachlogik.HibernateUtil;
 import fachlogik.PruefungDTO;
@@ -11,6 +12,7 @@ import fachlogik.PruefungDTO;
 public class PruefungDaoImpl implements PruefungDao {
 
 	private static PruefungDaoImpl instance;
+	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
 
 	private PruefungDaoImpl() {
@@ -29,9 +31,10 @@ public class PruefungDaoImpl implements PruefungDao {
 	@Override
 	public List<PruefungDTO> getAllePruefungen() {
 		List<PruefungDTO> liste = new ArrayList<>();
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		liste = session.createQuery("from PruefungDTO").list();
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return liste;
@@ -39,27 +42,30 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	@Override
 	public void addPruefung(PruefungDTO pruefung) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.save(pruefung);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void updatePruefung(PruefungDTO pruefung) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.update(pruefung);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void deletePruefung(PruefungDTO pruefung) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.delete(pruefung);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -67,9 +73,10 @@ public class PruefungDaoImpl implements PruefungDao {
 	@Override
 	public PruefungDTO getPruefung(int pruefungId) {
 		PruefungDTO pruefung = null;
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		pruefung = (PruefungDTO) session.get(PruefungDTO.class, pruefungId);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return pruefung;

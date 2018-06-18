@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import fachlogik.HibernateUtil;
 import fachlogik.TheoriestundeDTO;
@@ -11,6 +12,7 @@ import fachlogik.TheoriestundeDTO;
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	private static TheorieStundeDaoImpl instance;
+	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
 
 	private TheorieStundeDaoImpl() {
@@ -29,9 +31,10 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	@Override
 	public List<TheoriestundeDTO> getAlleTheoriestunden() {
 		List<TheoriestundeDTO> liste = new ArrayList<>();
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		liste = session.createQuery("from TheoriestundeDTO").list();
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return liste;
@@ -39,27 +42,30 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	@Override
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.save(theoriestunde);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.update(theoriestunde);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.delete(theoriestunde);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -67,9 +73,10 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 	@Override
 	public TheoriestundeDTO getTheoriestunde(int theoriestundeId) {
 		TheoriestundeDTO theoriestunde = null;
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		theoriestunde = (TheoriestundeDTO) session.get(TheoriestundeDTO.class, theoriestunde);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return theoriestunde;

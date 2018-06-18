@@ -3,8 +3,8 @@ package datenhaltung;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import fachlogik.FahrlehrerDTO;
 import fachlogik.HibernateUtil;
@@ -12,6 +12,7 @@ import fachlogik.HibernateUtil;
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
+	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
 
 	private FahrlehrerDaoImpl() {
@@ -29,9 +30,10 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	@Override
 	public List<FahrlehrerDTO> getAlleFahrlehrer() {
 		List<FahrlehrerDTO> liste = new ArrayList<>();
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		liste = session.createQuery("from FahrlehrerDTO").list();
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return liste;
@@ -39,27 +41,30 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	@Override
 	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.save(fahrlehrer);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.saveOrUpdate(fahrlehrer);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
 
 	@Override
 	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		session.delete(fahrlehrer);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -67,9 +72,10 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	@Override
 	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
-		session = HibernateUtil.createSessionFactory().openSession();
+		session = sessionfactory.openSession();
 		session.beginTransaction();
 		fahrlehrer = (FahrlehrerDTO) session.get(FahrlehrerDTO.class, fahrlehrerid);
+		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return fahrlehrer;
