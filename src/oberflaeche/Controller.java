@@ -147,7 +147,11 @@ public class Controller implements Observer {
 			model.setDatum(terminDatum);
 		}
 		if (!artString.isEmpty()) {
-			model.setArt(Fahrstundenart.valueOf(artString));
+			for(Fahrstundenart f : Fahrstundenart.values()) {
+				if(f.getBeschreibung().equals(artString.trim())) {
+					model.setArt(f);
+				}
+			}
 		}
 
 	}
