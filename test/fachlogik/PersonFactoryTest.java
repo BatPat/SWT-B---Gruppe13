@@ -3,13 +3,14 @@ package fachlogik;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PersonFactoryTest {
 				
 		private PersonFactory personFactory;
 
-		@BeforeAll
+		@BeforeEach
 		public void init() {
 			//Given
 			personFactory = new PersonFactory();
