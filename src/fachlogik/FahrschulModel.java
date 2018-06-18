@@ -5,11 +5,9 @@ import java.time.LocalTime;
 
 public class FahrschulModel {
 
-	private Kalender kalender;
 	private FahrstundeDTO fahrstunde;
 
 	public FahrschulModel() {
-		kalender = new Kalender();
 		fahrstunde = new FahrstundeDTO(null, new FahrlehrerDTO(), new FahrschuelerDTO(), null, null, "Fahrschule Terlau");
 	}
 
@@ -27,14 +25,6 @@ public class FahrschulModel {
 
 	public void setFahrschueler(FahrschuelerDTO fahrschueler) {
 		this.fahrstunde.setSchueler(fahrschueler);
-	}
-
-	public Kalender getKalender() {
-		return kalender;
-	}
-
-	public void setKalender(Kalender kalender) {
-		this.kalender = kalender;
 	}
 
 	public FahrstundeDTO getFahrstunde() {

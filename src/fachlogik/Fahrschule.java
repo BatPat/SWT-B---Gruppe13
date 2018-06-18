@@ -1,8 +1,12 @@
 package fachlogik;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import datenhaltung.FahrlehrerDao;
+import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDao;
+import datenhaltung.FahrschuelerDaoImpl;
+import datenhaltung.FahrstundeDao;
 
 public class Fahrschule {
 	
@@ -11,11 +15,49 @@ public class Fahrschule {
 	private List<Fuehrerscheinklasse> angeboteneKlassen;
 	
 	
-	public Fahrschule(FahrschuelerDao schuelerDao, FahrlehrerDao lehrerDao, List<Fuehrerscheinklasse> angeboteneKlassen) {
+	public Fahrschule() {
 		super();
-		this.schuelerDao = schuelerDao;
-		this.lehrerDao = lehrerDao;
-		this.setAngeboteneKlassen(angeboteneKlassen);
+		this.schuelerDao = FahrschuelerDaoImpl.getInstance();
+		this.lehrerDao = FahrlehrerDaoImpl.getInstance();
+		this.angeboteneKlassen = new ArrayList<>();
+		for(Fuehrerscheinklasse f: Fuehrerscheinklasse.values()) {
+			angeboteneKlassen.add(f);
+		}
+	}
+	
+	public List<LocalDateTime> getTermine(int fahrlehrerId){
+		List<LocalDateTime> result = new ArrayList<>();
+		List<Termin> termine = lehrerDao.getFahrlehrer(fahrlehrerId).getTermine();
+		for (Termin termin : termine) {
+			result.add(LocalDateTime.of(termin.getDatum(), termin.getUhrzeit()));
+		}
+		return result;		
+	}
+	
+	public int getAnzTheoriestunden(int fahrschuelerId){
+		return schuelerDao.getFahrschueler(fahrschuelerId).getTheoriestunden().size();
+	}
+	
+	public int getAnzSonderfahrten(int fahrschuelerId){
+		List<FahrstundeDTO> fstunden = schuelerDao.getFahrschueler(fahrschuelerId).getFahrstunden();
+		int anzSonderfahrten = 0;
+		for (FahrstundeDTO fahrstundeDTO : fstunden) {
+			if(fahrstundeDTO.getArt() == Fahrstundenart.B_SONDERFAHRT) {
+				anzSonderfahrten++;
+			}
+		}
+		return anzSonderfahrten;
+	}
+	
+	public int getAnzStandardfahrten(int fahrschuelerId){
+		List<FahrstundeDTO> fstunden = schuelerDao.getFahrschueler(fahrschuelerId).getFahrstunden();
+		int anzStandardfahrten = 0;
+		for (FahrstundeDTO fahrstundeDTO : fstunden) {
+			if(fahrstundeDTO.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
+				anzStandardfahrten++;
+			}
+		}
+		return anzStandardfahrten;
 	}
 
 	public void updateFahrschueler(FahrschuelerDTO s) {

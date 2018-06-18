@@ -2,17 +2,14 @@ package oberflaeche;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import datenhaltung.FahrlehrerDaoImpl;
-import datenhaltung.FahrschuelerDaoImpl;
-import datenhaltung.FahrstundeDaoImpl;
-import datenhaltung.PruefungDaoImpl;
-import datenhaltung.TheorieStundeDaoImpl;
 import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
 import fachlogik.FahrschulModel;
@@ -20,7 +17,6 @@ import fachlogik.Fahrschule;
 import fachlogik.FahrstundeDTO;
 import fachlogik.Fahrstundenart;
 import fachlogik.Fuehrerscheinklasse;
-import fachlogik.Kalender;
 import fachlogik.PdfDocumentBill;
 
 public class Controller implements Observer {
@@ -29,20 +25,13 @@ public class Controller implements Observer {
 	private MainView mainview;
 	private PdfDocumentBill pdf;
 	private Fahrschule fahrschule;
-	private Kalender kalender;
-	private StammdatenController stammdatenController;
 	private List<Integer> fahrlehrerids;
 	private List<Integer> fahrschuelerids;
 
 	public Controller() {
 		pdf = new PdfDocumentBill();
 		initModel();
-		List<Fuehrerscheinklasse> klassen = new ArrayList<>();
-		for (Fuehrerscheinklasse fuehrerscheinklasse : Fuehrerscheinklasse.values()) {
-			klassen.add(fuehrerscheinklasse);
-		}
-		fahrschule = new Fahrschule(FahrschuelerDaoImpl.getInstance(), FahrlehrerDaoImpl.getInstance(), klassen);
-		kalender = new Kalender(TheorieStundeDaoImpl.getInstance(), FahrstundeDaoImpl.getInstance(), PruefungDaoImpl.getInstance());
+		fahrschule = new Fahrschule();
 		initGUI();
 		mainview.getShell().layout(true);
 	}
@@ -89,47 +78,31 @@ public class Controller implements Observer {
 			}
 		}
 
-		FahrlehrerDTO fahrlehrer = model.getFahrlehrer();
-
-		List<FahrstundeDTO> terminefahrlehr;
-		terminefahrlehr = fahrlehrer.getFahrstunden();
+		
 		int tag = mainview.getDateFahrstunde().getDay();
 		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
 		int monat = mainview.getDateFahrstunde().getMonth() + 1;
 		int jahr = mainview.getDateFahrstunde().getYear();
-
-		for (int i = 0; i < terminefahrlehr.size(); i++) {
-			if (terminefahrlehr.get(i).getDatum().getDayOfMonth() == tag
-					&& terminefahrlehr.get(i).getDatum().getMonthValue() == monat
-					&& terminefahrlehr.get(i).getDatum().getYear() == jahr) {
-				for (int j = 9; j < 22; j++) {
-					if (terminefahrlehr.get(i).getUhrzeit().getHour() == j) {
-						String zeit = j + ":00";
-						mainview.getTimeCombo().remove(zeit);
-					}
+		int fId = fahrlehrerids.get(mainview.getLehrerCombo().getSelectionIndex());
+		List<LocalDateTime> termine = fahrschule.getTermine(fId);
+		
+		for (LocalDateTime l : termine) {
+			if(l.getDayOfMonth() == tag
+					&& l.getMonthValue() == monat
+					&& l.getYear() == jahr) {
+				if(l.getHour() > 8 && l.getHour() <23) {
+					String zeit = l.getHour() + ":00";
+					mainview.getTimeCombo().remove(zeit);
 				}
-
 			}
 		}
 	}
 
 	private void uebersichtFahrstunden() {
-
-		FahrschuelerDTO fahrschueler = model.getFahrschueler();
-		int anzNorm = 0;
-		int anzSond = 0;
-		int anzTheo = 0;
-		for (FahrstundeDTO fahrstunde : fahrschueler.getFahrstunden()) {
-			if (fahrstunde.getArt() == Fahrstundenart.B_STANDARDFAHRT) {
-				anzNorm++;
-			} else if (fahrstunde.getArt() != Fahrstundenart.B_STANDARDFAHRT) {
-				anzSond++;
-			}
-		}
-		anzTheo = fahrschueler.getTheoriestunden().size();
-		String anzSo = anzSond + "";
-		String anzNo = anzNorm + "";
-		String anzTh = anzTheo + "";
+		int fahrschuelerId = fahrschuelerids.get(mainview.getSchuelerCombo().getSelectionIndex());
+		String anzSo = fahrschule.getAnzSonderfahrten(fahrschuelerId) + "";
+		String anzNo = fahrschule.getAnzStandardfahrten(fahrschuelerId) + "";
+		String anzTh = fahrschule.getAnzTheoriestunden(fahrschuelerId) + "";
 		mainview.getTheorieTxt().setText(anzTh);
 		mainview.getSonderfahrtTxt().setText(anzSo);
 		mainview.getFahrstundeTxt().setText(anzNo);
@@ -151,42 +124,30 @@ public class Controller implements Observer {
 		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
 		int datumTag = mainview.getDateFahrstunde().getDay();
 
-		FahrschuelerDTO fSchueler = null;
-		FahrlehrerDTO fLehrer = null;
-		LocalTime terminUhrzeit = null;
-		Fahrstundenart fStundenArt = null;
-		LocalDate terminDatum = null;
-
+		
 		if (mainview.getSchuelerCombo().getSelectionIndex() != -1) {
-			fSchueler = fahrschule.getFahrschueler(fahrschuelerids.get(fahrschuelerindex));
-			model.setFahrschueler(fSchueler);
+			model.setFahrschueler(fahrschule.getFahrschueler(fahrschuelerids.get(fahrschuelerindex)));
 		}
 
 		if (mainview.getLehrerCombo().getSelectionIndex() != -1) {
-			fLehrer = fahrschule.getFahrlehrer(fahrlehrerids.get(fahrlehrerindex));
-			model.setFahrlehrer(fLehrer);
+			model.setFahrlehrer(fahrschule.getFahrlehrer(fahrlehrerids.get(fahrlehrerindex)));
 		}
 
 		if (!uhrzeitString.isEmpty()) {
 			if (uhrzeitString.length() == 4) {
 				uhrzeitString = "0" + uhrzeitString;
 			}
-			terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
+			LocalTime terminUhrzeit = LocalTime.of(Integer.parseInt(uhrzeitString.substring(0, 2)),
 					Integer.parseInt(uhrzeitString.substring(3)));
 			model.setUhrzeit(terminUhrzeit);
 		}
 
-		terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
+		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		if (!LocalDate.now().isAfter(terminDatum)) {
 			model.setDatum(terminDatum);
 		}
 		if (!artString.isEmpty()) {
-			if (artString.trim().compareTo(Fahrstundenart.B_STANDARDFAHRT.getBeschreibung()) == 0) {
-				fStundenArt = Fahrstundenart.B_STANDARDFAHRT;
-			} else {
-				fStundenArt = Fahrstundenart.B_SONDERFAHRT;
-			}
-			model.setArt(fStundenArt);
+			model.setArt(Fahrstundenart.valueOf(artString));
 		}
 
 	}
@@ -204,7 +165,6 @@ public class Controller implements Observer {
 
 		fLehrer.getFahrstunden().add(fStunde);
 		fSchueler.getFahrstunden().add(fStunde);
-		kalender.addFahrstunde(fStunde);
 		fahrschule.updateFahrlehrer(fLehrer);
 		fahrschule.updateFahrschueler(fSchueler);
 	}
@@ -305,7 +265,7 @@ public class Controller implements Observer {
 
 		case "StammdatenanGui":
 			mainview.getDisplay().close();
-			stammdatenController = new StammdatenController(this, fahrschule);
+			new StammdatenController(this, fahrschule);
 			break;
 
 		default:
