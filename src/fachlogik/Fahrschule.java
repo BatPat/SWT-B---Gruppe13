@@ -61,6 +61,7 @@ public class Fahrschule {
 	}
 	
 	public int[] getAnzSonderAndStandardFahrten(int fahrschuelerId) {
+		// momentan werden immer beide werte auf einmal benoetigt, deshalb diese methode mit nur einem datenbankzugriff und einer schleife
 		List<FahrstundeDTO> fstunden = schuelerDao.getFahrschueler(fahrschuelerId).getFahrstunden();
 		int[] anzFahrten = new int[2];
 		for (FahrstundeDTO fahrstundeDTO : fstunden) {
