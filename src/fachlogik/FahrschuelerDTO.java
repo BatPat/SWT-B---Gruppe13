@@ -206,8 +206,4 @@ public class FahrschuelerDTO implements Person, Serializable {
 	public void setTheoriestunden(List<TheoriestundeDTO> theoriestunden) {
 		this.theoriestunden = theoriestunden;
 	}
-
-	public String Fuehrerscheinklasse() {
-		return null;
-	}
 }

@@ -17,6 +17,7 @@ import datenhaltung.FahrschuelerDaoImpl;
 import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrschuelerDTO;
 import fachlogik.Fahrschule;
+import fachlogik.Person;
 import fachlogik.PersonType;
 
 public class StammdatenController implements Observer {
@@ -45,21 +46,9 @@ public class StammdatenController implements Observer {
 		table.removeAll();
 		List<FahrlehrerDTO> fListe= fahrschule.getFahrlehrerListe();
 		for (FahrlehrerDTO fahrlehrer : fListe) {
-			TableItem item = new TableItem(table, SWT.NONE);
-			int whitespaceIndex= fahrlehrer.getName().indexOf(" ");
-			item.setText(0, fahrlehrer.getName().substring(0, whitespaceIndex));
-			item.setText(1, fahrlehrer.getName().substring(whitespaceIndex + 1));
-			item.setText(2, fahrlehrer.getTelefonnummer());
-			item.setText(3, fahrlehrer.getStrasse());
-			item.setText(4, fahrlehrer.getHausnummer());
-			item.setText(5, fahrlehrer.getPlz());
-			item.setText(6, fahrlehrer.getGeburtsdatum());
-			item.setText(7, fahrlehrer.getFuehrerscheinklasse());
+			addPersonToTable(fahrlehrer, table);
 		}
-		for (int i = 0; i < table.getColumns().length; i++) {
-			TableColumn column = table.getColumns()[i];
-			column.pack();
-		}
+		packTable(table);
 	}
 
 	private void fillSchuelerListContent() {
@@ -67,17 +56,12 @@ public class StammdatenController implements Observer {
 		table.removeAll();
 		List<FahrschuelerDTO> fListe= fahrschule.getFahrschuelerListe();
 		for (FahrschuelerDTO fahrschueler : fListe) {
-			TableItem item = new TableItem(table, SWT.NONE);
-			int whitespaceIndex= fahrschueler.getName().indexOf(" ");
-			item.setText(0, fahrschueler.getName().substring(0, whitespaceIndex));
-			item.setText(1, fahrschueler.getName().substring(whitespaceIndex + 1));
-			item.setText(2, fahrschueler.getTelefonnummer());
-			item.setText(3, fahrschueler.getStrasse());
-			item.setText(4, fahrschueler.getHausnummer());
-			item.setText(5, fahrschueler.getPlz());
-			item.setText(6, fahrschueler.getGeburtsdatum());
-			item.setText(7, fahrschueler.getFuehrerscheinklasse());
+			addPersonToTable(fahrschueler, table);
 		}
+		packTable(table);
+	}
+
+	private void packTable(Table table) {
 		for (int i = 0; i < table.getColumns().length; i++) {
 			TableColumn column = table.getColumns()[i];
 			column.pack();
@@ -86,16 +70,24 @@ public class StammdatenController implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-
+		Person p;
 		switch (arg1.toString()) {
 		case "FahrlehrerNeu":
-			createPerson(PersonType.FAHRLEHRER);
-			fillLehrerListContent();
+			p = createPerson(PersonType.FAHRLEHRER);
+			if(p != null) {
+				Table table = stammdatenView.getLehrerStammdatenTabelle();
+				addPersonToTable(p, table);				
+				packTable(table);
+			}
 			break;
 
 		case "FahrschuelerNeu":
-			createPerson(PersonType.FAHRSCHUELER);
-			fillSchuelerListContent();
+			p = createPerson(PersonType.FAHRSCHUELER);
+			if(p != null) {
+				Table table = stammdatenView.getSchuelerStammdatenTable();
+				addPersonToTable(p, table);				
+				packTable(table);
+			}
 			break;
 
 		case "MainGui":
@@ -118,9 +110,23 @@ public class StammdatenController implements Observer {
 		}
 	}
 
-	private void createPerson(PersonType personType) {
+	private void addPersonToTable(Person p, Table table) {
+		TableItem item= new TableItem(table, SWT.NONE);
+		int whitespaceIndex= p.getName().indexOf(" ");
+		item.setText(0, p.getName().substring(0, whitespaceIndex));
+		item.setText(1, p.getName().substring(whitespaceIndex + 1));
+		item.setText(2, p.getTelefonnummer());
+		item.setText(3, p.getStrasse());
+		item.setText(4, p.getHausnummer());
+		item.setText(5, p.getPlz());
+		item.setText(6, p.getGeburtsdatum());
+		item.setText(7, p.getFuehrerscheinklasse());
+	}
+
+	private Person createPerson(PersonType personType) {
 		
-		new PersonAnlegenController(personType, stammdatenView.getDisplay().getActiveShell());
+		PersonAnlegenController pac = new PersonAnlegenController(personType, stammdatenView.getDisplay().getActiveShell());
+		return pac.getCreatedPerson();
 	}
 
 }

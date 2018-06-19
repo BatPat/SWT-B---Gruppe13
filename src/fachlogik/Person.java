@@ -19,6 +19,6 @@ public interface Person {
 	
 	public String getGeburtsdatum();
 	
-	public String Fuehrerscheinklasse();
+	public String getFuehrerscheinklasse();
 
 }

@@ -25,6 +25,7 @@ public class PersonAnlegenController{
 	private String hausNr;
 	private String geburtsdatum;
 	private String fuehrerscheinklasse;
+	private Person createdPerson;
 	
 	
 	public PersonAnlegenController(PersonType personType, Shell shell) {
@@ -44,8 +45,9 @@ public class PersonAnlegenController{
 
 
 	private void personAnlegen() {
+		createdPerson = null;
 		if(isAlleFelderAusgefüllt()) {
-			Person person = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+			createdPerson = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
 		}
 	}
 
@@ -166,5 +168,9 @@ public class PersonAnlegenController{
 		int monat = dialog.getGebdat().getMonth() + 1;
 		int jahr = dialog.getGebdat().getYear();
 		geburtsdatum = tag + "." + monat + "." + jahr;
+	}
+
+	public Person getCreatedPerson() {
+		return createdPerson;
 	}
 }
