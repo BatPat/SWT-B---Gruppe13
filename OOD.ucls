@@ -20,25 +20,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="oberflaeche.PersonAnlegenController" project="SWT-B---Gruppe13" 
-    file="/SWT-B---Gruppe13/src/oberflaeche/PersonAnlegenController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="180" y="1070"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="oberflaeche.StammdatenController" project="SWT-B---Gruppe13" 
-    file="/SWT-B---Gruppe13/src/oberflaeche/StammdatenController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1054" y="1051"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="oberflaeche.PersonAnlegenDialog" project="SWT-B---Gruppe13" 
+  <class id="3" language="java" name="oberflaeche.PersonAnlegenDialog" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/oberflaeche/PersonAnlegenDialog.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="178" y="102"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -47,7 +29,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="oberflaeche.MainView" project="SWT-B---Gruppe13" 
+  <class id="4" language="java" name="oberflaeche.MainView" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/oberflaeche/MainView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="500" y="352"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -56,7 +38,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="oberflaeche.FahrschulTheme" project="SWT-B---Gruppe13" 
+  <class id="5" language="java" name="oberflaeche.FahrschulTheme" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/oberflaeche/FahrschulTheme.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="778" y="245"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -65,7 +47,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="8" language="java" name="fachlogik.AbstractPersonFactory" project="SWT-B---Gruppe13" 
+  <interface id="6" language="java" name="fachlogik.AbstractPersonFactory" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/AbstractPersonFactory.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="100" y="1596"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -74,7 +56,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="fachlogik.Fahrschule" project="SWT-B---Gruppe13" 
+  <class id="7" language="java" name="fachlogik.Fahrschule" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/Fahrschule.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1365" y="1876"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -83,7 +65,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="fachlogik.FahrschulModel" project="SWT-B---Gruppe13" 
+  <class id="8" language="java" name="fachlogik.FahrschulModel" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/FahrschulModel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="488" y="1865"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -92,7 +74,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="fachlogik.FahrschuelerDTO" project="SWT-B---Gruppe13" 
+  <class id="9" language="java" name="fachlogik.FahrschuelerDTO" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/FahrschuelerDTO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="19" y="3420"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -101,7 +83,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="fachlogik.FahrstundeDTO" project="SWT-B---Gruppe13" 
+  <class id="10" language="java" name="fachlogik.FahrstundeDTO" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/FahrstundeDTO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="150" y="2272"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -110,7 +92,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="fachlogik.FahrlehrerDTO" project="SWT-B---Gruppe13" 
+  <class id="11" language="java" name="fachlogik.FahrlehrerDTO" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/FahrlehrerDTO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-557" y="3424"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -119,7 +101,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="fachlogik.PruefungDTO" project="SWT-B---Gruppe13" 
+  <class id="12" language="java" name="fachlogik.PruefungDTO" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/PruefungDTO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-778" y="2293"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -128,7 +110,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="fachlogik.PersonFactory" project="SWT-B---Gruppe13" 
+  <class id="13" language="java" name="fachlogik.PersonFactory" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/PersonFactory.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="100" y="1804"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -137,7 +119,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="16" language="java" name="fachlogik.PersonType" project="SWT-B---Gruppe13" 
+  <enumeration id="14" language="java" name="fachlogik.PersonType" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/PersonType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="251" y="1466"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -146,7 +128,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="17" language="java" name="fachlogik.PdfDocumentBill" project="SWT-B---Gruppe13" 
+  <class id="15" language="java" name="fachlogik.PdfDocumentBill" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/PdfDocumentBill.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="825" y="1898"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -155,7 +137,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="18" language="java" name="fachlogik.Fuehrerscheinklasse" project="SWT-B---Gruppe13" 
+  <enumeration id="16" language="java" name="fachlogik.Fuehrerscheinklasse" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/Fuehrerscheinklasse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1409" y="2211"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -164,7 +146,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="19" language="java" name="fachlogik.HibernateUtil" project="SWT-B---Gruppe13" 
+  <class id="17" language="java" name="fachlogik.HibernateUtil" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/HibernateUtil.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-30" y="3866"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -173,7 +155,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="20" language="java" name="fachlogik.Person" project="SWT-B---Gruppe13" 
+  <interface id="18" language="java" name="fachlogik.Person" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/Person.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-269" y="3403"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -182,7 +164,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="21" language="java" name="fachlogik.Termin" project="SWT-B---Gruppe13" 
+  <interface id="19" language="java" name="fachlogik.Termin" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/Termin.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-763" y="1656"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -191,7 +173,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="22" language="java" name="fachlogik.TheoriestundeDTO" project="SWT-B---Gruppe13" 
+  <class id="20" language="java" name="fachlogik.TheoriestundeDTO" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/TheoriestundeDTO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-358" y="2309"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -200,7 +182,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="fachlogik.Stunde" project="SWT-B---Gruppe13" 
+  <class id="21" language="java" name="fachlogik.Stunde" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/fachlogik/Stunde.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-407" y="1855"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -209,7 +191,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="24" language="java" name="datenhaltung.TheoriestundeDao" project="SWT-B---Gruppe13" 
+  <interface id="22" language="java" name="datenhaltung.TheoriestundeDao" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/TheoriestundeDao.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-527" y="4135"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -218,7 +200,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="25" language="java" name="datenhaltung.PruefungDao" project="SWT-B---Gruppe13" 
+  <interface id="23" language="java" name="datenhaltung.PruefungDao" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/PruefungDao.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-174" y="4127"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -227,7 +209,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="26" language="java" name="datenhaltung.FahrstundeDao" project="SWT-B---Gruppe13" 
+  <interface id="24" language="java" name="datenhaltung.FahrstundeDao" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrstundeDao.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="114" y="4130"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -236,7 +218,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="27" language="java" name="datenhaltung.FahrschuelerDao" project="SWT-B---Gruppe13" 
+  <interface id="25" language="java" name="datenhaltung.FahrschuelerDao" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrschuelerDao.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="694" y="4121"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -245,7 +227,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="28" language="java" name="datenhaltung.FahrlehrerDao" project="SWT-B---Gruppe13" 
+  <interface id="26" language="java" name="datenhaltung.FahrlehrerDao" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrlehrerDao.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="384" y="4108"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -254,7 +236,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="29" language="java" name="datenhaltung.FahrlehrerDaoImpl" project="SWT-B---Gruppe13" 
+  <class id="27" language="java" name="datenhaltung.FahrlehrerDaoImpl" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrlehrerDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="390" y="4378"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -263,7 +245,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="datenhaltung.FahrschuelerDaoImpl" project="SWT-B---Gruppe13" 
+  <class id="28" language="java" name="datenhaltung.FahrschuelerDaoImpl" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrschuelerDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="716" y="4396"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -272,7 +254,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="datenhaltung.FahrstundeDaoImpl" project="SWT-B---Gruppe13" 
+  <class id="29" language="java" name="datenhaltung.FahrstundeDaoImpl" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/FahrstundeDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="108" y="4364"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -281,7 +263,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="datenhaltung.PruefungDaoImpl" project="SWT-B---Gruppe13" 
+  <class id="30" language="java" name="datenhaltung.PruefungDaoImpl" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/PruefungDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-180" y="4384"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -290,7 +272,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="datenhaltung.TheorieStundeDaoImpl" project="SWT-B---Gruppe13" 
+  <class id="31" language="java" name="datenhaltung.TheorieStundeDaoImpl" project="SWT-B---Gruppe13" 
     file="/SWT-B---Gruppe13/src/datenhaltung/TheorieStundeDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-526" y="4350"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -299,316 +281,508 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="34">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="28"/>  
-  </realization>  
-  <association id="35">    
+  <class id="32" language="java" name="oberflaeche.PersonAnlegenController" project="SWT-B---Gruppe13" 
+    file="/SWT-B---Gruppe13/src/oberflaeche/PersonAnlegenController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="288" width="227" x="-31" y="846"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="oberflaeche.StammdatenController" project="SWT-B---Gruppe13" 
+    file="/SWT-B---Gruppe13/src/oberflaeche/StammdatenController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1056" y="1002"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="Main" project="SWT-B---Gruppe13" file="/SWT-B---Gruppe13/src/Main.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1460" y="958"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="InitTestData" project="SWT-B---Gruppe13" 
+    file="/SWT-B---Gruppe13/src/InitTestData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="92" y="4736"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="36">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="37" name="mainview">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="36" name="angeboteneKlassen"/>      
-      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="39" name="schueler"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="41">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="25"/>  
-  </realization>  
-  <association id="42">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="43" name="instance"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="45">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <association id="46">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="47" name="theoriestunden"/>      
-      <multiplicity id="48" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="49">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <association id="50">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="51" name="dialog"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="54" name="schuelerDao"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="56">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="57" name="stammdatenView"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="60" name="instance"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="63" name="pruefungen"/>      
-      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="66" name="lehrer"/>      
-      <multiplicity id="67" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="68">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <association id="69">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="70" name="fahrstunden"/>      
-      <multiplicity id="71" minimum="0" maximum="2147483647"/>    
+      <attribute id="40" name="pruefungen">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="41" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="72">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="73" name="fahrschule"/>      
-      <multiplicity id="74" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="75">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="76" name="personType"/>      
-      <multiplicity id="77" minimum="0" maximum="1"/>    
+  <association id="42">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="43" name="angeboteneKlassen">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="78">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="79" name="lehrerDao"/>      
-      <multiplicity id="80" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="81">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="82" name="theme"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="84">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="85" name="theoriestunden"/>      
-      <multiplicity id="86" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="87">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="88" name="fahrlehrer"/>      
-      <multiplicity id="89" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="90">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="91" name="pruefungen"/>      
-      <multiplicity id="92" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="93">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="94" name="fahrschule"/>      
-      <multiplicity id="95" minimum="0" maximum="1"/>    
+  <association id="45">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="46" name="fahrschueler">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="49" name="lehrer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="52" name="stammdatenView"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="54">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="55">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="56" name="schuelerDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="59" name="fahrlehrer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <realization id="62">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <realization id="63">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <association id="65">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="66" name="theoriestunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="67" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="69" name="createdPerson"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="72" name="pruefungen">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="75" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="78" name="schueler">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="80">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="81">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="82" name="fahrstunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="85" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="86" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="88" name="fahrlehrer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="91" name="fahrstundemanager"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="94" name="dialog"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="96">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="97" name="theme"/>      
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="97" name="fahrschule"/>      
       <multiplicity id="98" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="99">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="100" name="model"/>      
-      <multiplicity id="101" minimum="0" maximum="1"/>    
+  <generalization id="99">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="100">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="101" name="fahrschuelerManager"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="104" name="fahrstunde">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="102">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <association id="103">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="104" name="pdf"/>      
-      <multiplicity id="105" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="106">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="107">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="108" name="fahrlehrer"/>      
-      <multiplicity id="109" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="110">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <association id="111">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="112" name="instance"/>      
-      <multiplicity id="113" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="114">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <association id="115">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="116" name="instance"/>      
-      <multiplicity id="117" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="118">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="119" name="mainview"/>      
-      <multiplicity id="120" minimum="0" maximum="1"/>    
+  <association id="106">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="107" name="factory"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="121">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="26"/>  
+  <association id="109">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="110" name="controller"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="112">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="25"/>  
   </realization>  
-  <association id="122">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="123" name="factory"/>      
-      <multiplicity id="124" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="125">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="24"/>  
+  <realization id="113">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="19"/>  
   </realization>  
-  <association id="126">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="127" name="fahrstunde"/>      
-      <multiplicity id="128" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="129">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <association id="130">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="131" name="fahrstunden"/>      
-      <multiplicity id="132" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="133">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="134" name="fahrschueler"/>      
-      <multiplicity id="135" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="136">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="137" name="instance"/>      
-      <multiplicity id="138" minimum="0" maximum="1"/>    
+  <association id="114">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="115" name="pruefungmanager"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="139">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="140" name="fahrschueler"/>      
-      <multiplicity id="141" minimum="0" maximum="2147483647"/>    
+  <realization id="117">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="118">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <association id="119">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="120" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="121" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="142">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="143" name="controller"/>      
-      <multiplicity id="144" minimum="0" maximum="1"/>    
+  <association id="122">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="123" name="lehrerDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="126" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="127" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="129" name="theoriestundemanager"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="132" name="fahrschule">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="133" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="135" name="pdf">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="136" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="138" name="fahrschueler">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="139" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="140">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="141">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="142" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="143" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="144">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="145" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="146" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="147">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="148" name="theme">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="149" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="151" name="fahrstunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="152" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="153">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="154" name="personType"/>      
+      <multiplicity id="155" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="156">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="157" name="theme">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="158" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="160" name="theoriestunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="161" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="163" name="fahrlehrerManager"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
