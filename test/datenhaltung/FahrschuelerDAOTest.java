@@ -27,12 +27,12 @@ public class FahrschuelerDAOTest {
 	public void init() {
 		session = HibernateUtil.createSessionFactory().openSession();
 		session.beginTransaction();
-		Query q = session.createNativeQuery("DROP TABLE fahrschule.theoriestunden_fahrschueler");
-		Query q2 = session.createNativeQuery("DROP TABLE fahrschule.theoriestunde");
-		Query q3 = session.createNativeQuery("DROP TABLE fahrschule.pruefung");
-		Query q4 = session.createNativeQuery("DROP TABLE fahrschule.fahrstunde");
-		Query q5 = session.createNativeQuery("DROP TABLE fahrschule.fahrschueler");
-		Query q6 = session.createNativeQuery("DROP TABLE fahrschule.fahrlehrer");
+		Query q = session.createNativeQuery("DELETE FROM theoriestunden_fahrschueler");
+		Query q2 = session.createNativeQuery("DELETE FROM theoriestunde");
+		Query q3 = session.createNativeQuery("DELETE FROM pruefung");
+		Query q4 = session.createNativeQuery("DELETE FROM fahrstunde");
+		Query q5 = session.createNativeQuery("DELETE FROM fahrschueler");
+		Query q6 = session.createNativeQuery("DELETE FROM fahrlehrer");
 		q.executeUpdate();
 		q2.executeUpdate();
 		q3.executeUpdate();
