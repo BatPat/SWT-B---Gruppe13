@@ -22,7 +22,7 @@ public class InitTestData {
 	private PruefungDaoImpl pruefungmanager = PruefungDaoImpl.getInstance();
 
 	public InitTestData() {
-		if(fahrlehrerManager.getAlleFahrlehrer().size()== 0)
+		if(fahrlehrerManager.getAlleFahrlehrer().size() == 0)
 			createTestData();
 	}
 	
