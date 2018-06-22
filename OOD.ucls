@@ -317,425 +317,419 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="36">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="37" name="angeboteneKlassen">        
-        <position height="0" width="0" x="-44" y="171"/>      
-      </attribute>      
-      <multiplicity id="38" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-44" y="171"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <bendpoint x="154" y="4692"/>    
-    <bendpoint x="389" y="4693"/>    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="40" name="fahrlehrerManager">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="42">    
-    <bendpoint x="1237" y="2044"/>    
-    <bendpoint x="1237" y="2504"/>    
-    <bendpoint x="1121" y="2505"/>    
-    <bendpoint x="1120" y="3817"/>    
-    <bendpoint x="714" y="3816"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="43" name="schuelerDao">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="44" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="45">    
-    <bendpoint x="-696" y="3101"/>    
-    <bendpoint x="-696" y="2569"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="46" name="pruefungen">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="47" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="48">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <realization id="49">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="25"/>  
-  </realization>  
-  <association id="50">    
+  <class id="36" language="java" name="fachlogik.PersonInfo" project="SWT-B---Gruppe13" 
+    file="/SWT-B---Gruppe13/src/fachlogik/PersonInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1253" y="1930"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="37">    
     <bendpoint x="717" y="4717"/>    
     <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="51" name="fahrschuelerManager">        
+      <attribute id="38" name="fahrschuelerManager">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="52" minimum="0" maximum="1">        
+      <multiplicity id="39" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="53">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="54">    
-    <bendpoint x="-599" y="3104"/>    
-    <bendpoint x="-600" y="2648"/>    
-    <bendpoint x="-516" y="2649"/>    
-    <bendpoint x="-515" y="2586"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="55" name="theoriestunden">        
+  <association id="40">    
+    <bendpoint x="-780" y="3089"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="41" name="fahrlehrer">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="44" name="theme">        
+        <position height="0" width="0" x="3" y="-31"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="0" width="0" x="3" y="-31"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <bendpoint x="220" y="3084"/>    
+    <bendpoint x="220" y="2516"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="47" name="fahrstunden">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="56" minimum="0" maximum="2147483647">        
+      <multiplicity id="48" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="57">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="23"/>  
-  </realization>  
+  <association id="49">    
+    <bendpoint x="-487" y="2576"/>    
+    <bendpoint x="-487" y="2689"/>    
+    <bendpoint x="-574" y="2689"/>    
+    <bendpoint x="-574" y="3093"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="50" name="fahrlehrer">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="53" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="56" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="58">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="59" name="instance">        
+    <bendpoint x="109" y="4678"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="59" name="fahrstundemanager">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="60" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
+    <end type="TARGET" refId="29" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="61">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="62" name="dialog">        
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="62" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="63" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="64">    
-    <bendpoint x="334" y="2512"/>    
-    <bendpoint x="334" y="2828"/>    
-    <bendpoint x="-418" y="2829"/>    
-    <bendpoint x="-418" y="3294"/>    
-    <bendpoint x="-516" y="3294"/>    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="65" name="lehrer">        
-        <position height="0" width="0" x="-138" y="-2"/>      
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="65" name="mainview">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="66" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-138" y="-2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="67">    
-    <bendpoint x="-527" y="3350"/>    
-    <bendpoint x="-379" y="3350"/>    
-    <bendpoint x="-380" y="2858"/>    
-    <bendpoint x="377" y="2858"/>    
-    <bendpoint x="376" y="2524"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="68" name="fahrstunden">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="69" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="70">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <association id="71">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="72" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="74">    
-    <bendpoint x="-528" y="4716"/>    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="75" name="theoriestundemanager">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="76" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="77">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <association id="78">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="79" name="theme">        
-        <position height="0" width="0" x="3" y="-31"/>      
-      </attribute>      
-      <multiplicity id="80" minimum="0" maximum="1">        
-        <position height="0" width="0" x="3" y="-31"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="81">    
-    <bendpoint x="220" y="3084"/>    
-    <bendpoint x="220" y="2516"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="82" name="fahrstunden">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="83" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="84">    
-    <bendpoint x="32" y="4701"/>    
-    <bendpoint x="-179" y="4701"/>    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="85" name="pruefungmanager">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="86" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="87">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <association id="88">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="89" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="90" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="91">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <association id="92">    
-    <bendpoint x="109" y="4678"/>    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="93" name="fahrstundemanager">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="94" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="95">    
-    <bendpoint x="264" y="1140"/>    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="96" name="personType">        
-        <position height="0" width="0" x="14" y="-65"/>      
-      </attribute>      
-      <multiplicity id="97" minimum="0" maximum="1">        
-        <position height="0" width="0" x="14" y="-65"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="98">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="24"/>  
-  </realization>  
-  <association id="99">    
-    <bendpoint x="-780" y="3089"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="100" name="fahrlehrer">        
-        <position height="0" width="0" x="-138" y="-2"/>      
-      </attribute>      
-      <multiplicity id="101" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-138" y="-2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="102">    
-    <bendpoint x="-183" y="2573"/>    
-    <bendpoint x="-184" y="2720"/>    
-    <bendpoint x="-23" y="2720"/>    
-    <bendpoint x="-23" y="3076"/>    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="103" name="fahrschueler">        
-        <position height="0" width="0" x="116" y="2"/>      
-      </attribute>      
-      <multiplicity id="104" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="116" y="2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="105">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="106" name="theme">        
-        <position height="0" width="0" x="3" y="-31"/>      
-      </attribute>      
-      <multiplicity id="107" minimum="0" maximum="1">        
-        <position height="0" width="0" x="3" y="-31"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="108">    
-    <bendpoint x="589" y="1230"/>    
-    <bendpoint x="1126" y="1230"/>    
-    <bendpoint x="1126" y="1877"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="109" name="fahrschule">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="110" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="111">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="112" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="113" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="114">    
-    <bendpoint x="489" y="1241"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="115" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="116" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="117">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="118" name="mainview">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="119" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="120">    
-    <bendpoint x="-43" y="3262"/>    
-    <bendpoint x="-126" y="3262"/>    
-    <bendpoint x="-126" y="2976"/>    
-    <bendpoint x="-938" y="2977"/>    
-    <bendpoint x="-938" y="2574"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="121" name="pruefungen">        
+  <realization id="67">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="68">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="69" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="122" minimum="0" maximum="2147483647">        
+      <multiplicity id="70" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="123">    
-    <bendpoint x="1501" y="2045"/>    
+  <association id="71">    
+    <bendpoint x="32" y="4701"/>    
+    <bendpoint x="-179" y="4701"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="72" name="pruefungmanager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <bendpoint x="488" y="1272"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="75" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="78" name="theme">        
+        <position height="0" width="0" x="3" y="-31"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="1">        
+        <position height="0" width="0" x="3" y="-31"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <bendpoint x="-528" y="4716"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="81" name="theoriestundemanager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="82" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="84" name="angeboteneKlassen">        
+        <position height="0" width="0" x="-44" y="171"/>      
+      </attribute>      
+      <multiplicity id="85" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-44" y="171"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <bendpoint x="154" y="4692"/>    
+    <bendpoint x="389" y="4693"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="87" name="fahrlehrerManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="88" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="90" name="dialog">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="91" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="92">    
+    <bendpoint x="1500" y="2128"/>    
     <bendpoint x="1501" y="2466"/>    
     <bendpoint x="1064" y="2466"/>    
     <bendpoint x="1065" y="3528"/>    
     <bendpoint x="393" y="3529"/>    
     <bendpoint x="392" y="3820"/>    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="124" name="lehrerDao">        
+      <attribute id="93" name="lehrerDao">        
         <position height="0" width="0" x="9" y="0"/>      
       </attribute>      
-      <multiplicity id="125" minimum="0" maximum="1">        
+      <multiplicity id="94" minimum="0" maximum="1">        
         <position height="0" width="0" x="9" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="95">    
+    <bendpoint x="-43" y="3262"/>    
+    <bendpoint x="-126" y="3262"/>    
+    <bendpoint x="-126" y="2976"/>    
+    <bendpoint x="-938" y="2977"/>    
+    <bendpoint x="-938" y="2574"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="96" name="pruefungen">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="97" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <bendpoint x="-1255" y="1400"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="99" name="personType"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="101">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <association id="102">    
+    <bendpoint x="334" y="2512"/>    
+    <bendpoint x="334" y="2828"/>    
+    <bendpoint x="-418" y="2829"/>    
+    <bendpoint x="-418" y="3294"/>    
+    <bendpoint x="-516" y="3294"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="103" name="lehrer">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-138" y="-2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <bendpoint x="-1367" y="996"/>    
+    <bendpoint x="-1366" y="1645"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="106" name="createdPersonInfo"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="108">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <realization id="109">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="110">    
+    <bendpoint x="-527" y="3350"/>    
+    <bendpoint x="-379" y="3350"/>    
+    <bendpoint x="-380" y="2858"/>    
+    <bendpoint x="377" y="2858"/>    
+    <bendpoint x="376" y="2524"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="111" name="fahrstunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="112" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="114">    
+    <bendpoint x="-696" y="3101"/>    
+    <bendpoint x="-696" y="2569"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="115" name="pruefungen">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="116" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="117">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="118">    
+    <bendpoint x="149" y="1932"/>    
+    <bendpoint x="-177" y="1932"/>    
+    <bendpoint x="-177" y="1653"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="119">    
+    <bendpoint x="-183" y="2573"/>    
+    <bendpoint x="-184" y="2720"/>    
+    <bendpoint x="-23" y="2720"/>    
+    <bendpoint x="-23" y="3076"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="120" name="fahrschueler">        
+        <position height="0" width="0" x="116" y="2"/>      
+      </attribute>      
+      <multiplicity id="121" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="116" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="122">    
+    <bendpoint x="-599" y="3104"/>    
+    <bendpoint x="-600" y="2648"/>    
+    <bendpoint x="-516" y="2649"/>    
+    <bendpoint x="-515" y="2586"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="123" name="theoriestunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="125">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
   <association id="126">    
-    <bendpoint x="-904" y="2570"/>    
-    <bendpoint x="-904" y="3012"/>    
-    <bendpoint x="-155" y="3013"/>    
-    <bendpoint x="-156" y="3301"/>    
-    <bendpoint x="-52" y="3300"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="127" name="fahrschueler">        
+    <bendpoint x="134" y="2513"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="127" name="schueler">        
         <position height="0" width="0" x="116" y="2"/>      
       </attribute>      
       <multiplicity id="128" minimum="0" maximum="1">        
@@ -746,141 +740,135 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="129">    
-    <bendpoint x="134" y="2513"/>    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="130" name="schueler">        
-        <position height="0" width="0" x="116" y="2"/>      
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="130" name="stammdatenView">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="131" minimum="0" maximum="1">        
-        <position height="0" width="0" x="116" y="2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="132">    
-    <bendpoint x="149" y="1932"/>    
-    <bendpoint x="-177" y="1932"/>    
-    <bendpoint x="-177" y="1653"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <association id="133">    
-    <bendpoint x="488" y="2271"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="134" name="fahrstunde">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="135" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="136">    
-    <bendpoint x="590" y="1199"/>    
-    <bendpoint x="825" y="1199"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="137" name="pdf">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="138" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="139">    
-    <bendpoint x="18" y="3082"/>    
-    <bendpoint x="18" y="2690"/>    
-    <bendpoint x="-240" y="2690"/>    
-    <bendpoint x="-239" y="2582"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="140" name="theoriestunden">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="141" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="142">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="26"/>  
-  </realization>  
-  <association id="143">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="144" name="controller">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="145" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="146">    
-    <bendpoint x="1365" y="1065"/>    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="147" name="fahrschule">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="148" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="149">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="22"/>  
-  </realization>  
-  <association id="150">    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="151" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="152" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="153">    
-    <bendpoint x="-487" y="2576"/>    
-    <bendpoint x="-487" y="2689"/>    
-    <bendpoint x="-574" y="2689"/>    
-    <bendpoint x="-574" y="3093"/>    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="154" name="fahrlehrer">        
-        <position height="0" width="0" x="-138" y="-2"/>      
-      </attribute>      
-      <multiplicity id="155" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-138" y="-2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="156">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="157" name="stammdatenView">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="158" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="132">    
+    <bendpoint x="1237" y="2124"/>    
+    <bendpoint x="1237" y="2504"/>    
+    <bendpoint x="1121" y="2505"/>    
+    <bendpoint x="1120" y="3817"/>    
+    <bendpoint x="714" y="3816"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="133" name="schuelerDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="134" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="136" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="137" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="138">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <association id="139">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="140" name="controller">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="141" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <bendpoint x="-904" y="2570"/>    
+    <bendpoint x="-904" y="3012"/>    
+    <bendpoint x="-155" y="3013"/>    
+    <bendpoint x="-156" y="3301"/>    
+    <bendpoint x="-52" y="3300"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="143" name="fahrschueler">        
+        <position height="0" width="0" x="116" y="2"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="116" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="145">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <realization id="146">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <association id="147">    
+    <bendpoint x="589" y="1230"/>    
+    <bendpoint x="1126" y="1230"/>    
+    <bendpoint x="1126" y="1877"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="148" name="fahrschule">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="149" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <bendpoint x="1365" y="1065"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="151" name="fahrschule">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="152" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="153">    
+    <bendpoint x="18" y="3082"/>    
+    <bendpoint x="18" y="2690"/>    
+    <bendpoint x="-240" y="2690"/>    
+    <bendpoint x="-239" y="2582"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="154" name="theoriestunden">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="155" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="156">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
