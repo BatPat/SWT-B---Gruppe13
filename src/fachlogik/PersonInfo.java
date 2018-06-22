@@ -2,6 +2,7 @@ package fachlogik;
 
 public class PersonInfo {
 	
+	private int id;
 	private PersonType personType;
 	private String name;
 	private String plz;	
@@ -89,5 +90,15 @@ public class PersonInfo {
 	}
 	public void setFuehrerscheinklasse(String fuehrerscheinklasse) {
 		this.fuehrerscheinklasse = fuehrerscheinklasse;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

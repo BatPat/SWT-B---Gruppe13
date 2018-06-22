@@ -9,20 +9,16 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import fachlogik.FahrlehrerDTO;
-import fachlogik.FahrschuelerDTO;
 import fachlogik.FahrschulModel;
 import fachlogik.Fahrschule;
-import fachlogik.FahrstundeDTO;
 import fachlogik.Fahrstundenart;
 import fachlogik.Fuehrerscheinklasse;
-import fachlogik.PdfDocumentBill;
+import fachlogik.PersonInfo;
 
 public class Controller implements Observer {
 
 	private FahrschulModel model;
 	private MainView mainview;
-	private PdfDocumentBill pdf;
 	private Fahrschule fahrschule;
 	private List<Integer> fahrlehrerids;
 	private List<Integer> fahrschuelerids;
@@ -30,7 +26,6 @@ public class Controller implements Observer {
 	private int chachedFahrschuelerSelection = -1;
 
 	public Controller() {
-		pdf = new PdfDocumentBill();
 		initModel();
 		fahrschule = new Fahrschule();
 		initGUI();
@@ -50,12 +45,12 @@ public class Controller implements Observer {
 
 	private void fillListContent() {
 		fahrlehrerids = new ArrayList<>();
-		for (FahrlehrerDTO f : fahrschule.getFahrlehrerListe()) {
+		for (PersonInfo f : fahrschule.getFahrlehrerInfoListe()) {
 			mainview.getLehrerCombo().add(f.getName());
 			fahrlehrerids.add(f.getId());
 		}
 		fahrschuelerids = new ArrayList<>();
-		for (FahrschuelerDTO f : fahrschule.getFahrschuelerListe()) {
+		for (PersonInfo f : fahrschule.getFahrschuelerInfoListe()) {
 			mainview.getSchuelerCombo().add(f.getName());
 			fahrschuelerids.add(f.getId());
 		}
@@ -84,7 +79,7 @@ public class Controller implements Observer {
 		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
 		int monat = mainview.getDateFahrstunde().getMonth() + 1;
 		int jahr = mainview.getDateFahrstunde().getYear();
-		int fId = fahrlehrerids.get(mainview.getLehrerCombo().getSelectionIndex());
+		int fId = fahrlehrerids.get(getFahrlehrerSelectionIndex());
 		List<LocalDateTime> termine = fahrschule.getTermine(fId);
 		
 		for (LocalDateTime l : termine) {
@@ -100,7 +95,7 @@ public class Controller implements Observer {
 	}
 
 	private void uebersichtFahrstunden() {
-		int fahrschuelerId = fahrschuelerids.get(mainview.getSchuelerCombo().getSelectionIndex());
+		int fahrschuelerId = fahrschuelerids.get(getFahrschuelerSelectionIndex());
 		int[] anzFahrstunden = fahrschule.getAnzSonderAndStandardFahrten(fahrschuelerId);
 		String anzSo = anzFahrstunden[0] + "";
 		String anzNo = anzFahrstunden[1] + "";
@@ -117,24 +112,23 @@ public class Controller implements Observer {
 
 	private void updateModel() {
 
-		int fahrschuelerindex = mainview.getSchuelerCombo().getSelectionIndex();
-		int fahrlehrerindex = mainview.getLehrerCombo().getSelectionIndex();
+		int fahrschuelerindex = getFahrschuelerSelectionIndex();
+		int fahrlehrerindex = getFahrlehrerSelectionIndex();
 		String artString = mainview.getArtCombo().getText();
 		String uhrzeitString = mainview.getTimeCombo().getText();
 		int datumJahr = mainview.getDateFahrstunde().getYear();
 		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
 		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
 		int datumTag = mainview.getDateFahrstunde().getDay();
-
-		
+	
 		if (fahrschuelerindex != -1 && fahrschuelerindex != chachedFahrschuelerSelection) {
 			chachedFahrschuelerSelection = fahrschuelerindex;
-			model.setFahrschueler(fahrschule.getFahrschueler(fahrschuelerids.get(fahrschuelerindex)));
+			model.setFahrschuelerId(fahrschuelerids.get(fahrschuelerindex));
 		}
 
 		if (fahrlehrerindex != -1 && fahrlehrerindex != chachedFahrlehrerSelection) {
 			chachedFahrlehrerSelection = fahrlehrerindex;
-			model.setFahrlehrer(fahrschule.getFahrlehrer(fahrlehrerids.get(fahrlehrerindex)));
+			model.setFahrlehrerId(fahrlehrerids.get(fahrlehrerindex));
 		}
 
 		if (!uhrzeitString.isEmpty()) {
@@ -149,7 +143,10 @@ public class Controller implements Observer {
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		if (!LocalDate.now().isAfter(terminDatum)) {
 			model.setDatum(terminDatum);
+		}else {
+			resetViewDatum();
 		}
+		
 		if (!artString.isEmpty()) {
 			for(Fahrstundenart f : Fahrstundenart.values()) {
 				if(f.getBeschreibung().equals(artString.trim())) {
@@ -160,47 +157,46 @@ public class Controller implements Observer {
 
 	}
 
+	private int getFahrlehrerSelectionIndex() {
+		return mainview.getLehrerCombo().getSelectionIndex();
+	}
+
 	private void erstellePdf() throws IOException {
-		if (model.getFahrschueler().getName() != null) {
-			pdf.createPdf(model.getFahrschueler());
+		if (getFahrschuelerSelectionIndex() != -1) {
+			fahrschule.druckeRechnungPdf(model.getFahrschuelerId());
 		}
 	}
 
 	private void bucheFahrstunde() {
-		FahrstundeDTO fStunde = model.getFahrstunde();
-		FahrschuelerDTO fSchueler = model.getFahrschueler();
-		FahrlehrerDTO fLehrer = model.getFahrlehrer();
-
-		fLehrer.getFahrstunden().add(fStunde);
-		fSchueler.getFahrstunden().add(fStunde);
-		fahrschule.updateFahrlehrer(fLehrer);
-		fahrschule.updateFahrschueler(fSchueler);
-		
+		int fSchuelerId = model.getFahrschuelerId();
+		int fLehrerId = model.getFahrlehrerId();
 		LocalDate datum = model.getDatum();
 		LocalTime zeit = model.getUhrzeit();
 		Fahrstundenart art = model.getArt();
 		
-		model.setFahrstunde(new FahrstundeDTO(art, fLehrer, fSchueler, zeit, datum, "Fahrschule Terlau"));
+		fahrschule.bucheFahrstunde(art, fSchuelerId, fLehrerId, datum, zeit, "Fahrschule Terlau");
 	}
 
 	private void updatePanel() {
-		if (model.getFahrlehrer().getName() != null) {
+		if (getFahrlehrerSelectionIndex() != -1) {
 			zeigePassendeTermine();
-			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
+			updateLehrerLabel();
 		}
-		if (model.getFahrschueler().getName() != null) {
+		if (getFahrschuelerSelectionIndex() != -1) {
 			uebersichtFahrstunden();
-			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
+			updateSchuelerLabel();
 		}
-
-		int datumJahr = mainview.getDateFahrstunde().getYear();
-		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
-		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
-		int datumTag = mainview.getDateFahrstunde().getDay();
-		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
-		if (LocalDate.now().isAfter(terminDatum)) {
+		if (LocalDate.now().isAfter(model.getDatum())) {
 			resetViewDatum();
 		}
+	}
+
+	private void updateSchuelerLabel() {
+		mainview.getSchuelernameLabel().setText(fahrschule.getFahrschuelerInfo(model.getFahrschuelerId()).getName());
+	}
+	
+	private void updateLehrerLabel() {
+		mainview.getLehrernameLabel().setText(fahrschule.getFahrlehrerInfo(model.getFahrlehrerId()).getName());
 	}
 
 	private void resetViewDatum() {
@@ -216,16 +212,20 @@ public class Controller implements Observer {
 		
 	}
 
-	public boolean isAlleFelderAusgefuellt() {
+	private boolean isAlleFelderAusgefuellt() {
 		boolean result = true;
 
-		result = mainview.getLehrerCombo().getSelectionIndex() != -1;
-		result = result && mainview.getSchuelerCombo().getSelectionIndex() != -1;
+		result = getFahrlehrerSelectionIndex() != -1;
+		result = result && getFahrschuelerSelectionIndex() != -1;
 		result = result && mainview.getFsKlasseCombo().getSelectionIndex() != -1;
 		result = result && mainview.getArtCombo().getSelectionIndex() != -1;
 		result = result && mainview.getTimeCombo().getSelectionIndex() != -1;
 
 		return result;
+	}
+
+	private int getFahrschuelerSelectionIndex() {
+		return mainview.getSchuelerCombo().getSelectionIndex();
 	}
 
 	@Override
@@ -236,7 +236,7 @@ public class Controller implements Observer {
 		switch (arg1.toString()) {
 		case "Fahrlehrer":
 			zeigePassendeTermine();
-			mainview.getLehrernameLabel().setText(model.getFahrlehrer().getName());
+			updateLehrerLabel();
 			break;
 
 		case "Datum":
@@ -245,7 +245,7 @@ public class Controller implements Observer {
 
 		case "Fahrschueler":
 			uebersichtFahrstunden();
-			mainview.getSchuelernameLabel().setText(model.getFahrschueler().getName());
+			updateSchuelerLabel();
 			break;
 
 		case "Uhrzeit":

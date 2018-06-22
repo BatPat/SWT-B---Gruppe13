@@ -5,57 +5,55 @@ import java.time.LocalTime;
 
 public class FahrschulModel {
 
-	private FahrstundeDTO fahrstunde;
+	private int fahrlehrerId;
+	private int fahrschuelerId;
+	private LocalDate datum;
+	private LocalTime uhrzeit;
+	private Fahrstundenart art;
 
 	public FahrschulModel() {
-		fahrstunde = new FahrstundeDTO(null, new FahrlehrerDTO(), new FahrschuelerDTO(), null, null, "Fahrschule Terlau");
+		this.datum = LocalDate.now();
 	}
 
-	public FahrlehrerDTO getFahrlehrer() {
-		return fahrstunde.getLehrer();
+	public int getFahrlehrerId() {
+		return fahrlehrerId;
 	}
 
-	public void setFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		this.fahrstunde.setLehrer(fahrlehrer);
+	public void setFahrlehrerId(int fahrlehrerId) {
+		this.fahrlehrerId = fahrlehrerId;
 	}
 
-	public FahrschuelerDTO getFahrschueler() {
-		return fahrstunde.getSchueler();
+	public int getFahrschuelerId() {
+		return fahrschuelerId;
 	}
 
-	public void setFahrschueler(FahrschuelerDTO fahrschueler) {
-		this.fahrstunde.setSchueler(fahrschueler);
-	}
-
-	public FahrstundeDTO getFahrstunde() {
-		return fahrstunde;
-	}
-
-	public void setFahrstunde(FahrstundeDTO fahrstunde) {
-		this.fahrstunde = fahrstunde;
-	}
-
-	public LocalTime getUhrzeit() {
-		return fahrstunde.getUhrzeit();
-	}
-
-	public void setUhrzeit(LocalTime uhrzeit) {
-		this.fahrstunde.setUhrzeit(uhrzeit);
+	public void setFahrschuelerId(int fahschuelerId) {
+		this.fahrschuelerId = fahschuelerId;
 	}
 
 	public LocalDate getDatum() {
-		return fahrstunde.getDatum();
+		return datum;
 	}
 
 	public void setDatum(LocalDate datum) {
-		this.fahrstunde.setDatum(datum);
+		this.datum = datum;
+	}
+
+	public LocalTime getUhrzeit() {
+		return uhrzeit;
+	}
+
+	public void setUhrzeit(LocalTime uhrzeit) {
+		this.uhrzeit = uhrzeit;
 	}
 
 	public Fahrstundenart getArt() {
-		return fahrstunde.getArt();
+		return art;
 	}
 
 	public void setArt(Fahrstundenart art) {
-		this.fahrstunde.setArt(art);
+		this.art = art;
 	}
+
+	
 }

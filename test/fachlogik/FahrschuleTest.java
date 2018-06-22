@@ -8,7 +8,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import static org.assertj.core.api.Assertions.*;
+
+import org.hibernate.Session;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +29,30 @@ class FahrschuleTest {
 	public static FahrlehrerDTO fahrlehrer;
 	public static FahrschuelerDTO fahrschueler;
 
+	@AfterAll
+	public static void resetData() {
+		Session session = HibernateUtil.createSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createNativeQuery("DELETE FROM theoriestunden_fahrschueler");
+		Query q2 = session.createNativeQuery("DELETE FROM theoriestunde");
+		Query q3 = session.createNativeQuery("DELETE FROM pruefung");
+		Query q4 = session.createNativeQuery("DELETE FROM fahrstunde");
+		Query q5 = session.createNativeQuery("DELETE FROM fahrschueler");
+		Query q6 = session.createNativeQuery("DELETE FROM fahrlehrer");
+		q.executeUpdate();
+		q2.executeUpdate();
+		q3.executeUpdate();
+		q4.executeUpdate();
+		q5.executeUpdate();
+		q6.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
+	
 	@BeforeAll
 	public static void init() {
+		resetData();
+		
 		//Given
 		fahrschule = new Fahrschule();
 		fahrlehrer = new FahrlehrerDTO("test", "test", "test", "test", "test", "test", "test", "test");

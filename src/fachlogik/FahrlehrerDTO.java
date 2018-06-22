@@ -194,4 +194,9 @@ public class FahrlehrerDTO implements Person, Serializable {
 	public void setFuehrerscheinklasse(String fuehrerscheinklasse) {
 		this.fuehrerscheinklasse = fuehrerscheinklasse;
 	}
+
+	@Override
+	public PersonType getPersonType() {
+		return PersonType.FAHRLEHRER;
+	}
 }

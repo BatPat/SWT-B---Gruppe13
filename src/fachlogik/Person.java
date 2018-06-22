@@ -21,4 +21,8 @@ public interface Person {
 	
 	public String getFuehrerscheinklasse();
 
+	public PersonType getPersonType();
+
+	public int getId();
+
 }

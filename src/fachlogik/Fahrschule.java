@@ -1,16 +1,22 @@
 package fachlogik;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 import datenhaltung.FahrlehrerDao;
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDao;
 import datenhaltung.FahrschuelerDaoImpl;
+import datenhaltung.FahrstundeDao;
+import datenhaltung.FahrstundeDaoImpl;
 
 public class Fahrschule {
 	
 	private FahrschuelerDao schuelerDao;
 	private FahrlehrerDao lehrerDao;
+	private FahrstundeDao fahrStundeDao;
 	private List<Fuehrerscheinklasse> angeboteneKlassen;
 	
 	
@@ -18,6 +24,7 @@ public class Fahrschule {
 		super();
 		this.schuelerDao = FahrschuelerDaoImpl.getInstance();
 		this.lehrerDao = FahrlehrerDaoImpl.getInstance();
+		this.fahrStundeDao = FahrstundeDaoImpl.getInstance();
 		this.angeboteneKlassen = new ArrayList<>();
 		for(Fuehrerscheinklasse f: Fuehrerscheinklasse.values()) {
 			angeboteneKlassen.add(f);
@@ -136,21 +143,47 @@ public class Fahrschule {
 		return extractPersonInfos(getFahrschuelerListe());
 	}
 
-	public List<PersonInfo> extractPersonInfos(List<? extends Person> pListe) {
+	private List<PersonInfo> extractPersonInfos(List<? extends Person> pListe) {
 		List<PersonInfo> infoListe = new ArrayList<>();
 		for (Person person : pListe) {
-			PersonInfo pInfo = new PersonInfo();
-			pInfo.setName(person.getName());
-			pInfo.setPlz(person.getPlz());
-			pInfo.setWohnort(person.getWohnort());
-			pInfo.setStrasse(person.getStrasse());
-			pInfo.setHausnummer(person.getHausnummer());
-			pInfo.setTelefonnummer(person.getTelefonnummer());
-			pInfo.setGeburtsdatum(person.getGeburtsdatum());
-			pInfo.setFuehrerscheinklasse(person.getFuehrerscheinklasse());
-			infoListe.add(pInfo);
+			infoListe.add(extractPersonInfo(person));
 		}
 		return infoListe;
+	}
+	
+	public PersonInfo getFahrschuelerInfo(int fahrschuelerId) {
+		return extractPersonInfo(getFahrschueler(fahrschuelerId));
+	}
+	
+	public PersonInfo getFahrlehrerInfo(int fahrlehrerId) {
+		return extractPersonInfo(getFahrlehrer(fahrlehrerId));
+	}
+
+	private PersonInfo extractPersonInfo(Person person) {
+		PersonInfo pInfo = new PersonInfo();
+		pInfo.setId(person.getId());
+		pInfo.setPersonType(person.getPersonType());
+		pInfo.setName(person.getName());
+		pInfo.setPlz(person.getPlz());
+		pInfo.setWohnort(person.getWohnort());
+		pInfo.setStrasse(person.getStrasse());
+		pInfo.setHausnummer(person.getHausnummer());
+		pInfo.setTelefonnummer(person.getTelefonnummer());
+		pInfo.setGeburtsdatum(person.getGeburtsdatum());
+		pInfo.setFuehrerscheinklasse(person.getFuehrerscheinklasse());
+		return pInfo;
+	}
+
+	public void druckeRechnungPdf(int fahrschuelerId) {
+		try {
+			new PdfDocumentBill().createPdf(getFahrschueler(fahrschuelerId));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void bucheFahrstunde(Fahrstundenart art, int fSchuelerId, int fLehrerId, LocalDate datum, LocalTime zeit, String ort) {
+		fahrStundeDao.addFahrstunde(new FahrstundeDTO(art, getFahrlehrer(fLehrerId), getFahrschueler(fSchuelerId), zeit, datum, ort));
 	}
 
 }
