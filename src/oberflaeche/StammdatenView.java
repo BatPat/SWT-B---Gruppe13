@@ -10,7 +10,6 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 import java.util.Observable;
 
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.MouseEvent;

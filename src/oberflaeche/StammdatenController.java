@@ -1,23 +1,14 @@
 package oberflaeche;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-
-import datenhaltung.FahrlehrerDaoImpl;
-import datenhaltung.FahrschuelerDaoImpl;
-import fachlogik.FahrlehrerDTO;
-import fachlogik.FahrschuelerDTO;
 import fachlogik.Fahrschule;
-import fachlogik.Person;
+import fachlogik.PersonInfo;
 import fachlogik.PersonType;
 
 public class StammdatenController implements Observer {
@@ -44,9 +35,9 @@ public class StammdatenController implements Observer {
 	private void fillLehrerListContent() {
 		Table table = stammdatenView.getLehrerStammdatenTabelle();
 		table.removeAll();
-		List<FahrlehrerDTO> fListe= fahrschule.getFahrlehrerListe();
-		for (FahrlehrerDTO fahrlehrer : fListe) {
-			addPersonToTable(fahrlehrer, table);
+		List<PersonInfo> fListe= fahrschule.getFahrlehrerInfoListe();
+		for (PersonInfo fahrlehrer : fListe) {
+			addPersonInfoToTable(fahrlehrer, table);
 		}
 		packTable(table);
 	}
@@ -54,9 +45,9 @@ public class StammdatenController implements Observer {
 	private void fillSchuelerListContent() {
 		Table table = stammdatenView.getSchuelerStammdatenTable();
 		table.removeAll();
-		List<FahrschuelerDTO> fListe= fahrschule.getFahrschuelerListe();
-		for (FahrschuelerDTO fahrschueler : fListe) {
-			addPersonToTable(fahrschueler, table);
+		List<PersonInfo> fListe= fahrschule.getFahrschuelerInfoListe();
+		for (PersonInfo fahrschueler : fListe) {
+			addPersonInfoToTable(fahrschueler, table);
 		}
 		packTable(table);
 	}
@@ -70,22 +61,24 @@ public class StammdatenController implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		Person p;
+		PersonInfo p;
 		switch (arg1.toString()) {
 		case "FahrlehrerNeu":
-			p = createPerson(PersonType.FAHRLEHRER);
+			p = createPersonInfo(PersonType.FAHRLEHRER);
 			if(p != null) {
+				fahrschule.addPerson(p);
 				Table table = stammdatenView.getLehrerStammdatenTabelle();
-				addPersonToTable(p, table);				
+				addPersonInfoToTable(p, table);				
 				packTable(table);
 			}
 			break;
 
 		case "FahrschuelerNeu":
-			p = createPerson(PersonType.FAHRSCHUELER);
+			p = createPersonInfo(PersonType.FAHRSCHUELER);
 			if(p != null) {
+				fahrschule.addPerson(p);
 				Table table = stammdatenView.getSchuelerStammdatenTable();
-				addPersonToTable(p, table);				
+				addPersonInfoToTable(p, table);				
 				packTable(table);
 			}
 			break;
@@ -110,7 +103,7 @@ public class StammdatenController implements Observer {
 		}
 	}
 
-	private void addPersonToTable(Person p, Table table) {
+	private void addPersonInfoToTable(PersonInfo p, Table table) {
 		TableItem item= new TableItem(table, SWT.NONE);
 		int whitespaceIndex= p.getName().indexOf(" ");
 		item.setText(0, p.getName().substring(0, whitespaceIndex));
@@ -123,10 +116,10 @@ public class StammdatenController implements Observer {
 		item.setText(7, p.getFuehrerscheinklasse());
 	}
 
-	private Person createPerson(PersonType personType) {
+	private PersonInfo createPersonInfo(PersonType personType) {
 		
 		PersonAnlegenController pac = new PersonAnlegenController(personType, stammdatenView.getDisplay().getActiveShell());
-		return pac.getCreatedPerson();
+		return pac.getCreatedPersonInfo();
 	}
 
 }

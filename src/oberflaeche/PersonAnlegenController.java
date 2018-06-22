@@ -4,16 +4,11 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.widgets.Shell;
-
-import fachlogik.AbstractPersonFactory;
-import fachlogik.Person;
-import fachlogik.PersonFactory;
+import fachlogik.PersonInfo;
 import fachlogik.PersonType;
 
 public class PersonAnlegenController{
 	
-	private AbstractPersonFactory factory;
-	private PersonType personType;
 	private PersonAnlegenDialog dialog;
 	
 	private String vorname;
@@ -25,29 +20,27 @@ public class PersonAnlegenController{
 	private String hausNr;
 	private String geburtsdatum;
 	private String fuehrerscheinklasse;
-	private Person createdPerson;
+	private PersonInfo createdPersonInfo;
 	
 	
 	public PersonAnlegenController(PersonType personType, Shell shell) {
-		factory = new PersonFactory();
-		this.personType = personType;
-		initGUI(shell);
+		initGUI(personType, shell);
 	}
 
-	private void initGUI(Shell shell) {
+	private void initGUI(PersonType personType, Shell shell) {
 		dialog = new PersonAnlegenDialog(shell);
 		dialog.create();
 		createDialogListener();
 		if (dialog.open() == Window.OK) {
-			personAnlegen();
+			personInfoAnlegen(personType);
 		}
 	}
 
 
-	private void personAnlegen() {
-		createdPerson = null;
+	private void personInfoAnlegen(PersonType personType) {
+		createdPersonInfo = null;
 		if(isAlleFelderAusgefüllt()) {
-			createdPerson = factory.createPerson(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
+			createdPersonInfo = new PersonInfo(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
 		}
 	}
 
@@ -170,7 +163,7 @@ public class PersonAnlegenController{
 		geburtsdatum = tag + "." + monat + "." + jahr;
 	}
 
-	public Person getCreatedPerson() {
-		return createdPerson;
+	public PersonInfo getCreatedPersonInfo() {
+		return createdPersonInfo;
 	}
 }

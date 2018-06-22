@@ -6,7 +6,6 @@ import datenhaltung.FahrlehrerDao;
 import datenhaltung.FahrlehrerDaoImpl;
 import datenhaltung.FahrschuelerDao;
 import datenhaltung.FahrschuelerDaoImpl;
-import datenhaltung.FahrstundeDao;
 
 public class Fahrschule {
 	
@@ -122,6 +121,36 @@ public class Fahrschule {
 
 	public void setAngeboteneKlassen(List<Fuehrerscheinklasse> angeboteneKlassen) {
 		this.angeboteneKlassen = angeboteneKlassen;
+	}
+
+	public void addPerson(PersonInfo p) {
+		PersonFactory pFactory = new PersonFactory();
+		pFactory.createPerson(p.getPersonType(), p.getName(), p.getPlz(), p.getWohnort(), p.getStrasse(), p.getHausnummer(), p.getTelefonnummer(), p.getGeburtsdatum(), p.getFuehrerscheinklasse());
+	}
+
+	public List<PersonInfo> getFahrlehrerInfoListe() {
+		return extractPersonInfos(getFahrlehrerListe());
+	}
+	
+	public List<PersonInfo> getFahrschuelerInfoListe() {
+		return extractPersonInfos(getFahrschuelerListe());
+	}
+
+	public List<PersonInfo> extractPersonInfos(List<? extends Person> pListe) {
+		List<PersonInfo> infoListe = new ArrayList<>();
+		for (Person person : pListe) {
+			PersonInfo pInfo = new PersonInfo();
+			pInfo.setName(person.getName());
+			pInfo.setPlz(person.getPlz());
+			pInfo.setWohnort(person.getWohnort());
+			pInfo.setStrasse(person.getStrasse());
+			pInfo.setHausnummer(person.getHausnummer());
+			pInfo.setTelefonnummer(person.getTelefonnummer());
+			pInfo.setGeburtsdatum(person.getGeburtsdatum());
+			pInfo.setFuehrerscheinklasse(person.getFuehrerscheinklasse());
+			infoListe.add(pInfo);
+		}
+		return infoListe;
 	}
 
 }
