@@ -36,7 +36,7 @@ public class MainView extends Observable {
 
 	private Display display;
 	private Shell shell;
-	private CLabel btBuchen, btRechnung;
+	private CLabel btBuchen, btRechnung, btStammdaten;
 	private DateTime dateFahrstunde;
 
 	private Combo lehrerCombo, schuelerCombo, fsKlasseCombo, artCombo, timeCombo;
@@ -54,7 +54,7 @@ public class MainView extends Observable {
 	}
 
 	private void initUI() {
-		display = new Display();
+		display = Display.getDefault();
 		shell = new Shell(display);
 		theme = new FahrschulTheme();
 
@@ -120,14 +120,62 @@ public class MainView extends Observable {
 
 	private void erzeugeHeader() {
 		headerComposite = new Composite(mainComposite, SWT.NONE);
-		headerComposite.setLayout(new GridLayout(5, false));
+		headerComposite.setLayout(new GridLayout(5, true));
 		setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
 
 		Label nameLabel = new Label(headerComposite, SWT.NORMAL);
-		nameLabel.setText("Fahrschul-Verwaltungssoftware" + "\n" + "Version: 1.0");
+		nameLabel.setText("Fahrschul-Verwaltungssoftware" + "\n" + "Version: 2.0");
 		nameLabel.setFont(theme.getFont1());
 		nameLabel.setBackground(theme.getWhiteColor());
 		nameLabel.setForeground(theme.getBlueColor());
+
+		createFillerLabel(headerComposite, 2);
+
+		Label wechselLabel = new Label(headerComposite, SWT.NONE);
+		wechselLabel.setText("Ansicht wechseln:");
+		wechselLabel.setFont(theme.getNamefont());
+
+		btStammdaten = new CLabel(headerComposite, SWT.BORDER);
+		btStammdaten.setText("Stammdaten \n anzeigen");
+		btStammdaten.setTextDirection(SWT.CENTER);
+		btStammdaten.setFont(theme.getFont2());
+		btStammdaten.setBackground(theme.getBlueColor());
+		btStammdaten.setForeground(theme.getWhiteColor());
+		btStammdaten.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				btStammdaten.setBackground(new Color(display, 0, 0, 255));
+				setChanged();
+				notifyObservers("StammdatenanGui");
+			}
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				btStammdaten.setBackground(theme.getBlueColor());
+			}
+
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) { // not needed
+			}
+		});
+
+		btStammdaten.addMouseTrackListener(new MouseTrackListener() {
+
+			@Override
+			public void mouseHover(MouseEvent arg0) { // not needed
+			}
+
+			@Override
+			public void mouseExit(MouseEvent arg0) {
+				btStammdaten.setBackground(theme.getBlueColor());
+			}
+
+			@Override
+			public void mouseEnter(MouseEvent arg0) {
+				btStammdaten.setBackground(new Color(display, 125, 125, 255));
+			}
+		});
 
 		erzeugeLinie(headerComposite);
 	}

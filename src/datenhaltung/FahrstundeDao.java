@@ -1,15 +1,17 @@
 package datenhaltung;
 import java.util.List;
 
-import fachlogik.Fahrstunde;
+import fachlogik.FahrstundeDTO;
 
 public interface FahrstundeDao {
 	
-	public List<Fahrstunde> getAlleFahrstunden();
+	public List<FahrstundeDTO> getAlleFahrstunden();
 	
-	public void addFahrstunde(Fahrstunde fahrstunde);
+	public void addFahrstunde(FahrstundeDTO fahrstunde);
 	
-	public void updateFahrstunde(Fahrstunde fahrstunde);
+	public void updateFahrstunde(FahrstundeDTO fahrstunde);
 	
-	public void deleteFahrstunde(Fahrstunde fahrstunde);
+	public void deleteFahrstunde(FahrstundeDTO fahrstunde);
+	
+	public FahrstundeDTO getFahrstunde(int fahrstundeid);
 }

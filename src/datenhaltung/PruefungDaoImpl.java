@@ -1,78 +1,84 @@
 package datenhaltung;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import fachlogik.Pruefung;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import fachlogik.HibernateUtil;
+import fachlogik.PruefungDTO;
 
 public class PruefungDaoImpl implements PruefungDao {
+
+	private static PruefungDaoImpl instance;
+	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
+	private Session session;
+
+	private PruefungDaoImpl() {
+		
+	}
 	
-	private static String javadir = System.getProperty("user.dir");
-
-	@Override
-	public List<Pruefung> getAllePruefungen() {
-		File dir = new File(javadir + "/Fahrschule/Pruefung/");
-		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File arg0, String arg1) {
-				return arg1.startsWith("Pruefung") && arg1.endsWith(".ser");
-			}
-
-		});
-		List<Pruefung> liste = new ArrayList<>();
-		Pruefung pruefung = null;
-		for (int i = 0; i < puefungdateien.length; i++) {
-			File file = puefungdateien[i];
-			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-				pruefung = (Pruefung) ois.readObject();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			liste.add(pruefung);
+	public static PruefungDaoImpl getInstance() {
+		if(instance == null) {
+			instance = new PruefungDaoImpl();
 		}
+		return instance;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PruefungDTO> getAllePruefungen() {
+		List<PruefungDTO> liste = new ArrayList<>();
+		session = sessionfactory.openSession();
+		session.beginTransaction();
+		liste = session.createQuery("from PruefungDTO").list();
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
 		return liste;
 	}
 
-	private File generateFile(Pruefung pruefung) {
-		File dir = new File(javadir + "/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
-		dir.getParentFile().mkdirs();
-		return dir;
+	@Override
+	public void addPruefung(PruefungDTO pruefung) {
+		session = sessionfactory.openSession();
+		session.beginTransaction();
+		session.save(pruefung);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void addPruefung(Pruefung pruefung) {
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(pruefung);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	public void updatePruefung(PruefungDTO pruefung) {
+		session = sessionfactory.openSession();
+		session.beginTransaction();
+		session.update(pruefung);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
-	public void updatePruefung(Pruefung pruefung) {
-		File td = generateFile(pruefung);
-		td.delete();
-		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-				oos.writeObject(pruefung);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	public void deletePruefung(PruefungDTO pruefung) {
+		session = sessionfactory.openSession();
+		session.beginTransaction();
+		session.delete(pruefung);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
 	}
-
+	
 	@Override
-	public void deletePruefung(Pruefung pruefung) {
-		File td = generateFile(pruefung);
-		td.delete();
+	public PruefungDTO getPruefung(int pruefungId) {
+		PruefungDTO pruefung = null;
+		session = sessionfactory.openSession();
+		session.beginTransaction();
+		pruefung = (PruefungDTO) session.get(PruefungDTO.class, pruefungId);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+		return pruefung;
 	}
-
 }

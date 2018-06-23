@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   
+      <property name = "hibernate.dialect">
+        org.hibernate.dialect.MySQL5InnoDBDialect
+      </property>
+      
+      <property name = "hibernate.connection.driver_class">
+        com.mysql.cj.jdbc.Driver
+      </property>
+      
+      <property name = "hibernate.connection.url">
+        jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=CET&amp;allowPublicKeyRetrieval=true&amp;
+      </property>
+      
+      <property name = "hibernate.connection.username">
+        fahrschule
+      </property>
+      
+      <property name = "hibernate.connection.password">
+        fahrschule
+      </property>
+      
+      <property name = "show_sql">
+        true
+      </property>
+      
+      <property name="hibernate.hbm2ddl.auto">
+ 		update
+      </property>
+      
+      <property name="hibernate.c3p0.min_size">
+      	5
+      </property>
+  		
+  	  <property name="hibernate.c3p0.max_size">
+  	  	20
+  	  </property>
+  		
+  	  <property name="hibernate.c3p0.timeout">
+  	  	3000
+  	  </property>
+  		
+  	  <property name="hibernate.c3p0.max_statements">
+  	  	50
+  	  </property>
+  		
+  	  <property name="hibernate.c3p0.idle_test_period">
+  	  	300
+  	  </property>       
+      
+<!--       List of XML mapping files -->
+      <mapping class ="fachlogik.FahrlehrerDTO"/>
+      <mapping class ="fachlogik.FahrschuelerDTO"/>
+      <mapping class ="fachlogik.FahrstundeDTO"/>
+      <mapping class ="fachlogik.PruefungDTO"/>
+      <mapping class ="fachlogik.TheoriestundeDTO"/>
+      
+   </session-factory>
+</hibernate-configuration>
