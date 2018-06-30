@@ -2,18 +2,21 @@ package datenhaltung;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import fachlogik.FahrlehrerDTO;
 import fachlogik.HibernateUtil;
+import fachlogik.MyLoggerUtil;
 
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
 
 	private static FahrlehrerDaoImpl instance;
 	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
+	private static Logger log = MyLoggerUtil.createLogger();
 
 	private FahrlehrerDaoImpl() {
 
@@ -23,6 +26,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		if (instance == null) {
 			instance = new FahrlehrerDaoImpl();
 		}
+		log.fine(" Singleton-Instanz von Fahrlehrer wurde erzeugt. ");
 		return instance;
 	}
 
@@ -36,6 +40,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Liste der Fahrlehrer wurde geladen. ");
 		return liste;
 	}
 
@@ -47,6 +52,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde hinzugefügt. ");
 	}
 
 	@Override
@@ -57,6 +63,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde verändert. ");
 	}
 
 	@Override
@@ -67,6 +74,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde gelöscht. ");
 	}
 
 	@Override
@@ -78,6 +86,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde geladen. ");
 		return fahrlehrer;
 	}
 

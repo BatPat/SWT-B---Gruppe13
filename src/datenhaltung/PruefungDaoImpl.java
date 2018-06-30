@@ -2,11 +2,13 @@ package datenhaltung;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import fachlogik.HibernateUtil;
+import fachlogik.MyLoggerUtil;
 import fachlogik.PruefungDTO;
 
 public class PruefungDaoImpl implements PruefungDao {
@@ -14,18 +16,19 @@ public class PruefungDaoImpl implements PruefungDao {
 	private static PruefungDaoImpl instance;
 	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
+	private static Logger log = MyLoggerUtil.createLogger();
 
 	private PruefungDaoImpl() {
-		
+
 	}
-	
+
 	public static PruefungDaoImpl getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new PruefungDaoImpl();
 		}
+		log.fine(" Singleton-Instanz von Pruefung wurde erzeugt. ");
 		return instance;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -37,6 +40,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Liste der Pruefungen wurde geladen. ");
 		return liste;
 	}
 
@@ -48,6 +52,8 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
+				+ pruefung.getFahrlehrer() + " wurde hinzugefügt. ");
 	}
 
 	@Override
@@ -58,6 +64,8 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
+				+ pruefung.getFahrlehrer() + " wurde verändert. ");
 	}
 
 	@Override
@@ -68,8 +76,10 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
+				+ pruefung.getFahrlehrer() + " wurde gelöscht. ");
 	}
-	
+
 	@Override
 	public PruefungDTO getPruefung(int pruefungId) {
 		PruefungDTO pruefung = null;
@@ -79,6 +89,8 @@ public class PruefungDaoImpl implements PruefungDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
+				+ pruefung.getFahrlehrer() + " wurde geladen. ");
 		return pruefung;
 	}
 }

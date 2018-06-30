@@ -2,30 +2,33 @@ package datenhaltung;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import fachlogik.FahrstundeDTO;
 import fachlogik.HibernateUtil;
+import fachlogik.MyLoggerUtil;
 
 public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private static FahrstundeDaoImpl instance;
 	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
 	private Session session;
+	private static Logger log = MyLoggerUtil.createLogger();
 
 	private FahrstundeDaoImpl() {
-		
+
 	}
-	
+
 	public static FahrstundeDaoImpl getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new FahrstundeDaoImpl();
 		}
+		log.fine(" Singleton-Instanz von Fahrstunde wurde erzeugt. ");
 		return instance;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -37,6 +40,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Liste der Fahrstunden wurde geladen. ");
 		return liste;
 	}
 
@@ -48,6 +52,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
+				+ fahrstunde.getLehrer() + " wurde hinzugefügt. ");
 	}
 
 	@Override
@@ -58,6 +64,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
+				+ fahrstunde.getLehrer() + " wurde verändert. ");
 	}
 
 	@Override
@@ -68,8 +76,10 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
+				+ fahrstunde.getLehrer() + " wurde gelöscht. ");
 	}
-	
+
 	@Override
 	public FahrstundeDTO getFahrstunde(int fahrstundeId) {
 		FahrstundeDTO fahrstunde = null;
@@ -79,6 +89,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
+				+ fahrstunde.getLehrer() + " wurde geladen. ");
 		return fahrstunde;
 	}
 }
