@@ -66,6 +66,9 @@ public class PersonAnlegenController{
 		if(!result) {
 			log.warning(" Beim Personen anlegen wurden nicht alle Felder ausgefüllt. ");
 		}
+		else {
+			log.fine(" Beim Personen anlegen wurden alle Felder ausgefüllt. ");
+		}
 		return result;
 	}
 

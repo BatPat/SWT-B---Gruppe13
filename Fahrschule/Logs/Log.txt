@@ -1,64 +1,344 @@
-
- 30 Jun 2018 11:06HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CET&allowPublicKeyRetrieval=true&INFO
-
- 30 Jun 2018 11:06HHH10001001: Connection properties: {user=fahrschule, password=****}INFO
-
- 30 Jun 2018 11:06HHH10001003: Autocommit mode: falseINFO
-
- 30 Jun 2018 11:06HHH10001007: JDBC isolation level: <unknown>INFO
-
- 30 Jun 2018 11:06HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialectINFO
-
- 30 Jun 2018 11:06HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1aa99005] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.INFO
-
- 30 Jun 2018 11:06HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CET&allowPublicKeyRetrieval=true&INFO
-
- 30 Jun 2018 11:06HHH10001001: Connection properties: {user=fahrschule, password=****}INFO
-
- 30 Jun 2018 11:06HHH10001003: Autocommit mode: falseINFO
-
- 30 Jun 2018 11:06HHH10001007: JDBC isolation level: <unknown>INFO
-
- 30 Jun 2018 11:06HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialectINFO
-
- 30 Jun 2018 11:06HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6145b81e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.INFO
-
- 30 Jun 2018 11:06HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CET&allowPublicKeyRetrieval=true&INFO
-
- 30 Jun 2018 11:06HHH10001001: Connection properties: {user=fahrschule, password=****}INFO
-
- 30 Jun 2018 11:06HHH10001003: Autocommit mode: falseINFO
-
- 30 Jun 2018 11:06HHH10001007: JDBC isolation level: <unknown>INFO
-
- 30 Jun 2018 11:06HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialectINFO
-
- 30 Jun 2018 11:06HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@61dde151] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.INFO
-
- 30 Jun 2018 11:06HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CET&allowPublicKeyRetrieval=true&INFO
-
- 30 Jun 2018 11:06HHH10001001: Connection properties: {user=fahrschule, password=****}INFO
-
- 30 Jun 2018 11:06HHH10001003: Autocommit mode: falseINFO
-
- 30 Jun 2018 11:06HHH10001007: JDBC isolation level: <unknown>INFO
-
- 30 Jun 2018 11:06HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialectINFO
-
- 30 Jun 2018 11:06HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6ba30587] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.INFO
-
- 30 Jun 2018 11:06HHH000397: Using ASTQueryTranslatorFactoryINFO
-
- 30 Jun 2018 11:06Liste der Fahrlehrer wurde geladen. INFO
-
- 30 Jun 2018 11:06Liste der Fahrlehrer wurde geladen. INFO
-
- 30 Jun 2018 11:06HHH000397: Using ASTQueryTranslatorFactoryINFO
-
- 30 Jun 2018 11:06Liste der Fahrschueler wurde geladen. INFO
-
- 30 Jun 2018 11:07Liste der Fahrschueler wurde geladen. INFO
-
- 30 Jun 2018 11:07Liste der Fahrlehrer wurde geladen. INFO
-
- 30 Jun 2018 11:07ATTENTION!: Beim Personen anlegen wurden nicht alle Felder ausgefüllt.WARNING
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-07-03T12:43:18</date>
+  <millis>1530614598786</millis>
+  <sequence>9</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=CET&amp;allowPublicKeyRetrieval=true&amp;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:18</date>
+  <millis>1530614598788</millis>
+  <sequence>10</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001001: Connection properties: {user=fahrschule, password=****}</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:18</date>
+  <millis>1530614598789</millis>
+  <sequence>11</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001003: Autocommit mode: false</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:18</date>
+  <millis>1530614598869</millis>
+  <sequence>12</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001007: JDBC isolation level: &lt;unknown&gt;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:18</date>
+  <millis>1530614598893</millis>
+  <sequence>13</sequence>
+  <logger>org.hibernate.dialect.Dialect</logger>
+  <level>INFO</level>
+  <class>org.hibernate.dialect.Dialect</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599037</millis>
+  <sequence>14</sequence>
+  <logger>org.hibernate.orm.connections.access</logger>
+  <level>INFO</level>
+  <class>org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl</class>
+  <method>getIsolatedConnection</method>
+  <thread>1</thread>
+  <message>HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4bee18dc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599510</millis>
+  <sequence>15</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=CET&amp;allowPublicKeyRetrieval=true&amp;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599513</millis>
+  <sequence>16</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001001: Connection properties: {user=fahrschule, password=****}</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599515</millis>
+  <sequence>17</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001003: Autocommit mode: false</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599631</millis>
+  <sequence>18</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001007: JDBC isolation level: &lt;unknown&gt;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599675</millis>
+  <sequence>19</sequence>
+  <logger>org.hibernate.dialect.Dialect</logger>
+  <level>INFO</level>
+  <class>org.hibernate.dialect.Dialect</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:19</date>
+  <millis>1530614599868</millis>
+  <sequence>20</sequence>
+  <logger>org.hibernate.orm.connections.access</logger>
+  <level>INFO</level>
+  <class>org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl</class>
+  <method>getIsolatedConnection</method>
+  <thread>1</thread>
+  <message>HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7573e12f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600559</millis>
+  <sequence>21</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=CET&amp;allowPublicKeyRetrieval=true&amp;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600563</millis>
+  <sequence>22</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001001: Connection properties: {user=fahrschule, password=****}</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600565</millis>
+  <sequence>23</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001003: Autocommit mode: false</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600729</millis>
+  <sequence>24</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001007: JDBC isolation level: &lt;unknown&gt;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600792</millis>
+  <sequence>25</sequence>
+  <logger>org.hibernate.dialect.Dialect</logger>
+  <level>INFO</level>
+  <class>org.hibernate.dialect.Dialect</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:20</date>
+  <millis>1530614600985</millis>
+  <sequence>26</sequence>
+  <logger>org.hibernate.orm.connections.access</logger>
+  <level>INFO</level>
+  <class>org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl</class>
+  <method>getIsolatedConnection</method>
+  <thread>1</thread>
+  <message>HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4e61e4c2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601603</millis>
+  <sequence>27</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql://localhost:3306/fahrschule?createDatabaseIfNotExist=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=CET&amp;allowPublicKeyRetrieval=true&amp;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601605</millis>
+  <sequence>28</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001001: Connection properties: {user=fahrschule, password=****}</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601607</millis>
+  <sequence>29</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001003: Autocommit mode: false</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601704</millis>
+  <sequence>30</sequence>
+  <logger>org.hibernate.c3p0.internal.C3P0ConnectionProvider</logger>
+  <level>INFO</level>
+  <class>org.hibernate.c3p0.internal.C3P0ConnectionProvider</class>
+  <method>configure</method>
+  <thread>1</thread>
+  <message>HHH10001007: JDBC isolation level: &lt;unknown&gt;</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601769</millis>
+  <sequence>31</sequence>
+  <logger>org.hibernate.dialect.Dialect</logger>
+  <level>INFO</level>
+  <class>org.hibernate.dialect.Dialect</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:21</date>
+  <millis>1530614601922</millis>
+  <sequence>32</sequence>
+  <logger>org.hibernate.orm.connections.access</logger>
+  <level>INFO</level>
+  <class>org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl</class>
+  <method>getIsolatedConnection</method>
+  <thread>1</thread>
+  <message>HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342726f1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:22</date>
+  <millis>1530614602765</millis>
+  <sequence>33</sequence>
+  <logger>org.hibernate.hql.internal.QueryTranslatorFactoryInitiator</logger>
+  <level>INFO</level>
+  <class>org.hibernate.hql.internal.QueryTranslatorFactoryInitiator</class>
+  <method>initiateService</method>
+  <thread>1</thread>
+  <message>HHH000397: Using ASTQueryTranslatorFactory</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:23</date>
+  <millis>1530614603478</millis>
+  <sequence>34</sequence>
+  <logger></logger>
+  <level>INFO</level>
+  <class>java.util.logging.LogManager$RootLogger</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message> Liste der Fahrlehrer wurde geladen. </message>
+</record>
+<record>
+  <date>2018-07-03T12:43:25</date>
+  <millis>1530614605669</millis>
+  <sequence>35</sequence>
+  <logger></logger>
+  <level>INFO</level>
+  <class>java.util.logging.LogManager$RootLogger</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message> Liste der Fahrlehrer wurde geladen. </message>
+</record>
+<record>
+  <date>2018-07-03T12:43:25</date>
+  <millis>1530614605747</millis>
+  <sequence>36</sequence>
+  <logger>org.hibernate.hql.internal.QueryTranslatorFactoryInitiator</logger>
+  <level>INFO</level>
+  <class>org.hibernate.hql.internal.QueryTranslatorFactoryInitiator</class>
+  <method>initiateService</method>
+  <thread>1</thread>
+  <message>HHH000397: Using ASTQueryTranslatorFactory</message>
+</record>
+<record>
+  <date>2018-07-03T12:43:26</date>
+  <millis>1530614606119</millis>
+  <sequence>37</sequence>
+  <logger></logger>
+  <level>INFO</level>
+  <class>java.util.logging.LogManager$RootLogger</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message> Liste der Fahrschueler wurde geladen. </message>
+</record>
+<record>
+  <date>2018-07-03T12:43:33</date>
+  <millis>1530614613674</millis>
+  <sequence>38</sequence>
+  <logger></logger>
+  <level>INFO</level>
+  <class>java.util.logging.LogManager$RootLogger</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message> Fahrlehrer : Stefan Terlau wurde geladen. </message>
+</record>
+<record>
+  <date>2018-07-03T12:43:34</date>
+  <millis>1530614614943</millis>
+  <sequence>39</sequence>
+  <logger></logger>
+  <level>INFO</level>
+  <class>java.util.logging.LogManager$RootLogger</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message> Fahrlehrer : Stefan Terlau wurde geladen. </message>
+</record>
