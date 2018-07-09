@@ -8,11 +8,13 @@ import oberflaeche.Controller;
 public class Main {
 
 	public static void main(String[] args) {
-		Properties properties = new Properties();
+		Properties fahrschulProperties = new Properties();
 		try {
-			properties.load(new FileInputStream("resources/fahrschule.properties"));
-			String lang = properties.getProperty("lang");
-			String tax = properties.getProperty("tax");
+			fahrschulProperties.load(new FileInputStream("resources/fahrschule.properties"));
+			String lang = fahrschulProperties.getProperty("lang");
+			String tax = fahrschulProperties.getProperty("tax");
+			Properties languageProperties = new Properties();
+			languageProperties.load(new FileInputStream("resources/" + lang + ".properties"));
 			//TODO verwenden der properties
 			
 			new InitTestData();
