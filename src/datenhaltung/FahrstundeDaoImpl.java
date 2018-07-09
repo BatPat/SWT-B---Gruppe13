@@ -10,7 +10,10 @@ import org.hibernate.SessionFactory;
 import fachlogik.FahrstundeDTO;
 import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
-
+/**
+ * Klasse die die Datenbankzugriffe auf die Fahrstunde-Tabelle ausführt.
+ *
+ */
 public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private static FahrstundeDaoImpl instance;
@@ -22,6 +25,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	}
 
+	//Singleton-Pattern das die Anzahl der FahrstundeDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
 	public static FahrstundeDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new FahrstundeDaoImpl();
@@ -30,6 +34,8 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		return instance;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
+	//Fahrstunden zurückliefert, welche dann zurückgegeben werden.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FahrstundeDTO> getAlleFahrstunden() {
@@ -44,6 +50,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		return liste;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle gespeichert wird.
 	@Override
 	public void addFahrstunde(FahrstundeDTO fahrstunde) {
 		session = sessionfactory.openSession();
@@ -56,6 +63,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 				+ fahrstunde.getLehrer() + " wurde hinzugefügt. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
 		session = sessionfactory.openSession();
@@ -68,6 +76,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 				+ fahrstunde.getLehrer() + " wurde verändert. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
 		session = sessionfactory.openSession();
@@ -80,6 +89,7 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 				+ fahrstunde.getLehrer() + " wurde gelöscht. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde aus der Datenbanktabelle geladen wird.
 	@Override
 	public FahrstundeDTO getFahrstunde(int fahrstundeId) {
 		FahrstundeDTO fahrstunde = null;

@@ -10,7 +10,12 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-
+/**
+ * Klasse die mithilfe der Annotationen von Hibernate zu einer Datenbanktabelle gemappt werden kann.
+ * Besitzt außer Setter und Getter keine Logik
+ * Die Annotationen sorgen dafür das die Attribute als Spalten übernommen werden und z.B. nicht nullable sein sollen 
+ *
+ */
 @Entity
 @Table(name = "fahrstunde")
 @SuppressWarnings("serial")

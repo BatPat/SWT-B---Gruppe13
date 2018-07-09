@@ -7,10 +7,14 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
+/**
+ * Klasse, die die Konfiguration vom Logger übernimmt und festlegt wo die Log Dateien gespeichert werden.
+ *
+ */
 public class MyLoggerUtil {
 	private static String javadir = System.getProperty("user.dir");
 	
+	//Erstellen eines Loggers und Festlegen der Speicherorts der logs sowie die Formatierung der log-Nachrichten
 	public static Logger createLogger() {
 		Logger root = Logger.getLogger("");
 		FileHandler txt = null;

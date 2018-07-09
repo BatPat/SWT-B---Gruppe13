@@ -13,7 +13,10 @@ import fachlogik.FahrschuelerDTO;
 import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
 import fachlogik.TheoriestundeDTO;
-
+/**
+ * Klasse die die Datenbankzugriffe auf die Fahrschueler-Tabelle ausführt.
+ *
+ */
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	private static FahrschuelerDaoImpl instance;
@@ -25,6 +28,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	}
 
+	//Singleton-Pattern das die Anzahl der FahrschuelerDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
 	public static FahrschuelerDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new FahrschuelerDaoImpl();
@@ -33,6 +37,8 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return instance;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
+	//Fahrschueler zurückliefert, welche dann zurückgegeben werden.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FahrschuelerDTO> getAlleFahrschueler() {
@@ -47,6 +53,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return liste;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle gespeichert wird.
 	@Override
 	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = sessionfactory.openSession();
@@ -58,6 +65,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde hinzugefügt. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = sessionfactory.openSession();
@@ -69,6 +77,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde verändert. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
 		session = sessionfactory.openSession();
@@ -83,6 +92,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde gelöscht. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler aus der Datenbanktabelle geladen wird.
 	@Override
 	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
 		FahrschuelerDTO fahrschueler = null;
@@ -96,6 +106,8 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return fahrschueler;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler aus der Datenbanktabelle geladen wird 
+	//und eine Theoriestunde zugewiesen bekommt.
 	public void addTheoriestunde(FahrschuelerDTO fahrschueler, TheoriestundeDTO theostd1) {
 		session = sessionfactory.openSession();
 		session.beginTransaction();

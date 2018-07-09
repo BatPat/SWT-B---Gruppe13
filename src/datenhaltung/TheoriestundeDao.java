@@ -2,7 +2,10 @@ package datenhaltung;
 import java.util.List;
 
 import fachlogik.TheoriestundeDTO;
-
+/**
+ * Interface, welches die verfügbaren Methoden für die Datenbankzugriffe festlegt.
+ *
+ */
 public interface TheoriestundeDao {
 	
 	public List<TheoriestundeDTO> getAlleTheoriestunden();

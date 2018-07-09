@@ -15,6 +15,7 @@ public class HibernateUtil {
 //	    aMap.put("TheoriestundeDTO","theoriestunde");	
 //		klassen_zu_tabellennamen = Collections.unmodifiableMap(aMap);
 //	}
+	//Erstellen einer SessionFactory die benutzt wird um über Sessions, Transaktion ausführen zu können, um Datenbankaktionen auszuführen.
 	public static SessionFactory createSessionFactory() {			
 		Configuration configuration = new Configuration();
 		configuration.configure();

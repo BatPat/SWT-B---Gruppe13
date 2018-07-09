@@ -10,7 +10,10 @@ import org.hibernate.SessionFactory;
 import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
 import fachlogik.TheoriestundeDTO;
-
+/**
+ * Klasse die die Datenbankzugriffe auf die Theoriestunde-Tabelle ausführt.
+ *
+ */
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	private static TheorieStundeDaoImpl instance;
@@ -22,6 +25,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	}
 
+	//Singleton-Pattern das die Anzahl der TheoriestundeDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
 	public static TheorieStundeDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new TheorieStundeDaoImpl();
@@ -30,6 +34,8 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		return instance;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
+	//Theoriestunden zurückliefert, welche dann zurückgegeben werden.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TheoriestundeDTO> getAlleTheoriestunden() {
@@ -44,6 +50,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		return liste;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle gespeichert wird.
 	@Override
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = sessionfactory.openSession();
@@ -56,6 +63,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 				+ theoriestunde.getFahrlehrer() + " wurde hinzugefügt. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = sessionfactory.openSession();
@@ -68,6 +76,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 				+ theoriestunde.getFahrlehrer() + " wurde verändert. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
 		session = sessionfactory.openSession();
@@ -80,6 +89,7 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 				+ theoriestunde.getFahrlehrer() + " wurde gelöscht. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde aus der Datenbanktabelle geladen wird.
 	@Override
 	public TheoriestundeDTO getTheoriestunde(int theoriestundeId) {
 		TheoriestundeDTO theoriestunde = null;

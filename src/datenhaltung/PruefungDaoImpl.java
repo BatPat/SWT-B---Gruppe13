@@ -10,7 +10,10 @@ import org.hibernate.SessionFactory;
 import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
 import fachlogik.PruefungDTO;
-
+/**
+ * Klasse die die Datenbankzugriffe auf die Prüfung-Tabelle ausführt.
+ *
+ */
 public class PruefungDaoImpl implements PruefungDao {
 
 	private static PruefungDaoImpl instance;
@@ -22,6 +25,7 @@ public class PruefungDaoImpl implements PruefungDao {
 
 	}
 
+	//Singleton-Pattern das die Anzahl der PruefungDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
 	public static PruefungDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new PruefungDaoImpl();
@@ -30,6 +34,8 @@ public class PruefungDaoImpl implements PruefungDao {
 		return instance;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
+	//Pruefungen zurückliefert, welche dann zurückgegeben werden.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PruefungDTO> getAllePruefungen() {
@@ -44,6 +50,7 @@ public class PruefungDaoImpl implements PruefungDao {
 		return liste;
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle gespeichert wird.
 	@Override
 	public void addPruefung(PruefungDTO pruefung) {
 		session = sessionfactory.openSession();
@@ -56,6 +63,7 @@ public class PruefungDaoImpl implements PruefungDao {
 				+ pruefung.getFahrlehrer() + " wurde hinzugefügt. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle verändert wird.
 	@Override
 	public void updatePruefung(PruefungDTO pruefung) {
 		session = sessionfactory.openSession();
@@ -68,6 +76,7 @@ public class PruefungDaoImpl implements PruefungDao {
 				+ pruefung.getFahrlehrer() + " wurde verändert. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deletePruefung(PruefungDTO pruefung) {
 		session = sessionfactory.openSession();
@@ -80,6 +89,7 @@ public class PruefungDaoImpl implements PruefungDao {
 				+ pruefung.getFahrlehrer() + " wurde gelöscht. ");
 	}
 
+	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung aus der Datenbanktabelle gesladen wird.
 	@Override
 	public PruefungDTO getPruefung(int pruefungId) {
 		PruefungDTO pruefung = null;
