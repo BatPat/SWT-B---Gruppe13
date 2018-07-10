@@ -16,6 +16,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -37,6 +38,9 @@ public class StammdatenView extends Observable {
 	private CLabel btNeuerFahrschueler, btNeuerFahrlehrer, btStundenBuchen;
 	private Table schuelerStammdatenTable, lehrerStammdatenTabelle;
 
+	private CLabel germanButton, englishButton;
+	private Image germanImage, englishImage;
+	
 	private Label fillerLabel;
 	private FahrschulTheme theme;
 	private Composite mainComposite, headerComposite, datenComposite;
@@ -164,7 +168,65 @@ public class StammdatenView extends Observable {
 				btStundenBuchen.setBackground(new Color(display, 125, 125, 255));
 			}
 		});
+		Composite langComposite = new Composite(headerComposite, SWT.RIGHT | SWT.BORDER);
+		langComposite.setLayout(new GridLayout(2, true));
+		langComposite.setLayoutData(new GridData(SWT.END, SWT.CENTER, false, false));
+		langComposite.setBackground(theme.getWhiteColor());
 
+		germanImage = new Image(display, "./resources/german-flag.png");
+		germanButton = new CLabel(langComposite, SWT.BORDER);
+		germanButton.setText("\n deutsch \n");
+		germanButton.setBackgroundImage(germanImage);
+		germanButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				setChanged();
+				notifyObservers("german");
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				setChanged();
+				notifyObservers("german");
+			}
+
+		});
+
+		englishImage = new Image(display, "./resources/english-flag.png");
+
+		englishButton = new CLabel(langComposite, SWT.BORDER);
+		englishButton.setText("\n english \n");
+		englishButton.setBackgroundImage(englishImage);
+		englishButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				setChanged();
+				notifyObservers("english");
+				englishButton.setFocus();
+
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				setChanged();
+				notifyObservers("english");
+				englishButton.setFocus();
+
+			}
+
+		});
 		erzeugeLinie(headerComposite);
 	}
 

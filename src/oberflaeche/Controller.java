@@ -1,5 +1,7 @@
 package oberflaeche;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import fachlogik.FahrschulModel;
@@ -26,13 +29,17 @@ public class Controller implements Observer {
 	private List<Integer> fahrschuelerids;
 	private int chachedFahrlehrerSelection = -1;
 	private int chachedFahrschuelerSelection = -1;
+	private Properties fahrschulProperties;
+	private Properties languageProperties;
 	private static Logger log = MyLoggerUtil.createLogger();
 
-	public Controller() {
+	public Controller(Properties fahrschulProperties, Properties languageProperties) {
 		initModel();
 		fahrschule = new Fahrschule();
 		initGUI();
 		mainview.getShell().layout(true);
+		this.fahrschulProperties = fahrschulProperties;
+		this.languageProperties = languageProperties;
 	}
 
 	private void initGUI() {
@@ -293,6 +300,16 @@ public class Controller implements Observer {
 			new StammdatenController(this, fahrschule);
 			log.fine(" Modus wurde gewechselt zum Anlegen neuer Person. ");
 			break;
+			
+		case "german":
+			aendereSprache("de");
+			log.fine(" Sprache wurde gewechselt zu Deutsch. ");
+			break;
+
+		case "english":
+			aendereSprache("en");
+			log.fine(" Sprache wurde gewechselt zu Englisch. ");
+			break;
 
 		default:
 			try {
@@ -302,6 +319,15 @@ public class Controller implements Observer {
 			}
 			break;
 		}
+	}
+
+	private void aendereSprache(String sprachKuerzel) {
+		try {
+			languageProperties.load(new FileInputStream("resources/" + sprachKuerzel + ".properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.mainview
 	}
 
 }
