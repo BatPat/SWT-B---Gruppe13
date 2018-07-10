@@ -23,9 +23,14 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
-
+/**
+ * Klasse die ein Pdf Dokument erstellt und teilweise die Daten aus dem übergebenen Fahrschueler liest und an 
+ * entsprechenden Stellen einsetzt. 
+ *
+ */
 public class PdfDocumentBill {
 
+	//Deklaration verschiedener Schriftarten und Variablen 
 	private static Font red = new Font(FontFamily.HELVETICA, 24, Font.BOLDITALIC, BaseColor.RED);
 	private static Font black = new Font(FontFamily.HELVETICA, 24, Font.BOLDITALIC, BaseColor.BLACK);
 	private static Font righttop = new Font(FontFamily.SYMBOL, 20, Font.NORMAL, BaseColor.BLACK);
@@ -41,6 +46,8 @@ public class PdfDocumentBill {
 	private static DecimalFormat df = new DecimalFormat("#0.00");
 	private static String javadir = System.getProperty("user.dir");
 
+	//Ober-Methode die das Dokument erstellt, den Pfad bestimmt und dann für jede "Zeile" im PDF eine Untermethode aufruft die 
+	//den Inhalt für die jeweilige Zeile schreibt.
 	public void createPdf(FahrschuelerDTO fahrschueler) throws IOException {
 		try {
 			File file = new File(javadir + "/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
@@ -77,6 +84,7 @@ public class PdfDocumentBill {
 		}
 	}
 
+	//Schreibt den untersten Bereich des PDF`s, wo Bankinformationen und weiteres stehen.
 	private void createTableAndAddBankInformation(Document document, PdfWriter pdfwriter) {
 		// -> Bank Information part 1
 		PdfPTable tablebankinf1 = new PdfPTable(1);
@@ -121,6 +129,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreibt den Bereich wo die Grußformel steht.
 	private void createSeventhTableAndAddGreetings(Document document, PdfWriter pdfwriter) {
 		// -> Greeting at the End
 		PdfPTable tableGreetings = new PdfPTable(1);
@@ -136,6 +145,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Kleingedrucktes unter der Tabelle mit den jeweiligen Beträgen wird hier geschrieben
 	private void createSixthTableAndAddTaxInformation(Document document, PdfWriter pdfwriter) {
 		// -> Little Information about the Taxes
 		PdfPTable tableTaxes = new PdfPTable(1);
@@ -152,6 +162,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Ober Methode für die Tabelle wo die Beträge einzeln aufgeschlüsselt werden.
 	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// Table with the prices for every piece
 		float[] columnWidths = { 7, 2, 2 };
@@ -173,6 +184,8 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der zehnten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung der Rechnungsbetrages 
 	private void createTenthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R11 = new PdfPCell(new Phrase("Rechnungsbetrag ", fonthell10undbolred));
 		cell1R11.setBorder(Rectangle.BOTTOM);
@@ -225,6 +238,8 @@ public class PdfDocumentBill {
 		tableBill.setTotalWidth(500);
 	}
 
+	//Schreiben der achten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung des Gesamtbetrages 
 	private void createEightRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R9 = new PdfPCell(new Phrase("Gesamtbetrag	", fonthell10bol));
 		cell1R9.setBorder(Rectangle.BOTTOM);
@@ -278,6 +293,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der siebten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden 
 	private void createSeventhRowInBillTable(PdfPTable tableBill) {
 		// -> Eigth Row
 		PdfPCell cell1R8 = new PdfPCell(new Phrase("zzgl. Auslage SVA Gebühr", fonthell10));
@@ -296,6 +312,8 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der sechsten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung des Gesamtbetrages der Führerscheinausbildung
 	private void createSixthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
 		PdfPCell cell1R7 = new PdfPCell(new Phrase("Gesamtbetrag Führerscheinausbildung", fonthell10ita));
 		cell1R7.setBorder(Rectangle.BOTTOM);
@@ -348,8 +366,9 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der fünften Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung der Kosten für die praktische Prüfung
 	private void createFifthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
-		// -> Sixth Row
 		PdfPCell cell1R6 = new PdfPCell(new Phrase("Vorstellung zur praktische Prüfung", fonthell10));
 		cell1R6.setBorder(Rectangle.BOTTOM);
 		cell1R6.setFixedHeight(18);
@@ -374,8 +393,9 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der vierten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung der Kosten für die theoretische Prüfung
 	private void createFourthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
-		// -> Fifth Row
 		PdfPCell cell1R5 = new PdfPCell(new Phrase("Vorstellung zur theoretischen Prüfung", fonthell10));
 		cell1R5.setBorder(Rectangle.BOTTOM);
 		cell1R5.setFixedHeight(18);
@@ -400,8 +420,9 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der dritten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung der Kosten für die Sonderfahrten
 	private void createThirdRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
-		// -> Fourth Row
 		PdfPCell cell1R4 = new PdfPCell(new Phrase("Sonderfahrten a 44,00€", fonthell10));
 		cell1R4.setBorder(Rectangle.BOTTOM);
 		cell1R4.setFixedHeight(18);
@@ -426,8 +447,9 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der zweiten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Berechnung der Kosten für die Übungsstunden
 	private void createSecondRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
-		// -> Third Row
 		PdfPCell cell1R3 = new PdfPCell(new Phrase("Übungsstunden a 34,00€", fonthell10));
 		cell1R3.setBorder(Rectangle.BOTTOM);
 		cell1R3.setFixedHeight(18);
@@ -452,6 +474,8 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der ersten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
+	//Grundbetrag
 	private void createFirstRowBillTable(PdfPTable tableBill) {
 		PdfPCell cell1R2 = new PdfPCell(new Phrase("Grundbetrag", fonthell10));
 		cell1R2.setBorder(Rectangle.BOTTOM);
@@ -469,8 +493,8 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der Spaltenüberschriften in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
 	private void createHeaderInBillTable(PdfPTable tableBill) {
-		// -> First Row Header
 		PdfPCell cell1R1 = new PdfPCell(new Phrase(""));
 		cell1R1.setBorder(Rectangle.BOTTOM);
 		cell1R1.setFixedHeight(18);
@@ -487,6 +511,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der Information zu Datum, Fahrerlaubnis und Fahrschueler
 	private void createFourthTableAndAddBillHeader(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// fourth row -> Header for Bill
 		PdfPTable tableBillHeader = new PdfPTable(1);
@@ -508,6 +533,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben des Datum auf der rechten Seite des PDF
 	private void createThirdTableAndAddTimestamp(Document document, PdfWriter pdfwriter) {
 		// third row -> DateTime on the middle right
 		PdfPTable tableDateTime = new PdfPTable(1);
@@ -523,6 +549,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben des Adress-Teils vom Absender und Empfänger
 	private void createSecondTableAndAddAdressParts(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
 		// second row -> Address Part of the driving school
 		PdfPTable tableAdressPartSchool = new PdfPTable(1);
@@ -576,6 +603,7 @@ public class PdfDocumentBill {
 		// ---------------------------------------------------
 	}
 
+	//Schreiben der Überschrift
 	private void createFirstTableAndAddHeader(Document document) throws DocumentException {
 		// ---- Initialization of the First Table ------
 		PdfPTable tableheader = new PdfPTable(1);

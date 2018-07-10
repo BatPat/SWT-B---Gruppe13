@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 
 import fachlogik.FahrschulModel;
 import fachlogik.Fahrschule;
 import fachlogik.Fahrstundenart;
 import fachlogik.Fuehrerscheinklasse;
+import fachlogik.MyLoggerUtil;
 import fachlogik.PersonInfo;
 
 public class Controller implements Observer {
@@ -24,6 +26,7 @@ public class Controller implements Observer {
 	private List<Integer> fahrschuelerids;
 	private int chachedFahrlehrerSelection = -1;
 	private int chachedFahrschuelerSelection = -1;
+	private static Logger log = MyLoggerUtil.createLogger();
 
 	public Controller() {
 		initModel();
@@ -37,10 +40,12 @@ public class Controller implements Observer {
 		mainview.addObserver(this);
 		fillListContent();
 		mainview.startEventHandler();
+		log.fine(" GUI wird initialisiert. ");
 	}
 
 	private void initModel() {
 		model = new FahrschulModel();
+		log.fine(" Model wird initialisiert. ");
 	}
 
 	private void fillListContent() {
@@ -62,6 +67,7 @@ public class Controller implements Observer {
 		for (Fahrstundenart f : Fahrstundenart.values()) {
 			mainview.getArtCombo().add(f.getBeschreibung());
 		}
+		log.fine(" Drop-Down-Listen werden gefüllt. ");
 	}
 
 	private void zeigePassendeTermine() {
@@ -92,6 +98,7 @@ public class Controller implements Observer {
 				}
 			}
 		}
+		log.fine(" Freie Termine werden geladen. ");
 	}
 
 	private void uebersichtFahrstunden() {
@@ -154,7 +161,7 @@ public class Controller implements Observer {
 				}
 			}
 		}
-
+		log.fine(" Model wird auf Veränderungen geprüft und alle Änderungen werden übernommen und neu geladen. ");
 	}
 
 	private int getFahrlehrerSelectionIndex() {
@@ -164,6 +171,7 @@ public class Controller implements Observer {
 	private void erstellePdf() throws IOException {
 		if (getFahrschuelerSelectionIndex() != -1) {
 			fahrschule.druckeRechnungPdf(model.getFahrschuelerId());
+			log.fine(" PDF-Rechnung wird erstellt. ");
 		}
 	}
 
@@ -175,6 +183,7 @@ public class Controller implements Observer {
 		Fahrstundenart art = model.getArt();
 		
 		fahrschule.bucheFahrstunde(art, fSchuelerId, fLehrerId, datum, zeit, "Fahrschule Terlau");
+		log.fine(" Fahrstunde wurde gebucht. ");
 	}
 
 	private void updatePanel() {
@@ -220,7 +229,7 @@ public class Controller implements Observer {
 		result = result && mainview.getFsKlasseCombo().getSelectionIndex() != -1;
 		result = result && mainview.getArtCombo().getSelectionIndex() != -1;
 		result = result && mainview.getTimeCombo().getSelectionIndex() != -1;
-
+		log.fine(" Überprüfung ob alle Felder gefüllt sind ");
 		return result;
 	}
 
@@ -282,6 +291,7 @@ public class Controller implements Observer {
 		case "StammdatenanGui":
 			mainview.getDisplay().close();
 			new StammdatenController(this, fahrschule);
+			log.fine(" Modus wurde gewechselt zum Anlegen neuer Person. ");
 			break;
 
 		default:

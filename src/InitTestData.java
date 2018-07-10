@@ -13,7 +13,10 @@ import fachlogik.Fahrstundenart;
 import fachlogik.PruefungDTO;
 import fachlogik.TheorieThema;
 import fachlogik.TheoriestundeDTO;
-
+/**
+ * Klasse die dafür genutzt wird die Datenbanktabellen mit Testdaten zu füllen, falls diese noch nicht gefüllt sein sollten. 
+ *
+ */
 public class InitTestData {
 	private FahrlehrerDaoImpl fahrlehrerManager = FahrlehrerDaoImpl.getInstance();
 	private FahrschuelerDaoImpl fahrschuelerManager = FahrschuelerDaoImpl.getInstance();
@@ -21,11 +24,14 @@ public class InitTestData {
 	private TheorieStundeDaoImpl theoriestundemanager = TheorieStundeDaoImpl.getInstance();
 	private PruefungDaoImpl pruefungmanager = PruefungDaoImpl.getInstance();
 
+	//Überprüfung ob es notwendig ist die Testdaten zu initialisieren
 	public InitTestData() {
 		if(fahrlehrerManager.getAlleFahrlehrer().size() == 0)
 			createTestData();
 	}
 	
+	//Initialisierung der Testdaten
+	//Füllen der Datenbanktabellen
 	public void createTestData(){
 		FahrlehrerDTO fahrlehrer1 = new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3","0321-4589347","15.07.2000","B");
 		FahrlehrerDTO fahrlehrer2 = new FahrlehrerDTO("Lukas Schmidt", "45231", "Bochum", "Marienweg", "10","0321-573447","03.06.1999","B");

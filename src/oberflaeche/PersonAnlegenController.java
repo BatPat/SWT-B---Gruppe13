@@ -1,9 +1,13 @@
 package oberflaeche;
 
+import java.util.logging.Logger;
+
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.widgets.Shell;
+
+import fachlogik.MyLoggerUtil;
 import fachlogik.PersonInfo;
 import fachlogik.PersonType;
 
@@ -21,6 +25,7 @@ public class PersonAnlegenController{
 	private String geburtsdatum;
 	private String fuehrerscheinklasse;
 	private PersonInfo createdPersonInfo;
+	private static Logger log = MyLoggerUtil.createLogger();
 	
 	
 	public PersonAnlegenController(PersonType personType, Shell shell) {
@@ -34,6 +39,7 @@ public class PersonAnlegenController{
 		if (dialog.open() == Window.OK) {
 			personInfoAnlegen(personType);
 		}
+		log.fine(" GUI wird initialisiert. ");
 	}
 
 
@@ -42,6 +48,7 @@ public class PersonAnlegenController{
 		if(isAlleFelderAusgefüllt()) {
 			createdPersonInfo = new PersonInfo(personType, vorname + " " + nachname, plz, ort, strasse, hausNr, telefonnummer, geburtsdatum, fuehrerscheinklasse);
 		}
+		log.fine(" Person wurde angelegt. ");
 	}
 
 	private boolean isAlleFelderAusgefüllt() {
@@ -55,6 +62,13 @@ public class PersonAnlegenController{
 		result = result && hausNr != null;
 		result = result && geburtsdatum != null;
 		result = result && fuehrerscheinklasse != null;
+		log.fine(" Überprüfung ob alle Felder ausgefüllt sind ");
+		if(!result) {
+			log.warning(" Beim Personen anlegen wurden nicht alle Felder ausgefüllt. ");
+		}
+		else {
+			log.fine(" Beim Personen anlegen wurden alle Felder ausgefüllt. ");
+		}
 		return result;
 	}
 

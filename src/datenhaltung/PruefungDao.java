@@ -2,7 +2,10 @@ package datenhaltung;
 import java.util.List;
 
 import fachlogik.PruefungDTO;
-
+/**
+ * Interface, welches die verfügbaren Methoden für die Datenbankzugriffe festlegt.
+ *
+ */
 public interface PruefungDao {
 	
 	public List<PruefungDTO> getAllePruefungen();

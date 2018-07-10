@@ -2,7 +2,10 @@ package datenhaltung;
 import java.util.List;
 
 import fachlogik.FahrschuelerDTO;
-
+/**
+ * Interface, welches die verfügbaren Methoden für die Datenbankzugriffe festlegt.
+ *
+ */
 public interface FahrschuelerDao {
 	
 	public List<FahrschuelerDTO> getAlleFahrschueler();
