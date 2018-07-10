@@ -19,6 +19,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -43,6 +44,9 @@ public class MainView extends Observable {
 	private Text fahrstundeTxt, sonderfahrtTxt, theorieTxt;
 
 	private Label schuelernameLabel, lehrernameLabel;
+
+	private CLabel germanButton, englishButton;
+	private Image germanImage, englishImage;
 
 	private Label fillerLabel;
 	private FahrschulTheme theme;
@@ -129,7 +133,7 @@ public class MainView extends Observable {
 		nameLabel.setBackground(theme.getWhiteColor());
 		nameLabel.setForeground(theme.getBlueColor());
 
-		createFillerLabel(headerComposite, 2);
+		createFillerLabel(headerComposite, 1);
 
 		Label wechselLabel = new Label(headerComposite, SWT.NONE);
 		wechselLabel.setText("Ansicht wechseln:");
@@ -177,6 +181,65 @@ public class MainView extends Observable {
 			}
 		});
 
+		Composite langComposite = new Composite(headerComposite, SWT.RIGHT | SWT.BORDER);
+		langComposite.setLayout(new GridLayout(2, true));
+		langComposite.setLayoutData(new GridData(SWT.END, SWT.CENTER, false, false));
+		langComposite.setBackground(theme.getWhiteColor());
+
+		germanImage = new Image(display, "./resources/german-flag.png");
+		germanButton = new CLabel(langComposite, SWT.BORDER);
+		germanButton.setText("\n deutsch \n");
+		germanButton.setBackgroundImage(germanImage);
+		germanButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				setChanged();
+				notifyObservers("german");
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				setChanged();
+				notifyObservers("german");
+			}
+
+		});
+
+		englishImage = new Image(display, "./resources/english-flag.png");
+
+		englishButton = new CLabel(langComposite, SWT.BORDER);
+		englishButton.setText("\n english \n");
+		englishButton.setBackgroundImage(englishImage);
+		englishButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				setChanged();
+				notifyObservers("english");
+				englishButton.setFocus();
+
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				setChanged();
+				notifyObservers("english");
+				englishButton.setFocus();
+
+			}
+
+		});
 		erzeugeLinie(headerComposite);
 	}
 
@@ -610,6 +673,14 @@ public class MainView extends Observable {
 
 	public Text getTheorieTxt() {
 		return theorieTxt;
+	}
+
+	public CLabel getGermanButton() {
+		return germanButton;
+	}
+
+	public CLabel getEnglishButton() {
+		return englishButton;
 	}
 
 	public FahrschulTheme getTheme() {
