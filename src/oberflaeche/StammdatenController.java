@@ -1,31 +1,37 @@
 package oberflaeche;
 
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Properties;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+
 import fachlogik.Fahrschule;
 import fachlogik.PersonInfo;
 import fachlogik.PersonType;
 
 public class StammdatenController implements Observer {
-	
+
 	private Controller controller;
 	private StammdatenView stammdatenView;
 	private Fahrschule fahrschule;
+	private Properties languageProperties;
 
-	public StammdatenController(Controller controller, Fahrschule fahrschule) {
+	public StammdatenController(Controller controller, Fahrschule fahrschule, Properties languageProperties) {
 		super();
 		this.controller = controller;
 		this.fahrschule = fahrschule;
-		initGUI();
+		this.languageProperties = languageProperties;
+		initGUI(languageProperties);
 	}
 
-	private void initGUI() {
-		stammdatenView = new StammdatenView();
+	private void initGUI(Properties languageProperties) {
+		stammdatenView = new StammdatenView(languageProperties);
 		stammdatenView.addObserver(this);
 		fillSchuelerListContent();
 		fillLehrerListContent();
@@ -35,7 +41,7 @@ public class StammdatenController implements Observer {
 	private void fillLehrerListContent() {
 		Table table = stammdatenView.getLehrerStammdatenTabelle();
 		table.removeAll();
-		List<PersonInfo> fListe= fahrschule.getFahrlehrerInfoListe();
+		List<PersonInfo> fListe = fahrschule.getFahrlehrerInfoListe();
 		for (PersonInfo fahrlehrer : fListe) {
 			addPersonInfoToTable(fahrlehrer, table);
 		}
@@ -45,7 +51,7 @@ public class StammdatenController implements Observer {
 	private void fillSchuelerListContent() {
 		Table table = stammdatenView.getSchuelerStammdatenTable();
 		table.removeAll();
-		List<PersonInfo> fListe= fahrschule.getFahrschuelerInfoListe();
+		List<PersonInfo> fListe = fahrschule.getFahrschuelerInfoListe();
 		for (PersonInfo fahrschueler : fListe) {
 			addPersonInfoToTable(fahrschueler, table);
 		}
@@ -65,20 +71,20 @@ public class StammdatenController implements Observer {
 		switch (arg1.toString()) {
 		case "FahrlehrerNeu":
 			p = createPersonInfo(PersonType.FAHRLEHRER);
-			if(p != null) {
+			if (p != null) {
 				fahrschule.addPerson(p);
 				Table table = stammdatenView.getLehrerStammdatenTabelle();
-				addPersonInfoToTable(p, table);				
+				addPersonInfoToTable(p, table);
 				packTable(table);
 			}
 			break;
 
 		case "FahrschuelerNeu":
 			p = createPersonInfo(PersonType.FAHRSCHUELER);
-			if(p != null) {
+			if (p != null) {
 				fahrschule.addPerson(p);
 				Table table = stammdatenView.getSchuelerStammdatenTable();
-				addPersonInfoToTable(p, table);				
+				addPersonInfoToTable(p, table);
 				packTable(table);
 			}
 			break;
@@ -89,9 +95,16 @@ public class StammdatenController implements Observer {
 			break;
 
 		case "FenstergroesseAendern":
-			//nix
+			// nix
 			break;
 
+		case "german":
+			aendereSprache("de");
+			break;
+
+		case "english":
+			aendereSprache("en");
+			break;
 
 		default:
 			try {
@@ -103,9 +116,19 @@ public class StammdatenController implements Observer {
 		}
 	}
 
+	private void aendereSprache(String sprachKuerzel) {
+		try {
+			languageProperties.load(new FileInputStream("resources/" + sprachKuerzel + ".properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		stammdatenView.getDisplay().close();
+		initGUI(languageProperties);
+	}
+
 	private void addPersonInfoToTable(PersonInfo p, Table table) {
-		TableItem item= new TableItem(table, SWT.NONE);
-		int whitespaceIndex= p.getName().indexOf(" ");
+		TableItem item = new TableItem(table, SWT.NONE);
+		int whitespaceIndex = p.getName().indexOf(" ");
 		item.setText(0, p.getName().substring(0, whitespaceIndex));
 		item.setText(1, p.getName().substring(whitespaceIndex + 1));
 		item.setText(2, p.getTelefonnummer());
@@ -117,8 +140,9 @@ public class StammdatenController implements Observer {
 	}
 
 	private PersonInfo createPersonInfo(PersonType personType) {
-		
-		PersonAnlegenController pac = new PersonAnlegenController(personType, stammdatenView.getDisplay().getActiveShell());
+
+		PersonAnlegenController pac = new PersonAnlegenController(personType,
+				stammdatenView.getDisplay().getActiveShell());
 		return pac.getCreatedPersonInfo();
 	}
 

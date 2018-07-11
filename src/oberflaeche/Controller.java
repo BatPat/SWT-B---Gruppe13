@@ -1,7 +1,6 @@
 package oberflaeche;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,21 +28,19 @@ public class Controller implements Observer {
 	private List<Integer> fahrschuelerids;
 	private int chachedFahrlehrerSelection = -1;
 	private int chachedFahrschuelerSelection = -1;
-	private Properties fahrschulProperties;
 	private Properties languageProperties;
 	private static Logger log = MyLoggerUtil.createLogger();
 
-	public Controller(Properties fahrschulProperties, Properties languageProperties) {
+	public Controller(Properties languageProperties) {
 		initModel();
 		fahrschule = new Fahrschule();
-		initGUI();
-		mainview.getShell().layout(true);
-		this.fahrschulProperties = fahrschulProperties;
 		this.languageProperties = languageProperties;
+		initGUI(languageProperties);
+		mainview.getShell().layout(true);
 	}
 
-	private void initGUI() {
-		mainview = new MainView();
+	private void initGUI(Properties languageProperties) {
+		mainview = new MainView(languageProperties);
 		mainview.addObserver(this);
 		fillListContent();
 		mainview.startEventHandler();
@@ -87,19 +84,16 @@ public class Controller implements Observer {
 			}
 		}
 
-		
 		int tag = mainview.getDateFahrstunde().getDay();
 		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
 		int monat = mainview.getDateFahrstunde().getMonth() + 1;
 		int jahr = mainview.getDateFahrstunde().getYear();
 		int fId = fahrlehrerids.get(getFahrlehrerSelectionIndex());
 		List<LocalDateTime> termine = fahrschule.getTermine(fId);
-		
+
 		for (LocalDateTime l : termine) {
-			if(l.getDayOfMonth() == tag
-					&& l.getMonthValue() == monat
-					&& l.getYear() == jahr) {
-				if(l.getHour() > 8 && l.getHour() < 22) {
+			if (l.getDayOfMonth() == tag && l.getMonthValue() == monat && l.getYear() == jahr) {
+				if (l.getHour() > 8 && l.getHour() < 22) {
 					String zeit = l.getHour() + ":00";
 					mainview.getTimeCombo().remove(zeit);
 				}
@@ -134,7 +128,7 @@ public class Controller implements Observer {
 		// localdate arbeitet von 1 - 12, das datums element von 0 - 11
 		int datumMonat = mainview.getDateFahrstunde().getMonth() + 1;
 		int datumTag = mainview.getDateFahrstunde().getDay();
-	
+
 		if (fahrschuelerindex != -1 && fahrschuelerindex != chachedFahrschuelerSelection) {
 			chachedFahrschuelerSelection = fahrschuelerindex;
 			model.setFahrschuelerId(fahrschuelerids.get(fahrschuelerindex));
@@ -157,13 +151,13 @@ public class Controller implements Observer {
 		LocalDate terminDatum = LocalDate.of(datumJahr, datumMonat, datumTag);
 		if (!LocalDate.now().isAfter(terminDatum)) {
 			model.setDatum(terminDatum);
-		}else {
+		} else {
 			resetViewDatum();
 		}
-		
+
 		if (!artString.isEmpty()) {
-			for(Fahrstundenart f : Fahrstundenart.values()) {
-				if(f.getBeschreibung().equals(artString.trim())) {
+			for (Fahrstundenart f : Fahrstundenart.values()) {
+				if (f.getBeschreibung().equals(artString.trim())) {
 					model.setArt(f);
 				}
 			}
@@ -188,7 +182,7 @@ public class Controller implements Observer {
 		LocalDate datum = model.getDatum();
 		LocalTime zeit = model.getUhrzeit();
 		Fahrstundenart art = model.getArt();
-		
+
 		fahrschule.bucheFahrstunde(art, fSchuelerId, fLehrerId, datum, zeit, "Fahrschule Terlau");
 		log.fine(" Fahrstunde wurde gebucht. ");
 	}
@@ -210,7 +204,7 @@ public class Controller implements Observer {
 	private void updateSchuelerLabel() {
 		mainview.getSchuelernameLabel().setText(fahrschule.getFahrschuelerInfo(model.getFahrschuelerId()).getName());
 	}
-	
+
 	private void updateLehrerLabel() {
 		mainview.getLehrernameLabel().setText(fahrschule.getFahrlehrerInfo(model.getFahrlehrerId()).getName());
 	}
@@ -221,11 +215,11 @@ public class Controller implements Observer {
 		mainview.getDateFahrstunde().setMonth(LocalDate.now().getMonthValue() - 1);
 		mainview.getDateFahrstunde().setYear(LocalDate.now().getYear());
 	}
-	
+
 	public void restoreGUI() {
-		initGUI();
+		initGUI(languageProperties);
 		mainview.getShell().layout(true);
-		
+
 	}
 
 	private boolean isAlleFelderAusgefuellt() {
@@ -297,10 +291,10 @@ public class Controller implements Observer {
 
 		case "StammdatenanGui":
 			mainview.getDisplay().close();
-			new StammdatenController(this, fahrschule);
+			new StammdatenController(this, fahrschule, languageProperties);
 			log.fine(" Modus wurde gewechselt zum Anlegen neuer Person. ");
 			break;
-			
+
 		case "german":
 			aendereSprache("de");
 			log.fine(" Sprache wurde gewechselt zu Deutsch. ");
@@ -327,7 +321,8 @@ public class Controller implements Observer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.mainview
+		mainview.getDisplay().close();
+		restoreGUI();
 	}
 
 }

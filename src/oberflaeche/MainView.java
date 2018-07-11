@@ -9,6 +9,7 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.px;
 import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 import java.util.Observable;
+import java.util.Properties;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
@@ -53,7 +54,10 @@ public class MainView extends Observable {
 	private Composite mainComposite, headerComposite, eingabe1Composite, eingabe2Composite, kalenderComposite,
 			uebersichtComposite;
 
-	public MainView() {
+	private Properties languageProperties;
+
+	public MainView(Properties languageProperties) {
+		this.languageProperties = languageProperties;
 		initUI();
 	}
 
@@ -78,7 +82,7 @@ public class MainView extends Observable {
 	private void initShell() {
 		shell.setFont(theme.getFont1());
 		shell.setLayout(createFluidGrid());
-		shell.setText("Fahrschul Verwaltung");
+		shell.setText(languageProperties.getProperty("hauptFensterueberschrift"));
 		aendereShellGroesse();
 
 		display.addListener(SWT.Resize, new Listener() {
@@ -128,7 +132,8 @@ public class MainView extends Observable {
 		setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
 
 		Label nameLabel = new Label(headerComposite, SWT.NORMAL);
-		nameLabel.setText("Fahrschul-Verwaltungssoftware" + "\n" + "Version: 2.0");
+		nameLabel.setText(languageProperties.getProperty("hauptFensterueberschrift") + "\n"
+				+ languageProperties.getProperty("version") + ": 3.0");
 		nameLabel.setFont(theme.getFont1());
 		nameLabel.setBackground(theme.getWhiteColor());
 		nameLabel.setForeground(theme.getBlueColor());
@@ -136,11 +141,11 @@ public class MainView extends Observable {
 		createFillerLabel(headerComposite, 1);
 
 		Label wechselLabel = new Label(headerComposite, SWT.NONE);
-		wechselLabel.setText("Ansicht wechseln:");
+		wechselLabel.setText(languageProperties.getProperty("ansichtWechseln"));
 		wechselLabel.setFont(theme.getNamefont());
 
 		btStammdaten = new CLabel(headerComposite, SWT.BORDER);
-		btStammdaten.setText("Stammdaten \n anzeigen");
+		btStammdaten.setText(languageProperties.getProperty("stammdatenButtonText"));
 		btStammdaten.setTextDirection(SWT.CENTER);
 		btStammdaten.setFont(theme.getFont2());
 		btStammdaten.setBackground(theme.getBlueColor());
@@ -306,7 +311,7 @@ public class MainView extends Observable {
 	private void erzeugeObereWidgets() {
 
 		Label lehrerLabel = new Label(eingabe1Composite, SWT.NONE);
-		lehrerLabel.setText("Fahrlehrer");
+		lehrerLabel.setText(languageProperties.getProperty("fahrlehrer"));
 		lehrerLabel.setFont(theme.getFont1());
 		lehrerLabel.setBackground(theme.getWhiteColor());
 		lehrerLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -327,7 +332,7 @@ public class MainView extends Observable {
 		new Label(eingabe1Composite, SWT.NONE);
 
 		Label datumLabel = new Label(eingabe1Composite, SWT.NONE);
-		datumLabel.setText("Datum:");
+		datumLabel.setText(languageProperties.getProperty("datum") + ":");
 		datumLabel.setFont(theme.getFont1());
 		datumLabel.setBackground(theme.getWhiteColor());
 		datumLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -345,7 +350,7 @@ public class MainView extends Observable {
 		erzeugeLinie(eingabe1Composite);
 
 		Label schuelerLabel = new Label(eingabe2Composite, SWT.NONE);
-		schuelerLabel.setText("Fahrschüler");
+		schuelerLabel.setText(languageProperties.getProperty("fahrschueler"));
 		schuelerLabel.setFont(theme.getFont1());
 		schuelerLabel.setBackground(theme.getWhiteColor());
 		schuelerLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -366,7 +371,7 @@ public class MainView extends Observable {
 		new Label(eingabe2Composite, SWT.NONE);
 
 		Label fsKlasseLabel = new Label(eingabe2Composite, SWT.NONE);
-		fsKlasseLabel.setText("Führerscheinklasse:");
+		fsKlasseLabel.setText(languageProperties.getProperty("fuehrerscheinklasse"));
 		fsKlasseLabel.setFont(theme.getFont1());
 		fsKlasseLabel.setBackground(theme.getWhiteColor());
 		fsKlasseLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -403,7 +408,7 @@ public class MainView extends Observable {
 		createFillerLabel(kalenderComposite, 4);
 
 		Label ueberschrift = new Label(kalenderComposite, SWT.NONE | SWT.WRAP);
-		ueberschrift.setText("Offene Stunden von Fahrlehrer: ");
+		ueberschrift.setText(languageProperties.getProperty("offeneStundenUeberschrift") + ": ");
 		ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
 		ueberschrift.setFont(theme.getFont1());
 		ueberschrift.setBackground(theme.getWhiteColor());
@@ -411,7 +416,7 @@ public class MainView extends Observable {
 		createFillerLabel(kalenderComposite, 2);
 
 		lehrernameLabel = new Label(kalenderComposite, SWT.NONE | SWT.WRAP);
-		lehrernameLabel.setText("Fahrlehrername");
+		lehrernameLabel.setText(languageProperties.getProperty("fahrlehrername"));
 		lehrernameLabel.setLayoutData(createFillFillTrueFalseGridData());
 		lehrernameLabel.setFont(theme.getNamefont());
 		lehrernameLabel.setBackground(theme.getWhiteColor());
@@ -420,7 +425,7 @@ public class MainView extends Observable {
 		createFillerLabel(kalenderComposite, 7);
 
 		Label zeitLabel = new Label(kalenderComposite, SWT.NONE);
-		zeitLabel.setText("Uhrzeit");
+		zeitLabel.setText(languageProperties.getProperty("uhrzeit"));
 		zeitLabel.setBackground(theme.getWhiteColor());
 		zeitLabel.setFont(theme.getFont2());
 		zeitLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -439,7 +444,7 @@ public class MainView extends Observable {
 		createFillerLabel(kalenderComposite, 1);
 
 		Label artLabel = new Label(kalenderComposite, SWT.NONE);
-		artLabel.setText("Art der Fahrstunde:");
+		artLabel.setText(languageProperties.getProperty("fahrstundenArt"));
 		artLabel.setBackground(theme.getWhiteColor());
 		artLabel.setFont(theme.getFont2());
 		artLabel.setLayoutData(createFillFillTrueFalseGridData());
@@ -460,7 +465,7 @@ public class MainView extends Observable {
 		createFillerLabel(kalenderComposite, 8);
 
 		btBuchen = new CLabel(kalenderComposite, SWT.BORDER);
-		btBuchen.setText("Fahrstunde \n buchen");
+		btBuchen.setText(languageProperties.getProperty("stundeBuchenButtonText"));
 		btBuchen.setTextDirection(SWT.CENTER);
 		btBuchen.setFont(theme.getFont2());
 		btBuchen.setBackground(theme.getBlueColor());
@@ -508,7 +513,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 4);
 
 		Label ueberschrift = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		ueberschrift.setText("Übersicht der Stunden von Schüler:");
+		ueberschrift.setText(languageProperties.getProperty("uebersichtStundenUeberschrift"));
 		ueberschrift.setLayoutData(createFillFillTrueFalseGridData());
 		ueberschrift.setFont(theme.getFont1());
 		ueberschrift.setBackground(theme.getWhiteColor());
@@ -516,7 +521,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 2);
 
 		schuelernameLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		schuelernameLabel.setText("Fahrschuelername");
+		schuelernameLabel.setText(languageProperties.getProperty("fahrschuelername"));
 		schuelernameLabel.setLayoutData(createFillFillTrueFalseGridData());
 		schuelernameLabel.setFont(theme.getNamefont());
 		schuelernameLabel.setBackground(theme.getWhiteColor());
@@ -525,7 +530,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 7);
 
 		Label fahrstundeLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		fahrstundeLabel.setText("Fahrstunden:");
+		fahrstundeLabel.setText(languageProperties.getProperty("fahrstunden") + ":");
 		fahrstundeLabel.setBackground(theme.getWhiteColor());
 		fahrstundeLabel.setFont(theme.getFont2());
 
@@ -535,7 +540,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 1);
 
 		Label sonderfahrtLabel = new Label(uebersichtComposite, SWT.NONE);
-		sonderfahrtLabel.setText("Sonderfahrten:");
+		sonderfahrtLabel.setText(languageProperties.getProperty("sonderfahrten") + ":");
 		sonderfahrtLabel.setBackground(theme.getWhiteColor());
 		sonderfahrtLabel.setFont(theme.getFont2());
 
@@ -545,7 +550,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 1);
 
 		Label theorieLabel = new Label(uebersichtComposite, SWT.NONE | SWT.WRAP);
-		theorieLabel.setText("Theoriestunden:");
+		theorieLabel.setText(languageProperties.getProperty("theoriestunden") + ":");
 		theorieLabel.setBackground(theme.getWhiteColor());
 		theorieLabel.setFont(theme.getFont2());
 
@@ -555,7 +560,7 @@ public class MainView extends Observable {
 		createFillerLabel(uebersichtComposite, 8);
 
 		btRechnung = new CLabel(uebersichtComposite, SWT.BORDER);
-		btRechnung.setText("Rechnungsübersicht \n erstellen");
+		btRechnung.setText(languageProperties.getProperty("rechnungButtonText"));
 		btRechnung.setTextDirection(SWT.CENTER);
 		btRechnung.setFont(theme.getFont2());
 		btRechnung.setBackground(theme.getBlueColor());

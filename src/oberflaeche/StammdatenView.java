@@ -9,6 +9,7 @@ import static com.eclipsesource.tabris.passepartout.PassePartout.px;
 import static com.eclipsesource.tabris.passepartout.PassePartout.when;
 
 import java.util.Observable;
+import java.util.Properties;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
@@ -40,12 +41,15 @@ public class StammdatenView extends Observable {
 
 	private CLabel germanButton, englishButton;
 	private Image germanImage, englishImage;
-	
+
 	private Label fillerLabel;
 	private FahrschulTheme theme;
 	private Composite mainComposite, headerComposite, datenComposite;
 
-	public StammdatenView() {
+	private Properties languageProperties;
+
+	public StammdatenView(Properties languageProperties) {
+		this.languageProperties = languageProperties;
 		initUI();
 	}
 
@@ -67,7 +71,7 @@ public class StammdatenView extends Observable {
 	private void initShell() {
 		shell.setFont(theme.getFont1());
 		shell.setLayout(createFluidGrid());
-		shell.setText("Fahrschul Verwaltung");
+		shell.setText(languageProperties.getProperty("hauptFensterueberschrift"));
 		aendereShellGroesse();
 
 		display.addListener(SWT.Resize, new Listener() {
@@ -116,19 +120,20 @@ public class StammdatenView extends Observable {
 		setzeSpaltenVonFluidGrudData(headerComposite, 8, 4, 16, 16);
 
 		Label nameLabel = new Label(headerComposite, SWT.NORMAL);
-		nameLabel.setText("Fahrschul-Verwaltungssoftware" + "\n" + "Version: 2.0");
+		nameLabel.setText(languageProperties.getProperty("hauptFensterueberschrift") + "\n"
+				+ languageProperties.getProperty("version") + ": 3.0");
 		nameLabel.setFont(theme.getFont1());
 		nameLabel.setBackground(theme.getWhiteColor());
 		nameLabel.setForeground(theme.getBlueColor());
 
-		createFillerLabel(headerComposite, 2);
+		createFillerLabel(headerComposite, 1);
 
 		Label wechselLabel = new Label(headerComposite, SWT.NONE);
-		wechselLabel.setText("Ansicht wechseln:");
+		wechselLabel.setText(languageProperties.getProperty("ansichtWechseln"));
 		wechselLabel.setFont(theme.getNamefont());
 
 		btStundenBuchen = new CLabel(headerComposite, SWT.BORDER);
-		btStundenBuchen.setText("Fahrstunden \n buchen");
+		btStundenBuchen.setText(languageProperties.getProperty("stundeBuchenButtonText"));
 		btStundenBuchen.setTextDirection(SWT.CENTER);
 		btStundenBuchen.setFont(theme.getFont2());
 		btStundenBuchen.setBackground(theme.getBlueColor());
@@ -276,7 +281,7 @@ public class StammdatenView extends Observable {
 
 		Label uebersichtFS = new Label(datenComposite, SWT.NONE);
 		uebersichtFS.setFont(theme.getNamefont());
-		uebersichtFS.setText("Übersicht über die Fahrschüler");
+		uebersichtFS.setText(languageProperties.getProperty("uebersichtFahrschuelerTabelle"));
 		uebersichtFS.setBackground(theme.getWhiteColor());
 		uebersichtFS.setForeground(theme.getBlueColor());
 
@@ -289,8 +294,11 @@ public class StammdatenView extends Observable {
 		schuelerdata.heightHint = 350;
 		schuelerStammdatenTable.setLayoutData(schuelerdata);
 
-		String[] schuelertitles = { "Vorname", "Nachname", "Telefonnummer", "Straße", "Hausnummer", "PLZ",
-				"Geburtsdatum", "Führerscheinklasse" };
+		String[] schuelertitles = { languageProperties.getProperty("vorname"),
+				languageProperties.getProperty("nachname"), languageProperties.getProperty("telefonnummer"),
+				languageProperties.getProperty("strasse"), languageProperties.getProperty("hausnummer"),
+				languageProperties.getProperty("plz"), languageProperties.getProperty("geburtsdatum"),
+				languageProperties.getProperty("fuehrerscheinklasse") };
 		for (int i = 0; i < schuelertitles.length; i++) {
 			TableColumn column = new TableColumn(schuelerStammdatenTable, SWT.NONE);
 			column.setText(schuelertitles[i]);
@@ -310,7 +318,7 @@ public class StammdatenView extends Observable {
 		}
 
 		btNeuerFahrschueler = new CLabel(datenComposite, SWT.BORDER);
-		btNeuerFahrschueler.setText("Fahrschueler \n hinzufügen");
+		btNeuerFahrschueler.setText(languageProperties.getProperty("fahrschuelerHinzufuegenButtonText"));
 		btNeuerFahrschueler.setTextDirection(SWT.CENTER);
 		btNeuerFahrschueler.setFont(theme.getFont2());
 		btNeuerFahrschueler.setBackground(theme.getBlueColor());
@@ -323,7 +331,6 @@ public class StammdatenView extends Observable {
 				setChanged();
 				notifyObservers("FahrschuelerNeu");
 
-				
 			}
 
 			@Override
@@ -359,7 +366,7 @@ public class StammdatenView extends Observable {
 
 		Label uebersichtFL = new Label(datenComposite, SWT.NONE);
 		uebersichtFL.setFont(theme.getNamefont());
-		uebersichtFL.setText("Übersicht über die Fahrlehrer");
+		uebersichtFL.setText(languageProperties.getProperty("uebersichtFahrlehrerTabelle"));
 		uebersichtFL.setBackground(theme.getWhiteColor());
 		uebersichtFL.setForeground(theme.getBlueColor());
 
@@ -372,8 +379,10 @@ public class StammdatenView extends Observable {
 		lehrerdata.heightHint = 200;
 		lehrerStammdatenTabelle.setLayoutData(lehrerdata);
 
-		String[] lehrertitles = { "Vorname", "Nachname", "Telefonnummer", "Straße", "Hausnummer", "PLZ", "Geburtsdatum",
-				"Führerscheinklasse" };
+		String[] lehrertitles = { languageProperties.getProperty("vorname"), languageProperties.getProperty("nachname"),
+				languageProperties.getProperty("telefonnummer"), languageProperties.getProperty("strasse"),
+				languageProperties.getProperty("hausnummer"), languageProperties.getProperty("plz"),
+				languageProperties.getProperty("geburtsdatum"), languageProperties.getProperty("fuehrerscheinklasse") };
 		for (int i = 0; i < lehrertitles.length; i++) {
 			TableColumn column = new TableColumn(lehrerStammdatenTabelle, SWT.NONE);
 			column.setText(lehrertitles[i]);
@@ -393,7 +402,7 @@ public class StammdatenView extends Observable {
 		}
 
 		btNeuerFahrlehrer = new CLabel(datenComposite, SWT.BORDER);
-		btNeuerFahrlehrer.setText("Fahrlehrer \n hinzufügen");
+		btNeuerFahrlehrer.setText(languageProperties.getProperty("fahrlehrerHinzufuegenButtonText"));
 		btNeuerFahrlehrer.setTextDirection(SWT.CENTER);
 		btNeuerFahrlehrer.setFont(theme.getFont2());
 		btNeuerFahrlehrer.setBackground(theme.getBlueColor());
@@ -453,11 +462,6 @@ public class StammdatenView extends Observable {
 			}
 		}
 		display.dispose();
-	}
-
-	public static void main(String[] args) {
-		StammdatenView stv = new StammdatenView();
-		stv.startEventHandler();
 	}
 
 	public CLabel getBtNeuerFahrschueler() {
