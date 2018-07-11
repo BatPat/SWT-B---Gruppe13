@@ -142,7 +142,7 @@ public class StammdatenController implements Observer {
 	private PersonInfo createPersonInfo(PersonType personType) {
 
 		PersonAnlegenController pac = new PersonAnlegenController(personType,
-				stammdatenView.getDisplay().getActiveShell());
+				stammdatenView.getDisplay().getActiveShell(), languageProperties);
 		return pac.getCreatedPersonInfo();
 	}
 

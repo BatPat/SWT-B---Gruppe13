@@ -1,5 +1,7 @@
 package oberflaeche;
 
+import java.util.Properties;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -17,8 +19,11 @@ public class PersonAnlegenDialog extends Dialog {
 
 	private DateTime gebdat;
 
-	public PersonAnlegenDialog(Shell parentShell) {
+	private Properties languageProperties;
+
+	public PersonAnlegenDialog(Shell parentShell, Properties languageProperties) {
 		super(parentShell);
+		this.languageProperties = languageProperties;
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class PersonAnlegenDialog extends Dialog {
 	private void erzeugeDialogelemente(Composite composite) {
 
 		Label vornameLabel = new Label(composite, SWT.NONE);
-		vornameLabel.setText("Vorname: ");
+		vornameLabel.setText(languageProperties.getProperty("vorname"));
 
 		vornameInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(vornameInput);
@@ -43,7 +48,7 @@ public class PersonAnlegenDialog extends Dialog {
 		new Label(composite, SWT.NONE);
 
 		Label nachnameLabel = new Label(composite, SWT.NONE);
-		nachnameLabel.setText("Nachname: ");
+		nachnameLabel.setText(languageProperties.getProperty("nachname"));
 
 		nachnameInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(nachnameInput);
@@ -51,7 +56,7 @@ public class PersonAnlegenDialog extends Dialog {
 		erzeugeTrennlinie(composite);
 
 		Label strLabel = new Label(composite, SWT.NONE);
-		strLabel.setText("Straße: ");
+		strLabel.setText(languageProperties.getProperty("strasse"));
 
 		strInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(strInput);
@@ -59,7 +64,7 @@ public class PersonAnlegenDialog extends Dialog {
 		new Label(composite, SWT.NONE);
 
 		Label hausnrLabel = new Label(composite, SWT.NONE);
-		hausnrLabel.setText("Hausnummer: ");
+		hausnrLabel.setText(languageProperties.getProperty("hausnummer"));
 
 		hausnrInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(hausnrInput);
@@ -67,7 +72,7 @@ public class PersonAnlegenDialog extends Dialog {
 		erzeugeTrennlinie(composite);
 
 		Label plzLabel = new Label(composite, SWT.NONE);
-		plzLabel.setText("PLZ: ");
+		plzLabel.setText(languageProperties.getProperty("plz"));
 
 		plzInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(plzInput);
@@ -75,7 +80,7 @@ public class PersonAnlegenDialog extends Dialog {
 		new Label(composite, SWT.NONE);
 
 		Label ortLabel = new Label(composite, SWT.NONE);
-		ortLabel.setText("Ort: ");
+		ortLabel.setText(languageProperties.getProperty("ort"));
 
 		ortInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(ortInput);
@@ -83,14 +88,14 @@ public class PersonAnlegenDialog extends Dialog {
 		erzeugeTrennlinie(composite);
 
 		Label gebdatLabel = new Label(composite, SWT.NONE);
-		gebdatLabel.setText("Geburtsdatum: ");
+		gebdatLabel.setText(languageProperties.getProperty("geburtsdatum"));
 
 		gebdat = new DateTime(composite, SWT.DATE);
 
 		new Label(composite, SWT.NONE);
 
 		Label telLabel = new Label(composite, SWT.NONE);
-		telLabel.setText("Telefonnummer: ");
+		telLabel.setText(languageProperties.getProperty("telefonnummer"));
 
 		telInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(telInput);
@@ -98,7 +103,7 @@ public class PersonAnlegenDialog extends Dialog {
 		erzeugeTrennlinie(composite);
 
 		Label fsklasseLabel = new Label(composite, SWT.NONE);
-		fsklasseLabel.setText("Führerscheinklasse: ");
+		fsklasseLabel.setText(languageProperties.getProperty("fuehrerscheinklasse"));
 
 		fsklasseInput = new Text(composite, SWT.BORDER);
 		aendereGroessevonTextfeld(fsklasseInput);
@@ -123,7 +128,7 @@ public class PersonAnlegenDialog extends Dialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Person hinzufügen");
+		newShell.setText(languageProperties.getProperty("personHinzufuegenFensterUeberschrift"));
 	}
 
 	@Override

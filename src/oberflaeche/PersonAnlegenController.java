@@ -1,5 +1,6 @@
 package oberflaeche;
 
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.eclipse.jface.window.Window;
@@ -26,13 +27,15 @@ public class PersonAnlegenController {
 	private String fuehrerscheinklasse;
 	private PersonInfo createdPersonInfo;
 	private static Logger log = MyLoggerUtil.createLogger();
+	private Properties languageProperties;
 
-	public PersonAnlegenController(PersonType personType, Shell shell) {
+	public PersonAnlegenController(PersonType personType, Shell shell, Properties languageProperties) {
+		this.languageProperties = languageProperties;
 		initGUI(personType, shell);
 	}
 
 	private void initGUI(PersonType personType, Shell shell) {
-		dialog = new PersonAnlegenDialog(shell);
+		dialog = new PersonAnlegenDialog(shell, languageProperties);
 		dialog.create();
 		createDialogListener();
 		if (dialog.open() == Window.OK) {
