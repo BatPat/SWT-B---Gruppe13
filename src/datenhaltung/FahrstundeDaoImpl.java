@@ -1,26 +1,25 @@
 package datenhaltung;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import fachlogik.FahrstundeDTO;
-import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
-/**
- * Klasse die die Datenbankzugriffe auf die Fahrstunde-Tabelle ausführt.
- *
- */
 public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	private static FahrstundeDaoImpl instance;
-	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
-	private Session session;
 	private static Logger log = MyLoggerUtil.createLogger();
-
+	private static final String FAHRSTUNDEN_PATH = "/Fahrschule/Fahrstunden/";
+	private static final String JAVADIR = System.getProperty("user.dir");
+	
 	private FahrstundeDaoImpl() {
 
 	}
@@ -34,73 +33,71 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 		return instance;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
-	//Fahrstunden zurückliefert, welche dann zurückgegeben werden.
-	@SuppressWarnings("unchecked")
+
+
 	@Override
 	public List<FahrstundeDTO> getAlleFahrstunden() {
+		File dir = new File(JAVADIR + FAHRSTUNDEN_PATH);
+		File[] fahrstundendateien = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File arg0, String arg1) {
+				return arg1.startsWith("Fahrstunde") && arg1.endsWith(".ser");
+			}
+
+		});
 		List<FahrstundeDTO> liste = new ArrayList<>();
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		liste = session.createQuery("from FahrstundeDTO").list();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Liste der Fahrstunden wurde geladen. ");
+		FahrstundeDTO fahrstunde = null;
+		for (int i = 0; i < fahrstundendateien.length; i++) {
+			File file = fahrstundendateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				fahrstunde = (FahrstundeDTO) ois.readObject();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			liste.add(fahrstunde);
+		}
 		return liste;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle gespeichert wird.
+	private File generateFile(FahrstundeDTO fahrstunde) {
+		File dir = new File(
+				JAVADIR + FAHRSTUNDEN_PATH + "Fahrstunde" + fahrstunde.getGenid() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
+	}
+
 	@Override
 	public void addFahrstunde(FahrstundeDTO fahrstunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.save(fahrstunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
-				+ fahrstunde.getLehrer() + " wurde hinzugefügt. ");
+		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(fahrstunde);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateFahrstunde(FahrstundeDTO fahrstunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.update(fahrstunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
-				+ fahrstunde.getLehrer() + " wurde verändert. ");
+		File td = generateFile(fahrstunde);
+		td.delete();
+		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrstunde));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(fahrstunde);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteFahrstunde(FahrstundeDTO fahrstunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.delete(fahrstunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
-				+ fahrstunde.getLehrer() + " wurde gelöscht. ");
+		File td = generateFile(fahrstunde);
+		td.delete();
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Fahrstunde aus der Datenbanktabelle geladen wird.
 	@Override
-	public FahrstundeDTO getFahrstunde(int fahrstundeId) {
-		FahrstundeDTO fahrstunde = null;
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		fahrstunde = (FahrstundeDTO) session.get(FahrstundeDTO.class, fahrstundeId);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrstunde : Für Fahrlschueler : " + fahrstunde.getSchueler() + "bei dem Fahrlehrer: "
-				+ fahrstunde.getLehrer() + " wurde geladen. ");
-		return fahrstunde;
+	public FahrstundeDTO getFahrstunde(int fahrstundeid) {
+		return new FahrstundeDTO();
 	}
+
 }

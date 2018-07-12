@@ -1,24 +1,21 @@
 package datenhaltung;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
 import fachlogik.PruefungDTO;
-/**
- * Klasse die die Datenbankzugriffe auf die Prüfung-Tabelle ausführt.
- *
- */
 public class PruefungDaoImpl implements PruefungDao {
 
 	private static PruefungDaoImpl instance;
-	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
-	private Session session;
 	private static Logger log = MyLoggerUtil.createLogger();
 
 	private PruefungDaoImpl() {
@@ -34,73 +31,71 @@ public class PruefungDaoImpl implements PruefungDao {
 		return instance;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
-	//Pruefungen zurückliefert, welche dann zurückgegeben werden.
-	@SuppressWarnings("unchecked")
+	private static String javadir = System.getProperty("user.dir");
+
 	@Override
 	public List<PruefungDTO> getAllePruefungen() {
+		File dir = new File(javadir + "/Fahrschule/Pruefung/");
+		File[] puefungdateien = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File arg0, String arg1) {
+				return arg1.startsWith("Pruefung") && arg1.endsWith(".ser");
+			}
+
+		});
 		List<PruefungDTO> liste = new ArrayList<>();
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		liste = session.createQuery("from PruefungDTO").list();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Liste der Pruefungen wurde geladen. ");
+		PruefungDTO pruefung = null;
+		for (int i = 0; i < puefungdateien.length; i++) {
+			File file = puefungdateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				pruefung = (PruefungDTO) ois.readObject();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			liste.add(pruefung);
+		}
 		return liste;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle gespeichert wird.
+	private File generateFile(PruefungDTO pruefung) {
+		File dir = new File(javadir + "/Fahrschule/Pruefung/" + "Pruefung" + pruefung.getGenid() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
+	}
+
 	@Override
 	public void addPruefung(PruefungDTO pruefung) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.save(pruefung);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
-				+ pruefung.getFahrlehrer() + " wurde hinzugefügt. ");
+		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(pruefung);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle verändert wird.
 	@Override
 	public void updatePruefung(PruefungDTO pruefung) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.update(pruefung);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
-				+ pruefung.getFahrlehrer() + " wurde verändert. ");
+		File td = generateFile(pruefung);
+		td.delete();
+		try (FileOutputStream fos = new FileOutputStream(generateFile(pruefung));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(pruefung);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deletePruefung(PruefungDTO pruefung) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.delete(pruefung);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
-				+ pruefung.getFahrlehrer() + " wurde gelöscht. ");
+		File td = generateFile(pruefung);
+		td.delete();
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Pruefung aus der Datenbanktabelle gesladen wird.
 	@Override
-	public PruefungDTO getPruefung(int pruefungId) {
-		PruefungDTO pruefung = null;
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		pruefung = (PruefungDTO) session.get(PruefungDTO.class, pruefungId);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Pruefung : Für Fahrlschueler : " + pruefung.getFahrschueler() + "bei dem Fahrlehrer: "
-				+ pruefung.getFahrlehrer() + " wurde geladen. ");
-		return pruefung;
+	public PruefungDTO getPruefung(int pruefungid) {
+		return new PruefungDTO();
 	}
+
 }
+

@@ -1,31 +1,26 @@
 package datenhaltung;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import fachlogik.FahrlehrerDTO;
-import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
-/**
- * Klasse die die Datenbankzugriffe auf die Fahrlehrer-Tabelle ausführt.
- *
- */
+
 public class FahrlehrerDaoImpl implements FahrlehrerDao {
-
+	
+	private static final String FAHRLEHRER_PATH = "/Fahrschule/Fahrlehrer/";
 	private static FahrlehrerDaoImpl instance;
-	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
-	private Session session;
+	private static final String JAVADIR = System.getProperty("user.dir");
 	private static Logger log = MyLoggerUtil.createLogger();
-
-	private FahrlehrerDaoImpl() {
-
-	}
-
-	//Singleton-Pattern das die Anzahl der FahrlehrerDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
+	
 	public static FahrlehrerDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new FahrlehrerDaoImpl();
@@ -34,70 +29,70 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 		return instance;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
-	//Fahrlehrer zurückliefert, welche dann zurückgegeben werden.
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<FahrlehrerDTO> getAlleFahrlehrer() {
+		File dir = new File(JAVADIR + FAHRLEHRER_PATH);
+		File[] fahrlehrerdateien = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File arg0, String arg1) {
+				return arg1.endsWith(".ser");
+			}
+
+		});
 		List<FahrlehrerDTO> liste = new ArrayList<>();
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		liste = session.createQuery("from FahrlehrerDTO").list();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Liste der Fahrlehrer wurde geladen. ");
+		FahrlehrerDTO fahrlehrer = null;
+		for (int i = 0; i < fahrlehrerdateien.length; i++) {
+			File file = fahrlehrerdateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				fahrlehrer = (FahrlehrerDTO) ois.readObject();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			liste.add(fahrlehrer);
+		}
 		return liste;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrlehrer in der Datenbanktabelle gespeichert wird.
-	@Override
-	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.save(fahrlehrer);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde hinzugefügt. ");
+	private File generateFile(FahrlehrerDTO fahrlehrer) {
+		File dir = new File(JAVADIR + FAHRLEHRER_PATH + fahrlehrer.getName() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrlehrer in der Datenbanktabelle überarbeitet wird.
-	@Override
-	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.saveOrUpdate(fahrlehrer);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde verändert. ");
-	}
-
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrlehrer in der Datenbanktabelle gelöscht wird.
-	@Override
-	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.delete(fahrlehrer);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde gelöscht. ");
-	}
-
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrlehrer aus der Datenbanktabelle geladen wird.
 	@Override
 	public FahrlehrerDTO getFahrlehrer(int fahrlehrerid) {
 		FahrlehrerDTO fahrlehrer = null;
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		fahrlehrer = (FahrlehrerDTO) session.get(FahrlehrerDTO.class, fahrlehrerid);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrlehrer : " + fahrlehrer.getName() + " wurde geladen. ");
+		try (FileInputStream fis = new FileInputStream(
+				JAVADIR + FAHRLEHRER_PATH + fahrlehrerid + ".ser");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+			fahrlehrer = (FahrlehrerDTO) ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return fahrlehrer;
 	}
 
+	@Override
+	public void addFahrlehrer(FahrlehrerDTO fahrlehrer) {
+		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrlehrer));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(fahrlehrer);			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateFahrlehrer(FahrlehrerDTO fahrlehrer) {
+		File td = generateFile(fahrlehrer);
+		td.delete();
+		addFahrlehrer(fahrlehrer);		
+	}
+
+	@Override
+	public void deleteFahrlehrer(FahrlehrerDTO fahrlehrer) {
+		File td = generateFile(fahrlehrer);
+		td.delete();		
+	}
 }

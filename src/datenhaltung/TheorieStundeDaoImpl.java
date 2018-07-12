@@ -1,24 +1,21 @@
 package datenhaltung;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
 import fachlogik.TheoriestundeDTO;
-/**
- * Klasse die die Datenbankzugriffe auf die Theoriestunde-Tabelle ausführt.
- *
- */
 public class TheorieStundeDaoImpl implements TheoriestundeDao {
 
 	private static TheorieStundeDaoImpl instance;
-	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
-	private Session session;
 	private static Logger log = MyLoggerUtil.createLogger();
 
 	private TheorieStundeDaoImpl() {
@@ -34,73 +31,71 @@ public class TheorieStundeDaoImpl implements TheoriestundeDao {
 		return instance;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
-	//Theoriestunden zurückliefert, welche dann zurückgegeben werden.
-	@SuppressWarnings("unchecked")
+	private static String javadir = System.getProperty("user.dir");
+
 	@Override
 	public List<TheoriestundeDTO> getAlleTheoriestunden() {
+		File dir = new File(javadir + "/Fahrschule/Theoriestunde/");
+		File[] theoriestundedateien = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File arg0, String arg1) {
+				return arg1.startsWith("Theorie") && arg1.endsWith(".ser");
+			}
+
+		});
 		List<TheoriestundeDTO> liste = new ArrayList<>();
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		liste = session.createQuery("from TheoriestundeDTO").list();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Liste der Theoriestunden wurde geladen. ");
+		TheoriestundeDTO theoriestunde = null;
+		for (int i = 0; i < theoriestundedateien.length; i++) {
+			File file = theoriestundedateien[i];
+			try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+				theoriestunde = (TheoriestundeDTO) ois.readObject();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			liste.add(theoriestunde);
+		}
 		return liste;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle gespeichert wird.
+	private File generateFile(TheoriestundeDTO theoriestunde) {
+		File dir = new File(
+				javadir + "/Fahrschule/Theoriestunde/" + "Theorie" + theoriestunde.getGenid() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
+	}
+
 	@Override
 	public void addTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.save(theoriestunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Theoriestunde : über " + theoriestunde.getThema() + "bei dem Fahrlehrer: "
-				+ theoriestunde.getFahrlehrer() + " wurde hinzugefügt. ");
+		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(theoriestunde);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.update(theoriestunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Theoriestunde : über " + theoriestunde.getThema() + "bei dem Fahrlehrer: "
-				+ theoriestunde.getFahrlehrer() + " wurde verändert. ");
+		File td = generateFile(theoriestunde);
+		td.delete();
+		try (FileOutputStream fos = new FileOutputStream(generateFile(theoriestunde));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(theoriestunde);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteTheoriestunde(TheoriestundeDTO theoriestunde) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.delete(theoriestunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Theoriestunde : über " + theoriestunde.getThema() + "bei dem Fahrlehrer: "
-				+ theoriestunde.getFahrlehrer() + " wurde gelöscht. ");
+		File td = generateFile(theoriestunde);
+		td.delete();
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Theoriestunde aus der Datenbanktabelle geladen wird.
 	@Override
-	public TheoriestundeDTO getTheoriestunde(int theoriestundeId) {
-		TheoriestundeDTO theoriestunde = null;
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		theoriestunde = (TheoriestundeDTO) session.get(TheoriestundeDTO.class, theoriestunde);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Theoriestunde : über " + theoriestunde.getThema() + "bei dem Fahrlehrer: "
-				+ theoriestunde.getFahrlehrer() + " wurde geladen. ");
-		return theoriestunde;
+	public TheoriestundeDTO getTheoriestunde(int theoriestundeid) {
+		return new TheoriestundeDTO();
 	}
 }
+

@@ -48,24 +48,24 @@ public class InitTestData {
 		fahrschuelerManager.addFahrschueler(fahrschueler2);
 		fahrschuelerManager.addFahrschueler(fahrschueler3);
 
-		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(),
-				LocalTime.of(12, 0), "Recklinghausen");
-		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd1);
-		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd1);
-		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd1);
+//		TheoriestundeDTO theostd1 = new TheoriestundeDTO(TheorieThema.ANDERE_TEILNEHMER, fahrlehrer1, LocalDate.now(),
+//				LocalTime.of(12, 0), "Recklinghausen");
+//		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd1);
+//		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd1);
+//		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd1);
+//
+//		TheoriestundeDTO theostd2 = new TheoriestundeDTO(TheorieThema.MANEUVER, fahrlehrer2, LocalDate.now(),
+//				LocalTime.of(17, 00), "Recklinghausen");
+//		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd2);
+//		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd2);
+//
+//		TheoriestundeDTO theostd3 = new TheoriestundeDTO(TheorieThema.VORFAHRT, fahrlehrer1, LocalDate.now(),
+//				LocalTime.of(15, 0), "Recklinghausen");
+//		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd3);
 
-		TheoriestundeDTO theostd2 = new TheoriestundeDTO(TheorieThema.MANEUVER, fahrlehrer2, LocalDate.now(),
-				LocalTime.of(17, 00), "Recklinghausen");
-		fahrschuelerManager.addTheoriestunde(fahrschueler1, theostd2);
-		fahrschuelerManager.addTheoriestunde(fahrschueler2, theostd2);
-
-		TheoriestundeDTO theostd3 = new TheoriestundeDTO(TheorieThema.VORFAHRT, fahrlehrer1, LocalDate.now(),
-				LocalTime.of(15, 0), "Recklinghausen");
-		fahrschuelerManager.addTheoriestunde(fahrschueler3, theostd3);
-
-		theoriestundemanager.addTheoriestunde(theostd1);
-		theoriestundemanager.addTheoriestunde(theostd2);
-		theoriestundemanager.addTheoriestunde(theostd3);
+//		theoriestundemanager.addTheoriestunde(theostd1);
+//		theoriestundemanager.addTheoriestunde(theostd2);
+//		theoriestundemanager.addTheoriestunde(theostd3);
 
 		PruefungDTO pruef1 = new PruefungDTO(fahrlehrer1, fahrschueler1, LocalDate.now(), LocalTime.of(20, 0), "Reckling");
 		PruefungDTO pruef2 = new PruefungDTO(fahrlehrer1, fahrschueler2, LocalDate.now(), LocalTime.of(19, 0), "Reckling");

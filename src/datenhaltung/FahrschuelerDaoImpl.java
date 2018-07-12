@@ -1,34 +1,25 @@
 package datenhaltung;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.persistence.Query;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import fachlogik.FahrschuelerDTO;
-import fachlogik.HibernateUtil;
 import fachlogik.MyLoggerUtil;
-import fachlogik.TheoriestundeDTO;
-/**
- * Klasse die die Datenbankzugriffe auf die Fahrschueler-Tabelle ausführt.
- *
- */
 public class FahrschuelerDaoImpl implements FahrschuelerDao {
 
 	private static FahrschuelerDaoImpl instance;
-	private static SessionFactory sessionfactory = HibernateUtil.createSessionFactory();
-	private Session session;
 	private static Logger log = MyLoggerUtil.createLogger();
-
-	private FahrschuelerDaoImpl() {
-
-	}
-
-	//Singleton-Pattern das die Anzahl der FahrschuelerDaoImpl auf eins begrenzt und so verhindert das die Datenbank mit vielen Anfragen blockiert wird.
+	private static final String FAHRSCHUELER_PATH = "/Fahrschule/Fahrschueler/";
+	private static final String JAVADIR = System.getProperty("user.dir");
+	
 	public static FahrschuelerDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new FahrschuelerDaoImpl();
@@ -37,86 +28,72 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 		return instance;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der eine Abfrage gegen die Datenbank läuft und als Ergebnismenge alle 
-	//Fahrschueler zurückliefert, welche dann zurückgegeben werden.
-	@SuppressWarnings("unchecked")
+	private File generateFile(FahrschuelerDTO fahrschueler) {
+		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
+		dir.getParentFile().mkdirs();
+		return dir;
+	}
+
 	@Override
 	public List<FahrschuelerDTO> getAlleFahrschueler() {
+		File dir = new File(JAVADIR + FAHRSCHUELER_PATH);
+		File[] fahrschuelerdateien = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File arg0, String arg1) {
+				return arg1.endsWith(".ser");
+			}
+
+		});
 		List<FahrschuelerDTO> liste = new ArrayList<>();
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		liste = session.createQuery("from FahrschuelerDTO").list();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Liste der Fahrschueler wurde geladen. ");
+		FahrschuelerDTO fahrschueler = null;
+		for (int i = 0; i < fahrschuelerdateien.length; i++) {
+			File file = fahrschuelerdateien[i];
+			try (FileInputStream fis = new FileInputStream(file); 
+					ObjectInputStream ois = new ObjectInputStream(fis)) {
+				fahrschueler = (FahrschuelerDTO) ois.readObject();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			liste.add(fahrschueler);
+		}
 		return liste;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle gespeichert wird.
 	@Override
 	public void addFahrschueler(FahrschuelerDTO fahrschueler) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.save(fahrschueler);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde hinzugefügt. ");
+		try (FileOutputStream fos = new FileOutputStream(generateFile(fahrschueler));
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(fahrschueler);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle verändert wird.
 	@Override
 	public void updateFahrschueler(FahrschuelerDTO fahrschueler) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		session.update(fahrschueler);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde verändert. ");
+		File td = generateFile(fahrschueler);
+		td.delete();
+		addFahrschueler(fahrschueler);
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler in der Datenbanktabelle gelöscht wird.
 	@Override
 	public void deleteFahrschueler(FahrschuelerDTO fahrschueler) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		Query q = session.createNativeQuery(
-				"Delete from theoriestunden_fahrschueler where idfahrschueler=" + fahrschueler.getId());
-		q.executeUpdate();
-		session.delete(fahrschueler);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde gelöscht. ");
+		File td = generateFile(fahrschueler);
+		td.delete();
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler aus der Datenbanktabelle geladen wird.
 	@Override
-	public FahrschuelerDTO getFahrschueler(int fahrschuelerId) {
+	public FahrschuelerDTO getFahrschueler(int fahrschuelerid) {
 		FahrschuelerDTO fahrschueler = null;
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		fahrschueler = (FahrschuelerDTO) session.get(FahrschuelerDTO.class, fahrschuelerId);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde geladen. ");
+		try (FileInputStream fis = new FileInputStream(
+				JAVADIR + FAHRSCHUELER_PATH + fahrschuelerid + ".ser");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+			fahrschueler = (FahrschuelerDTO) ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return fahrschueler;
 	}
 
-	//Über eine Session wird eine Transaktion begonnen, in der ein Fahrschueler aus der Datenbanktabelle geladen wird 
-	//und eine Theoriestunde zugewiesen bekommt.
-	public void addTheoriestunde(FahrschuelerDTO fahrschueler, TheoriestundeDTO theostd1) {
-		session = sessionfactory.openSession();
-		session.beginTransaction();
-		FahrschuelerDTO fahrschuelerDTO = session.get(FahrschuelerDTO.class, fahrschueler.getId());
-		fahrschuelerDTO.addTheoriestunde(theostd1);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		log.info(" Fahrschueler : " + fahrschueler.getName() + " wurde Theoriestunde über " + theostd1.getThema()
-				+ " am " + theostd1.getDatum() + " zugewiesen. ");
-	}
 }

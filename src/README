@@ -1,0 +1,8 @@
+Datenbank Anbindung wurde ersetzt durch Serialisierung.
+In der Main werden (für diese Zwecke) Testdaten erzeugt.
+In den DAOImpls sind nun keine Kommentare zu den Methoden (da diese jetzt serialisieren und nicht mehr 
+für die Datenbank zuständig sind). In der Version mit der Datenbank gibt es bei jeder Methode einen Kommentar.
+Init TestData wurde auskommentiert, da es keine Datenbankverbindung geben sollte und somit auch keine Tabellen zu füllen sind.
+
+Wenn die Main gestartet wird kann man oben rechts zwischen den Sprachen Englisch und Deutsch wählen (Durch jeweiliges Klicken
+auf die Flagge). Anschließend wird das Fenster in der ausgewählten Sprache neu geladen. 
