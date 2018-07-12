@@ -4,5 +4,12 @@ In den DAOImpls sind nun keine Kommentare zu den Methoden (da diese jetzt serial
 für die Datenbank zuständig sind). In der Version mit der Datenbank gibt es bei jeder Methode einen Kommentar.
 Init TestData wurde auskommentiert, da es keine Datenbankverbindung geben sollte und somit auch keine Tabellen zu füllen sind.
 
+Wichtig: aufgrund der entfernten Datenbankanbindung kann in dieser Version nicht gearbeitet werden. 
+Diese Version soll lediglich die Internationalisierung demonstrieren.
+Für eine voll Funktionierende Version wird eine mySQL-Datenbank benötigt.
+
 Wenn die Main gestartet wird kann man oben rechts zwischen den Sprachen Englisch und Deutsch wählen (Durch jeweiliges Klicken
 auf die Flagge). Anschließend wird das Fenster in der ausgewählten Sprache neu geladen. 
+
+Die unterschiedlichen Sprachen für die enthaltenen Texte werden in de.properties und en.properties abgelegt und je nach Bedarf geladen.
+Die anfängliche Sprache wird zusammen mit einem anderen Parameter für die Mehrwertsteuer zu Beginn aus der fahrschule.properties gelesen.

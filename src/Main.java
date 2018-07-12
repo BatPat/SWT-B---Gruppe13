@@ -20,7 +20,6 @@ public class Main {
 			String tax = fahrschulProperties.getProperty("tax");
 			languageProperties = new Properties();
 			languageProperties.load(new FileInputStream("resources/" + lang + ".properties"));
-			// TODO verwenden der properties
 
 //			new InitTestData();
 			FahrlehrerDaoImpl fahrlehrer = new FahrlehrerDaoImpl(); 
