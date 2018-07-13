@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import fachlogik.FahrlehrerDTO;
 import fachlogik.FahrstundeDTO;
 import fachlogik.MyLoggerUtil;
 public class FahrstundeDaoImpl implements FahrstundeDao {
@@ -97,7 +98,15 @@ public class FahrstundeDaoImpl implements FahrstundeDao {
 
 	@Override
 	public FahrstundeDTO getFahrstunde(int fahrstundeid) {
-		return new FahrstundeDTO();
+		FahrstundeDTO fahrstunde = null;
+		try (FileInputStream fis = new FileInputStream(
+				JAVADIR + FAHRSTUNDEN_PATH + fahrstundeid + ".ser");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+			fahrstunde = (FahrstundeDTO) ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fahrstunde;
 	}
 
 }

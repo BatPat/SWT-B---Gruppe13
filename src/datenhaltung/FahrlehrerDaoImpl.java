@@ -55,7 +55,7 @@ public class FahrlehrerDaoImpl implements FahrlehrerDao {
 	}
 
 	private File generateFile(FahrlehrerDTO fahrlehrer) {
-		File dir = new File(JAVADIR + FAHRLEHRER_PATH + fahrlehrer.getName() + ".ser");
+		File dir = new File(JAVADIR + FAHRLEHRER_PATH + fahrlehrer.getId() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}

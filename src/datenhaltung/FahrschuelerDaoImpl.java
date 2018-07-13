@@ -29,7 +29,7 @@ public class FahrschuelerDaoImpl implements FahrschuelerDao {
 	}
 
 	private File generateFile(FahrschuelerDTO fahrschueler) {
-		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getName() + ".ser");
+		File dir = new File(JAVADIR + FAHRSCHUELER_PATH + fahrschueler.getId() + ".ser");
 		dir.getParentFile().mkdirs();
 		return dir;
 	}
