@@ -24,9 +24,9 @@ public class Main {
 //			new InitTestData();
 			FahrlehrerDaoImpl fahrlehrer = new FahrlehrerDaoImpl(); 
 		    FahrschuelerDaoImpl fahrschueler = new FahrschuelerDaoImpl(); 
-		    fahrlehrer.addFahrlehrer(new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3", tax, tax, tax));
-		    fahrschueler.addFahrschueler(new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51", tax, tax, tax));
-			new Controller(languageProperties);
+		    fahrlehrer.addFahrlehrer(new FahrlehrerDTO("Stefan Terlau", "44723", "Dortmund", "Kaspergaeschen", "3", "0312-12423461","19.12.1983","B"));
+		    fahrschueler.addFahrschueler(new FahrschuelerDTO("Peter Jung", "41743", "Dortmund", "Perss-Alle", "51", "0312-12732461","19.12.1983","B"));
+			new Controller(languageProperties,fahrschulProperties);
 		} catch (Exception e) {
 		}
 	}

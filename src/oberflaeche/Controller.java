@@ -29,12 +29,14 @@ public class Controller implements Observer {
 	private int chachedFahrlehrerSelection = -1;
 	private int chachedFahrschuelerSelection = -1;
 	private Properties languageProperties;
+	private Properties fahrschulProperties;
 	private static Logger log = MyLoggerUtil.createLogger();
 
-	public Controller(Properties languageProperties) {
+	public Controller(Properties languageProperties,Properties fahrschulProperties) {
 		initModel();
 		fahrschule = new Fahrschule();
 		this.languageProperties = languageProperties;
+		this.fahrschulProperties = fahrschulProperties;
 		initGUI(languageProperties);
 		mainview.getShell().layout(true);
 	}
@@ -169,9 +171,9 @@ public class Controller implements Observer {
 		return mainview.getLehrerCombo().getSelectionIndex();
 	}
 
-	private void erstellePdf() throws IOException {
+	private void erstellePdf(Properties fahrschulproperties) throws IOException {
 		if (getFahrschuelerSelectionIndex() != -1) {
-			fahrschule.druckeRechnungPdf(model.getFahrschuelerId());
+			fahrschule.druckeRechnungPdf(model.getFahrschuelerId(), fahrschulproperties);
 			log.fine(" PDF-Rechnung wird erstellt. ");
 		}
 	}
@@ -283,7 +285,7 @@ public class Controller implements Observer {
 
 		case "Rechnung":
 			try {
-				erstellePdf();
+				erstellePdf(fahrschulProperties);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

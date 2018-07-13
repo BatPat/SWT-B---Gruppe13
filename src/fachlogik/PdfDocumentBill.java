@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -23,6 +24,8 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
+
+import oberflaeche.FahrschulTheme;
 /**
  * Klasse die ein Pdf Dokument erstellt und teilweise die Daten aus dem übergebenen Fahrschueler liest und an 
  * entsprechenden Stellen einsetzt. 
@@ -48,7 +51,7 @@ public class PdfDocumentBill {
 
 	//Ober-Methode die das Dokument erstellt, den Pfad bestimmt und dann für jede "Zeile" im PDF eine Untermethode aufruft die 
 	//den Inhalt für die jeweilige Zeile schreibt.
-	public void createPdf(FahrschuelerDTO fahrschueler) throws IOException {
+	public void createPdf(FahrschuelerDTO fahrschueler, Properties fahrschulproperties) throws IOException {
 		try {
 			File file = new File(javadir + "/Fahrschule/Rechnungen/" + fahrschueler.getName() + ".pdf");
 			file.getParentFile().mkdirs();
@@ -71,8 +74,8 @@ public class PdfDocumentBill {
 			createSecondTableAndAddAdressParts(document, pdfwriter, fahrschueler);
 			createThirdTableAndAddTimestamp(document, pdfwriter);
 			createFourthTableAndAddBillHeader(document, pdfwriter, fahrschueler);
-			createBillTableAndAddRows(document, pdfwriter, fahrschueler);
-			createSixthTableAndAddTaxInformation(document, pdfwriter);
+			createBillTableAndAddRows(document, pdfwriter, fahrschueler, fahrschulproperties);
+			createSixthTableAndAddTaxInformation(document, pdfwriter, fahrschulproperties);
 			createSeventhTableAndAddGreetings(document, pdfwriter);
 			createTableAndAddBankInformation(document, pdfwriter);
 			// --------
@@ -146,13 +149,14 @@ public class PdfDocumentBill {
 	}
 
 	//Kleingedrucktes unter der Tabelle mit den jeweiligen Beträgen wird hier geschrieben
-	private void createSixthTableAndAddTaxInformation(Document document, PdfWriter pdfwriter) {
+	private void createSixthTableAndAddTaxInformation(Document document, PdfWriter pdfwriter, Properties fahrschulproperties) {
 		// -> Little Information about the Taxes
 		PdfPTable tableTaxes = new PdfPTable(1);
 		tableTaxes.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		tableTaxes.setWidthPercentage(30);
+		double mwst = Double.parseDouble((String)fahrschulproperties.get("tax")) * 100;
 		PdfPCell celltaxes = new PdfPCell(new Phrase(
-				"*Die Mehrwertsteuer wird z.Zt. nicht ausgewiesen aufgrund eines \n anh�ngenden Verfahrens, wird jedoch an das Finanzamt abgeführt",
+				"*Der Rechnungbetrag ergibt sich aus dem Gesamtbetrag \n plus geltende Mehrwertsteuer von : " + mwst + "%" ,
 				fonthell10));
 		celltaxes.setBorder(Rectangle.NO_BORDER);
 		tableTaxes.addCell(celltaxes);
@@ -163,7 +167,7 @@ public class PdfDocumentBill {
 	}
 
 	//Ober Methode für die Tabelle wo die Beträge einzeln aufgeschlüsselt werden.
-	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler) {
+	private void createBillTableAndAddRows(Document document, PdfWriter pdfwriter, FahrschuelerDTO fahrschueler, Properties fahrschulproperties) {
 		// Table with the prices for every piece
 		float[] columnWidths = { 7, 2, 2 };
 		PdfPTable tableBill = new PdfPTable(columnWidths);
@@ -178,7 +182,7 @@ public class PdfDocumentBill {
 		createSixthRowInBillTable(tableBill, fahrschueler);
 		createSeventhRowInBillTable(tableBill);
 		createEightRowInBillTable(tableBill, fahrschueler);
-		createTenthRowInBillTable(tableBill, fahrschueler);
+		createTenthRowInBillTable(tableBill, fahrschueler, fahrschulproperties);
 		PdfContentByte canvas5 = pdfwriter.getDirectContent();
 		tableBill.writeSelectedRows(0, -1, document.left() + 10, document.top(260), canvas5);
 		// ---------------------------------------------------
@@ -186,7 +190,7 @@ public class PdfDocumentBill {
 
 	//Schreiben der zehnten Zeile in der Tabelle wo die Beträge einzeln aufgeschlüsselt werden
 	//Berechnung der Rechnungsbetrages 
-	private void createTenthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler) {
+	private void createTenthRowInBillTable(PdfPTable tableBill, FahrschuelerDTO fahrschueler, Properties fahrschulproperties) {
 		PdfPCell cell1R11 = new PdfPCell(new Phrase("Rechnungsbetrag ", fonthell10undbolred));
 		cell1R11.setBorder(Rectangle.BOTTOM);
 		cell1R11.setFixedHeight(20);
@@ -230,6 +234,8 @@ public class PdfDocumentBill {
 			}
 		}
 		gpreis += (counterpraxis * 98.00) + 104.20;
+		double mwst = Double.parseDouble((String) fahrschulproperties.get("tax"));
+		gpreis = gpreis + (gpreis * mwst);
 		String rechnungsbetrag = df.format(gpreis) + "";
 		PdfPCell cell3R11 = new PdfPCell(new Phrase(rechnungsbetrag, fonthell10undbolred));
 		cell3R11.setBorder(Rectangle.BOTTOM);

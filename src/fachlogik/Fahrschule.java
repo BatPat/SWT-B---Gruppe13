@@ -174,9 +174,9 @@ public class Fahrschule {
 		return pInfo;
 	}
 
-	public void druckeRechnungPdf(int fahrschuelerId) {
+	public void druckeRechnungPdf(int fahrschuelerId, Properties fahrschulproperties) {
 		try {
-			new PdfDocumentBill().createPdf(getFahrschueler(fahrschuelerId));
+			new PdfDocumentBill().createPdf(getFahrschueler(fahrschuelerId), fahrschulproperties);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
